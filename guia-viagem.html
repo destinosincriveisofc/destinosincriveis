@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guia Definitivo: Como Economizar em Viagens — Destinos Incríveis</title>
+<meta property="og:title" content="Guia Gratuito — Como Economizar em Viagens">
+<meta property="og:description" content="6 estratégias reais para pagar até 70% menos em passagens, hospedagem e experiências. Guia gratuito no WhatsApp.">
+<meta property="og:image" content="https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/og-image.png">
+<meta property="og:url" content="https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/guia-viagem.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -151,6 +157,19 @@
     .tip{grid-template-columns:52px 1fr;gap:16px;}
     .tip-num{width:52px;height:52px;font-size:19px;border-radius:14px;}
   }
+
+  /* BOTAO FLUTUANTE WHATSAPP */
+  .whats-float{
+    position:fixed;bottom:24px;right:24px;z-index:200;
+    width:60px;height:60px;border-radius:50%;
+    background:linear-gradient(135deg,#25D366,#1DA851);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 30px -8px rgba(37,211,102,.6);
+    transition:transform .3s ease,box-shadow .3s ease;
+  }
+  .whats-float:hover{transform:scale(1.08);box-shadow:0 18px 36px -6px rgba(37,211,102,.7);}
+  .whats-float svg{width:30px;height:30px;}
+  @media (max-width:560px){.whats-float{width:54px;height:54px;bottom:18px;right:18px;}.whats-float svg{width:26px;height:26px;}}
 </style>
 </head>
 <body>
@@ -321,5 +340,7 @@
   });
 </script>
 
+
+<a href="https://wa.me/5544991579205" target="_blank" rel="noopener" class="whats-float" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.06h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.83-3.05-.19-.31a8.2 8.2 0 0 1-1.26-4.29c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01s-.44.06-.67.31c-.23.24-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.17 1.75 2.67 4.25 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg></a>
 </body>
 </html>
