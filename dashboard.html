@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard — Destinos Incríveis</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0E3A5B;--navy-darker:#082941;--ocean:#1F7AA8;--gold:#F4B942;--gold-dark:#C98F1F;
+    --cloud:#F7F8FA;--ink:#0E3A5B;--ink-soft:#4A6478;--line:rgba(14,58,91,.08);
+    --green:#1DA851;--ease:cubic-bezier(.16,.8,.24,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Inter',sans-serif;background:var(--cloud);color:var(--ink);min-height:100vh;}
+  h1,h2,h3{font-family:'Poppins',sans-serif;}
+  a{text-decoration:none;color:inherit;}
+  ::-webkit-scrollbar{width:8px;height:8px;}
+  ::-webkit-scrollbar-thumb{background:rgba(14,58,91,.15);border-radius:10px;}
+
+  #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--navy-deep),var(--navy-darker));padding:24px;}
+  .gate-card{background:#fff;border-radius:22px;padding:44px 38px;max-width:380px;width:100%;text-align:center;box-shadow:0 30px 70px -20px rgba(0,0,0,.5);}
+  .gate-card .lock{width:56px;height:56px;border-radius:50%;background:rgba(31,122,168,.1);color:var(--ocean);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;}
+  .gate-card h2{font-size:20px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;}
+  .gate-card p{font-size:13.5px;color:var(--ink-soft);margin-bottom:24px;}
+  .gate-card input{width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid rgba(14,58,91,.15);font-size:15px;margin-bottom:14px;text-align:center;letter-spacing:2px;}
+  .gate-card input:focus{outline:none;border-color:var(--ocean);}
+  .gate-card button{width:100%;padding:14px;border-radius:12px;border:none;background:var(--navy-deep);color:#fff;font-weight:700;font-size:14.5px;cursor:pointer;transition:.3s;}
+  .gate-card button:hover{background:var(--navy-darker);}
+  .gate-error{color:#c0392b;font-size:13px;margin-top:12px;display:none;}
+
+  #dashboard{display:none;min-height:100vh;}
+  .topbar{background:linear-gradient(160deg,var(--navy-deep),var(--navy-darker));color:#fff;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .brand h1{font-size:18px;font-weight:700;}
+  .brand span{font-size:12px;color:rgba(255,255,255,.6);display:block;}
+  .topbar-right{display:flex;align-items:center;gap:18px;}
+  .live-pill{display:flex;align-items:center;gap:7px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.4);color:#8ee6ad;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;}
+  .live-pill .blink{width:7px;height:7px;border-radius:50%;background:#25D366;animation:blink 1.6s infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .logout-btn{font-size:12.5px;color:rgba(255,255,255,.7);cursor:pointer;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:100px;transition:.3s;}
+  .logout-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+
+  .tabs{display:flex;gap:6px;padding:0 32px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;}
+  .tab{padding:16px 18px;font-size:13.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.25s;}
+  .tab:hover{color:var(--navy-deep);}
+  .tab.active{color:var(--navy-deep);border-bottom-color:var(--gold);}
+
+  .content{max-width:1200px;margin:0 auto;padding:32px;}
+  .view{display:none;}
+  .view.active{display:block;animation:fadein .4s var(--ease);}
+  @keyframes fadein{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px;}
+  .kpi-card{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 1px 0 var(--line);position:relative;overflow:hidden;transition:transform .3s var(--ease);}
+  .kpi-card:hover{transform:translateY(-4px);}
+  .kpi-card .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;}
+  .kpi-card.c1 .ic{background:rgba(31,122,168,.12);color:var(--ocean);}
+  .kpi-card.c2 .ic{background:rgba(37,211,102,.12);color:var(--green);}
+  .kpi-card.c3 .ic{background:rgba(244,185,66,.15);color:var(--gold-dark);}
+  .kpi-card.c4 .ic{background:rgba(14,58,91,.1);color:var(--navy-deep);}
+  .kpi-card .lbl{font-size:12px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .kpi-card .val{font-size:22px;font-weight:800;color:var(--navy-deep);font-family:'Poppins';}
+  .kpi-card .sub{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+  .kpi-card a.link{position:absolute;top:20px;right:20px;font-size:11px;font-weight:700;color:var(--ocean);}
+
+  .panel{background:#fff;border-radius:18px;padding:0;margin-bottom:24px;box-shadow:0 1px 0 var(--line);overflow:hidden;}
+  .panel-head{padding:22px 24px 0;}
+  .panel-head h3{font-size:16px;font-weight:700;color:var(--navy-deep);}
+  .panel-head p{font-size:13px;color:var(--ink-soft);margin-top:4px;}
+  .chart-frame-wrap{padding:20px 24px 24px;}
+  .chart-iframe{width:100%;height:480px;border:none;border-radius:12px;background:var(--cloud);}
+  .connect-box{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--cloud);border-radius:12px;padding:16px 18px;margin:0 24px 22px;}
+  .connect-box input{flex:1;min-width:220px;padding:11px 14px;border-radius:9px;border:1.5px solid rgba(14,58,91,.15);font-size:13px;}
+  .connect-box input:focus{outline:none;border-color:var(--ocean);}
+  .connect-box button{padding:11px 20px;border-radius:9px;border:none;background:var(--navy-deep);color:#fff;font-weight:700;font-size:13px;cursor:pointer;}
+  .connect-box button:hover{background:var(--navy-darker);}
+  .empty-chart{height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--cloud);border-radius:12px;margin:0 24px 24px;text-align:center;padding:24px;}
+  .empty-chart .ic-big{width:56px;height:56px;border-radius:50%;background:rgba(31,122,168,.1);color:var(--ocean);display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .empty-chart h4{font-size:15px;font-weight:700;color:var(--navy-deep);}
+  .empty-chart p{font-size:13px;color:var(--ink-soft);max-width:380px;}
+
+  .shortcut-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px;}
+  .shortcut{background:#fff;border-radius:16px;padding:22px 20px;box-shadow:0 1px 0 var(--line);transition:transform .3s var(--ease);}
+  .shortcut:hover{transform:translateY(-4px);}
+  .shortcut .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;background:rgba(31,122,168,.1);color:var(--ocean);}
+  .shortcut h4{font-size:14.5px;font-weight:700;color:var(--navy-deep);margin-bottom:6px;}
+  .shortcut p{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;line-height:1.55;}
+  .shortcut a{font-size:12.5px;font-weight:700;color:var(--navy-deep);display:inline-flex;align-items:center;gap:6px;}
+
+  .event-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .event-card{display:flex;align-items:center;gap:14px;background:var(--cloud);border-radius:14px;padding:16px 18px;}
+  .event-card .ic{width:38px;height:38px;border-radius:10px;background:#fff;box-shadow:0 1px 0 var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .event-card code{display:block;background:rgba(14,58,91,.08);padding:2px 8px;border-radius:6px;font-size:12px;color:var(--navy-deep);font-family:monospace;margin-bottom:4px;width:fit-content;}
+  .event-card span{font-size:12.5px;color:var(--ink-soft);}
+
+  .steps{display:flex;flex-direction:column;gap:16px;}
+  .step{display:flex;gap:14px;align-items:flex-start;}
+  .step .n{width:28px;height:28px;border-radius:50%;background:var(--navy-deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;}
+  .step h5{font-size:13.5px;font-weight:700;color:var(--navy-deep);margin-bottom:3px;}
+  .step p{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+
+  .ai-box{background:linear-gradient(160deg,var(--navy-deep),var(--navy-darker));border-radius:18px;padding:30px 26px;color:#fff;}
+  .ai-box h3{color:#fff;display:flex;align-items:center;gap:8px;font-size:16px;}
+  .ai-box > p{color:rgba(255,255,255,.78);font-size:13.5px;line-height:1.7;margin:10px 0 20px;}
+  .ai-box .step .n{background:var(--gold);color:var(--navy-darker);}
+  .ai-box .step h5{color:#fff;}
+  .ai-box .step p{color:rgba(255,255,255,.7);}
+
+  @media (max-width:980px){
+    .kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .shortcut-grid{grid-template-columns:1fr;}
+    .event-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .kpi-grid{grid-template-columns:1fr;}
+    .content{padding:20px 16px;}
+    .topbar{padding:16px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="lock">🔒</div>
+    <h2>Dashboard Privado</h2>
+    <p>Acesso restrito ao administrador do Destinos Incríveis.</p>
+    <input type="password" id="pwInput" placeholder="Digite a senha" maxlength="30">
+    <button onclick="checkPassword()">Entrar</button>
+    <p class="gate-error" id="gateError">Senha incorreta. Tente novamente.</p>
+  </div>
+</div>
+
+<div id="dashboard">
+  <div class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <div>
+        <h1>Destinos Incríveis</h1>
+        <span>Dashboard de Performance</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="live-pill"><span class="blink"></span>Rastreamento ativo</span>
+      <span class="logout-btn" onclick="logout()">Sair</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-view="visao">Visão Geral</div>
+    <div class="tab" data-view="grafico">Relatório Visual</div>
+    <div class="tab" data-view="eventos">Eventos Rastreados</div>
+    <div class="tab" data-view="ia">Análise com IA</div>
+  </div>
+
+  <div class="content">
+
+    <div class="view active" id="view-visao">
+      <div class="kpi-grid">
+        <div class="kpi-card c1">
+          <div class="ic">📊</div>
+          <div class="lbl">Visitantes</div>
+          <div class="val">Ver no Analytics</div>
+          <div class="sub">Tráfego de todas as páginas</div>
+          <a href="https://analytics.google.com/" target="_blank" rel="noopener" class="link">Abrir →</a>
+        </div>
+        <div class="kpi-card c2">
+          <div class="ic">💳</div>
+          <div class="lbl">Vendas do Clube</div>
+          <div class="val">Ver no Kiwify</div>
+          <div class="sub">Pedidos e aprovações</div>
+          <a href="https://dashboard.kiwify.com.br/" target="_blank" rel="noopener" class="link">Abrir →</a>
+        </div>
+        <div class="kpi-card c3">
+          <div class="ic">🤝</div>
+          <div class="lbl">Propostas de Parceria</div>
+          <div class="val">Ver no Typeform</div>
+          <div class="sub">Respostas recebidas</div>
+          <a href="https://www.typeform.com/reports/" target="_blank" rel="noopener" class="link">Abrir →</a>
+        </div>
+        <div class="kpi-card c4">
+          <div class="ic">💬</div>
+          <div class="lbl">Cliques WhatsApp</div>
+          <div class="val">Ver evento</div>
+          <div class="sub">Botão flutuante, todas páginas</div>
+        </div>
+      </div>
+
+      <div class="shortcut-grid">
+        <div class="shortcut">
+          <div class="ic">📈</div>
+          <h4>Google Analytics</h4>
+          <p>Visitantes, origem de tráfego, tempo no site e comportamento em cada página.</p>
+          <a href="https://analytics.google.com/" target="_blank" rel="noopener">Abrir relatório →</a>
+        </div>
+        <div class="shortcut">
+          <div class="ic">💳</div>
+          <h4>Kiwify</h4>
+          <p>Vendas do Destinos Incríveis Club, status de pagamento e reembolsos.</p>
+          <a href="https://dashboard.kiwify.com.br/" target="_blank" rel="noopener">Abrir painel →</a>
+        </div>
+        <div class="shortcut">
+          <div class="ic">📝</div>
+          <h4>Typeform</h4>
+          <p>Todas as propostas de parceria enviadas pelo formulário do site.</p>
+          <a href="https://www.typeform.com/reports/" target="_blank" rel="noopener">Abrir respostas →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="view-grafico">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Relatório Visual ao Vivo</h3>
+          <p>Gráficos reais de visitantes, cliques e conversões — direto do Google Looker Studio (gratuito).</p>
+        </div>
+        <div id="chartArea"></div>
+      </div>
+
+      <div class="panel" style="padding:22px 24px;">
+        <h3 style="margin-bottom:10px;">Como conectar seu relatório visual</h3>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><div><h5>Acesse lookerstudio.google.com</h5><p>Faça login com a mesma conta usada no Google Analytics.</p></div></div>
+          <div class="step"><div class="n">2</div><div><h5>Crie um relatório novo</h5><p>Clique em "Criar" → "Relatório" → conecte à fonte "Google Analytics" → selecione a propriedade "Destinos Incríveis Site".</p></div></div>
+          <div class="step"><div class="n">3</div><div><h5>Monte os gráficos</h5><p>O Looker Studio já sugere gráficos prontos de visitantes, páginas mais vistas e eventos — é só arrastar os que quiser.</p></div></div>
+          <div class="step"><div class="n">4</div><div><h5>Compartilhe e copie o link de incorporação</h5><p>Clique em "Compartilhar" → "Incorporar relatório" → copie o link (começa com "https://lookerstudio.google.com/embed/...") e cole no campo acima.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="view-eventos">
+      <div class="panel" style="padding:24px;">
+        <h3 style="margin-bottom:4px;">Eventos rastreados automaticamente</h3>
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:20px;">Já ativos em todas as páginas. Veja os números em Analytics → Relatórios → Engajamento → Eventos.</p>
+        <div class="event-grid">
+          <div class="event-card"><div class="ic">💬</div><div><code>click_whatsapp_float</code><span>Clique no botão flutuante de WhatsApp</span></div></div>
+          <div class="event-card"><div class="ic">💳</div><div><code>click_kiwify_compra</code><span>Clique em "Entrar no Clube" → pagamento</span></div></div>
+          <div class="event-card"><div class="ic">🤝</div><div><code>click_typeform_parceria</code><span>Clique em "Vender Mais com Parceria"</span></div></div>
+          <div class="event-card"><div class="ic">📝</div><div><code>form_submit_proposta</code><span>Formulário de proposta enviado (Mídia Kit)</span></div></div>
+          <div class="event-card"><div class="ic">🎁</div><div><code>click_entrar_grupo_guia</code><span>Entrar no grupo gratuito (página do guia)</span></div></div>
+          <div class="event-card"><div class="ic">✅</div><div><code>click_entrar_comunidade</code><span>Entrar na comunidade paga (obrigado)</span></div></div>
+          <div class="event-card"><div class="ic">🏆</div><div><code>purchase</code><span>Conversão — disparado na página de obrigado</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="view-ia">
+      <div class="ai-box">
+        <h3>🤖 Análise gratuita com IA</h3>
+        <p>Não é possível manter uma IA conectada 24h dentro deste dashboard sem um servidor pago rodando por trás. Mas você tem acesso a uma análise honesta, gratuita e ilimitada sempre que quiser:</p>
+        <div class="steps">
+          <div class="step"><div class="n">1</div><div><h5>Exporte ou tire um print</h5><p>No Google Analytics ou no relatório do Looker Studio, exporte um CSV ou tire um print da tela com os números.</p></div></div>
+          <div class="step"><div class="n">2</div><div><h5>Volte na conversa com o Claude</h5><p>Cole os números ou anexe o print aqui mesmo, na nossa conversa de sempre.</p></div></div>
+          <div class="step"><div class="n">3</div><div><h5>Peça a análise</h5><p>"Analise essas métricas e me diga o que está funcionando e o que não está" — resposta na hora, sem custo.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const PASSWORD = "1874";
+  const SESSION_KEY = "di_dashboard_auth";
+  const CHART_KEY = "di_looker_embed_url";
+
+  function showDashboard(){
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderChartArea();
+  }
+
+  function checkPassword(){
+    const input = document.getElementById('pwInput').value;
+    if(input === PASSWORD){
+      sessionStorage.setItem(SESSION_KEY, "1");
+      showDashboard();
+    } else {
+      document.getElementById('gateError').style.display = 'block';
+    }
+  }
+
+  document.getElementById('pwInput').addEventListener('keydown', (e)=>{ if(e.key === 'Enter') checkPassword(); });
+
+  function logout(){
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('gate').style.display = 'flex';
+    document.getElementById('pwInput').value = '';
+  }
+
+  if(sessionStorage.getItem(SESSION_KEY) === "1"){ showDashboard(); }
+
+  document.querySelectorAll('.tab').forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('view-' + tab.dataset.view).classList.add('active');
+    });
+  });
+
+  function renderChartArea(){
+    const area = document.getElementById('chartArea');
+    const saved = localStorage.getItem(CHART_KEY);
+    if(saved){
+      area.innerHTML = `
+        <div class="chart-frame-wrap">
+          <iframe class="chart-iframe" src="${saved}" allowfullscreen></iframe>
+        </div>
+        <div class="connect-box">
+          <input type="text" id="lookerInput" placeholder="Colar novo link de incorporação do Looker Studio" value="${saved}">
+          <button onclick="saveLookerLink()">Atualizar</button>
+        </div>
+      `;
+    } else {
+      area.innerHTML = `
+        <div class="empty-chart">
+          <div class="ic-big">📊</div>
+          <h4>Nenhum relatório conectado ainda</h4>
+          <p>Siga o passo a passo abaixo para criar seu relatório gratuito no Looker Studio e ver os gráficos reais aqui.</p>
+        </div>
+        <div class="connect-box">
+          <input type="text" id="lookerInput" placeholder="Colar aqui o link de incorporação do Looker Studio">
+          <button onclick="saveLookerLink()">Conectar</button>
+        </div>
+      `;
+    }
+  }
+
+  function saveLookerLink(){
+    const val = document.getElementById('lookerInput').value.trim();
+    if(val){
+      localStorage.setItem(CHART_KEY, val);
+      renderChartArea();
+    }
+  }
+</script>
+
+</body>
+</html>
