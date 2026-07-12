@@ -60,9 +60,12 @@
   .deal-img{position:relative;height:140px;overflow:hidden;}
   .deal-img img{width:100%;height:100%;object-fit:cover;}
   .deal-img-placeholder{
-    width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(140deg,#0E3A5B,#1F7AA8);color:rgba(255,255,255,.85);
-    font-family:'Poppins';font-weight:700;font-size:13px;text-align:center;padding:10px;
+    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;font-family:'Poppins';font-weight:700;font-size:14px;text-align:center;padding:10px;
+    position:relative;overflow:hidden;
+  }
+  .deal-img-placeholder::after{
+    content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.12), transparent 60%);
   }
 
   .deal-discount{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--navy-darker);font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:8px;}
@@ -136,7 +139,7 @@
       <div class="row-scroll">
         <div class="deal-card">
           <div class="deal-img">
-            <div class="deal-img-placeholder">📷 Foto real do parceiro<br>Fortaleza</div>
+            <div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 60%,#3FA9C9);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏖️</span>Fortaleza</div>
             <span class="deal-discount">-38%</span>
             <span class="deal-provider">Booking</span>
           </div>
@@ -149,7 +152,7 @@
         </div>
         <div class="deal-card">
           <div class="deal-img">
-            <div class="deal-img-placeholder">📷 Foto real do parceiro<br>Lisboa</div>
+            <div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#0E3A5B 55%,#1F7AA8);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏛️</span>Lisboa</div>
             <span class="deal-discount">-42%</span>
             <span class="deal-provider">Latam</span>
           </div>
@@ -162,7 +165,7 @@
         </div>
         <div class="deal-card">
           <div class="deal-img">
-            <div class="deal-img-placeholder">📷 Foto real do parceiro<br>Gramado</div>
+            <div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 50%,#2E8B57);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏔️</span>Gramado</div>
             <span class="deal-discount">-30%</span>
             <span class="deal-provider">Decolar</span>
           </div>
@@ -175,7 +178,7 @@
         </div>
         <div class="deal-card">
           <div class="deal-img">
-            <div class="deal-img-placeholder">📷 Foto real do parceiro<br>Fernando de Noronha</div>
+            <div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 45%,#F4B942);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏝️</span>Fernando de Noronha</div>
             <span class="deal-discount">-25%</span>
             <span class="deal-provider">Azul</span>
           </div>
@@ -188,7 +191,7 @@
         </div>
         <div class="deal-card">
           <div class="deal-img">
-            <div class="deal-img-placeholder">📷 Foto real do parceiro<br>Buenos Aires</div>
+            <div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#0E3A5B 55%,#1F7AA8);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏙️</span>Buenos Aires</div>
             <span class="deal-discount">-33%</span>
             <span class="deal-provider">Gol</span>
           </div>
@@ -206,19 +209,19 @@
       <div class="row-head"><h3>✈️ Passagens em Promoção</h3><span>Nacional e internacional</span></div>
       <div class="row-scroll">
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Salvador</div><span class="deal-discount">-28%</span><span class="deal-provider">Latam</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 60%,#3FA9C9);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏖️</span>Salvador</div><span class="deal-discount">-28%</span><span class="deal-provider">Latam</span></div>
           <div class="deal-body"><h4>Salvador, BA</h4><div class="route">Ida e volta · Saída de SP</div><div class="deal-price-row"><span class="old">R$ 980</span><span class="new">R$ 699</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Orlando</div><span class="deal-discount">-35%</span><span class="deal-provider">Gol</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#C98F1F 85%);"><span style="font-size:26px;display:block;margin-bottom:6px;">🎢</span>Orlando</div><span class="deal-discount">-35%</span><span class="deal-provider">Gol</span></div>
           <div class="deal-body"><h4>Orlando, EUA</h4><div class="route">Ida e volta · Saída do Rio</div><div class="deal-price-row"><span class="old">R$ 3.900</span><span class="new">R$ 2.520</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Cancún</div><span class="deal-discount">-31%</span><span class="deal-provider">Azul</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 45%,#F4B942);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏝️</span>Cancún</div><span class="deal-discount">-31%</span><span class="deal-provider">Azul</span></div>
           <div class="deal-body"><h4>Cancún, México</h4><div class="route">Ida e volta · Saída de SP</div><div class="deal-price-row"><span class="old">R$ 3.100</span><span class="new">R$ 2.140</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Natal</div><span class="deal-discount">-22%</span><span class="deal-provider">Latam</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 60%,#3FA9C9);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏖️</span>Natal</div><span class="deal-discount">-22%</span><span class="deal-provider">Latam</span></div>
           <div class="deal-body"><h4>Natal, RN</h4><div class="route">Ida e volta · Saída de BH</div><div class="deal-price-row"><span class="old">R$ 890</span><span class="new">R$ 690</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
       </div>
@@ -228,15 +231,15 @@
       <div class="row-head"><h3>🏨 Hotéis com Desconto</h3><span>Diárias selecionadas</span></div>
       <div class="row-scroll">
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Maceió</div><span class="deal-discount">-40%</span><span class="deal-provider">Booking</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 60%,#3FA9C9);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏖️</span>Maceió</div><span class="deal-discount">-40%</span><span class="deal-provider">Booking</span></div>
           <div class="deal-body"><h4>Maceió, AL</h4><div class="route">Resort frente-mar · Café incluso</div><div class="deal-price-row"><span class="old">R$ 650</span><span class="new">R$ 390</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Paris</div><span class="deal-discount">-27%</span><span class="deal-provider">Booking</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#0E3A5B 55%,#1F7AA8);"><span style="font-size:26px;display:block;margin-bottom:6px;">🗼</span>Paris</div><span class="deal-discount">-27%</span><span class="deal-provider">Booking</span></div>
           <div class="deal-body"><h4>Paris, França</h4><div class="route">Hotel boutique · Centro histórico</div><div class="deal-price-row"><span class="old">R$ 980</span><span class="new">R$ 715</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Bonito</div><span class="deal-discount">-33%</span><span class="deal-provider">Decolar</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 50%,#2E8B57);"><span style="font-size:26px;display:block;margin-bottom:6px;">🌿</span>Bonito</div><span class="deal-discount">-33%</span><span class="deal-provider">Decolar</span></div>
           <div class="deal-body"><h4>Bonito, MS</h4><div class="route">Pousada ecológica · All-inclusive</div><div class="deal-price-row"><span class="old">R$ 1.100</span><span class="new">R$ 740</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
       </div>
@@ -246,11 +249,11 @@
       <div class="row-head"><h3>⚡ Erros Tarifários</h3><span>Ação rápida — podem sumir a qualquer hora</span></div>
       <div class="row-scroll">
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Miami</div><span class="deal-discount">-68%</span><span class="deal-provider">Latam</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#0E3A5B 55%,#1F7AA8);"><span style="font-size:26px;display:block;margin-bottom:6px;">🌆</span>Miami</div><span class="deal-discount">-68%</span><span class="deal-provider">Latam</span></div>
           <div class="deal-body"><h4>Miami, EUA</h4><div class="route">Ida e volta · Saída de SP</div><div class="deal-price-row"><span class="old">R$ 3.400</span><span class="new">R$ 1.090</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Lisboa erro tarifário</div><span class="deal-discount">-71%</span><span class="deal-provider">TAP</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#0E3A5B 55%,#1F7AA8);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏛️</span>Lisboa erro tarifário</div><span class="deal-discount">-71%</span><span class="deal-provider">TAP</span></div>
           <div class="deal-body"><h4>Lisboa, Portugal</h4><div class="route">Ida e volta · Saída do Rio</div><div class="deal-price-row"><span class="old">R$ 4.800</span><span class="new">R$ 1.390</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
       </div>
@@ -260,11 +263,11 @@
       <div class="row-head"><h3>📦 Pacotes Completos</h3><span>Passagem + hospedagem</span></div>
       <div class="row-scroll">
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Cusco</div><span class="deal-discount">-36%</span><span class="deal-provider">CVC</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#0E3A5B,#1F7AA8 50%,#2E8B57);"><span style="font-size:26px;display:block;margin-bottom:6px;">🏔️</span>Cusco</div><span class="deal-discount">-36%</span><span class="deal-provider">CVC</span></div>
           <div class="deal-body"><h4>Cusco, Peru</h4><div class="route">6 dias · Passagem + hotel</div><div class="deal-price-row"><span class="old">R$ 2.900</span><span class="new">R$ 1.860</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
         <div class="deal-card">
-          <div class="deal-img"><div class="deal-img-placeholder">📷 Foto real do parceiro<br>Caldas Novas</div><span class="deal-discount">-29%</span><span class="deal-provider">Decolar</span></div>
+          <div class="deal-img"><div class="deal-img-placeholder" style="background:linear-gradient(150deg,#082941,#C98F1F 85%);"><span style="font-size:26px;display:block;margin-bottom:6px;">♨️</span>Caldas Novas</div><span class="deal-discount">-29%</span><span class="deal-provider">Decolar</span></div>
           <div class="deal-body"><h4>Caldas Novas, GO</h4><div class="route">4 dias · Resort com parque aquático</div><div class="deal-price-row"><span class="old">R$ 1.650</span><span class="new">R$ 1.170</span></div><a href="#" class="deal-btn">Ver Oferta</a></div>
         </div>
       </div>
@@ -286,7 +289,7 @@
   </div>
 </footer>
 
-<a href="https://wa.me/5544991579205" target="_blank" rel="noopener" class="whats-float" aria-label="Falar no WhatsApp">
+<a href="https://wa.me/5511997204445" target="_blank" rel="noopener" class="whats-float" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.06h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.83-3.05-.19-.31a8.2 8.2 0 0 1-1.26-4.29c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01s-.44.06-.67.31c-.23.24-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.17 1.75 2.67 4.25 3.75.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
 </a>
 
