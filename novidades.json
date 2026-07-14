@@ -1,21 +1,42 @@
 [
   {
-    "id": "a74ae781-3750-4acf-85af-fb76b3dbea84",
-    "titulo": "Teste Hermes AI Publicação",
-    "slug": "teste-hermes-ai-publicacao",
-    "resumo": "Este é um teste real da automação do ecossistema Destinos Incríveis.",
-    "conteudo_html": "<h2>Teste de Publicação Automática</h2><p>Este é um teste real da automação do ecossistema Destinos Incríveis. O sistema de Content Pipeline v2 está funcionando corretamente.</p>",
-    "imagem_url": "https://via.placeholder.com/800x400",
-    "categoria": "teste",
+    "id": "hermes-test-blog-001",
+    "titulo": "Teste Oficial da Automação Hermes - Destinos Incríveis",
+    "slug": "teste-oficial-automacao-hermes-destinos-incriveis",
+    "resumo": "Este é um post de teste oficial do sistema de automação de conteúdo Hermes AI do Destinos Incríveis.",
+    "conteudo_html": "<h2>Teste Oficial da Automação Hermes</h2><p>Este post foi gerado automaticamente pelo sistema de automação de conteúdo Hermes AI do Destinos Incríveis.</p><p>O sistema utilize inteligência artificial para criar conteúdo de qualidade sobre destinos de viagem, ofertas e dicas para viajantes brasileiros.</p><h3>Como Funciona?</h3><ul><li>Pesquisa automática de tendências</li><li>Geração de conteúdo otimizado</li><li>Publicação automática no site</li><li>Distribuição via WhatsApp</li></ul><p>Em breve teremos muito mais conteúdo automatizado para quem ama viajar!</p>",
+    "imagem_url": "https://via.placeholder.com/800x400/0088FF/FFFFFF?text=Destinos+Incr%C3%ADveis+Teste",
+    "categoria": "blog",
     "tags": [
-      "teste",
       "automação",
-      "hermes"
+      "hermes",
+      "teste",
+      "inteligência-artificial"
     ],
     "data_publicacao": "2026-07-14",
-    "seo_title": "Teste Hermes AI Publicação",
-    "seo_description": "Post de teste da automação Content Pipeline v2.",
-    "data_criacao": "2026-07-14T06:30:00Z",
+    "seo_title": "Teste Oficial Automação Hermes - Destinos Incríveis",
+    "seo_description": "Post de teste oficial do sistema de automação Hermes AI. Conteúdo gerado automaticamente por IA.",
+    "data_criacao": "2026-07-14T04:00:00Z",
+    "fonte": "auto"
+  },
+  {
+    "id": "hermes-test-oferta-001",
+    "titulo": "Oferta Teste Destinos Incríveis",
+    "slug": "oferta-teste-destinos-incriveis",
+    "resumo": "Oferta de teste gerada automaticamente pelo sistema Hermes AI. Confira as condições especiais!",
+    "conteudo_html": "<h2>Oferta Especial - Teste Hermes AI</h2><p>Esta é uma oferta de teste gerada automaticamente pelo nosso sistema de automação.</p><div class='oferta-box'><h3>Condições Especiais</h3><p><strong>Destino:</strong> Destino de Teste</p><p><strong>Preço:</strong> A partir de R$ 999,00</p><p><strong>Validade:</strong> 30 dias</p><p><strong>Inclui:</strong> Passagem + Hospedagem + Café da manhã</p></div><p> Esta oferta é apenas para fins de teste do nosso sistema de automação.</p>",
+    "imagem_url": "https://via.placeholder.com/800x400/FF6B00/FFFFFF?text=Oferta+Teste",
+    "categoria": "ofertas",
+    "tags": [
+      "oferta",
+      "promoção",
+      "teste",
+      "viagem"
+    ],
+    "data_publicacao": "2026-07-14",
+    "seo_title": "Oferta Teste Destinos Incríveis - Hermes AI",
+    "seo_description": "Oferta de teste gerada por IA. Confira as condições especiais para sua próxima viagem!",
+    "data_criacao": "2026-07-14T04:00:00Z",
     "fonte": "auto"
   }
 ]
