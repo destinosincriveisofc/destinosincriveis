@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "a74ae781-3750-4acf-85af-fb76b3dbea84",
+    "titulo": "Teste Hermes AI Publicação",
+    "slug": "teste-hermes-ai-publicacao",
+    "resumo": "Este é um teste real da automação do ecossistema Destinos Incríveis.",
+    "conteudo_html": "<h2>Teste de Publicação Automática</h2><p>Este é um teste real da automação do ecossistema Destinos Incríveis. O sistema de Content Pipeline v2 está funcionando corretamente.</p>",
+    "imagem_url": "https://via.placeholder.com/800x400",
+    "categoria": "teste",
+    "tags": [
+      "teste",
+      "automação",
+      "hermes"
+    ],
+    "data_publicacao": "2026-07-14",
+    "seo_title": "Teste Hermes AI Publicação",
+    "seo_description": "Post de teste da automação Content Pipeline v2.",
+    "data_criacao": "2026-07-14T06:30:00Z",
+    "fonte": "auto"
+  }
+]
