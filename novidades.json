@@ -1,5 +1,29 @@
 [
   {
+    "id": "cb94fd23-af76-4f5f-a26e-cc1a592a349d",
+    "titulo": "Descubra os Encantos de Fernando de Noronha!",
+    "slug": "descubra-os-encantos-de-fernando-de-noronha",
+    "resumo": "Seja bem-vindo a Fernando de Noronha, um paraíso preservado no Brasil, onde a natureza exuberante e a preservação ambiental se encontram em perfeita harmonia. Explore as belezas naturais dessa ilha pa...",
+    "conteudo_html": "Seja bem-vindo a Fernando de Noronha, um paraíso preservado no Brasil, onde a natureza exuberante e a preservação ambiental se encontram em perfeita harmonia. Explore as belezas naturais dessa ilha paradisíaca e descubra os encantos secretos que ela guarda. Prepare-se para se maravilhar com praias de águas cristalinas, vida marinha abundante e paisagens de tirar o fôlego. Não perca a oportunidade de conhecer esse destino incrível e se encantar com tudo o que Fernando de Noronha tem a oferecer!",
+    "imagem_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    "imagem_status": "fallback",
+    "imagem_pronta_publicacao": true,
+    "fotografo": "Google Imagen 3 Fallback",
+    "fonte_imagem": "Google Imagen 3",
+    "alt_text": "Fernando de Noronha beach with crystal clear waters and rock formations",
+    "categoria": "blog",
+    "tags": [
+      "FernandodeNoronha",
+      "DestinosIncríveis",
+      "NaturezaPreservada"
+    ],
+    "data_publicacao": "2026-07-15T03:41:42.188Z",
+    "seo_title": "Descubra os Encantos de Fernando de Noronha!",
+    "seo_description": "Seja bem-vindo a Fernando de Noronha, um paraíso preservado no Brasil, onde a natureza exuberante e a preservação ambiental se encontram em perfeita harmonia. Explore as belezas naturais dessa ilha pa...",
+    "data_criacao": "2026-07-15T03:41:42.188Z",
+    "fonte": "pipeline"
+  },
+  {
     "id": "43d7337f-7962-4d92-8018-c875e1b65ac7",
     "titulo": "Descubra os Encantos de Fernando de Noronha",
     "slug": "descubra-os-encantos-de-fernando-de-noronha",
