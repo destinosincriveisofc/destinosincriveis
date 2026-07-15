@@ -30,22 +30,58 @@ export default function OfferCard({ offer }: OfferCardProps) {
   const isTariffError = price < 500 && (offer.destination || "") !== "SDU";
 
   // Clean type label text instead of emoji
-  const typeText = offer.type === 'voo' ? 'Voo' : offer.type === 'hotel' ? 'Hotel' : 'Pacote';
+  const typeText = offer.type === 'voo' ? 'Voo' : offer.type === 'hotel' ? 'Hotel' : offer.type === 'passeio' ? 'Passeio' : 'Pacote';
 
-  // Safe date helper
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return "";
-    try {
-      const d = new Date(dateStr);
-      if (isNaN(d.getTime())) return "";
-      return d.toLocaleDateString('pt-BR');
-    } catch {
-      return "";
+  // Dynamic Badge Text and Colors
+  let badgeText = typeText;
+  let badgeClass = styles.badgeDefault;
+  
+  const discountThreshold = discount >= 35 || isTariffError;
+  
+  if (offer.type === 'voo' && discountThreshold) {
+    badgeText = "Erro Tarifário";
+    badgeClass = styles.badgeRed;
+  } else if (offer.type === 'passeio') {
+    badgeText = "Passeio";
+    badgeClass = styles.badgeBlue;
+  } else if (offer.type === 'hotel') {
+    badgeText = "Hotel";
+    badgeClass = styles.badgeGreen;
+  } else if (offer.type === 'pacote') {
+    badgeText = "Hotel + Voos";
+    badgeClass = styles.badgeGreen;
+  } else {
+    badgeText = "Voo";
+    badgeClass = styles.badgeDark;
+  }
+
+  // Dynamic travel period logic
+  const getTravelPeriod = () => {
+    let depDate = new Date();
+    if (offer.departureDate) {
+      const parsed = new Date(offer.departureDate);
+      if (!isNaN(parsed.getTime())) {
+        depDate = parsed;
+      }
     }
+    
+    const today = new Date();
+    if (depDate < today) {
+      depDate = new Date();
+      depDate.setDate(today.getDate() + 60);
+    }
+    
+    const retDate = new Date(depDate);
+    retDate.setDate(depDate.getDate() + 10);
+    
+    const fmt = (d: Date) => {
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      return `${day}/${month}`;
+    };
+    
+    return `📅 Período: ${fmt(depDate)} a ${fmt(retDate)}`;
   };
-
-  const departureFormatted = formatDate(offer.departureDate);
-  const returnFormatted = formatDate(offer.returnDate);
 
   return (
     <div className={styles.card}>
@@ -59,13 +95,9 @@ export default function OfferCard({ offer }: OfferCardProps) {
         />
         <div className={styles.imageOverlay} />
         
-        {/* Alerts */}
+        {/* Alerts / Discount Badge */}
         <div className={styles.badgeList}>
-          {isTariffError ? (
-            <AlertBadge text="Erro Tarifário" />
-          ) : (
-            <AlertBadge text={`${discount}% OFF`} />
-          )}
+          <AlertBadge text={`${discount}% OFF`} />
         </div>
 
         {/* Country Badge (No emoji) */}
@@ -73,9 +105,9 @@ export default function OfferCard({ offer }: OfferCardProps) {
           <span>{offer.countryName || "Destino"}</span>
         </div>
 
-        {/* Type Badge (No emoji) */}
-        <div className={styles.typeBadge}>
-          {typeText}
+        {/* Dynamic Type Badge */}
+        <div className={`${styles.typeBadge} ${badgeClass}`}>
+          {badgeText}
         </div>
       </div>
 
@@ -89,34 +121,28 @@ export default function OfferCard({ offer }: OfferCardProps) {
           <h3 className={styles.destinationTitle}>
             {offer.destinationName || "Destino"} ({offer.destination || ""})
           </h3>
+          {/* Airline */}
+          <div className={styles.airlineText}>
+            ✈️ {offer.airline || "Companhia Aérea"}
+          </div>
         </div>
 
-        {/* Dates */}
+        {/* Travel Period */}
         <div className={styles.dates}>
-          {departureFormatted && (
-            <span className={styles.dateItem}>
-              <Calendar size={12} />
-              Ida: {departureFormatted}
-            </span>
-          )}
-          {returnFormatted && (
-            <span className={styles.dateItem}>
-              <Calendar size={12} />
-              Volta: {returnFormatted}
-            </span>
-          )}
+          <span className={styles.dateItem}>
+            {getTravelPeriod()}
+          </span>
         </div>
 
         {/* Price & CTA */}
         <div className={styles.footer}>
           <div className={styles.priceWrapper}>
-            <span className={styles.originalPrice}>
-              R$ {originalPrice.toLocaleString('pt-BR')}
-            </span>
-            <span className={styles.promoPrice}>
-              <span className={styles.currency}>R$</span>
-              <span className={styles.priceVal}>{price.toLocaleString('pt-BR')}</span>
-            </span>
+            <div className={styles.priceComparison}>
+              De <span className={styles.oldPrice}>R$ {originalPrice.toLocaleString('pt-BR')}</span> por
+            </div>
+            <div className={styles.newPrice}>
+              Apenas <span className={styles.newPriceVal}>R$ {price.toLocaleString('pt-BR')}</span>
+            </div>
           </div>
 
           <a

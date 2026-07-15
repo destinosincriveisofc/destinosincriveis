@@ -13,7 +13,7 @@ export interface FlightOffer {
   airline: string;
   link: string;
   link_afiliado?: string;
-  type: 'voo' | 'hotel' | 'pacote';
+  type: 'voo' | 'hotel' | 'pacote' | 'passeio';
   imagem_url?: string;
 }
 

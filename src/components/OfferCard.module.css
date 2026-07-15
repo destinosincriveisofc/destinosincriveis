@@ -180,9 +180,56 @@
   gap: 6px;
   box-shadow: 0 4px 10px rgba(255, 212, 59, 0.15);
   transition: all 0.2s ease;
-}
-
 .ctaButton:hover {
   background-color: #F0B429;
   transform: translateY(-1px);
+}
+
+.badgeRed {
+  background-color: #dc2626 !important;
+}
+
+.badgeBlue {
+  background-color: #2563eb !important;
+}
+
+.badgeGreen {
+  background-color: #16a34a !important;
+}
+
+.badgeDark {
+  background-color: rgba(10, 22, 40, 0.85) !important;
+}
+
+.badgeDefault {
+  background-color: rgba(10, 22, 40, 0.75) !important;
+}
+
+.airlineText {
+  font-size: 0.8rem;
+  color: #5b6e84;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.priceComparison {
+  font-size: 0.75rem;
+  color: #8896A9;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.newPrice {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #8896A9;
+}
+
+.newPriceVal {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #2D7DB8;
 }
