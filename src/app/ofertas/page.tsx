@@ -13,55 +13,68 @@ import styles from './page.module.css';
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
     const res = await fetch('/offers.json');
-    if (res.ok) {
-      const dbOffers = await res.json();
-      if (Array.isArray(dbOffers) && dbOffers.length > 0) {
-        const airportNames: Record<string, { name: string; country: string; code: string }> = {
-          EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
-          SCL: { name: "Santiago", country: "Chile", code: "CL" },
-          MIA: { name: "Miami", country: "Estados Unidos", code: "US" },
-          MCO: { name: "Orlando", country: "Estados Unidos", code: "US" },
-          LIS: { name: "Lisboa", country: "Portugal", code: "PT" },
-          MAD: { name: "Madri", country: "Espanha", code: "ES" },
-          CDG: { name: "Paris", country: "França", code: "FR" },
-          SDU: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
-          SSA: { name: "Salvador", country: "Brasil", code: "BR" },
-          REC: { name: "Recife", country: "Brasil", code: "BR" },
-          GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
-          VCP: { name: "Campinas", country: "Brasil", code: "BR" }
-        };
-        
-        return dbOffers.map((dbOffer: any) => {
-          const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
-          const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
-          
-          return {
-            id: dbOffer.id,
-            origin: dbOffer.origem || "GRU",
-            originName: originInfo.name,
-            destination: dbOffer.destino || "",
-            destinationName: destInfo.name,
-            countryName: destInfo.country,
-            countryCode: destInfo.code,
-            price: dbOffer.preco_atual,
-            originalPrice: dbOffer.preco_original,
-            departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
-            returnDate: "",
-            airline: dbOffer.companhia || "Companhia",
-            link: dbOffer.link_afiliado || "",
-            type: dbOffer.tipo || "voo",
-            imagem_url: dbOffer.imagem_url
-          };
-        });
-      }
+    if (!res.ok) {
+      throw new Error(`Server returned status ${res.status}`);
     }
-  } catch (e) {
-    console.error("Fetch from Hermes Router failed, using fallback:", e);
-  }
+    const contentType = res.headers.get("content-type");
+    if (contentType && !contentType.includes("application/json")) {
+      throw new Error(`Invalid content type: ${contentType}`);
+    }
+    const dbOffers = await res.json();
+    if (!Array.isArray(dbOffers)) {
+      throw new Error("Response is not a JSON array");
+    }
+    if (dbOffers.length === 0) {
+      throw new Error("JSON array is empty");
+    }
 
-  // Fallback to locally bundled mock data
-  const { fetchCheapFlights } = await import('@/lib/travelpayouts');
-  return await fetchCheapFlights();
+    const airportNames: Record<string, { name: string; country: string; code: string }> = {
+      EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
+      SCL: { name: "Santiago", country: "Chile", code: "CL" },
+      MIA: { name: "Miami", country: "Estados Unidos", code: "US" },
+      MCO: { name: "Orlando", country: "Estados Unidos", code: "US" },
+      LIS: { name: "Lisboa", country: "Portugal", code: "PT" },
+      MAD: { name: "Madri", country: "Espanha", code: "ES" },
+      CDG: { name: "Paris", country: "França", code: "FR" },
+      SDU: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
+      SSA: { name: "Salvador", country: "Brasil", code: "BR" },
+      REC: { name: "Recife", country: "Brasil", code: "BR" },
+      GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
+      VCP: { name: "Campinas", country: "Brasil", code: "BR" }
+    };
+    
+    return dbOffers.map((dbOffer: any) => {
+      const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
+      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
+      
+      return {
+        id: dbOffer.id,
+        origin: dbOffer.origem || "GRU",
+        originName: originInfo.name,
+        destination: dbOffer.destino || "",
+        destinationName: destInfo.name,
+        countryName: destInfo.country,
+        countryCode: destInfo.code,
+        price: dbOffer.preco_atual,
+        originalPrice: dbOffer.preco_original,
+        departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
+        returnDate: "",
+        airline: dbOffer.companhia || "Companhia",
+        link: dbOffer.link_afiliado || "",
+        type: dbOffer.tipo || "voo",
+        imagem_url: dbOffer.imagem_url
+      };
+    });
+  } catch (e) {
+    console.error("Robust fetch from /offers.json failed, using fallback:", e);
+    try {
+      const { fetchCheapFlights } = await import('@/lib/travelpayouts');
+      return await fetchCheapFlights();
+    } catch (err) {
+      console.error("Critical: Fallback mock data import failed:", err);
+      return [];
+    }
+  }
 }
 
 export default function OfertasPage() {
