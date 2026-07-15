@@ -194,9 +194,18 @@ const AIRPORT_NAMES: Record<string, { name: string; country: string; code: strin
 
 export function generateAffiliateLink(origin: string, destination: string, date: string): string {
   const marker = process.env.TRAVELPAYOUTS_MARKER || "748517";
-  const formattedDate = date.replace(/-/g, ""); // e.g. 20260912
-  const searchUrl = `https://www.aviasales.com/search/${origin}${formattedDate}${destination}1`;
-  return `https://c111.travelpayouts.com/click?shmarker=${marker}&promo_id=8231&source_type=link&type=click&trs=250000&destination_url=${encodeURIComponent(searchUrl)}`;
+  
+  let dateStr = "";
+  if (date) {
+    const cleanDate = date.split('T')[0].split(' ')[0];
+    const parts = cleanDate.split('-');
+    if (parts.length === 3) {
+      dateStr = `${parts[2]}${parts[1]}`; // DDMM
+    }
+  }
+  
+  const searchUrl = `https://www.aviasales.com/search/${origin || "GRU"}${dateStr}${destination || ""}1`;
+  return `https://tp.media/r?marker=${marker}&p=8231&u=${encodeURIComponent(searchUrl)}`;
 }
 
 // Memory cache with expiration
