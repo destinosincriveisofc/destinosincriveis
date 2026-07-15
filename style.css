@@ -28,14 +28,21 @@
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   color: var(--text-main);
   background: var(--bg-deep);
+  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -68,6 +75,7 @@ ul {
 section {
   position: relative;
   padding: 120px 0;
+  overflow: hidden;
 }
 
 /* BUTTONS */

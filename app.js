@@ -185,7 +185,7 @@ function renderOffersDynamic() {
                 <span class="old">R$ ${offer.preco_antigo}</span>
                 <span class="new">R$ ${offer.preco_novo}</span>
               </div>
-              <a href="https://wa.me/5511999999999" target="_blank" class="deal-btn">Ver Oferta</a>
+              <a href="https://wa.me/5511997204445" target="_blank" class="deal-btn">Ver Oferta</a>
             </div>
           </div>
         `;
