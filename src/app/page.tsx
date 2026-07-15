@@ -43,8 +43,60 @@ const MOCK_ARTICLES: BlogArticle[] = [
   }
 ];
 
+async function getRealOffers() {
+  try {
+    const res = await fetch('http://localhost:5001/api/offers', { cache: 'no-store' });
+    if (res.ok) {
+      const dbOffers = await res.json();
+      if (Array.isArray(dbOffers) && dbOffers.length > 0) {
+        const airportNames: Record<string, { name: string; country: string; code: string }> = {
+          EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
+          SCL: { name: "Santiago", country: "Chile", code: "CL" },
+          MIA: { name: "Miami", country: "Estados Unidos", code: "US" },
+          MCO: { name: "Orlando", country: "Estados Unidos", code: "US" },
+          LIS: { name: "Lisboa", country: "Portugal", code: "PT" },
+          MAD: { name: "Madri", country: "Espanha", code: "ES" },
+          CDG: { name: "Paris", country: "França", code: "FR" },
+          SDU: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
+          SSA: { name: "Salvador", country: "Brasil", code: "BR" },
+          REC: { name: "Recife", country: "Brasil", code: "BR" },
+          GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
+          VCP: { name: "Campinas", country: "Brasil", code: "BR" }
+        };
+        
+        return dbOffers.map((dbOffer: any) => {
+          const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
+          const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
+          
+          return {
+            id: dbOffer.id,
+            origin: dbOffer.origem || "GRU",
+            originName: originInfo.name,
+            destination: dbOffer.destino || "",
+            destinationName: destInfo.name,
+            countryName: destInfo.country,
+            countryCode: destInfo.code,
+            price: dbOffer.preco_atual,
+            originalPrice: dbOffer.preco_original,
+            departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: dbOffer.companhia || "Companhia",
+            link: dbOffer.link_afiliado || "",
+            type: dbOffer.tipo || "voo",
+            imagem_url: dbOffer.imagem_url
+          };
+        });
+      }
+    }
+  } catch (e) {
+    console.error("Fetch from Hermes Router failed, using fallback:", e);
+  }
+  
+  return await fetchCheapFlights();
+}
+
 export default async function Home() {
-  const cheapFlights = await fetchCheapFlights();
+  const cheapFlights = await getRealOffers();
   const alertOffers = cheapFlights.slice(0, 3); // Display top 3 alerts in central section
 
   return (

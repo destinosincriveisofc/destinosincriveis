@@ -22,7 +22,7 @@ const DESTINATION_IMAGES: Record<string, string> = {
 };
 
 export default function OfferCard({ offer }: OfferCardProps) {
-  const imageUrl = DESTINATION_IMAGES[offer.destination] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop";
+  const imageUrl = offer.imagem_url || DESTINATION_IMAGES[offer.destination] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop";
 
   const discount = Math.round(((offer.originalPrice - offer.price) / offer.originalPrice) * 100);
   const isTariffError = offer.price < 500 && offer.destination !== "SDU";

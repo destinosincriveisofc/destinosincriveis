@@ -13,6 +13,7 @@ export interface FlightOffer {
   airline: string;
   link: string;
   type: 'voo' | 'hotel' | 'pacote';
+  imagem_url?: string;
 }
 
 const MOCK_OFFERS: FlightOffer[] = [
