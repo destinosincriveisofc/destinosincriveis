@@ -1,5 +1,7 @@
-import React from 'react';
-import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star } from 'lucide-react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 
 import Header from '@/components/Header';
@@ -9,7 +11,7 @@ import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import OfferCard from '@/components/OfferCard';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
-import { fetchCheapFlights } from '@/lib/travelpayouts';
+import { FlightOffer } from '@/lib/travelpayouts';
 import styles from './page.module.css';
 
 // Mock Blog Articles
@@ -43,9 +45,9 @@ const MOCK_ARTICLES: BlogArticle[] = [
   }
 ];
 
-async function getRealOffers() {
+async function getRealOffers(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('http://localhost:5001/api/offers', { cache: 'no-store' });
+    const res = await fetch('/offers.json');
     if (res.ok) {
       const dbOffers = await res.json();
       if (Array.isArray(dbOffers) && dbOffers.length > 0) {
@@ -92,12 +94,27 @@ async function getRealOffers() {
     console.error("Fetch from Hermes Router failed, using fallback:", e);
   }
   
+  const { fetchCheapFlights } = await import('@/lib/travelpayouts');
   return await fetchCheapFlights();
 }
 
-export default async function Home() {
-  const cheapFlights = await getRealOffers();
-  const alertOffers = cheapFlights.slice(0, 3); // Display top 3 alerts in central section
+export default function Home() {
+  const [alertOffers, setAlertOffers] = useState<FlightOffer[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadOffers = async () => {
+      try {
+        const cheapFlights = await getRealOffers();
+        setAlertOffers(cheapFlights.slice(0, 3));
+      } catch (e) {
+        console.error("Error loading offers:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadOffers();
+  }, []);
 
   return (
     <>
@@ -171,9 +188,19 @@ export default async function Home() {
             </div>
 
             <div className={styles.grid3}>
-              {alertOffers.map((offer) => (
-                <OfferCard key={offer.id} offer={offer} />
-              ))}
+              {loading ? (
+                <div style={{ gridColumn: 'span 3', display: 'flex', justifyContent: 'center', padding: '2rem 0', width: '100%' }}>
+                  <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
+                </div>
+              ) : alertOffers.length === 0 ? (
+                <div style={{ gridColumn: 'span 3', textAlign: 'center', color: '#666', padding: '2rem 0', width: '100%' }}>
+                  Nenhuma oferta recente encontrada.
+                </div>
+              ) : (
+                alertOffers.map((offer) => (
+                  <OfferCard key={offer.id} offer={offer} />
+                ))
+              )}
             </div>
           </div>
         </section>

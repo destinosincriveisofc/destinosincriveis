@@ -12,7 +12,7 @@ import styles from './page.module.css';
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('http://localhost:5001/api/offers');
+    const res = await fetch('/offers.json');
     if (res.ok) {
       const dbOffers = await res.json();
       if (Array.isArray(dbOffers) && dbOffers.length > 0) {
