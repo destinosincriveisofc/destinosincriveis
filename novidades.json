@@ -1,5 +1,29 @@
 [
   {
+    "id": "43d7337f-7962-4d92-8018-c875e1b65ac7",
+    "titulo": "Descubra os Encantos de Fernando de Noronha",
+    "slug": "descubra-os-encantos-de-fernando-de-noronha",
+    "resumo": "Fernando de Noronha é um destino em alta, com foco em ecoturismo e preservação ambiental. Descubra os encantos secretos dessa ilha paradisíaca, repleta de natureza exuberante. Explore mais sobre Ferna...",
+    "conteudo_html": "Fernando de Noronha é um destino em alta, com foco em ecoturismo e preservação ambiental. Descubra os encantos secretos dessa ilha paradisíaca, repleta de natureza exuberante. Explore mais sobre Fernando de Noronha!",
+    "imagem_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    "imagem_status": "fallback",
+    "imagem_pronta_publicacao": true,
+    "fotografo": "Google Imagen 3 Fallback",
+    "fonte_imagem": "Google Imagen 3",
+    "alt_text": "Fernando de Noronha Brazil beach",
+    "categoria": "blog",
+    "tags": [
+      "FernandodeNoronha",
+      "Ecoturismo",
+      "PreservacaoAmbiental"
+    ],
+    "data_publicacao": "2026-07-15T03:31:17.259Z",
+    "seo_title": "Descubra os Encantos de Fernando de Noronha",
+    "seo_description": "Fernando de Noronha é um destino em alta, com foco em ecoturismo e preservação ambiental. Descubra os encantos secretos dessa ilha paradisíaca, repleta de natureza exuberante. Explore mais sobre Ferna...",
+    "data_criacao": "2026-07-15T03:31:17.259Z",
+    "fonte": "pipeline"
+  },
+  {
     "id": "a260f0c1-c44d-4fd9-8ad1-3ee9b7b85656",
     "titulo": "Conteúdo Destinos Incríveis",
     "slug": "conteudo-destinos-incriveis",
