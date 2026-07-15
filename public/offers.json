@@ -1,5 +1,21 @@
 [
   {
+    "id": "c4af113a-b03a-4401-a5f0-c5962c5ff7f4",
+    "origem": "GRU",
+    "destino": "Roma, Itália (FCO)",
+    "preco_atual": 1450.0,
+    "preco_original": 2900.0,
+    "desconto_percent": 50,
+    "companhia": "Anantara Palazzo Naiadi Rome Hotel",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80",
+    "tipo": "hotel",
+    "nota_urgencia": 9,
+    "texto_venda": "🇮🇹 **LUXO EM ROMA COM 50% OFF!** 🏛️\nHospede-se no prestigiado *Anantara Palazzo Naiadi Rome* por apenas **R$ 1.450/noite** (antes R$ 2.900)!\nViva uma experiência 5 estrelas única na Itália com luxo e conforto incomparáveis.\nÚltimos quartos disponíveis nessa tarifa promocional exclusiva!\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:59:20"
+  },
+  {
     "id": "080337db-721e-41a0-a865-18251c551bfa",
     "origem": "GRU",
     "destino": "FCO",
@@ -174,21 +190,5 @@
     "texto_venda": null,
     "ativo": 1,
     "criado_em": "2026-07-15 22:05:54"
-  },
-  {
-    "id": "9a5fcb4b-5e6d-4bdd-af79-03823974331f",
-    "origem": null,
-    "destino": null,
-    "preco_atual": null,
-    "preco_original": null,
-    "desconto_percent": null,
-    "companhia": null,
-    "link_afiliado": null,
-    "imagem_url": null,
-    "tipo": "voo",
-    "nota_urgencia": null,
-    "texto_venda": null,
-    "ativo": 1,
-    "criado_em": "2026-07-15 21:58:40"
   }
 ]
