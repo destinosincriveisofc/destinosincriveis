@@ -1,5 +1,21 @@
 [
   {
+    "id": "4a6194d3-f668-44c8-99d8-d1fcdf4d0764",
+    "origem": null,
+    "destino": null,
+    "preco_atual": null,
+    "preco_original": null,
+    "desconto_percent": null,
+    "companhia": null,
+    "link_afiliado": null,
+    "imagem_url": null,
+    "tipo": "voo",
+    "nota_urgencia": null,
+    "texto_venda": null,
+    "ativo": 1,
+    "criado_em": "2026-07-15 22:35:02"
+  },
+  {
     "id": "3c170965-1a29-4499-9709-1502777914a4",
     "origem": null,
     "destino": null,
