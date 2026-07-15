@@ -7,6 +7,7 @@ import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
+import styles from './page.module.css';
 
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
@@ -69,80 +70,64 @@ export default function OfertasPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF] pt-28 pb-20">
-        <div className="container">
+      <main className={styles.main}>
+        <div className={styles.container}>
           {/* Page Intro */}
-          <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
-            <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Promoções em Tempo Real</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0A1628]">Central de Ofertas</h1>
-            <p className="text-sm md:text-base text-[#8896A9]">
+          <div className={styles.pageIntro}>
+            <span className={styles.badge}>Promoções em Tempo Real</span>
+            <h1 className={styles.title}>Central de Ofertas</h1>
+            <p className={styles.description}>
               Encontre voos barateados, hotéis e pacotes promocionais saindo de São Paulo (GRU). Atualizado constantemente.
             </p>
           </div>
 
           {/* Filtering Section */}
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10">
+          <div className={styles.filtersContainer}>
             {/* Search Input */}
-            <div className="relative w-full lg:max-w-xs">
+            <div className={styles.searchWrapper}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Buscar destino ou país..."
-                className="w-full pl-10 pr-4 py-2.5 bg-[#FAFBFF] border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#5BA4CF] transition-colors"
+                className={styles.searchInput}
               />
             </div>
 
             {/* Type selector */}
-            <div className="flex flex-wrap gap-2 w-full lg:w-auto">
+            <div className={styles.btnGroup}>
               <button
                 onClick={() => setSelectedType('todos')}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  selectedType === 'todos'
-                    ? 'bg-[#0A1628] text-white'
-                    : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
-                }`}
+                className={`${styles.filterBtn} ${selectedType === 'todos' ? styles.filterBtnActive : ''}`}
               >
                 Todos
               </button>
               <button
                 onClick={() => setSelectedType('voo')}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  selectedType === 'voo'
-                    ? 'bg-[#0A1628] text-white'
-                    : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
-                }`}
+                className={`${styles.filterBtn} ${selectedType === 'voo' ? styles.filterBtnActive : ''}`}
               >
                 ✈️ Voos
               </button>
               <button
                 onClick={() => setSelectedType('hotel')}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  selectedType === 'hotel'
-                    ? 'bg-[#0A1628] text-white'
-                    : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
-                }`}
+                className={`${styles.filterBtn} ${selectedType === 'hotel' ? styles.filterBtnActive : ''}`}
               >
                 🏨 Hotéis
               </button>
               <button
                 onClick={() => setSelectedType('pacote')}
-                className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
-                  selectedType === 'pacote'
-                    ? 'bg-[#0A1628] text-white'
-                    : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
-                }`}
+                className={`${styles.filterBtn} ${selectedType === 'pacote' ? styles.filterBtnActive : ''}`}
               >
                 📦 Pacotes
               </button>
             </div>
 
             {/* Price slider */}
-            <div className="w-full lg:max-w-xs flex flex-col gap-1.5">
-              <div className="flex justify-between text-xs font-semibold text-[#0A1628]">
+            <div className={styles.sliderWrapper}>
+              <div className={styles.sliderLabelRow}>
                 <span>Preço Máximo:</span>
-                <span className="text-[#2D7DB8]">R$ {maxPrice.toLocaleString('pt-BR')}</span>
+                <span className={styles.sliderValue}>R$ {maxPrice.toLocaleString('pt-BR')}</span>
               </div>
               <input
                 type="range"
@@ -151,24 +136,24 @@ export default function OfertasPage() {
                 step="100"
                 value={maxPrice}
                 onChange={e => setMaxPrice(Number(e.target.value))}
-                className="w-full h-1.5 bg-gray-150 rounded-lg appearance-none cursor-pointer accent-[#5BA4CF]"
+                className={styles.sliderInput}
               />
             </div>
           </div>
 
           {/* Loading state */}
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-3">
+            <div className={styles.loadingWrapper}>
               <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
-              <span className="text-sm font-semibold text-[#8896A9]">Buscando melhores tarifas...</span>
+              <span className={styles.loadingText}>Buscando melhores tarifas...</span>
             </div>
           ) : filteredOffers.length === 0 ? (
-            <div className="text-center py-20 bg-white border border-gray-100 rounded-2xl shadow-sm">
-              <p className="text-base font-semibold text-[#0A1628] mb-2">Nenhuma oferta encontrada</p>
-              <p className="text-sm text-[#8896A9]">Tente redefinir seus filtros ou buscar por outro termo.</p>
+            <div className={styles.emptyState}>
+              <p className={styles.emptyTitle}>Nenhuma oferta encontrada</p>
+              <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={styles.grid3}>
               {filteredOffers.map((offer) => (
                 <OfferCard key={offer.id} offer={offer} />
               ))}

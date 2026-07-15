@@ -40,7 +40,7 @@ export default function ChatWidget() {
 
     // Simulate bot response
     setTimeout(() => {
-      let botResponseText = 'Entendi! Para falar com um especialista em passagens ou suporte personalizado, clique no botão de WhatsApp abaixo.';
+      let botResponseText = 'Entendi! Para falar com um especialista em passagens ou suporte personalizado, clique no link do nosso WhatsApp oficial: https://wa.me/5511997204445';
       
       const query = inputValue.toLowerCase();
       if (query.includes('clube') || query.includes('club') || query.includes('assinar')) {
@@ -49,6 +49,8 @@ export default function ChatWidget() {
         botResponseText = 'Temos uma central cheia de promoções atualizadas na página /ofertas. Dê uma olhada!';
       } else if (query.includes('consultoria') || query.includes('roteiro')) {
         botResponseText = 'Nossa Consultoria VIP cria roteiros personalizados e busca as melhores passagens com milhas para você. Acesse a página /consultoria e solicite agendamento.';
+      } else if (query.includes('grupo') || query.includes('gratis') || query.includes('gratuito')) {
+        botResponseText = 'Você pode entrar no nosso grupo gratuito de ofertas do WhatsApp clicando no link: https://chat.whatsapp.com/EkXLZVT2FGv4Ru7n3vM2J8';
       }
 
       const botMessage: Message = {
@@ -64,6 +66,21 @@ export default function ChatWidget() {
 
   const handleQuickOption = (option: string) => {
     setInputValue(option);
+  };
+
+  const renderMessageText = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    return parts.map((part, i) => {
+      if (urlRegex.test(part)) {
+        return (
+          <a key={i} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#5BA4CF', textDecoration: 'underline', fontWeight: 600 }}>
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
   };
 
   return (
@@ -114,7 +131,7 @@ export default function ChatWidget() {
                       msg.sender === 'user' ? styles.userBubble : styles.botBubble
                     }`}
                   >
-                    <p>{msg.text}</p>
+                    <p>{renderMessageText(msg.text)}</p>
                     <span
                       className={`${styles.time} ${
                         msg.sender === 'user' ? styles.userTime : styles.botTime
@@ -140,6 +157,12 @@ export default function ChatWidget() {
                 className={styles.suggestionBtn}
               >
                 Passagens Baratas
+              </button>
+              <button
+                onClick={() => handleQuickOption('Como entro no grupo gratuito?')}
+                className={styles.suggestionBtn}
+              >
+                Grupo Grátis
               </button>
             </div>
 

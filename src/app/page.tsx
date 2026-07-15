@@ -217,14 +217,22 @@ export default async function Home() {
                   Prefere que busquemos as passagens e hotéis ideais para você? Nossa consultoria cria roteiros sob medida, otimiza trechos complexos e encontra as melhores tarifas pagas em dinheiro ou milhas.
                 </p>
                 <div className={styles.contactList}>
-                  <div className={styles.contactItem}>
+                  <a
+                    href="https://wa.me/5511997204445"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.contactItem}
+                  >
                     <Phone size={16} className={styles.contactIcon} />
                     <span>WhatsApp VIP: +55 (11) 99720-4445</span>
-                  </div>
-                  <div className={styles.contactItem}>
+                  </a>
+                  <a
+                    href="mailto:suporte@destinosincriveis.com.br"
+                    className={styles.contactItem}
+                  >
                     <Mail size={16} className={styles.contactIcon} />
                     <span>suporte@destinosincriveis.com.br</span>
-                  </div>
+                  </a>
                 </div>
               </div>
 
@@ -301,12 +309,14 @@ export default async function Home() {
                 <span className={styles.partnerBadge}>Travelpayouts</span>
               </div>
 
-              <Link
-                href="mailto:suporte@destinosincriveis.com.br?subject=Parceria%20Afiliados"
+              <a
+                href="https://form.typeform.com/to/UAOGJSzY"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={styles.partnerLink}
               >
                 Fazer Parceria Comercial
-              </Link>
+              </a>
             </div>
           </div>
         </section>

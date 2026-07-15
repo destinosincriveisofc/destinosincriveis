@@ -1,0 +1,187 @@
+.main {
+  background-color: var(--fundo-principal);
+  min-height: 100vh;
+  padding-top: 112px; /* pt-28 */
+  padding-bottom: 80px; /* pb-20 */
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pageIntro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--azul-bebe-principal);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.875rem;
+  }
+}
+
+.description {
+  font-size: 0.95rem;
+  color: var(--cinza-suave);
+  line-height: 1.5;
+}
+
+/* Partner Cards */
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+@media (min-width: 768px) {
+  .grid3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  background-color: var(--branco-puro);
+  border-radius: 16px;
+  border: 1px solid rgba(91, 164, 207, 0.08);
+  box-shadow: var(--shadow-soft);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--transition-smooth);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--fundo-secundario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--azul-bebe-principal);
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+}
+
+.cardText {
+  font-size: 0.875rem;
+  color: var(--cinza-suave);
+  line-height: 1.6;
+}
+
+/* CTA Area */
+.ctaArea {
+  text-align: center;
+  padding: 48px 32px;
+  background-color: var(--fundo-secundario);
+  border-radius: 20px;
+  border: 1px solid rgba(91, 164, 207, 0.1);
+  box-shadow: var(--shadow-soft);
+  max-width: 800px;
+  margin: 0 auto 56px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ctaTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+}
+
+.ctaText {
+  font-size: 0.95rem;
+  color: var(--cinza-suave);
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.ctaBtn {
+  background-color: var(--amarelo-marca);
+  color: var(--azul-profundo);
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 750;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 10px rgba(255, 212, 59, 0.3);
+}
+
+.ctaBtn:hover {
+  background-color: var(--amarelo-escuro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 212, 59, 0.5);
+}
+
+/* Partners Logos Grid */
+.logosSection {
+  border-top: 1px solid rgba(91, 164, 207, 0.1);
+  padding-top: 56px;
+  text-align: center;
+}
+
+.logosTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cinza-suave);
+  margin-bottom: 24px;
+}
+
+.logosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0.6;
+}
+
+.logoBadge {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--azul-profundo);
+  padding: 10px 20px;
+  border: 1px solid rgba(91, 164, 207, 0.15);
+  border-radius: 8px;
+  background-color: var(--branco-puro);
+}

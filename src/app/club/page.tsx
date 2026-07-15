@@ -1,10 +1,15 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import { Check, Star, ArrowRight, ShieldCheck, Flame, Bell, MessageSquare, CreditCard } from 'lucide-react';
+import styles from './page.module.css';
 
 export default function ClubPage() {
+  const [hasClickedBuy, setHasClickedBuy] = useState(false);
+
   const benefits = [
     {
       icon: <Bell className="text-[#5BA4CF]" size={24} />,
@@ -92,45 +97,47 @@ export default function ClubPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF] pt-28 pb-20">
+      <main className={styles.main}>
         {/* Hero Section */}
-        <section className="py-16 text-center max-w-4xl mx-auto px-6 flex flex-col gap-6">
-          <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#F0F4FF] text-[#2D7DB8]">
+        <section className={styles.hero}>
+          <div className={styles.heroBadge}>
             ✨ Comunidade Exclusiva
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#0A1628] leading-[1.1] tracking-tight">
-            Viaje com quem entende de <span className="text-[#5BA4CF]">Passagem Barata</span>
+          <h1 className={styles.heroTitle}>
+            Viaje com quem entende de <span className={styles.heroHighlight}>Passagem Barata</span>
           </h1>
-          <p className="text-base md:text-lg text-[#8896A9] max-w-2xl mx-auto leading-relaxed">
+          <p className={styles.heroDesc}>
             Economize milhares de reais em passagens aéreas e hotéis. Junte-se a mais de 15.000 viajantes que recebem alertas de tarifas imperdíveis e erros no WhatsApp.
           </p>
-          <div className="flex justify-center mt-2">
+          <div>
             <a
-              href="#pricing"
-              className="pill-button pill-button-primary flex items-center gap-2"
+              href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.heroBtn}
             >
-              Quero Garantir Minha Vaga
+              Entrar no Clube
               <ArrowRight size={18} />
             </a>
           </div>
         </section>
 
         {/* Benefits Grid */}
-        <section className="py-16 bg-white border-y border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="text-center max-w-xl mx-auto mb-12 flex flex-col gap-2">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Benefícios Inclusos</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0A1628]">Tudo o que você vai receber</h2>
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Benefícios Inclusos</span>
+              <h2 className={styles.sectionTitle}>Tudo o que você vai receber</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className={styles.benefitsGrid}>
               {benefits.map((b, i) => (
-                <div key={i} className="flex flex-col gap-3 p-6 rounded-2xl bg-[#FAFBFF] border border-gray-150">
-                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                <div key={i} className={styles.benefitCard}>
+                  <div className={styles.benefitIconWrapper}>
                     {b.icon}
                   </div>
-                  <h3 className="text-base font-bold text-[#0A1628] mt-2">{b.title}</h3>
-                  <p className="text-xs text-[#8896A9] leading-relaxed">{b.description}</p>
+                  <h3 className={styles.benefitTitle}>{b.title}</h3>
+                  <p className={styles.benefitText}>{b.description}</p>
                 </div>
               ))}
             </div>
@@ -138,82 +145,101 @@ export default function ClubPage() {
         </section>
 
         {/* Pricing Table */}
-        <section id="pricing" className="py-20">
-          <div className="container flex flex-col items-center">
-            <div className="text-center max-w-xl mx-auto mb-12 flex flex-col gap-2">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Acesso Imediato</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0A1628]">Escolha o melhor plano para você</h2>
-              <p className="text-sm text-[#8896A9]">Sem fidelidade, cancele quando quiser com um clique.</p>
-            </div>
-
-            {plans.map((plan, index) => (
-              <div
-                key={index}
-                className="bg-white w-full max-w-md rounded-2xl shadow-xl border-2 border-[#5BA4CF]/30 overflow-hidden flex flex-col p-8 relative"
-              >
-                {plan.popular && (
-                  <div className="absolute top-4 right-4 bg-[#FFD43B] text-[#0A1628] text-[9px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">
-                    Mais Assinado
-                  </div>
-                )}
-                
-                <span className="text-lg font-bold text-[#0A1628]">{plan.name}</span>
-                <p className="text-xs text-[#8896A9] mt-1">{plan.description}</p>
-
-                <div className="my-6 flex items-baseline gap-1">
-                  <span className="text-4xl font-extrabold text-[#0A1628]">{plan.price}</span>
-                  <span className="text-xs text-[#8896A9] font-medium">{plan.period}</span>
-                </div>
-
-                <a
-                  href={plan.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pill-button pill-button-primary w-full text-center py-3.5 flex items-center justify-center gap-2 mb-6"
-                >
-                  <CreditCard size={18} />
-                  Assinar Agora via Kiwify
-                </a>
-
-                <div className="flex flex-col gap-3">
-                  {plan.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-2 text-xs text-[#0A1628]">
-                      <Check className="text-green-500 mt-0.5 flex-shrink-0" size={16} />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
-                </div>
+        <section id="pricing" className={styles.sectionIce}>
+          <div className={styles.container}>
+            <div className={styles.pricingContainer}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.badge}>Acesso Imediato</span>
+                <h2 className={styles.sectionTitle}>Escolha o melhor plano para você</h2>
+                <p className={styles.sectionDesc}>Sem fidelidade, cancele quando quiser com um clique.</p>
               </div>
-            ))}
+
+              {plans.map((plan, index) => (
+                <div key={index} className={styles.pricingCard}>
+                  {plan.popular && (
+                    <div className={styles.popularBadge}>
+                      Mais Assinado
+                    </div>
+                  )}
+                  
+                  <span className={styles.planName}>{plan.name}</span>
+                  <p className={styles.planDesc}>{plan.description}</p>
+
+                  <div className={styles.priceWrapper}>
+                    <span className={styles.priceVal}>{plan.price}</span>
+                    <span className={styles.pricePeriod}>{plan.period}</span>
+                  </div>
+
+                  <a
+                    href={plan.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setHasClickedBuy(true)}
+                    className={styles.pricingBtn}
+                  >
+                    <CreditCard size={18} />
+                    Assinar Agora via Kiwify
+                  </a>
+
+                  <div className={styles.featuresList}>
+                    {plan.features.map((feat, fIdx) => (
+                      <div key={fIdx} className={styles.featureItem}>
+                        <Check className={styles.featureIcon} size={16} />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              {/* Paid WhatsApp Group Link - displays after click/purchase indicator */}
+              {hasClickedBuy && (
+                <div className={styles.successCard}>
+                  <h3 className={styles.successTitle}>🎉 Pagamento Iniciado!</h3>
+                  <p className={styles.successText}>
+                    Clique no botão abaixo para entrar no grupo pago do Clube assim que finalizar a sua inscrição na Kiwify.
+                  </p>
+                  <a
+                    href="https://chat.whatsapp.com/C9l2ljLrOB2EmCZxu1cLEM"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.successBtn}
+                  >
+                    <MessageSquare size={18} />
+                    Entrar no Grupo Pago do Clube
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-white border-t border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="text-center max-w-xl mx-auto mb-16 flex flex-col gap-2">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Depoimentos reais</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0A1628]">Quem assina, viaja e recomenda</h2>
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Depoimentos reais</span>
+              <h2 className={styles.sectionTitle}>Quem assina, viaja e recomenda</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={styles.testimonialsGrid}>
               {testimonials.map((t, i) => (
-                <div key={i} className="card p-8 flex flex-col gap-4">
-                  <div className="flex text-[#FFD43B]">
+                <div key={i} className={styles.testimonialCard}>
+                  <div className={styles.stars}>
                     {[...Array(t.rating)].map((_, r) => (
                       <Star key={r} size={16} fill="currentColor" />
                     ))}
                   </div>
-                  <p className="text-sm text-[#8896A9] leading-relaxed italic">
+                  <p className={styles.testimonialText}>
                     &quot;{t.text}&quot;
                   </p>
-                  <div className="flex items-center gap-3 mt-4">
-                    <div className="w-10 h-10 rounded-full bg-[#F0F4FF] flex items-center justify-center font-bold text-[#0A1628] text-sm">
+                  <div className={styles.authorRow}>
+                    <div className={styles.avatar}>
                       {t.avatar}
                     </div>
-                    <div>
-                      <strong className="text-sm text-[#0A1628] block">{t.name}</strong>
-                      <span className="text-[10px] text-[#8896A9] font-medium">{t.role}</span>
+                    <div className={styles.authorMeta}>
+                      <strong className={styles.authorName}>{t.name}</strong>
+                      <span className={styles.authorRole}>{t.role}</span>
                     </div>
                   </div>
                 </div>
@@ -223,18 +249,18 @@ export default function ClubPage() {
         </section>
 
         {/* FAQs */}
-        <section className="py-20">
-          <div className="container max-w-3xl">
-            <div className="text-center max-w-xl mx-auto mb-16 flex flex-col gap-2">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Perguntas Frequentes</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#0A1628]">Dúvidas sobre o Club</h2>
+        <section className={styles.sectionIce}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Perguntas Frequentes</span>
+              <h2 className={styles.sectionTitle}>Dúvidas sobre o Club</h2>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className={styles.faqsList}>
               {faqs.map((faq, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-150 shadow-sm flex flex-col gap-2">
-                  <h3 className="text-sm md:text-base font-bold text-[#0A1628]">{faq.q}</h3>
-                  <p className="text-xs md:text-sm text-[#8896A9] leading-relaxed">{faq.a}</p>
+                <div key={i} className={styles.faqCard}>
+                  <h3 className={styles.faqQuestion}>{faq.q}</h3>
+                  <p className={styles.faqAnswer}>{faq.a}</p>
                 </div>
               ))}
             </div>

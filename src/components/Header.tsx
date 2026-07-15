@@ -48,14 +48,22 @@ export default function Header() {
           <Link href="/consultoria" className={styles.navLink}>
             Consultoria VIP
           </Link>
+          <Link href="/parcerias" className={styles.navLink}>
+            Parcerias
+          </Link>
         </nav>
 
         {/* Desktop CTA */}
         <div className={styles.ctaContainer}>
-          <Link href="/club" className={styles.ctaButton}>
+          <a
+            href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButton}
+          >
             Fazer Parte do Club
             <ArrowRight size={16} />
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -107,12 +115,21 @@ export default function Header() {
             Consultoria VIP
           </Link>
           <Link
-            href="/club"
+            href="/parcerias"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={styles.mobileLink}
+          >
+            Parcerias
+          </Link>
+          <a
+            href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileCta}
           >
             Fazer Parte do Club
-          </Link>
+          </a>
         </div>
       )}
     </header>
