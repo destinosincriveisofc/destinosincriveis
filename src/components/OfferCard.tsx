@@ -120,7 +120,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
           </div>
 
           <a
-            href={offer.link || "/ofertas"}
+            href={offer.link_afiliado || offer.link || "/ofertas"}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}

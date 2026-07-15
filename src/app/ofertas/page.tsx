@@ -66,6 +66,7 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
         returnDate: "",
         airline: dbOffer.companhia || "Companhia",
         link: dbOffer.link_afiliado || "",
+        link_afiliado: dbOffer.link_afiliado || "",
         type: dbOffer.tipo || "voo",
         imagem_url: dbOffer.imagem_url
       };

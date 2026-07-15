@@ -12,6 +12,7 @@ export interface FlightOffer {
   returnDate: string;
   airline: string;
   link: string;
+  link_afiliado?: string;
   type: 'voo' | 'hotel' | 'pacote';
   imagem_url?: string;
 }
