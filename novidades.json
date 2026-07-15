@@ -1,5 +1,28 @@
 [
   {
+    "id": "a260f0c1-c44d-4fd9-8ad1-3ee9b7b85656",
+    "titulo": "Conteúdo Destinos Incríveis",
+    "slug": "conteudo-destinos-incriveis",
+    "resumo": "",
+    "conteudo_html": "<p>Conteúdo em breve</p>",
+    "imagem_url": "",
+    "imagem_status": "failed",
+    "imagem_pronta_publicacao": false,
+    "fotografo": "",
+    "fonte_imagem": "Unsplash",
+    "alt_text": "Gramado and Canela landscape in Rio Grande do Sul, Brazil - European architecture, parks, and events",
+    "categoria": "blog",
+    "tags": [
+      "#DestinosIncríveis",
+      "#Viagens"
+    ],
+    "data_publicacao": "2026-07-15T02:35:41.220Z",
+    "seo_title": "Conteúdo Destinos Incríveis",
+    "seo_description": "",
+    "data_criacao": "2026-07-15T02:35:41.221Z",
+    "fonte": "pipeline"
+  },
+  {
     "id": "post_mrlf55kn_cofwf89c",
     "titulo": "Conteúdo Destinos Incríveis",
     "slug": "conteudo-destinos-incriveis",
