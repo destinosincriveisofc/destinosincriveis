@@ -1,5 +1,28 @@
 [
   {
+    "id": "post_mrlf2dho_itqz0yqc",
+    "titulo": "Conteúdo Destinos Incríveis",
+    "slug": "conteudo-destinos-incriveis",
+    "resumo": "",
+    "conteudo_html": "<p>Conteúdo em breve</p>",
+    "imagem_url": "https://images.unsplash.com/photo-1716518776260-3d4ab176a065?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5OTg2NTN8MHwxfHNlYXJjaHwxfHxDaGFwYWRhJTIwZG9zJTIwVmVhZGVpcm9zJTIwQnJhemlsJTIwZWNvdG91cmlzbXxlbnwwfDB8fHwxNzg0MDc5ODIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "imagem_status": "generated",
+    "imagem_pronta_publicacao": true,
+    "fotografo": "Róger Nobles",
+    "fonte_imagem": "Unsplash",
+    "alt_text": "Chapada dos Veadeiros Brazil ecotourism destination",
+    "categoria": "blog",
+    "tags": [
+      "#DestinosIncríveis",
+      "#Viagens"
+    ],
+    "data_publicacao": "2026-07-15T01:43:47.916Z",
+    "seo_title": "Conteúdo Destinos Incríveis",
+    "seo_description": "",
+    "data_criacao": "2026-07-15T01:43:47.916Z",
+    "fonte": "pipeline"
+  },
+  {
     "id": "hermes-test-blog-001",
     "titulo": "Teste Oficial da Automação Hermes - Destinos Incríveis",
     "slug": "teste-oficial-automacao-hermes-destinos-incriveis",
