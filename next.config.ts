@@ -2,8 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  images: { unoptimized: true },
   trailingSlash: true,
+  images: { unoptimized: true },
+  basePath: '/destinosincriveis',
+  assetPrefix: '/destinosincriveis/',
   allowedDevOrigins: [
     '177.153.195.66',
     '177.153.195.66:3001',
