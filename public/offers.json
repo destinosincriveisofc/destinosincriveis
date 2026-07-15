@@ -1,5 +1,21 @@
 [
   {
+    "id": "080337db-721e-41a0-a865-18251c551bfa",
+    "origem": "GRU",
+    "destino": "FCO",
+    "preco_atual": 1500.0,
+    "preco_original": 4500.0,
+    "desconto_percent": 66,
+    "companhia": "LATAM",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80",
+    "tipo": "voo",
+    "nota_urgencia": 10,
+    "texto_venda": "🚨 *ALERTA BUG DE TARIFA LATAM!* 🚨\nRoma a R$1500 saindo de GRU! Preço normal R$4500, economia de 66%!\nÉ um *erro de sistema* da LATAM e pode acabar A QUALQUER SEGUNDO!\n✅ Garanta já seu voo para a Itália!\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:58:02"
+  },
+  {
     "id": "5367ac80-4031-4f0a-b32c-3a00fca6bdbd",
     "origem": "GRU",
     "destino": "MCO",
@@ -174,21 +190,5 @@
     "texto_venda": null,
     "ativo": 1,
     "criado_em": "2026-07-15 21:58:40"
-  },
-  {
-    "id": "test-offer-1",
-    "origem": "GRU",
-    "destino": "MIA",
-    "preco_atual": 1500.0,
-    "preco_original": 3000.0,
-    "desconto_percent": 50,
-    "companhia": "Latam",
-    "link_afiliado": "https://afiliado.com/123",
-    "imagem_url": "https://picsum.photos/200",
-    "tipo": "voo",
-    "nota_urgencia": 8,
-    "texto_venda": "Super promo para Miami!",
-    "ativo": 1,
-    "criado_em": "2026-07-15 20:32:03"
   }
 ]
