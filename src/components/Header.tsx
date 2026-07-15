@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import styles from './Header.module.css';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,46 +22,37 @@ export default function Header() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 backdrop-blur-md border-b border-[#5BA4CF]/10 shadow-sm py-4'
-          : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="container flex items-center justify-between">
+    <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
+      <div className={styles.container}>
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight text-[#0A1628]">
-            Destinos<span className="text-[#5BA4CF]">Incríveis</span>
+        <Link href="/" className={styles.logo}>
+          <span>
+            Destinos<span className={styles.logoHighlight}>Incríveis</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-sm font-medium text-[#0A1628] hover:text-[#5BA4CF]">
+        <nav className={styles.nav}>
+          <Link href="/" className={styles.navLink}>
             Home
           </Link>
-          <Link href="/ofertas" className="text-sm font-medium text-[#0A1628] hover:text-[#5BA4CF]">
+          <Link href="/ofertas" className={styles.navLink}>
             Ofertas
           </Link>
-          <Link href="/club" className="text-sm font-medium text-[#0A1628] hover:text-[#5BA4CF]">
+          <Link href="/club" className={styles.navLink}>
             Club Exclusivo
           </Link>
-          <Link href="/blog" className="text-sm font-medium text-[#0A1628] hover:text-[#5BA4CF]">
+          <Link href="/blog" className={styles.navLink}>
             Dicas & Blog
           </Link>
-          <Link href="/consultoria" className="text-sm font-medium text-[#0A1628] hover:text-[#5BA4CF]">
+          <Link href="/consultoria" className={styles.navLink}>
             Consultoria VIP
           </Link>
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:block">
-          <Link
-            href="/club"
-            className="pill-button pill-button-primary flex items-center gap-2"
-          >
+        <div className={styles.ctaContainer}>
+          <Link href="/club" className={styles.ctaButton}>
             Fazer Parte do Club
             <ArrowRight size={16} />
           </Link>
@@ -69,7 +61,7 @@ export default function Header() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-[#0A1628] hover:text-[#5BA4CF]"
+          className={styles.menuButton}
           aria-label="Toggle Menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -78,46 +70,46 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-[#5BA4CF]/10 shadow-lg py-6 px-6 flex flex-col gap-4 animate-fadeIn">
+        <div className={styles.mobileMenu}>
           <Link
             href="/"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-base font-semibold text-[#0A1628] py-2 border-b border-gray-50"
+            className={styles.mobileLink}
           >
             Home
           </Link>
           <Link
             href="/ofertas"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-base font-semibold text-[#0A1628] py-2 border-b border-gray-50"
+            className={styles.mobileLink}
           >
             Ofertas
           </Link>
           <Link
             href="/club"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-base font-semibold text-[#0A1628] py-2 border-b border-gray-50"
+            className={styles.mobileLink}
           >
             Club Exclusivo
           </Link>
           <Link
             href="/blog"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-base font-semibold text-[#0A1628] py-2 border-b border-gray-50"
+            className={styles.mobileLink}
           >
             Dicas & Blog
           </Link>
           <Link
             href="/consultoria"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="text-base font-semibold text-[#0A1628] py-2 border-b border-gray-50"
+            className={styles.mobileLink}
           >
             Consultoria VIP
           </Link>
           <Link
             href="/club"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="pill-button pill-button-primary mt-2 text-center"
+            className={styles.mobileCta}
           >
             Fazer Parte do Club
           </Link>

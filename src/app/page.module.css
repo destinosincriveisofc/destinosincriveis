@@ -1,0 +1,487 @@
+.main {
+  background-color: #FAFBFF;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Sections general */
+.sectionWhite {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+.sectionIce {
+  padding: 80px 0;
+  background-color: #F0F4FF;
+  border-top: 1px solid rgba(91, 164, 207, 0.1);
+  border-bottom: 1px solid rgba(91, 164, 207, 0.1);
+}
+
+.sectionAlt {
+  padding: 80px 0;
+  background-color: #FAFBFF;
+  border-top: 1px solid rgba(91, 164, 207, 0.1);
+}
+
+/* Section headers */
+.sectionHeader {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionHeaderLeft {
+  text-align: left;
+  max-width: 640px;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #5BA4CF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sectionTitle {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #0A1628;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 2.25rem;
+  }
+}
+
+.sectionDesc {
+  font-size: 0.95rem;
+  color: #8896A9;
+  line-height: 1.5;
+}
+
+/* Como Funciona Steps Grid */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .stepsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+}
+
+.stepCard {
+  background-color: #FAFBFF;
+  border: 1px solid rgba(91, 164, 207, 0.1);
+  padding: 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.02);
+}
+
+.stepNum {
+  width: 48px;
+  height: 48px;
+  background-color: #F0F4FF;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5BA4CF;
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.stepTitle {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #0A1628;
+}
+
+.stepText {
+  font-size: 0.875rem;
+  color: #8896A9;
+  line-height: 1.6;
+}
+
+/* Alertas Recentes */
+.alertHeaderRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .alertHeaderRow {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.buttonOutline {
+  border: 2px solid #5BA4CF;
+  color: #5BA4CF;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.buttonOutline:hover {
+  background-color: #5BA4CF;
+  color: #ffffff;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .grid3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Club presentation */
+.clubGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .clubGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+.clubText {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .clubText {
+    grid-column: span 6 / span 6;
+  }
+}
+
+.clubFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.clubFeatureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.featureIcon {
+  color: #5BA4CF;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featureTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0A1628;
+}
+
+.featureDesc {
+  font-size: 0.8125rem;
+  color: #8896A9;
+}
+
+.buttonPrimary {
+  background-color: #FFD43B;
+  color: #0A1628;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 750;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.buttonPrimary:hover {
+  background-color: #F0B429;
+  transform: translateY(-2px);
+}
+
+.clubImageArea {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .clubImageArea {
+    grid-column: span 6 / span 6;
+  }
+}
+
+.clubImageWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(10, 22, 40, 0.05);
+  border: 1px solid rgba(91, 164, 207, 0.1);
+}
+
+.clubImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.clubTestimonialOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(10, 22, 40, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.clubTestimonialBox {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 320px;
+  text-align: center;
+  border: 1px solid rgba(91, 164, 207, 0.2);
+  box-shadow: 0 10px 25px rgba(10, 22, 40, 0.1);
+}
+
+.testimonialQuote {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #0A1628;
+  line-height: 1.45;
+}
+
+.testimonialAuthor {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: #8896A9;
+  display: block;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* Consultoria VIP Form */
+.consultingGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .consultingGrid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+.consultingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .consultingInfo {
+    grid-column: span 5 / span 5;
+  }
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 0.875rem;
+  color: #0A1628;
+  font-weight: 600;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contactIcon {
+  color: #5BA4CF;
+}
+
+.formBox {
+  background-color: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(91, 164, 207, 0.1);
+  box-shadow: 0 10px 30px rgba(10, 22, 40, 0.05);
+}
+
+@media (min-width: 1024px) {
+  .formBox {
+    grid-column: span 7 / span 7;
+  }
+}
+
+.formTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0A1628;
+  margin-bottom: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .formGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.span2 {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0A1628;
+}
+
+.input {
+  background-color: #FAFBFF;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #5BA4CF;
+}
+
+.textarea {
+  resize: none;
+}
+
+.submitBtn {
+  background-color: #FFD43B;
+  color: #0A1628;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 750;
+  font-size: 0.875rem;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.submitBtn:hover {
+  background-color: #F0B429;
+}
+
+/* Partners & Affiliates */
+.partnersContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.partnersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0.6;
+}
+
+.partnerBadge {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0A1628;
+  padding: 10px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+.partnerLink {
+  border: 2px solid #5BA4CF;
+  color: #5BA4CF;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.partnerLink:hover {
+  background-color: #5BA4CF;
+  color: #ffffff;
+}

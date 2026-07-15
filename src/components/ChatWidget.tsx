@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MessageCircle, X, Send, User } from 'lucide-react';
+import { MessageCircle, X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import styles from './ChatWidget.module.css';
 
 interface Message {
   id: string;
@@ -66,7 +67,7 @@ export default function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <div className={styles.widget}>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -74,48 +75,49 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="bg-white w-[360px] max-w-[calc(100vw-32px)] h-[500px] rounded-2xl shadow-2xl border border-[#5BA4CF]/20 flex flex-col overflow-hidden mb-4"
+            className={styles.chatBox}
           >
             {/* Header */}
-            <div className="bg-[#0A1628] text-white p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#5BA4CF] flex items-center justify-center text-[#0A1628] font-bold">
+            <div className={styles.header}>
+              <div className={styles.headerInfo}>
+                <div className={styles.avatar}>
                   DI
                 </div>
-                <div>
-                  <h4 className="text-sm font-semibold">Suporte Inteligente</h4>
-                  <span className="text-[10px] text-[#5BA4CF] flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                <div className={styles.headerMeta}>
+                  <h4 className={styles.headerTitle}>Suporte Inteligente</h4>
+                  <span className={styles.status}>
+                    <span className={styles.statusDot} />
                     Online agora
                   </span>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white transition-colors"
+                className={styles.closeButton}
+                aria-label="Fechar"
               >
                 <X size={20} />
               </button>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 bg-[#FAFBFF]">
+            <div className={styles.messageArea}>
               {messages.map((msg) => (
                 <div
                   key={msg.id}
-                  className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`${styles.messageRow} ${
+                    msg.sender === 'user' ? styles.userRow : styles.botRow
+                  }`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
-                      msg.sender === 'user'
-                        ? 'bg-[#5BA4CF] text-white rounded-tr-none'
-                        : 'bg-white text-[#0A1628] border border-gray-150 rounded-tl-none shadow-sm'
+                    className={`${styles.messageBubble} ${
+                      msg.sender === 'user' ? styles.userBubble : styles.botBubble
                     }`}
                   >
-                    <p className="leading-relaxed break-words">{msg.text}</p>
+                    <p>{msg.text}</p>
                     <span
-                      className={`text-[9px] block text-right mt-1 ${
-                        msg.sender === 'user' ? 'text-white/70' : 'text-gray-400'
+                      className={`${styles.time} ${
+                        msg.sender === 'user' ? styles.userTime : styles.botTime
                       }`}
                     >
                       {msg.timestamp}
@@ -126,37 +128,31 @@ export default function ChatWidget() {
             </div>
 
             {/* Quick Suggestions */}
-            <div className="px-4 py-2 bg-[#F0F4FF] flex gap-2 overflow-x-auto border-t border-gray-100 scrollbar-none">
+            <div className={styles.suggestions}>
               <button
                 onClick={() => handleQuickOption('Como funciona o Club?')}
-                className="whitespace-nowrap text-xs bg-white border border-[#5BA4CF]/20 text-[#0A1628] px-3 py-1.5 rounded-full hover:bg-[#5BA4CF]/10 transition-colors"
+                className={styles.suggestionBtn}
               >
                 Clube de Viagens
               </button>
               <button
                 onClick={() => handleQuickOption('Onde vejo passagens baratas?')}
-                className="whitespace-nowrap text-xs bg-white border border-[#5BA4CF]/20 text-[#0A1628] px-3 py-1.5 rounded-full hover:bg-[#5BA4CF]/10 transition-colors"
+                className={styles.suggestionBtn}
               >
                 Passagens Baratas
               </button>
             </div>
 
             {/* Input Form */}
-            <form
-              onSubmit={handleSendMessage}
-              className="p-3 border-t border-gray-100 flex items-center gap-2 bg-white"
-            >
+            <form onSubmit={handleSendMessage} className={styles.form}>
               <input
                 type="text"
                 value={inputValue}
                 onChange={e => setInputValue(e.target.value)}
                 placeholder="Escreva sua mensagem..."
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-[#5BA4CF] transition-colors"
+                className={styles.input}
               />
-              <button
-                type="submit"
-                className="w-9 h-9 rounded-full bg-[#0A1628] text-white flex items-center justify-center hover:bg-[#5BA4CF] transition-colors"
-              >
+              <button type="submit" className={styles.sendBtn} aria-label="Enviar">
                 <Send size={16} />
               </button>
             </form>
@@ -167,7 +163,7 @@ export default function ChatWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-[#5BA4CF] text-[#0A1628] shadow-lg hover:shadow-[#5BA4CF]/30 hover:scale-105 transition-all flex items-center justify-center border-2 border-white"
+        className={styles.toggleBtn}
         aria-label="Abrir Chat"
       >
         <MessageCircle size={26} />

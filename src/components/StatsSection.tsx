@@ -1,5 +1,6 @@
 import React from 'react';
 import { Users, Award, ShieldCheck, Flame } from 'lucide-react';
+import styles from './StatsSection.module.css';
 
 export default function StatsSection() {
   const stats = [
@@ -30,25 +31,23 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="py-12 bg-white border-y border-[#5BA4CF]/10">
-      <div className="container">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat) => (
-            <div key={stat.id} className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 p-2">
-              <div className="w-12 h-12 rounded-2xl bg-[#F0F4FF] flex items-center justify-center flex-shrink-0">
-                {stat.icon}
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-2xl md:text-3xl font-extrabold text-[#0A1628] tracking-tight">
-                  {stat.value}
-                </span>
-                <span className="text-xs md:text-sm text-[#8896A9] font-medium leading-tight">
-                  {stat.label}
-                </span>
-              </div>
+    <section className={styles.section}>
+      <div className={styles.container}>
+        {stats.map((stat) => (
+          <div key={stat.id} className={styles.statCard}>
+            <div className={styles.iconWrapper}>
+              {stat.icon}
             </div>
-          ))}
-        </div>
+            <div className={styles.statContent}>
+              <span className={styles.value}>
+                {stat.value}
+              </span>
+              <span className={styles.label}>
+                {stat.label}
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

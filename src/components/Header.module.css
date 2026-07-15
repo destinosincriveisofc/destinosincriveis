@@ -1,0 +1,141 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  padding: 24px 0;
+}
+
+.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-b: 1px solid rgba(91, 164, 207, 0.1);
+  box-shadow: 0 4px 20px rgba(10, 22, 40, 0.04);
+  padding: 16px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #0A1628;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoHighlight {
+  color: #5BA4CF;
+}
+
+.nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+}
+
+.navLink {
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: #0A1628;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #5BA4CF;
+}
+
+.ctaContainer {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ctaContainer {
+    display: block;
+  }
+}
+
+.ctaButton {
+  background-color: #FFD43B;
+  color: #0A1628;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(255, 212, 59, 0.2);
+}
+
+.ctaButton:hover {
+  background-color: #F0B429;
+  transform: translateY(-2px);
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #0A1628;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+/* Mobile Menu dropdown */
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(91, 164, 207, 0.1);
+  box-shadow: 0 10px 30px rgba(10, 22, 40, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 999;
+}
+
+.mobileLink {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0A1628;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f4ff;
+}
+
+.mobileCta {
+  background-color: #FFD43B;
+  color: #0A1628;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 8px;
+}

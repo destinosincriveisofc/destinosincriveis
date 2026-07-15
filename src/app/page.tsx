@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star } from 'lucide-react';
 import Link from 'next/link';
 
 import Header from '@/components/Header';
@@ -10,6 +10,7 @@ import StatsSection from '@/components/StatsSection';
 import OfferCard from '@/components/OfferCard';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import { fetchCheapFlights } from '@/lib/travelpayouts';
+import styles from './page.module.css';
 
 // Mock Blog Articles
 const MOCK_ARTICLES: BlogArticle[] = [
@@ -49,7 +50,7 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF]">
+      <main className={styles.main}>
         {/* 1. Hero Section */}
         <HeroSection />
 
@@ -57,46 +58,40 @@ export default async function Home() {
         <StatsSection />
 
         {/* 3. Como Funciona Section */}
-        <section className="py-20 bg-white">
-          <div className="container">
-            <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col gap-3">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Metodologia Inteligente</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628]">Como economizar em 3 passos</h2>
-              <p className="text-sm md:text-base text-[#8896A9]">
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Metodologia Inteligente</span>
+              <h2 className={styles.sectionTitle}>Como economizar em 3 passos</h2>
+              <p className={styles.sectionDesc}>
                 Nossa tecnologia monitora a variação de preços e avisa você no momento exato de reservar.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div className={styles.stepsGrid}>
               {/* Step 1 */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 p-6 rounded-2xl bg-[#FAFBFF] border border-gray-100">
-                <div className="w-12 h-12 rounded-xl bg-[#F0F4FF] flex items-center justify-center text-[#5BA4CF] font-bold text-lg">
-                  01
-                </div>
-                <h3 className="text-lg font-bold text-[#0A1628]">Nós rastreamos</h3>
-                <p className="text-sm text-[#8896A9] leading-relaxed">
+              <div className={styles.stepCard}>
+                <div className={styles.stepNum}>01</div>
+                <h3 className={styles.stepTitle}>Nós rastreamos</h3>
+                <p className={styles.stepText}>
                   Algoritmos monitoram tarifas de passagens 24h por dia, identificando quedas bruscas de preços e bugs do sistema.
                 </p>
               </div>
 
               {/* Step 2 */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 p-6 rounded-2xl bg-[#FAFBFF] border border-gray-100">
-                <div className="w-12 h-12 rounded-xl bg-[#F0F4FF] flex items-center justify-center text-[#5BA4CF] font-bold text-lg">
-                  02
-                </div>
-                <h3 className="text-lg font-bold text-[#0A1628]">Você recebe o alerta</h3>
-                <p className="text-sm text-[#8896A9] leading-relaxed">
+              <div className={styles.stepCard}>
+                <div className={styles.stepNum}>02</div>
+                <h3 className={styles.stepTitle}>Você recebe o alerta</h3>
+                <p className={styles.stepText}>
                   Disparamos alertas instantâneos no seu WhatsApp ou e-mail com o link de reserva direta, sem taxas ou intermediários.
                 </p>
               </div>
 
               {/* Step 3 */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 p-6 rounded-2xl bg-[#FAFBFF] border border-gray-100">
-                <div className="w-12 h-12 rounded-xl bg-[#F0F4FF] flex items-center justify-center text-[#5BA4CF] font-bold text-lg">
-                  03
-                </div>
-                <h3 className="text-lg font-bold text-[#0A1628]">Você viaja economizando</h3>
-                <p className="text-sm text-[#8896A9] leading-relaxed">
+              <div className={styles.stepCard}>
+                <div className={styles.stepNum}>03</div>
+                <h3 className={styles.stepTitle}>Você viaja economizando</h3>
+                <p className={styles.stepText}>
                   Emitindo diretamente com a companhia aérea ou parceiro consolidado, você economiza até 60% em relação ao preço padrão.
                 </p>
               </div>
@@ -105,28 +100,25 @@ export default async function Home() {
         </section>
 
         {/* 4. Central de Alertas Section */}
-        <section className="py-20 bg-[#F0F4FF]/50 border-t border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div className="flex flex-col gap-3">
-                <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Alertas Recentes</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628]">Central de Promoções Ativas</h2>
-                <p className="text-sm md:text-base text-[#8896A9]">
+        <section className={styles.sectionIce}>
+          <div className={styles.container}>
+            <div className={styles.alertHeaderRow}>
+              <div className={styles.sectionHeaderLeft}>
+                <span className={styles.badge}>Alertas Recentes</span>
+                <h2 className={styles.sectionTitle}>Central de Promoções Ativas</h2>
+                <p className={styles.sectionDesc}>
                   Estas são as passagens aéreas e ofertas mais baratas encontradas nas últimas horas.
                 </p>
               </div>
               <div>
-                <Link
-                  href="/ofertas"
-                  className="pill-button pill-button-outline flex items-center gap-1.5 whitespace-nowrap text-sm"
-                >
+                <Link href="/ofertas" className={styles.buttonOutline}>
                   Ver todas as ofertas
                   <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={styles.grid3}>
               {alertOffers.map((offer) => (
                 <OfferCard key={offer.id} offer={offer} />
               ))}
@@ -135,39 +127,39 @@ export default async function Home() {
         </section>
 
         {/* 5. Club Section */}
-        <section className="py-20 bg-white border-t border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6 flex flex-col gap-6">
-                <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Acesso Exclusivo</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628] leading-tight">
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.clubGrid}>
+              <div className={styles.clubText}>
+                <span className={styles.badge}>Acesso Exclusivo</span>
+                <h2 className={styles.sectionTitle}>
                   Destinos Incríveis Club: <br />
                   Seu passaporte para viajar mais
                 </h2>
-                <p className="text-sm md:text-base text-[#8896A9] leading-relaxed">
+                <p className={styles.sectionDesc}>
                   Faça parte do nosso grupo privado. Nossa equipe monitora 24 horas por dia, 7 dias por semana, enviando imediatamente no seu WhatsApp erros tarifários raros e descontos históricos de passagens.
                 </p>
 
-                <div className="flex flex-col gap-3.5">
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 size={20} className="text-[#5BA4CF] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-[#0A1628] text-sm block">4 Grupos Especializados</strong>
-                      <span className="text-xs text-[#8896A9]">Nacionais, Internacionais, Executivas/Primeira Classe e Hotéis.</span>
+                <div className={styles.clubFeatures}>
+                  <div className={styles.clubFeatureItem}>
+                    <CheckCircle2 size={20} className={styles.featureIcon} />
+                    <div className={styles.featureContent}>
+                      <strong className={styles.featureTitle}>4 Grupos Especializados</strong>
+                      <span className={styles.featureDesc}>Nacionais, Internacionais, Executivas/Primeira Classe e Hotéis.</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 size={20} className="text-[#5BA4CF] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-[#0A1628] text-sm block">Alertas de Erro Tarifário Imediatos</strong>
-                      <span className="text-xs text-[#8896A9]">Seja o primeiro a saber e emita antes que a companhia corrija o valor.</span>
+                  <div className={styles.clubFeatureItem}>
+                    <CheckCircle2 size={20} className={styles.featureIcon} />
+                    <div className={styles.featureContent}>
+                      <strong className={styles.featureTitle}>Alertas de Erro Tarifário Imediatos</strong>
+                      <span className={styles.featureDesc}>Seja o primeiro a saber e emita antes que a companhia corrija o valor.</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2.5">
-                    <CheckCircle2 size={20} className="text-[#5BA4CF] flex-shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-[#0A1628] text-sm block">Suporte e Dúvidas com Especialistas</strong>
-                      <span className="text-xs text-[#8896A9]">Canal direto com o fundador Juliano Amorin e consultores.</span>
+                  <div className={styles.clubFeatureItem}>
+                    <CheckCircle2 size={20} className={styles.featureIcon} />
+                    <div className={styles.featureContent}>
+                      <strong className={styles.featureTitle}>Suporte e Dúvidas com Especialistas</strong>
+                      <span className={styles.featureDesc}>Canal direto com o fundador Juliano Amorin e consultores.</span>
                     </div>
                   </div>
                 </div>
@@ -177,7 +169,7 @@ export default async function Home() {
                     href="https://pay.kiwify.com.br/HFIXsiL"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pill-button pill-button-primary inline-flex items-center gap-2"
+                    className={styles.buttonPrimary}
                   >
                     Entrar no Club por R$ 29,90/mês
                     <ArrowRight size={18} />
@@ -185,20 +177,24 @@ export default async function Home() {
                 </div>
               </div>
 
-              <div className="lg:col-span-6 relative">
-                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+              <div className={styles.clubImageArea}>
+                <div className={styles.clubImageWrapper}>
                   <img
                     src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop"
                     alt="Laptop showing flight details"
-                    className="w-full h-full object-cover"
+                    className={styles.clubImage}
                   />
-                  <div className="absolute inset-0 bg-[#0A1628]/30 backdrop-blur-[1px] flex items-center justify-center">
-                    <div className="bg-white/95 text-[#0A1628] p-6 rounded-xl shadow-lg max-w-xs text-center border border-[#5BA4CF]/20">
-                      <span className="text-2xl block mb-2">⭐</span>
-                      <p className="text-xs font-semibold italic text-[#0A1628]">
+                  <div className={styles.clubTestimonialOverlay}>
+                    <div className={styles.clubTestimonialBox}>
+                      <div className="flex justify-center text-[#FFD43B] mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={14} fill="currentColor" />
+                        ))}
+                      </div>
+                      <p className={styles.testimonialQuote}>
                         &quot;Economizei R$ 4.200 em uma única viagem para a Itália com o alerta do Club! Vale cada centavo.&quot;
                       </p>
-                      <span className="block text-[10px] font-bold text-[#8896A9] mt-2.5">— Mariana S., São Paulo</span>
+                      <span className={styles.testimonialAuthor}>— Mariana S., São Paulo</span>
                     </div>
                   </div>
                 </div>
@@ -208,79 +204,76 @@ export default async function Home() {
         </section>
 
         {/* 6. Consultoria VIP Section */}
-        <section id="consultoria" className="py-20 bg-[#F0F4FF] border-t border-b border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-5 flex flex-col gap-6">
-                <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Atendimento Exclusivo</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628] leading-tight">
+        <section id="consultoria" className={styles.sectionIce}>
+          <div className={styles.container}>
+            <div className={styles.consultingGrid}>
+              <div className={styles.consultingInfo}>
+                <span className={styles.badge}>Atendimento Exclusivo</span>
+                <h2 className={styles.sectionTitle}>
                   Consultoria VIP <br />
                   Destinos Incríveis
                 </h2>
-                <p className="text-sm md:text-base text-[#8896A9] leading-relaxed">
+                <p className={styles.sectionDesc}>
                   Prefere que busquemos as passagens e hotéis ideais para você? Nossa consultoria cria roteiros sob medida, otimiza trechos complexos e encontra as melhores tarifas pagas em dinheiro ou milhas.
                 </p>
-                <div className="flex flex-col gap-4 text-sm text-[#0A1628]">
-                  <div className="flex items-center gap-2">
-                    <Phone size={16} className="text-[#5BA4CF]" />
+                <div className={styles.contactList}>
+                  <div className={styles.contactItem}>
+                    <Phone size={16} className={styles.contactIcon} />
                     <span>WhatsApp VIP: +55 (11) 99720-4445</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail size={16} className="text-[#5BA4CF]" />
+                  <div className={styles.contactItem}>
+                    <Mail size={16} className={styles.contactIcon} />
                     <span>suporte@destinosincriveis.com.br</span>
                   </div>
                 </div>
               </div>
 
               {/* Consultation Form */}
-              <div className="lg:col-span-7 bg-white p-8 rounded-2xl shadow-xl border border-gray-150">
-                <h3 className="text-xl font-bold text-[#0A1628] mb-6">Solicitar Roteiro Personalizado</h3>
-                <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#0A1628]">Nome Completo</label>
+              <div className={styles.formBox}>
+                <h3 className={styles.formTitle}>Solicitar Roteiro Personalizado</h3>
+                <form className={styles.formGrid}>
+                  <div className={styles.formField}>
+                    <label className={styles.label}>Nome Completo</label>
                     <input
                       type="text"
                       placeholder="Ex: Juliano Amorin"
-                      className="bg-[#FAFBFF] border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#5BA4CF]"
+                      className={styles.input}
                     />
                   </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#0A1628]">WhatsApp de Contato</label>
+                  <div className={styles.formField}>
+                    <label className={styles.label}>WhatsApp de Contato</label>
                     <input
                       type="tel"
                       placeholder="Ex: (11) 99720-4445"
-                      className="bg-[#FAFBFF] border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#5BA4CF]"
+                      className={styles.input}
                     />
                   </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#0A1628]">Origem</label>
+                  <div className={styles.formField}>
+                    <label className={styles.label}>Origem</label>
                     <input
                       type="text"
                       placeholder="Ex: São Paulo (GRU)"
-                      className="bg-[#FAFBFF] border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#5BA4CF]"
+                      className={styles.input}
                     />
                   </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-semibold text-[#0A1628]">Destino Desejado</label>
+                  <div className={styles.formField}>
+                    <label className={styles.label}>Destino Desejado</label>
                     <input
                       type="text"
                       placeholder="Ex: Roma, Itália"
-                      className="bg-[#FAFBFF] border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#5BA4CF]"
+                      className={styles.input}
                     />
                   </div>
-                  <div className="flex flex-col gap-1.5 sm:col-span-2">
-                    <label className="text-xs font-semibold text-[#0A1628]">Mensagem / Observações</label>
+                  <div className={`${styles.formField} ${styles.span2}`}>
+                    <label className={styles.label}>Mensagem / Observações</label>
                     <textarea
                       rows={3}
                       placeholder="Nos fale sobre a sua viagem dos sonhos e o período preferido..."
-                      className="bg-[#FAFBFF] border border-gray-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#5BA4CF] resize-none"
+                      className={`${styles.input} ${styles.textarea}`}
                     />
                   </div>
-                  <div className="sm:col-span-2 pt-2">
-                    <button
-                      type="submit"
-                      className="pill-button pill-button-primary w-full text-center"
-                    >
+                  <div className={styles.span2}>
+                    <button type="submit" className={styles.submitBtn}>
                       Enviar Solicitação via WhatsApp
                     </button>
                   </div>
@@ -291,54 +284,53 @@ export default async function Home() {
         </section>
 
         {/* 7. Parceiros & Afiliados Section */}
-        <section className="py-16 bg-white">
-          <div className="container flex flex-col items-center gap-10">
-            <div className="text-center max-w-xl flex flex-col gap-2">
-              <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Nossos Parceiros</span>
-              <h3 className="text-2xl font-bold text-[#0A1628]">Integrações e Consolidadores Oficiais</h3>
-            </div>
-            
-            {/* Logos Grid */}
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60">
-              <span className="text-sm font-semibold tracking-wider text-[#0A1628] px-4 py-2 border border-gray-200 rounded-lg">LATAM Airlines</span>
-              <span className="text-sm font-semibold tracking-wider text-[#0A1628] px-4 py-2 border border-gray-200 rounded-lg">Azul Linhas Aéreas</span>
-              <span className="text-sm font-semibold tracking-wider text-[#0A1628] px-4 py-2 border border-gray-200 rounded-lg">GOL</span>
-              <span className="text-sm font-semibold tracking-wider text-[#0A1628] px-4 py-2 border border-gray-200 rounded-lg">TAP Portugal</span>
-              <span className="text-sm font-semibold tracking-wider text-[#0A1628] px-4 py-2 border border-gray-200 rounded-lg">Travelpayouts</span>
-            </div>
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.partnersContainer}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.badge}>Nossos Parceiros</span>
+                <h3 className={styles.sectionTitle}>Integrações e Consolidadores Oficiais</h3>
+              </div>
+              
+              {/* Logos Grid */}
+              <div className={styles.partnersGrid}>
+                <span className={styles.partnerBadge}>LATAM Airlines</span>
+                <span className={styles.partnerBadge}>Azul Linhas Aéreas</span>
+                <span className={styles.partnerBadge}>GOL</span>
+                <span className={styles.partnerBadge}>TAP Portugal</span>
+                <span className={styles.partnerBadge}>Travelpayouts</span>
+              </div>
 
-            <Link
-              href="mailto:suporte@destinosincriveis.com.br?subject=Parceria%20Afiliados"
-              className="pill-button pill-button-outline text-xs px-6 py-2.5"
-            >
-              Fazer Parceria Comercial
-            </Link>
+              <Link
+                href="mailto:suporte@destinosincriveis.com.br?subject=Parceria%20Afiliados"
+                className={styles.partnerLink}
+              >
+                Fazer Parceria Comercial
+              </Link>
+            </div>
           </div>
         </section>
 
         {/* 8. Blog Preview Section */}
-        <section className="py-20 bg-[#FAFBFF] border-t border-[#5BA4CF]/10">
-          <div className="container">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div className="flex flex-col gap-3">
-                <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Blog & Dicas</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628]">Últimas novidades do blog</h2>
-                <p className="text-sm md:text-base text-[#8896A9]">
+        <section className={styles.sectionAlt}>
+          <div className={styles.container}>
+            <div className={styles.alertHeaderRow}>
+              <div className={styles.sectionHeaderLeft}>
+                <span className={styles.badge}>Blog & Dicas</span>
+                <h2 className={styles.sectionTitle}>Últimas novidades do blog</h2>
+                <p className={styles.sectionDesc}>
                   Fique atualizado com as melhores estratégias e rotas selecionadas por nossos analistas.
                 </p>
               </div>
               <div>
-                <Link
-                  href="/blog"
-                  className="pill-button pill-button-outline flex items-center gap-1.5 whitespace-nowrap text-sm"
-                >
+                <Link href="/blog" className={styles.buttonOutline}>
                   Ver todos os artigos
                   <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className={styles.grid3}>
               {MOCK_ARTICLES.map((article) => (
                 <BlogCard key={article.id} article={article} />
               ))}
