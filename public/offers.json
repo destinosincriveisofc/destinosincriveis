@@ -1,5 +1,21 @@
 [
   {
+    "id": "c987d81f-82c3-4081-a9b5-e23042b00618",
+    "origem": "GRU",
+    "destino": "MCO",
+    "preco_atual": 2100.0,
+    "preco_original": 4200.0,
+    "desconto_percent": 50,
+    "companhia": "Azul Linhas Aéreas",
+    "link_afiliado": "https://tp.media/r?marker=748517&p=8231&u=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1508MCO1",
+    "imagem_url": "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?auto=format&fit=crop&w=800&q=80",
+    "tipo": "voo",
+    "nota_urgencia": 8,
+    "texto_venda": "🚨 *ALERTA BUG TARIFAIRIO!* 🚨\n✈️ Voos diretos *GRU > Orlando (MCO)* pela *Azul* por APENAS *R$ 2.100!*\n🤑 Economia surreal de 50%! Preço original R$ 4.200. É para agir *AGORA!*\n🏃‍♀️💨 Essa chance ÚNICA de embarcar para a Disney vai *SUMIR MUITO RÁPIDO!*\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:22:20"
+  },
+  {
     "id": "a31b23c0-9f49-4c5a-821e-11fd55181582",
     "origem": "GRU",
     "destino": "MCO",
