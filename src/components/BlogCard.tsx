@@ -50,8 +50,8 @@ export default function BlogCard({ article }: BlogCardProps) {
         </p>
 
         <div className={styles.footer}>
-          <Link href={`/blog/${article.slug}`} className={styles.link}>
-            <span>Ler artigo completo</span>
+          <Link href="/blog" className={styles.link}>
+            <span>Ler mais</span>
             <ArrowRight size={14} className={styles.linkIcon} />
           </Link>
         </div>

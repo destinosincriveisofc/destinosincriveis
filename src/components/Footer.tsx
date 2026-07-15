@@ -1,27 +1,28 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A1628] text-white py-16 border-t border-[#5BA4CF]/10">
-      <div className="container grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className={styles.footer}>
+      <div className={styles.container}>
         {/* Brand */}
-        <div className="flex flex-col gap-4">
-          <Link href="/" className="text-xl font-bold tracking-tight text-white">
-            Destinos<span className="text-[#5BA4CF]">Incríveis</span>
+        <div className={styles.column}>
+          <Link href="/" className={styles.brand}>
+            Destinos<span className={styles.logoHighlight}>Incríveis</span>
           </Link>
-          <p className="text-[#8896A9] text-sm leading-relaxed max-w-xs">
+          <p className={styles.brandDesc}>
             Monitoramos e alertamos passagens imperdíveis, erros tarifários e oportunidades exclusivas de viagem.
           </p>
           {/* Social Links */}
-          <div className="flex items-center gap-3 mt-2">
+          <div className={styles.socials}>
             {/* Instagram */}
             <a
               href="https://www.instagram.com/destinosincriveis.ofc/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#5BA4CF] hover:text-[#0A1628] transition-all"
+              className={styles.socialLink}
               aria-label="Instagram"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -35,7 +36,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@destinosincriveis.ofc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#5BA4CF] hover:text-[#0A1628] transition-all"
+              className={styles.socialLink}
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -47,7 +48,7 @@ export default function Footer() {
               href="https://www.youtube.com/@destinosincriveis.oficial"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#5BA4CF] hover:text-[#0A1628] transition-all"
+              className={styles.socialLink}
               aria-label="YouTube"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -59,75 +60,75 @@ export default function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div className="flex flex-col gap-4">
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-[#5BA4CF]">Navegação</h4>
-          <nav className="flex flex-col gap-2.5">
-            <Link href="/" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+        <div className={`${styles.column} ${styles.borderLeft}`}>
+          <h4 className={styles.title}>Navegação</h4>
+          <nav className={styles.navGroup}>
+            <Link href="/" className={styles.link}>
               Home
             </Link>
-            <Link href="/ofertas" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+            <Link href="/ofertas" className={styles.link}>
               Buscar Ofertas
             </Link>
-            <Link href="/club" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+            <Link href="/club" className={styles.link}>
               Destinos Incríveis Club
             </Link>
-            <Link href="/blog" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+            <Link href="/blog" className={styles.link}>
               Dicas de Viagem
             </Link>
-            <Link href="/consultoria" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+            <Link href="/consultoria" className={styles.link}>
               Consultoria VIP
             </Link>
-            <Link href="/parcerias" className="text-sm text-[#8896A9] hover:text-white transition-colors">
+            <Link href="/parcerias" className={styles.link}>
               Parcerias Comercial
             </Link>
           </nav>
         </div>
 
         {/* Support */}
-        <div className="flex flex-col gap-4">
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-[#5BA4CF]">Atendimento</h4>
-          <div className="flex flex-col gap-3.5">
+        <div className={`${styles.column} ${styles.borderLeft}`}>
+          <h4 className={styles.title}>Atendimento</h4>
+          <div className={styles.navGroup}>
             <a
               href="https://wa.me/5511997204445"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-[#8896A9] hover:text-white transition-colors"
+              className={styles.supportLink}
             >
-              <MessageSquare size={16} className="text-[#5BA4CF]" />
+              <MessageSquare size={16} className={styles.iconBlue} />
               <span>WhatsApp Geral</span>
-              <ArrowUpRight size={12} className="opacity-50" />
+              <ArrowUpRight size={12} className={styles.iconOpacity} />
             </a>
             <a
               href="tel:+5511997204445"
-              className="flex items-center gap-2 text-sm text-[#8896A9] hover:text-white transition-colors"
+              className={styles.supportLink}
             >
-              <Phone size={16} className="text-[#5BA4CF]" />
+              <Phone size={16} className={styles.iconBlue} />
               <span>+55 (11) 99720-4445</span>
             </a>
             <a
               href="mailto:suporte@destinosincriveis.com.br"
-              className="flex items-center gap-2 text-sm text-[#8896A9] hover:text-white transition-colors"
+              className={styles.supportLink}
             >
-              <Mail size={16} className="text-[#5BA4CF]" />
+              <Mail size={16} className={styles.iconBlue} />
               <span>suporte@destinosincriveis.com.br</span>
             </a>
           </div>
         </div>
 
         {/* Legal / Founder */}
-        <div className="flex flex-col gap-4">
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-[#5BA4CF]">Sobre</h4>
-          <p className="text-sm text-[#8896A9] leading-relaxed">
-            Fundado por <strong className="text-white font-medium">Juliano Amorin</strong>, o portal tem a missão de democratizar as viagens pelo mundo por meio de inteligência tarifária.
+        <div className={`${styles.column} ${styles.borderLeft}`}>
+          <h4 className={styles.title}>Sobre</h4>
+          <p className={styles.brandDesc}>
+            Fundado por <strong className={styles.founder}>Juliano Amorin</strong>, o portal tem a missão de democratizar as viagens pelo mundo por meio de inteligência tarifária.
           </p>
         </div>
       </div>
 
-      <div className="container mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#8896A9]">
+      <div className={styles.bottomBar}>
         <p>© {new Date().getFullYear()} Destinos Incríveis. Todos os direitos reservados.</p>
-        <p className="flex gap-4">
-          <Link href="/" className="hover:text-white">Termos de Uso</Link>
-          <Link href="/" className="hover:text-white">Políticas de Privacidade</Link>
+        <p className={styles.bottomLinks}>
+          <Link href="/" className={styles.bottomLink}>Termos de Uso</Link>
+          <Link href="/" className={styles.bottomLink}>Políticas de Privacidade</Link>
         </p>
       </div>
     </footer>

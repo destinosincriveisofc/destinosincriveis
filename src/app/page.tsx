@@ -100,7 +100,7 @@ export default async function Home() {
         </section>
 
         {/* 4. Central de Alertas Section */}
-        <section className={styles.sectionIce}>
+        <section id="ofertas" className={styles.sectionIce}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
@@ -127,7 +127,7 @@ export default async function Home() {
         </section>
 
         {/* 5. Club Section */}
-        <section className={styles.sectionWhite}>
+        <section id="clube" className={styles.sectionWhite}>
           <div className={styles.container}>
             <div className={styles.clubGrid}>
               <div className={styles.clubText}>
@@ -165,15 +165,13 @@ export default async function Home() {
                 </div>
 
                 <div className="pt-2">
-                  <a
-                    href="https://pay.kiwify.com.br/HFIXsiL"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/club"
                     className={styles.buttonPrimary}
                   >
-                    Entrar no Club por R$ 29,90/mês
+                    Entrar no Club por R$ 19,90/mês
                     <ArrowRight size={18} />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -309,14 +307,12 @@ export default async function Home() {
                 <span className={styles.partnerBadge}>Travelpayouts</span>
               </div>
 
-              <a
-                href="https://form.typeform.com/to/UAOGJSzY"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/parcerias"
                 className={styles.partnerLink}
               >
-                Fazer Parceria Comercial
-              </a>
+                Fazer Parceria
+              </Link>
             </div>
           </div>
         </section>

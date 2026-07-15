@@ -36,7 +36,7 @@ export default function ClubPage() {
   const plans = [
     {
       name: "Assinatura Mensal",
-      price: "R$ 29,90",
+      price: "R$ 19,90",
       period: "por mês",
       description: "Ideal para testar e planejar sua próxima viagem.",
       link: "https://pay.kiwify.com.br/HFIXsiL",

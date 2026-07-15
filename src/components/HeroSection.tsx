@@ -38,18 +38,16 @@ export default function HeroSection() {
           {/* CTA Buttons */}
           <div className={styles.ctaButtons}>
             <a
-              href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#clube"
               className={styles.buttonPrimary}
             >
               Entrar no Clube
               <ArrowRight size={18} />
             </a>
-            <Link href="/ofertas" className={styles.buttonOutline}>
+            <a href="#ofertas" className={styles.buttonOutline}>
               Ver Ofertas Ativas
               <Plane size={18} />
-            </Link>
+            </a>
           </div>
 
           {/* Trust signals */}
