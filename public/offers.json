@@ -1,5 +1,21 @@
 [
   {
+    "id": "a31b23c0-9f49-4c5a-821e-11fd55181582",
+    "origem": "GRU",
+    "destino": "MCO",
+    "preco_atual": 2100.0,
+    "preco_original": 4800.0,
+    "desconto_percent": 56,
+    "companhia": "Azul",
+    "link_afiliado": "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=8231&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRUMCO1",
+    "imagem_url": "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?auto=format&fit=crop&w=800&q=80",
+    "tipo": "voo",
+    "nota_urgencia": 9,
+    "texto_venda": "🚨 *BUG TARIFÁRIO DIJA CLUB!* 🚨\nVoos GRU ✈️ MCO (Orlando) com *Azul*!\nDe R$4800 por *APENAS R$2100!* Economize R$2700 (56%)!\n⚡️ Imperdível, essa chance é agora! Garanta já antes que suma!\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:09:39"
+  },
+  {
     "id": "67a8edef-e169-4b90-bfa3-7caef3242af2",
     "origem": "VCP",
     "destino": "MCO",
