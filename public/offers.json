@@ -1,5 +1,21 @@
 [
   {
+    "id": "5367ac80-4031-4f0a-b32c-3a00fca6bdbd",
+    "origem": "GRU",
+    "destino": "MCO",
+    "preco_atual": 2100.0,
+    "preco_original": 4200.0,
+    "desconto_percent": 50,
+    "companhia": "Azul",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?auto=format&fit=crop&w=800&q=80",
+    "tipo": "voo",
+    "nota_urgencia": 8,
+    "texto_venda": "🚨 *DIJA CLUB ALERTA VIP!* Voo GRU ✈️ MCO (Orlando) com 50% OFF!\n💸 Azul: De R$4.200 por APENAS R$2.100! Economia GIGANTE!\n✨ Seu sonho americano mais perto! Não perca, vagas LIMITADAS!\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:27:42"
+  },
+  {
     "id": "c987d81f-82c3-4081-a9b5-e23042b00618",
     "origem": "GRU",
     "destino": "MCO",
