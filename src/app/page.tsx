@@ -78,7 +78,12 @@ async function getRealOffers(): Promise<FlightOffer[]> {
       VCP: { name: "Campinas", country: "Brasil", code: "BR" }
     };
     
-    return dbOffers.map((dbOffer: any) => {
+    const validDbOffers = dbOffers.filter((o: any) => o && o.origem && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
+    if (validDbOffers.length === 0) {
+      throw new Error("No valid offers found after filtering out corrupt ones.");
+    }
+
+    return validDbOffers.map((dbOffer: any) => {
       const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
       const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
       
@@ -90,8 +95,8 @@ async function getRealOffers(): Promise<FlightOffer[]> {
         destinationName: destInfo.name,
         countryName: destInfo.country,
         countryCode: destInfo.code,
-        price: dbOffer.preco_atual,
-        originalPrice: dbOffer.preco_original,
+        price: Number(dbOffer.preco_atual) || 0,
+        originalPrice: Number(dbOffer.preco_original) || Number(dbOffer.preco_atual) || 0,
         departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
         returnDate: "",
         airline: dbOffer.companhia || "Companhia",
@@ -206,14 +211,14 @@ export default function Home() {
                 <div style={{ gridColumn: 'span 3', display: 'flex', justifyContent: 'center', padding: '2rem 0', width: '100%' }}>
                   <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
                 </div>
-              ) : alertOffers.length === 0 ? (
+              ) : !Array.isArray(alertOffers) || alertOffers.length === 0 ? (
                 <div style={{ gridColumn: 'span 3', textAlign: 'center', color: '#666', padding: '2rem 0', width: '100%' }}>
                   Nenhuma oferta recente encontrada.
                 </div>
               ) : (
-                alertOffers.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} />
-                ))
+                Array.isArray(alertOffers) ? alertOffers.map((offer) => (
+                  <OfferCard key={offer.id || String(Math.random())} offer={offer} />
+                )) : null
               )}
             </div>
           </div>

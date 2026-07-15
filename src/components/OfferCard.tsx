@@ -22,13 +22,30 @@ const DESTINATION_IMAGES: Record<string, string> = {
 };
 
 export default function OfferCard({ offer }: OfferCardProps) {
-  const imageUrl = offer.imagem_url || DESTINATION_IMAGES[offer.destination] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop";
+  const imageUrl = offer.imagem_url || DESTINATION_IMAGES[offer.destination || ""] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop";
 
-  const discount = Math.round(((offer.originalPrice - offer.price) / offer.originalPrice) * 100);
-  const isTariffError = offer.price < 500 && offer.destination !== "SDU";
+  const price = offer.price || 0;
+  const originalPrice = offer.originalPrice || price || 1;
+  const discount = Math.round(((originalPrice - price) / originalPrice) * 100);
+  const isTariffError = price < 500 && (offer.destination || "") !== "SDU";
 
   // Clean type label text instead of emoji
   const typeText = offer.type === 'voo' ? 'Voo' : offer.type === 'hotel' ? 'Hotel' : 'Pacote';
+
+  // Safe date helper
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "";
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return "";
+      return d.toLocaleDateString('pt-BR');
+    } catch {
+      return "";
+    }
+  };
+
+  const departureFormatted = formatDate(offer.departureDate);
+  const returnFormatted = formatDate(offer.returnDate);
 
   return (
     <div className={styles.card}>
@@ -36,7 +53,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
       <div className={styles.imageArea}>
         <img
           src={imageUrl}
-          alt={offer.destinationName}
+          alt={offer.destinationName || "Destino"}
           className={styles.image}
           loading="lazy"
         />
@@ -53,7 +70,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
 
         {/* Country Badge (No emoji) */}
         <div className={styles.countryBadge}>
-          <span>{offer.countryName}</span>
+          <span>{offer.countryName || "Destino"}</span>
         </div>
 
         {/* Type Badge (No emoji) */}
@@ -67,23 +84,25 @@ export default function OfferCard({ offer }: OfferCardProps) {
         <div className={styles.routeInfo}>
           <div className={styles.originText}>
             <PlaneTakeoff size={12} className="text-[#5BA4CF]" />
-            <span>Saída de {offer.originName}</span>
+            <span>Saída de {offer.originName || "São Paulo"}</span>
           </div>
           <h3 className={styles.destinationTitle}>
-            {offer.destinationName} ({offer.destination})
+            {offer.destinationName || "Destino"} ({offer.destination || ""})
           </h3>
         </div>
 
         {/* Dates */}
         <div className={styles.dates}>
-          <span className={styles.dateItem}>
-            <Calendar size={12} />
-            Ida: {new Date(offer.departureDate).toLocaleDateString('pt-BR')}
-          </span>
-          {offer.returnDate && (
+          {departureFormatted && (
             <span className={styles.dateItem}>
               <Calendar size={12} />
-              Volta: {new Date(offer.returnDate).toLocaleDateString('pt-BR')}
+              Ida: {departureFormatted}
+            </span>
+          )}
+          {returnFormatted && (
+            <span className={styles.dateItem}>
+              <Calendar size={12} />
+              Volta: {returnFormatted}
             </span>
           )}
         </div>
@@ -92,11 +111,11 @@ export default function OfferCard({ offer }: OfferCardProps) {
         <div className={styles.footer}>
           <div className={styles.priceWrapper}>
             <span className={styles.originalPrice}>
-              R$ {offer.originalPrice.toLocaleString('pt-BR')}
+              R$ {originalPrice.toLocaleString('pt-BR')}
             </span>
             <span className={styles.promoPrice}>
               <span className={styles.currency}>R$</span>
-              <span className={styles.priceVal}>{offer.price.toLocaleString('pt-BR')}</span>
+              <span className={styles.priceVal}>{price.toLocaleString('pt-BR')}</span>
             </span>
           </div>
 

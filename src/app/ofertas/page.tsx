@@ -43,7 +43,12 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       VCP: { name: "Campinas", country: "Brasil", code: "BR" }
     };
     
-    return dbOffers.map((dbOffer: any) => {
+    const validDbOffers = dbOffers.filter((o: any) => o && o.origem && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
+    if (validDbOffers.length === 0) {
+      throw new Error("No valid offers found after filtering out corrupt ones.");
+    }
+
+    return validDbOffers.map((dbOffer: any) => {
       const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
       const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
       
@@ -55,8 +60,8 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
         destinationName: destInfo.name,
         countryName: destInfo.country,
         countryCode: destInfo.code,
-        price: dbOffer.preco_atual,
-        originalPrice: dbOffer.preco_original,
+        price: Number(dbOffer.preco_atual) || 0,
+        originalPrice: Number(dbOffer.preco_original) || Number(dbOffer.preco_atual) || 0,
         departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
         returnDate: "",
         airline: dbOffer.companhia || "Companhia",
@@ -201,16 +206,16 @@ export default function OfertasPage() {
               <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
               <span className={styles.loadingText}>Buscando melhores tarifas...</span>
             </div>
-          ) : filteredOffers.length === 0 ? (
+          ) : !Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (
             <div className={styles.emptyState}>
               <p className={styles.emptyTitle}>Nenhuma oferta encontrada</p>
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
             <div className={styles.grid3}>
-              {filteredOffers.map((offer) => (
-                <OfferCard key={offer.id} offer={offer} />
-              ))}
+              {Array.isArray(filteredOffers) ? filteredOffers.map((offer) => (
+                <OfferCard key={offer.id || String(Math.random())} offer={offer} />
+              )) : null}
             </div>
           )}
         </div>
