@@ -1,5 +1,21 @@
 [
   {
+    "id": "67a8edef-e169-4b90-bfa3-7caef3242af2",
+    "origem": "VCP",
+    "destino": "MCO",
+    "preco_atual": 2100.0,
+    "preco_original": 4200.0,
+    "desconto_percent": 50,
+    "companhia": "Azul",
+    "link_afiliado": "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=8231&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FVCPMCO1",
+    "imagem_url": "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?auto=format&fit=crop&w=800&q=80",
+    "tipo": "voo",
+    "nota_urgencia": 9,
+    "texto_venda": "ALERTA VIP! 🚨 Bug Tarifário para ORLANDO! 🎢\nVoos de VCP para MCO com a Azul por apenas *R$2.100*!\nEconomize R$2.100 (50% OFF) do preço original de R$4.200.\nOportunidade ÚNICA e com prazo LIMITADO! Garanta já!\n🔗 Ver oferta no site: https://www.destinosincriveisofc.com.br/ofertas",
+    "ativo": 1,
+    "criado_em": "2026-07-15 23:09:11"
+  },
+  {
     "id": "4a6194d3-f668-44c8-99d8-d1fcdf4d0764",
     "origem": null,
     "destino": null,
