@@ -1,0 +1,135 @@
+/* Design System - Destinos Incríveis */
+
+:root {
+  /* Colors */
+  --fundo-principal: #FAFBFF;
+  --fundo-secundario: #F0F4FF;
+  --azul-bebe-principal: #5BA4CF;
+  --azul-bebe-escuro: #2D7DB8;
+  --azul-profundo: #0A1628;
+  --amarelo-marca: #FFD43B;
+  --amarelo-escuro: #F0B429;
+  --cinza-suave: #8896A9;
+  --branco-puro: #FFFFFF;
+
+  /* Shadows */
+  --shadow-soft: 0 8px 30px rgba(10, 22, 40, 0.04);
+  --shadow-hover: 0 16px 40px rgba(10, 22, 40, 0.08);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--fundo-principal);
+  color: var(--azul-profundo);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-plus-jakarta-sans), var(--font-inter), sans-serif;
+  color: var(--azul-profundo);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.pill-button-primary {
+  background-color: var(--amarelo-marca);
+  color: var(--azul-profundo);
+}
+
+.pill-button-primary:hover {
+  background-color: var(--amarelo-escuro);
+  transform: translateY(-2px);
+}
+
+.pill-button-outline {
+  border: 2px solid var(--azul-bebe-principal);
+  color: var(--azul-bebe-principal);
+}
+
+.pill-button-outline:hover {
+  background-color: var(--azul-bebe-principal);
+  color: var(--branco-puro);
+  transform: translateY(-2px);
+}
+
+.pill-button-dark {
+  background-color: var(--azul-profundo);
+  color: var(--branco-puro);
+}
+
+.pill-button-dark:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.card {
+  background-color: var(--branco-puro);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+  border: 1px solid rgba(91, 164, 207, 0.08);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* Soft blink animation */
+@keyframes soft-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.96); }
+}
+
+.blink-animate {
+  animation: soft-blink 2s infinite ease-in-out;
+}
