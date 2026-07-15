@@ -261,9 +261,16 @@
   .whats-float:hover { transform: scale(1.08); }
   .whats-float svg { width: 30px; height: 30px; }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .nav-links { display: none; }
-    .deal-card { flex: 0 0 210px; }
+    .row-scroll {
+      flex-direction: column;
+      overflow-x: visible;
+    }
+    .deal-card {
+      flex: 0 0 auto;
+      width: 100%;
+    }
   }
 </style>
 <style>
@@ -301,8 +308,12 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="club.html">Clube</a>
-        <a href="midia-kit.html">Parcerias</a>
+        <a href="blog.html">Blog</a>
+        <a href="ofertas.html" class="active">Ofertas</a>
+        <a href="consultoria.html">Consultoria VIP</a>
+        <a href="guia-viagem.html">Guia de Viagem</a>
       </div>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
       <span class="disclaimer-badge">Alguns links são de afiliados</span>
     </nav>
   </div>
@@ -659,5 +670,6 @@
 })();
 </script>
 
+<script src="app.js"></script>
 </body>
 </html>

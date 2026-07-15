@@ -1536,6 +1536,21 @@ footer ul li a:hover {
     display: none;
   }
   
+  .nav-links.active-menu {
+    display: flex !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #02060d;
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
   .burger {
     display: flex;
   }

@@ -26,6 +26,81 @@ const alertData = {
   }
 };
 
+// DADOS DINÂMICOS DO SITE (PREPARAÇÃO PARA AUTOMACÕES)
+const activeOffers = [
+  {
+    destino: "Maldivas",
+    desconto: 45,
+    preco_antigo: "9.500",
+    preco_novo: "5.225",
+    imagem_url: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80",
+    data_alerta: "Hoje",
+    provedor: "Qatar Airways",
+    rota: "Voo + Resort All-Inclusive",
+    categoria: "destaque"
+  },
+  {
+    destino: "Paris, França",
+    desconto: 38,
+    preco_antigo: "4.800",
+    preco_novo: "2.970",
+    imagem_url: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80",
+    data_alerta: "Hoje",
+    provedor: "Air France",
+    rota: "Ida e Volta - Taxas Inclusas",
+    categoria: "passagens"
+  },
+  {
+    destino: "Roma, Itália",
+    desconto: 35,
+    preco_antigo: "5.100",
+    preco_novo: "3.315",
+    imagem_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=80",
+    data_alerta: "Ontem",
+    provedor: "ITA Airways",
+    rota: "Ida e Volta saindo de SP",
+    categoria: "passagens"
+  },
+  {
+    destino: "Fernando de Noronha, PE",
+    desconto: 30,
+    preco_antigo: "3.200",
+    preco_novo: "2.240",
+    imagem_url: "https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=600&q=80",
+    data_alerta: "Hoje",
+    provedor: "Azul Linhas Aéreas",
+    rota: "Voo + Pousada com Café",
+    categoria: "destaque"
+  }
+];
+
+const blogPosts = [
+  {
+    titulo: "6 estratégias reais para economizar em viagens",
+    categoria: "economia",
+    descricao_curta: "Esqueça as dicas óbvias. Conheça as estratégias que realmente fazem você economizar de verdade nas passagens e hospedagens.",
+    imagem_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+    data: "15 Jul 2026",
+    autor: "Juliano Amorin"
+  },
+  {
+    titulo: "Como arrumar sua mala de cabine para viagens longas",
+    categoria: "dicas",
+    descricao_curta: "Aprenda a viajar leve e organizar uma mala compacta para até 15 dias sem pagar taxas de despacho.",
+    imagem_url: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=600&q=80",
+    data: "14 Jul 2026",
+    autor: "Juliano Amorin"
+  },
+  {
+    titulo: "Passagens baratas: o segredo dos voos multidestinos",
+    categoria: "passagens",
+    descricao_curta: "Veja como funciona o stopover e visite dois ou mais destinos internacionais pelo preço de apenas um bilhete.",
+    imagem_url: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+    data: "12 Jul 2026",
+    autor: "Juliano Amorin"
+  }
+];
+
 // ATUALIZA CATEGORIA SELECIONADA NO SIMULADOR
 function selectAlert(type) {
   // Desativar botões anteriores
@@ -63,9 +138,123 @@ function selectAlert(type) {
   }
 }
 
+// FUNÇÕES DE RENDERIZAÇÃO DINÂMICA
+function renderOffersDynamic() {
+  const offersContainer = document.getElementById('offers-list');
+  if (!offersContainer) return;
+
+  const CATEGORY_LABELS = {
+    destaque: { title: "🔥 Ofertas em Destaque", sub: "Atualizado hoje" },
+    passagens: { title: "✈️ Passagens Aéreas", sub: "Preços de ida e volta" },
+    hoteis: { title: "🏨 Hotéis & Resorts", sub: "Hospedagens selecionadas" },
+    pacotes: { title: "🎒 Pacotes Completos", sub: "Voo + Hotel inclusos" }
+  };
+
+  const grouped = {};
+  activeOffers.forEach(offer => {
+    const cat = offer.categoria || 'destaque';
+    if (!grouped[cat]) grouped[cat] = [];
+    grouped[cat].push(offer);
+  });
+
+  let html = '';
+  Object.keys(CATEGORY_LABELS).forEach(cat => {
+    if (grouped[cat] && grouped[cat].length) {
+      const label = CATEGORY_LABELS[cat];
+      html += `
+        <div class="row-block">
+          <div class="row-head">
+            <h3>${label.title}</h3>
+            <span>${label.sub}</span>
+          </div>
+          <div class="row-scroll">
+      `;
+      
+      grouped[cat].forEach(offer => {
+        html += `
+          <div class="deal-card">
+            <div class="deal-img">
+              <img src="${offer.imagem_url}" alt="${offer.destino}">
+              <span class="deal-discount">-${offer.desconto}%</span>
+              <span class="deal-provider">${offer.provedor}</span>
+            </div>
+            <div class="deal-body">
+              <h4>${offer.destino}</h4>
+              <div class="route">${offer.rota}</div>
+              <div class="deal-price-row">
+                <span class="old">R$ ${offer.preco_antigo}</span>
+                <span class="new">R$ ${offer.preco_novo}</span>
+              </div>
+              <a href="https://wa.me/5511999999999" target="_blank" class="deal-btn">Ver Oferta</a>
+            </div>
+          </div>
+        `;
+      });
+      
+      html += `
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  offersContainer.innerHTML = html;
+}
+
+function renderBlogPostsDynamic() {
+  const blogContainer = document.getElementById('blog-list');
+  if (!blogContainer) return;
+
+  let html = '';
+  blogPosts.forEach(post => {
+    html += `
+      <article class="post" data-cat="${post.categoria}">
+        <div class="post-banner" style="background: url('${post.imagem_url}') center/cover no-repeat; height: 180px; position: relative;">
+          <span class="banner-label" style="position: absolute; bottom: 15px; left: 20px; background: rgba(0, 0, 0, 0.6); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+            ${post.categoria}
+          </span>
+        </div>
+        <div class="post-body">
+          <span class="tag" style="color: var(--gold-primary); font-weight: 700; font-size: 0.75rem; text-transform: uppercase;">${post.categoria}</span>
+          <h2 style="font-size: 1.3rem; margin: 10px 0;">${post.titulo}</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;">${post.descricao_curta}</p>
+          <div style="margin-top: auto; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+            <span>Por: ${post.autor}</span>
+            <span>${post.data}</span>
+          </div>
+        </div>
+      </article>
+    `;
+  });
+
+  // Mantém o cta-inline no final da lista
+  html += `
+    <div class="cta-inline">
+      <h3>Quer esse tipo de alerta direto no seu WhatsApp?</h3>
+      <p>No Destinos Incríveis Club, erros tarifários e promoções chegam pra você em tempo real.</p>
+      <a href="club.html" class="btn-gold">Conhecer o Clube</a>
+    </div>
+  `;
+
+  blogContainer.innerHTML = html;
+}
+
 // INICIALIZADORES DO SIMULADOR E GERAIS
 document.addEventListener("DOMContentLoaded", () => {
-  // Inicializar o primeiro alerta
+  // Renderizar itens dinâmicos do Blog e Ofertas
+  renderOffersDynamic();
+  renderBlogPostsDynamic();
+
+  // Mobile Burger Menu Toggle
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('active-menu');
+    });
+  }
+
+  // Inicializar o primeiro alerta do simulador
   selectAlert('promo');
 
   // Adicionar listeners para os botões do simulador

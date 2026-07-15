@@ -384,21 +384,7 @@
 
 <script src="app.js"></script>
 <script>
-  // Mobile Burger Menu Toggle
-  const burger = document.getElementById('burger');
-  const navLinks = document.querySelector('.nav-links');
-  if (burger && navLinks) {
-    burger.addEventListener('click', ()=>{
-      const isOpen = navLinks.classList.contains('active-menu');
-      if (isOpen) {
-        navLinks.classList.remove('active-menu');
-        navLinks.style.display = 'none';
-      } else {
-        navLinks.classList.add('active-menu');
-        navLinks.style.cssText = 'display:flex;position:absolute;top:100%;left:0;right:0;background:var(--bg-darker);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--border-glass);box-shadow:0 20px 40px rgba(0,0,0,0.5);';
-      }
-    });
-  }
+  // Mobile Burger Menu is handled dynamically by app.js
 
   // Intersection Observer for reveal animations
   const revealEls = document.querySelectorAll('.reveal');
