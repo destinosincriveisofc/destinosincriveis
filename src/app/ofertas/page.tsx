@@ -68,7 +68,8 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
         link: dbOffer.link_afiliado || "",
         link_afiliado: dbOffer.link_afiliado || "",
         type: dbOffer.tipo || "voo",
-        imagem_url: dbOffer.imagem_url
+        imagem_url: dbOffer.imagem_url,
+        criado_em: dbOffer.criado_em || ""
       };
     });
   } catch (e) {
@@ -97,8 +98,19 @@ export default function OfertasPage() {
     const loadOffers = async () => {
       setLoading(true);
       const data = await getFlightsClient();
-      setOffers(data);
-      setFilteredOffers(data);
+      
+      // Sort descending by date (criado_em)
+      const sorted = [...data].sort((a: any, b: any) => {
+        const valA = a.criado_em || a.departureDate || "";
+        const valB = b.criado_em || b.departureDate || "";
+        return valB.localeCompare(valA);
+      });
+      
+      // Limit to 8 most recent offers
+      const limited = sorted.slice(0, 8);
+      
+      setOffers(limited);
+      setFilteredOffers(limited);
       setLoading(false);
     };
     loadOffers();

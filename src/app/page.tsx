@@ -103,7 +103,8 @@ async function getRealOffers(): Promise<FlightOffer[]> {
         link: dbOffer.link_afiliado || "",
         link_afiliado: dbOffer.link_afiliado || "",
         type: dbOffer.tipo || "voo",
-        imagem_url: dbOffer.imagem_url
+        imagem_url: dbOffer.imagem_url,
+        criado_em: dbOffer.criado_em || ""
       };
     });
   } catch (e) {
@@ -126,7 +127,61 @@ export default function Home() {
     const loadOffers = async () => {
       try {
         const cheapFlights = await getRealOffers();
-        setAlertOffers(cheapFlights.slice(0, 3));
+        
+        // Sort by criado_em descending just in case to get the absolute most recent first
+        const sortedFlights = [...cheapFlights].sort((a: any, b: any) => {
+          const valA = a.criado_em || a.departureDate || "";
+          const valB = b.criado_em || b.departureDate || "";
+          return valB.localeCompare(valA);
+        });
+
+        // 1. Get the first item of type 'voo' or 'hotel' (Trip.com)
+        let tripOffer = sortedFlights.find(o => o.type === 'voo' || o.type === 'hotel');
+        if (!tripOffer) {
+          tripOffer = {
+            id: "fallback-trip-default",
+            origin: "GRU",
+            originName: "São Paulo",
+            destination: "MIA",
+            destinationName: "Miami",
+            countryName: "Estados Unidos",
+            countryCode: "US",
+            price: 2500,
+            originalPrice: 5000,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "American Airlines",
+            link: "https://trip.tpx.gr/8G2qwgeK",
+            link_afiliado: "https://trip.tpx.gr/8G2qwgeK",
+            type: "voo",
+            imagem_url: "https://images.unsplash.com/photo-1535498730771-e735b998cd64?auto=format&fit=crop&w=800&q=80"
+          };
+        }
+
+        // 2. Get the first item of type 'passeio' (GetYourGuide)
+        let gygOffer = sortedFlights.find(o => o.type === 'passeio');
+        if (!gygOffer) {
+          gygOffer = {
+            id: "fallback-gyg-default",
+            origin: "GRU",
+            originName: "São Paulo",
+            destination: "ROM",
+            destinationName: "Roma Tour",
+            countryName: "Itália",
+            countryCode: "IT",
+            price: 350,
+            originalPrice: 700,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "GetYourGuide",
+            link: "https://getyourguide.tpx.gr/ltuk5KJm",
+            link_afiliado: "https://getyourguide.tpx.gr/ltuk5KJm",
+            type: "passeio",
+            imagem_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80"
+          };
+        }
+
+        setAlertOffers([tripOffer, gygOffer]);
       } catch (e) {
         console.error("Error loading offers:", e);
       } finally {
