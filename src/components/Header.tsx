@@ -56,6 +56,12 @@ export default function Header() {
         {/* Desktop CTA */}
         <div className={styles.ctaContainer}>
           <Link
+            href="/login"
+            className={styles.loginButton}
+          >
+            Área de Membros
+          </Link>
+          <Link
             href="/checkout"
             className={styles.ctaButton}
           >
@@ -118,6 +124,13 @@ export default function Header() {
             className={styles.mobileLink}
           >
             Parcerias
+          </Link>
+          <Link
+            href="/login"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={styles.mobileLogin}
+          >
+            Área de Membros
           </Link>
           <Link
             href="/checkout"

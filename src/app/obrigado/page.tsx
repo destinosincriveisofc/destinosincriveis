@@ -12,12 +12,17 @@ export default function ObrigadoPage() {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const [showForm, setShowForm] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      setEmail(params.get('email') || "");
+      const emailParam = params.get('email');
+      setEmail(emailParam || "");
       setNome(params.get('nome') || "");
+      if (emailParam !== null) {
+        setShowForm(true);
+      }
     }
   }, []);
 
@@ -82,7 +87,7 @@ export default function ObrigadoPage() {
           Inscrição Aprovada! Bem-vindo ao Club DIJA 👑
         </h1>
 
-        {email ? (
+        {showForm ? (
           <>
             <p className={styles.subtitle}>
               Olá, {nome || "Membro"}! Sua assinatura foi confirmada. Agora, crie a sua senha para ativar sua conta e acessar a área de membros.
@@ -98,8 +103,9 @@ export default function ObrigadoPage() {
                 <input 
                   type="email" 
                   value={email} 
-                  disabled 
+                  onChange={(e) => setEmail(e.target.value)}
                   className={styles.inputField} 
+                  required
                 />
               </div>
 
