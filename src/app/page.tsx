@@ -246,6 +246,16 @@ export default function Home() {
         {/* 4. Central de Alertas Section */}
         <section id="ofertas" className={styles.sectionIce}>
           <div className={styles.container}>
+            {/* Warning Banner */}
+            <div className={styles.bannerContainer}>
+              <p className={styles.bannerText}>
+                📢 <strong>Aviso Importante:</strong> Nossas pesquisas são realizadas em tempo real em horários específicos do dia. Os valores e vagas podem sofrer alterações rápidas pelas companhias e operadoras. Quer garantir os alertas em primeira mão? Entre para o Club Dija!
+              </p>
+              <Link href="/club" className={styles.bannerBtn}>
+                Fazer Parte do Club →
+              </Link>
+            </div>
+
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
                 <span className={styles.badge}>Alertas Recentes</span>

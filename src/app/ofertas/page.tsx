@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
@@ -106,11 +107,7 @@ export default function OfertasPage() {
         return valB.localeCompare(valA);
       });
       
-      // Limit to 8 most recent offers
-      const limited = sorted.slice(0, 8);
-      
-      setOffers(limited);
-      setFilteredOffers(limited);
+      setOffers(sorted);
       setLoading(false);
     };
     loadOffers();
@@ -136,7 +133,8 @@ export default function OfertasPage() {
 
     result = result.filter(o => o.price <= maxPrice);
 
-    setFilteredOffers(result);
+    // Limit to the latest 8 offers matching the filters
+    setFilteredOffers(result.slice(0, 8));
   }, [searchTerm, selectedType, maxPrice, offers]);
 
   return (
@@ -151,6 +149,16 @@ export default function OfertasPage() {
             <p className={styles.description}>
               Encontre voos barateados, hotéis e pacotes promocionais saindo de São Paulo (GRU). Atualizado constantemente.
             </p>
+          </div>
+
+          {/* Warning Banner */}
+          <div className={styles.bannerContainer}>
+            <p className={styles.bannerText}>
+              📢 <strong>Aviso Importante:</strong> Nossas pesquisas são realizadas em tempo real em horários específicos do dia. Os valores e vagas podem sofrer alterações rápidas pelas companhias e operadoras. Quer garantir os alertas em primeira mão? Entre para o Club Dija!
+            </p>
+            <Link href="/club" className={styles.bannerBtn}>
+              Fazer Parte do Club →
+            </Link>
           </div>
 
           {/* Filtering Section */}
@@ -192,6 +200,12 @@ export default function OfertasPage() {
                 className={`${styles.filterBtn} ${selectedType === 'pacote' ? styles.filterBtnActive : ''}`}
               >
                 📦 Pacotes
+              </button>
+              <button
+                onClick={() => setSelectedType('passeio')}
+                className={`${styles.filterBtn} ${selectedType === 'passeio' ? styles.filterBtnActive : ''}`}
+              >
+                🎟️ Passeios
               </button>
             </div>
 
