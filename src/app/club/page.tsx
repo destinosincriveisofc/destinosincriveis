@@ -13,22 +13,22 @@ export default function ClubPage() {
 
   const benefits = [
     {
-      icon: <Bell className="text-[#5BA4CF]" size={24} />,
+      icon: <Bell className="text-[#155EEF]" size={24} />,
       title: "Alertas Imediatos via WhatsApp",
       description: "Nossa inteligência tarifária dispara alertas na hora que a promoção ou erro de preço acontece. Sem delays."
     },
     {
-      icon: <Flame className="text-[#FFD43B]" size={24} />,
+      icon: <Flame className="text-[#FFC107]" size={24} />,
       title: "Monitoramento de Erro de Tarifa",
       description: "Quando o sistema das companhias falha e vende passagens com até 90% de desconto. Avisamos de madrugada ou final de semana."
     },
     {
-      icon: <ShieldCheck className="text-[#5BA4CF]" size={24} />,
+      icon: <ShieldCheck className="text-[#155EEF]" size={24} />,
       title: "Emissão Direta sem Taxas",
       description: "Você não paga comissões ou taxas. Enviamos o link direto para o site oficial da companhia aérea parceira."
     },
     {
-      icon: <MessageSquare className="text-[#FFD43B]" size={24} />,
+      icon: <MessageSquare className="text-[#FFC107]" size={24} />,
       title: "Comunidade Exclusiva",
       description: "Tire dúvidas sobre roteiros, milhas ou emissões direto com Juliano Amorin e nossa equipe de moderadores."
     }

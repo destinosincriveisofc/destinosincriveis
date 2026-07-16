@@ -6,25 +6,25 @@ export default function StatsSection() {
   const stats = [
     {
       id: 1,
-      icon: <Users className="text-[#5BA4CF]" size={28} />,
+      icon: <Users className="text-[#155EEF]" size={28} />,
       value: "220 mil+",
       label: "Seguidores no Instagram",
     },
     {
       id: 2,
-      icon: <Flame className="text-[#FFD43B]" size={28} />,
+      icon: <Flame className="text-[#FFC107]" size={28} />,
       value: "45 mil+",
       label: "Ofertas monitoradas por mês",
     },
     {
       id: 3,
-      icon: <Award className="text-[#5BA4CF]" size={28} />,
+      icon: <Award className="text-[#155EEF]" size={28} />,
       value: "15 mil+",
       label: "Membros economizando no Club Dija",
     },
     {
       id: 4,
-      icon: <ShieldCheck className="text-[#FFD43B]" size={28} />,
+      icon: <ShieldCheck className="text-[#FFC107]" size={28} />,
       value: "R$ 18 Milhões",
       label: "Economizados por nossos viajantes",
     }

@@ -54,7 +54,7 @@ export default function LoginPage() {
     <div className={styles.main}>
       <div className={styles.loginCard}>
         <div className={styles.logoContainer}>
-          <span className={styles.logoEmoji}>✈️</span>
+          <img src="/logo-oficial.jpg" alt="Logo Oficial" className={styles.logoImage} />
           <h1 className={styles.brandTitle}>CLUB DIJA</h1>
           <p className={styles.brandSubtitle}>Área de Membros Exclusiva</p>
         </div>

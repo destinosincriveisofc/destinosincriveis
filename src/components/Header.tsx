@@ -26,6 +26,7 @@ export default function Header() {
       <div className={styles.container}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
+          <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} />
           <span>
             Destinos<span className={styles.logoHighlight}>Incríveis</span>
           </span>

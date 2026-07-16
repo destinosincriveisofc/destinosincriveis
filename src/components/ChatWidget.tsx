@@ -73,7 +73,10 @@ export default function ChatWidget() {
         text: msg.text
       }));
 
-      // 3. Request absolute backend URL
+      // 3. Request absolute backend URL with 7s timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 7000);
+
       const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/chat', {
         method: 'POST',
         headers: {
@@ -82,8 +85,11 @@ export default function ChatWidget() {
         body: JSON.stringify({
           message: text,
           history: historyPayload
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error('API server returned error status');
@@ -107,7 +113,7 @@ export default function ChatWidget() {
       const errorMsg: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: 'Desculpe, estou com dificuldades para me conectar agora. Por favor, tente novamente ou entre em contato com nosso suporte via WhatsApp: https://wa.me/5511997204445',
+        text: 'Opa, meu sistema está um pouco lento agora. Você pode me chamar direto no WhatsApp clicando no botão abaixo!\n\n[Chamar no WhatsApp](https://wa.me/5511997204445)',
         timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, errorMsg]);
@@ -147,8 +153,24 @@ export default function ChatWidget() {
           const linkText = mdLinkMatch[1];
           const linkUrl = mdLinkMatch[2];
           const isRelative = linkUrl.startsWith('/');
+          const isWhatsApp = linkUrl.includes('wa.me') || linkUrl.includes('whatsapp');
           
-          if (isRelative) {
+          if (isWhatsApp) {
+            return (
+              <a
+                key={partIdx}
+                href={linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.whatsappBtn}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+                {linkText}
+              </a>
+            );
+          } else if (isRelative) {
             return (
               <Link
                 key={partIdx}
@@ -246,7 +268,7 @@ export default function ChatWidget() {
             <div className={styles.header}>
               <div className={styles.headerInfo}>
                 <div className={styles.avatar}>
-                  DJ
+                  <img src="/logo-oficial.jpg" alt="Logo" className={styles.avatarImage} />
                 </div>
                 <div className={styles.headerMeta}>
                   <h4 className={styles.headerTitle}>CLUB DIJA</h4>
@@ -352,7 +374,7 @@ export default function ChatWidget() {
         className={styles.toggleBtn}
         aria-label="Abrir Chat"
       >
-        <MessageCircle size={26} />
+        {isOpen ? <X size={26} /> : <img src="/logo-oficial.jpg" alt="Logo" className={styles.launcherLogo} />}
       </button>
     </div>
   );

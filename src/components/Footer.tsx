@@ -10,7 +10,10 @@ export default function Footer() {
         {/* Brand */}
         <div className={styles.column}>
           <Link href="/" className={styles.brand}>
-            Destinos<span className={styles.logoHighlight}>Incríveis</span>
+            <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} />
+            <span>
+              Destinos<span className={styles.logoHighlight}>Incríveis</span>
+            </span>
           </Link>
           <p className={styles.brandDesc}>
             Monitoramos e alertamos passagens imperdíveis, erros tarifários e oportunidades exclusivas de viagem.

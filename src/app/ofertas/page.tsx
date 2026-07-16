@@ -230,7 +230,7 @@ export default function OfertasPage() {
           {/* Loading state */}
           {loading ? (
             <div className={styles.loadingWrapper}>
-              <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
+              <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
               <span className={styles.loadingText}>Buscando melhores tarifas...</span>
             </div>
           ) : !Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (

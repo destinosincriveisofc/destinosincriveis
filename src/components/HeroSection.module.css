@@ -63,7 +63,7 @@
 
 .stars {
   display: flex;
-  color: #FFD43B;
+  color: #FFC107;
 }
 
 .badge {
@@ -108,7 +108,7 @@
 }
 
 .headlineHighlight {
-  color: #5BA4CF;
+  color: #155EEF;
 }
 
 .description {
@@ -146,7 +146,7 @@
 }
 
 .buttonPrimary {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 16px 32px;
   border-radius: 999px;
@@ -167,13 +167,13 @@
 }
 
 .buttonPrimary:hover {
-  background-color: #F0B429;
+  background-color: #E0A800;
   transform: translateY(-2px);
 }
 
 .buttonOutline {
-  border: 2px solid #5BA4CF;
-  color: #5BA4CF;
+  border: 2px solid #155EEF;
+  color: #155EEF;
   padding: 14px 30px;
   border-radius: 999px;
   font-weight: 750;
@@ -193,7 +193,7 @@
 }
 
 .buttonOutline:hover {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #ffffff;
   transform: translateY(-2px);
 }
@@ -224,12 +224,12 @@
 }
 
 .trustIconBlue {
-  color: #5BA4CF;
+  color: #155EEF;
   flex-shrink: 0;
 }
 
 .trustIconYellow {
-  color: #FFD43B;
+  color: #FFC107;
   flex-shrink: 0;
 }
 
@@ -294,7 +294,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #FFD43B;
+  background-color: #FFC107;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -309,7 +309,7 @@
 .alertLabel {
   font-size: 0.65rem;
   font-weight: 800;
-  color: #5BA4CF;
+  color: #155EEF;
   letter-spacing: 0.05em;
   display: block;
 }

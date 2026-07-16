@@ -38,7 +38,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,7 +59,7 @@
 
 .status {
   font-size: 0.65rem;
-  color: #5BA4CF;
+  color: #155EEF;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -131,7 +131,7 @@
 }
 
 .userBubble {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #ffffff;
   border-top-right-radius: 0;
 }
@@ -201,7 +201,7 @@
 }
 
 .input:focus {
-  border-color: #5BA4CF;
+  border-color: #155EEF;
 }
 
 .sendBtn {
@@ -219,14 +219,14 @@
 }
 
 .sendBtn:hover {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
 }
 
 .toggleBtn {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #0A1628;
   box-shadow: 0 10px 25px rgba(91, 164, 207, 0.3);
   display: flex;
@@ -252,4 +252,41 @@
 .chatLink:hover {
   color: #2563eb;
   text-decoration: underline;
+}
+
+.whatsappBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25D366;
+  color: #ffffff !important;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.whatsappBtn:hover {
+  background-color: #1ebd54;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.launcherLogo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }

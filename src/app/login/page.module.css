@@ -1,5 +1,5 @@
 .main {
-  background: radial-gradient(circle at top, #1e3a8a, #0b132b);
+  background: radial-gradient(circle at top, #155EEF, #0A1628);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -38,10 +38,15 @@
   margin-bottom: 30px;
 }
 
-.logoEmoji {
-  font-size: 3rem;
-  display: inline-block;
-  margin-bottom: 10px;
+.logoImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 15px auto;
+  border: 3px solid #FFC107;
+  display: block;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   animation: float 3s ease-in-out infinite;
 }
 

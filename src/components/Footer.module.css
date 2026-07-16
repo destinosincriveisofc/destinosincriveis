@@ -41,12 +41,22 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #ffffff;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 4px;
 }
 
+.logoImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFC107;
+}
+
 .logoHighlight {
-  color: #5BA4CF;
+  color: #155EEF;
 }
 
 .brandDesc {
@@ -81,7 +91,7 @@
 }
 
 .socialLink:hover {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #0A1628;
   transform: translateY(-2px);
 }
@@ -91,7 +101,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #5BA4CF;
+  color: #155EEF;
   margin-bottom: 8px;
 }
 
@@ -132,7 +142,7 @@
 }
 
 .iconBlue {
-  color: #5BA4CF;
+  color: #155EEF;
   flex-shrink: 0;
 }
 

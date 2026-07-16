@@ -73,8 +73,8 @@
   width: 80px;
   height: 80px;
   border: 8px solid rgba(91, 164, 207, 0.15);
-  border-top: 8px solid #5BA4CF;
-  border-right: 8px solid #FFD43B;
+  border-top: 8px solid #155EEF;
+  border-right: 8px solid #FFC107;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }

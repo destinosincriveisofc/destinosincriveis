@@ -50,7 +50,7 @@
 .badge {
   font-size: 0.7rem;
   font-weight: 800;
-  color: #5BA4CF;
+  color: #155EEF;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5BA4CF;
+  color: #155EEF;
   font-weight: 800;
   font-size: 1.125rem;
 }
@@ -141,8 +141,8 @@
 }
 
 .buttonOutline {
-  border: 2px solid #5BA4CF;
-  color: #5BA4CF;
+  border: 2px solid #155EEF;
+  color: #155EEF;
   padding: 12px 24px;
   border-radius: 999px;
   font-weight: 700;
@@ -155,7 +155,7 @@
 }
 
 .buttonOutline:hover {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #ffffff;
 }
 
@@ -210,7 +210,7 @@
 }
 
 .featureIcon {
-  color: #5BA4CF;
+  color: #155EEF;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -233,7 +233,7 @@
 }
 
 .buttonPrimary {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 14px 28px;
   border-radius: 999px;
@@ -247,7 +247,7 @@
 }
 
 .buttonPrimary:hover {
-  background-color: #F0B429;
+  background-color: #E0A800;
   transform: translateY(-2px);
 }
 
@@ -356,7 +356,7 @@
 }
 
 .contactIcon {
-  color: #5BA4CF;
+  color: #155EEF;
 }
 
 .formBox {
@@ -419,7 +419,7 @@
 }
 
 .input:focus {
-  border-color: #5BA4CF;
+  border-color: #155EEF;
 }
 
 .textarea {
@@ -427,7 +427,7 @@
 }
 
 .submitBtn {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 14px;
   border: none;
@@ -440,7 +440,7 @@
 }
 
 .submitBtn:hover {
-  background-color: #F0B429;
+  background-color: #E0A800;
 }
 
 /* Partners & Affiliates */
@@ -471,8 +471,8 @@
 }
 
 .partnerLink {
-  border: 2px solid #5BA4CF;
-  color: #5BA4CF;
+  border: 2px solid #155EEF;
+  color: #155EEF;
   padding: 10px 20px;
   border-radius: 999px;
   font-size: 0.75rem;
@@ -482,7 +482,7 @@
 }
 
 .partnerLink:hover {
-  background-color: #5BA4CF;
+  background-color: #155EEF;
   color: #ffffff;
 }
 

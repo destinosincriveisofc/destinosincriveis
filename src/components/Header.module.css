@@ -35,8 +35,17 @@
   gap: 8px;
 }
 
+.logoImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #155EEF;
+  box-shadow: 0 2px 8px rgba(21, 94, 239, 0.15);
+}
+
 .logoHighlight {
-  color: #5BA4CF;
+  color: #155EEF;
 }
 
 .nav {
@@ -59,7 +68,7 @@
 }
 
 .navLink:hover {
-  color: #5BA4CF;
+  color: #155EEF;
 }
 
 .ctaContainer {
@@ -75,7 +84,7 @@
 }
 
 .ctaButton {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 12px 24px;
   border-radius: 999px;
@@ -89,7 +98,7 @@
 }
 
 .ctaButton:hover {
-  background-color: #F0B429;
+  background-color: #E0A800;
   transform: translateY(-2px);
 }
 
@@ -133,7 +142,7 @@
 }
 
 .mobileCta {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 14px;
   border-radius: 999px;
@@ -152,7 +161,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 2px solid #5BA4CF;
+  border: 2px solid #155EEF;
   transition: all 0.2s ease;
 }
 
@@ -162,7 +171,7 @@
 }
 
 .mobileLogin {
-  border: 2px solid #5BA4CF;
+  border: 2px solid #155EEF;
   color: #0A1628;
   padding: 14px;
   border-radius: 999px;

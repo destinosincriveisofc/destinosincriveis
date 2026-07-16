@@ -165,11 +165,11 @@
 }
 
 .priceVal {
-  color: #2D7DB8;
+  color: #1049C4;
 }
 
 .ctaButton {
-  background-color: #FFD43B;
+  background-color: #FFC107;
   color: #0A1628;
   padding: 10px 18px;
   border-radius: 999px;
@@ -182,7 +182,7 @@
   transition: all 0.2s ease;
 }
 .ctaButton:hover {
-  background-color: #F0B429;
+  background-color: #E0A800;
   transform: translateY(-1px);
 }
 
@@ -232,5 +232,5 @@
 .newPriceVal {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #2D7DB8;
+  color: #1049C4;
 }

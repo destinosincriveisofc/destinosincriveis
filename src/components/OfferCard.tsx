@@ -132,7 +132,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
         <div className={styles.routeInfo}>
           {showDeparture && (
             <div className={styles.originText}>
-              <PlaneTakeoff size={12} className="text-[#5BA4CF]" />
+              <PlaneTakeoff size={12} className="text-[#155EEF]" />
               <span>Saída de {offer.originName || "São Paulo"}</span>
             </div>
           )}

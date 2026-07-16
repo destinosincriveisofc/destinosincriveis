@@ -330,7 +330,7 @@ export default function Home() {
             <div className={styles.grid3}>
               {loading ? (
                 <div style={{ gridColumn: 'span 3', display: 'flex', justifyContent: 'center', padding: '2rem 0', width: '100%' }}>
-                  <RefreshCw className="animate-spin text-[#5BA4CF]" size={36} />
+                  <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
                 </div>
               ) : !Array.isArray(alertOffers) || alertOffers.length === 0 ? (
                 <div style={{ gridColumn: 'span 3', textAlign: 'center', color: '#666', padding: '2rem 0', width: '100%' }}>
@@ -403,7 +403,7 @@ export default function Home() {
                   />
                   <div className={styles.clubTestimonialOverlay}>
                     <div className={styles.clubTestimonialBox}>
-                      <div className="flex justify-center text-[#FFD43B] mb-2">
+                      <div className="flex justify-center text-[#FFC107] mb-2">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} size={14} fill="currentColor" />
                         ))}
@@ -632,7 +632,7 @@ export default function Home() {
                 padding: '12px',
                 borderRadius: '8px',
                 border: 'none',
-                backgroundColor: '#5BA4CF',
+                backgroundColor: '#155EEF',
                 color: 'white',
                 fontWeight: 600,
                 fontSize: '15px',
@@ -640,7 +640,7 @@ export default function Home() {
                 transition: 'background-color 0.2s',
               }}
               onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#4a93be'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#5BA4CF'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#155EEF'}
             >
               Fechar
             </button>
