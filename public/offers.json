@@ -1,5 +1,21 @@
 [
   {
+    "id": "UNKNOWN-ORLANDO",
+    "origem": null,
+    "destino": "Orlando",
+    "preco_atual": 450.0,
+    "preco_original": 900.0,
+    "desconto_percent": 50,
+    "companhia": "Disney Tour",
+    "link_afiliado": "https://getyourguide.tpx.gr/ltuk5KJm",
+    "imagem_url": "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?auto=format&fit=crop&w=800&q=80",
+    "tipo": "passeio",
+    "nota_urgencia": 8,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Orlando*\n🏢 Disney Tour\n\n💰 De ~~R$ 900~~ por apenas *R$ 450*\n📊 Você economiza *50%*\n📅 Datas disponíveis: datas selecionadas de 2025 e 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://getyourguide.tpx.gr/ltuk5KJm\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-16 01:01:04"
+  },
+  {
     "id": "GRU-LIS",
     "origem": "GRU",
     "destino": "LIS",
