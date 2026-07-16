@@ -44,7 +44,7 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       VCP: { name: "Campinas", country: "Brasil", code: "BR" }
     };
     
-    const validDbOffers = dbOffers.filter((o: any) => o && o.origem && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
+    const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
     if (validDbOffers.length === 0) {
       throw new Error("No valid offers found after filtering out corrupt ones.");
     }
