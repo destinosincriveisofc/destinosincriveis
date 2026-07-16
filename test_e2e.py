@@ -15,13 +15,13 @@ def post_json(url, payload, headers=None):
     import time
     for attempt in range(5):
         try:
-            with urllib.request.urlopen(req, timeout=90) as resp:
+            with urllib.request.urlopen(req, timeout=300) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except Exception as e:
             print(f"Attempt {attempt + 1} failed calling {url}: {e}")
             if attempt < 4:
-                print("Sleeping for 15 seconds before retrying...")
-                time.sleep(15)
+                print("Sleeping for 30 seconds before retrying...")
+                time.sleep(30)
             else:
                 if hasattr(e, 'read'):
                     print("Response:", e.read().decode('utf-8', errors='replace'))
