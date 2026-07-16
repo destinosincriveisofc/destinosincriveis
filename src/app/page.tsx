@@ -123,6 +123,61 @@ export default function Home() {
   const [alertOffers, setAlertOffers] = useState<FlightOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [consultoriaNome, setConsultoriaNome] = useState('');
+  const [consultoriaWhatsapp, setConsultoriaWhatsapp] = useState('');
+  const [consultoriaOrigem, setConsultoriaOrigem] = useState('');
+  const [consultoriaDestino, setConsultoriaDestino] = useState('');
+  const [consultoriaMensagem, setConsultoriaMensagem] = useState('');
+  const [consultoriaSubmitting, setConsultoriaSubmitting] = useState(false);
+  const [showConsultoriaSuccess, setShowConsultoriaSuccess] = useState(false);
+
+  const handleConsultoriaSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setConsultoriaSubmitting(true);
+    try {
+      const response = await fetch('/api/consultoria', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: consultoriaNome,
+          telefone: consultoriaWhatsapp,
+          origem: consultoriaOrigem,
+          destino: consultoriaDestino,
+          mensagem: consultoriaMensagem,
+        }),
+      });
+
+      if (response.ok) {
+        setShowConsultoriaSuccess(true);
+        setConsultoriaNome('');
+        setConsultoriaWhatsapp('');
+        setConsultoriaOrigem('');
+        setConsultoriaDestino('');
+        setConsultoriaMensagem('');
+
+        const formattedMessage = encodeURIComponent(
+          `📋 *NOVA SOLICITAÇÃO DE CONSULTORIA VIP!*\n\n` +
+          `👤 *Nome:* ${consultoriaNome}\n` +
+          `📞 *Telefone:* ${consultoriaWhatsapp}\n` +
+          `✈️ *Origem / Destino:* ${consultoriaOrigem} → ${consultoriaDestino}\n` +
+          `✉️ *Mensagem/Roteiro:* ${consultoriaMensagem}`
+        );
+        setTimeout(() => {
+          window.open(`https://wa.me/5544991579205?text=${formattedMessage}`, '_blank');
+        }, 3000);
+      } else {
+        alert('Erro ao registrar solicitação. Tente enviar diretamente pelo WhatsApp.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Erro de conexão. Tente enviar diretamente pelo WhatsApp.');
+    } finally {
+      setConsultoriaSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     const loadOffers = async () => {
       try {
@@ -401,11 +456,14 @@ export default function Home() {
               {/* Consultation Form */}
               <div className={styles.formBox}>
                 <h3 className={styles.formTitle}>Solicitar Roteiro Personalizado</h3>
-                <form className={styles.formGrid}>
+                <form onSubmit={handleConsultoriaSubmit} className={styles.formGrid}>
                   <div className={styles.formField}>
                     <label className={styles.label}>Nome Completo</label>
                     <input
                       type="text"
+                      required
+                      value={consultoriaNome}
+                      onChange={(e) => setConsultoriaNome(e.target.value)}
                       placeholder="Ex: Juliano Amorin"
                       className={styles.input}
                     />
@@ -414,6 +472,9 @@ export default function Home() {
                     <label className={styles.label}>WhatsApp de Contato</label>
                     <input
                       type="tel"
+                      required
+                      value={consultoriaWhatsapp}
+                      onChange={(e) => setConsultoriaWhatsapp(e.target.value)}
                       placeholder="Ex: (11) 99720-4445"
                       className={styles.input}
                     />
@@ -422,6 +483,8 @@ export default function Home() {
                     <label className={styles.label}>Origem</label>
                     <input
                       type="text"
+                      value={consultoriaOrigem}
+                      onChange={(e) => setConsultoriaOrigem(e.target.value)}
                       placeholder="Ex: São Paulo (GRU)"
                       className={styles.input}
                     />
@@ -430,6 +493,8 @@ export default function Home() {
                     <label className={styles.label}>Destino Desejado</label>
                     <input
                       type="text"
+                      value={consultoriaDestino}
+                      onChange={(e) => setConsultoriaDestino(e.target.value)}
                       placeholder="Ex: Roma, Itália"
                       className={styles.input}
                     />
@@ -438,13 +503,16 @@ export default function Home() {
                     <label className={styles.label}>Mensagem / Observações</label>
                     <textarea
                       rows={3}
+                      required
+                      value={consultoriaMensagem}
+                      onChange={(e) => setConsultoriaMensagem(e.target.value)}
                       placeholder="Nos fale sobre a sua viagem dos sonhos e o período preferido..."
                       className={`${styles.input} ${styles.textarea}`}
                     />
                   </div>
                   <div className={styles.span2}>
-                    <button type="submit" className={styles.submitBtn}>
-                      Enviar Solicitação via WhatsApp
+                    <button type="submit" disabled={consultoriaSubmitting} className={styles.submitBtn} style={{ opacity: consultoriaSubmitting ? 0.7 : 1 }}>
+                      {consultoriaSubmitting ? 'Enviando...' : 'Enviar Solicitação via WhatsApp'}
                     </button>
                   </div>
                 </form>
@@ -508,6 +576,77 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {showConsultoriaSuccess && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(10px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+          padding: '20px',
+        }}>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.4)',
+            borderRadius: '16px',
+            padding: '32px',
+            maxWidth: '450px',
+            width: '100%',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+          }}>
+            <div style={{
+              fontSize: '48px',
+              marginBottom: '16px',
+            }}>
+              🎉
+            </div>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: 700,
+              color: '#1e293b',
+              marginBottom: '12px',
+            }}>
+              Solicitação Recebida!
+            </h3>
+            <p style={{
+              fontSize: '15px',
+              color: '#64748b',
+              lineHeight: '1.6',
+              marginBottom: '24px',
+            }}>
+              Dados enviados com sucesso! Nossa equipe entrará em contato em breve. Aguarde...
+            </p>
+            <button
+              onClick={() => setShowConsultoriaSuccess(false)}
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: 'none',
+                backgroundColor: '#5BA4CF',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '15px',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#4a93be'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#5BA4CF'}
+            >
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
 
       <ChatWidget />
       <Footer />
