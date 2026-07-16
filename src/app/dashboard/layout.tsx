@@ -44,6 +44,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     activeTitle = "Comunidade Social";
   } else if (pathname === '/dashboard/guia') {
     activeTitle = "Guia de Bolso VIP";
+  } else if (pathname === '/dashboard/ofertas') {
+    activeTitle = "Vitrine Secreta VIP";
   } else if (pathname === '/dashboard') {
     if (tab === 'offers') activeTitle = "Ofertas de Viagens VIP";
     if (tab === 'tips') activeTitle = "Dicas & Notícias";
@@ -67,8 +69,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
             <span>Dashboard</span>
           </Link>
           <Link 
-            href="/dashboard?tab=offers" 
-            className={`${styles.menuItem} ${pathname === '/dashboard' && tab === 'offers' ? styles.active : ''}`}
+            href="/dashboard/ofertas" 
+            className={`${styles.menuItem} ${pathname === '/dashboard/ofertas' ? styles.active : ''}`}
           >
             <Plane size={20} />
             <span>Ofertas VIP</span>
