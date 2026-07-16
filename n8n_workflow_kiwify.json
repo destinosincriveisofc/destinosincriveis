@@ -1,0 +1,198 @@
+{
+  "id": "kiwifyWebhook123",
+  "name": "Gestão de Membros Club DIJA",
+  "active": true,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kiwify",
+        "options": {}
+      },
+      "id": "webhook-kiwify",
+      "name": "webhook-kiwify",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "={{ $json.event_type }}"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.event_type }}",
+                    "rightValue": "order.approved",
+                    "operator": "equals"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputName": "Aprovado"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "={{ $json.event_type }}"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.event_type }}",
+                    "rightValue": "subscription.canceled",
+                    "operator": "equals"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputName": "Cancelado (Assinatura)"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "={{ $json.event_type }}"
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.event_type }}",
+                    "rightValue": "order.refunded",
+                    "operator": "equals"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputName": "Cancelado (Reembolso)"
+            }
+          ]
+        }
+      },
+      "id": "switch-node",
+      "name": "Switch Event",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        350,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/message/sendText/destinos-incriveis",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"number\": \"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\", \"text\": \"🎉 *Bem-vindo ao DIJA Club, {{ $json.Customer?.name || $json.Customer?.full_name || $json.nome || $json.name }}!*\\nSua assinatura foi confirmada! ✅\\n✈️ Agora você recebe alertas VIP em primeira mão!\\n📢 Você já foi adicionado ao grupo exclusivo.\\n_Equipe Destinos Incríveis_ 💙\"}",
+        "options": {}
+      },
+      "id": "evolution-api-approved",
+      "name": "Evolution API Welcome",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/message/sendText/destinos-incriveis",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"number\": \"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\", \"text\": \"😢 *Sentiremos sua falta, {{ $json.Customer?.name || $json.Customer?.full_name || $json.nome || $json.name }}!*\\nSua assinatura foi cancelada.\\nVocê pode reativar a qualquer momento em:\\nhttps://pay.kiwify.com.br/sNQ2uEH\\n_Equipe Destinos Incríveis_ 💙\"}",
+        "options": {}
+      },
+      "id": "evolution-api-canceled",
+      "name": "Evolution API Cancellation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        450
+      ]
+    }
+  ],
+  "connections": {
+    "webhook-kiwify": {
+      "main": [
+        [
+          {
+            "node": "Switch Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Event": {
+      "main": [
+        [
+          {
+            "node": "Evolution API Welcome",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Evolution API Cancellation",
+            "type": "main",
+            "index": 1
+          }
+        ],
+        [
+          {
+            "node": "Evolution API Cancellation",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "staticData": null,
+  "meta": {
+    "templateCredsHelper": {}
+  },
+  "pinData": {}
+}
