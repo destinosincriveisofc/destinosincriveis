@@ -135,7 +135,7 @@ export default function Home() {
     e.preventDefault();
     setConsultoriaSubmitting(true);
     try {
-      const response = await fetch('/api/consultoria', {
+      const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/consultoria', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
