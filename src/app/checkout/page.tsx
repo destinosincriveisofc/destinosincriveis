@@ -1,11 +1,18 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ShieldCheck, Lock, CheckCircle2 } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function CheckoutPage() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.location.href = "https://pay.kiwify.com.br/sNQ2uEH";
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={styles.main}>
       {/* Header Premium */}
@@ -26,15 +33,26 @@ export default function CheckoutPage() {
         </div>
       </header>
 
-      {/* Kiwify Transparent Checkout Iframe */}
-      <div className={styles.iframeContainer}>
-        <iframe 
-          src="https://pay.kiwify.com.br/sNQ2uEH" 
-          width="100%" 
-          height="800px" 
-          style={{ border: 'none', display: 'block' }}
-          title="Kiwify Checkout"
-        />
+      {/* Central Transition Card */}
+      <div className={styles.transitionContainer}>
+        <div className={styles.spinnerWrapper}>
+          <div className={styles.spinner}></div>
+        </div>
+        
+        <h1 className={styles.transitionTitle}>
+          Iniciando pagamento seguro...
+        </h1>
+        
+        <p className={styles.transitionText}>
+          Você está sendo redirecionado para o ambiente de criptografia da Kiwify.
+        </p>
+
+        <a 
+          href="https://pay.kiwify.com.br/sNQ2uEH" 
+          className={styles.redirectButton}
+        >
+          Caso não seja redirecionado em instantes, clique aqui
+        </a>
       </div>
 
       {/* Security Info Footer */}
