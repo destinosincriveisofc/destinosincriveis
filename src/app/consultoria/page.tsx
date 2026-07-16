@@ -14,23 +14,70 @@ export default function ConsultoriaPage() {
   const [destino, setDestino] = useState('');
   const [passageiros, setPassageiros] = useState('1');
   const [classe, setClasse] = useState('economica');
+  const [orcamento, setOrcamento] = useState('');
+  const [periodo, setPeriodo] = useState('');
   const [mensagem, setMensagem] = useState('');
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMsg, setStatusMsg] = useState('');
+  const [statusType, setStatusType] = useState<'success' | 'error' | ''>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setStatusMsg('');
+    setStatusType('');
 
-    const formattedMessage = encodeURIComponent(
-      `Olá! Gostaria de agendar uma consultoria VIP de viagens. Seguem os dados:\n\n` +
-      `*Nome:* ${nome}\n` +
-      `*WhatsApp:* ${whatsapp}\n` +
-      `*Origem:* ${origem}\n` +
-      `*Destino:* ${destino}\n` +
-      `*Quantidade de Passageiros:* ${passageiros}\n` +
-      `*Classe Desejada:* ${classe === 'economica' ? 'Econômica' : classe === 'executiva' ? 'Executiva' : 'Primeira Classe'}\n` +
-      `*Observações/Roteiro:* ${mensagem}`
-    );
+    try {
+      const response = await fetch('/api/consultoria', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome,
+          telefone: whatsapp,
+          destino,
+          orcamento,
+          periodo,
+          origem,
+          passageiros,
+          classe,
+          mensagem
+        }),
+      });
 
-    window.open(`https://wa.me/5544991579205?text=${formattedMessage}`, '_blank');
+      if (response.ok) {
+        setStatusType('success');
+        setStatusMsg('Solicitação registrada! Abrindo atendimento no WhatsApp...');
+        
+        // WhatsApp prefilled message
+        const formattedMessage = encodeURIComponent(
+          `📋 *NOVA SOLICITAÇÃO DE CONSULTORIA VIP!*\n\n` +
+          `👤 *Nome:* ${nome}\n` +
+          `📞 *Telefone:* ${whatsapp}\n` +
+          `✈️ *Origem / Destino:* ${origem} → ${destino}\n` +
+          `💰 *Orçamento:* ${orcamento}\n` +
+          `📅 *Período:* ${periodo}\n` +
+          `👥 *Passageiros:* ${passageiros}\n` +
+          `💎 *Classe:* ${classe === 'economica' ? 'Econômica' : classe === 'executiva' ? 'Executiva' : 'Primeira Classe'}\n` +
+          `✉️ *Mensagem/Roteiro:* ${mensagem}`
+        );
+
+        setTimeout(() => {
+          window.open(`https://wa.me/5544991579205?text=${formattedMessage}`, '_blank');
+        }, 1500);
+      } else {
+        setStatusType('error');
+        setStatusMsg('Erro ao registrar solicitação. Tente enviar diretamente pelo WhatsApp.');
+      }
+    } catch (error) {
+      console.error('Error submitting consultoria form:', error);
+      setStatusType('error');
+      setStatusMsg('Erro de rede. Tente enviar diretamente pelo WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -187,6 +234,32 @@ export default function ConsultoriaPage() {
                     </select>
                   </div>
 
+                  {/* Added Budget Field */}
+                  <div className={styles.formField}>
+                    <label className={styles.label}>Orçamento Estimado (por pessoa)</label>
+                    <input
+                      type="text"
+                      required
+                      value={orcamento}
+                      onChange={e => setOrcamento(e.target.value)}
+                      placeholder="Ex: R$ 5.000 a R$ 10.000"
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* Added Period Field */}
+                  <div className={styles.formField}>
+                    <label className={styles.label}>Período Estimado da Viagem</label>
+                    <input
+                      type="text"
+                      required
+                      value={periodo}
+                      onChange={e => setPeriodo(e.target.value)}
+                      placeholder="Ex: Segunda quinzena de Outubro/2026"
+                      className={styles.input}
+                    />
+                  </div>
+
                   <div className={`${styles.formField} ${styles.span2}`}>
                     <label className={styles.label}>Mensagem / Observações</label>
                     <textarea
@@ -198,12 +271,33 @@ export default function ConsultoriaPage() {
                     />
                   </div>
 
-                  <div className={`${styles.span2} pt-2`}>
+                  {/* Form Submission status msg */}
+                  {statusMsg && (
+                    <div 
+                      className={styles.span2} 
+                      style={{ 
+                        padding: '12px', 
+                        borderRadius: '8px', 
+                        fontSize: '0.9rem', 
+                        fontWeight: '600',
+                        textAlign: 'center',
+                        backgroundColor: statusType === 'success' ? '#e6f4ea' : '#fce8e6', 
+                        color: statusType === 'success' ? '#137333' : '#c5221f',
+                        border: `1px solid ${statusType === 'success' ? '#ceead6' : '#fad2cf'}`
+                      }}
+                    >
+                      {statusMsg}
+                    </div>
+                  )}
+
+                  <div className={`${styles.span2}`} style={{ paddingTop: '8px' }}>
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className={styles.submitBtn}
+                      style={{ opacity: isSubmitting ? 0.7 : 1 }}
                     >
-                      <span>Falar com Consultor no WhatsApp</span>
+                      <span>{isSubmitting ? 'Registrando...' : 'Enviar Solicitação de Consultoria'}</span>
                       <ArrowRight size={16} />
                     </button>
                   </div>

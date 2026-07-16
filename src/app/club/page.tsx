@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
@@ -39,7 +40,7 @@ export default function ClubPage() {
       price: "R$ 19,90",
       period: "por mês",
       description: "Ideal para testar e planejar sua próxima viagem.",
-      link: "https://pay.kiwify.com.br/sNQ2uEH",
+      link: "/checkout",
       popular: true,
       features: [
         "Acesso aos 4 grupos exclusivos (WhatsApp)",
@@ -110,15 +111,13 @@ export default function ClubPage() {
             Economize milhares de reais em passagens aéreas e hotéis. Junte-se a mais de 15.000 viajantes que recebem alertas de tarifas imperdíveis e erros no WhatsApp.
           </p>
           <div>
-            <a
-              href="https://pay.kiwify.com.br/sNQ2uEH"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/checkout"
               className={styles.heroBtn}
             >
               Entrar no Clube
               <ArrowRight size={18} />
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -170,16 +169,14 @@ export default function ClubPage() {
                     <span className={styles.pricePeriod}>{plan.period}</span>
                   </div>
 
-                  <a
+                  <Link
                     href={plan.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     onClick={() => setHasClickedBuy(true)}
                     className={styles.pricingBtn}
                   >
                     <CreditCard size={18} />
                     Assinar Agora via Kiwify
-                  </a>
+                  </Link>
 
                   <div className={styles.featuresList}>
                     {plan.features.map((feat, fIdx) => (

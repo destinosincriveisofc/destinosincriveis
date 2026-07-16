@@ -55,15 +55,13 @@ export default function Header() {
 
         {/* Desktop CTA */}
         <div className={styles.ctaContainer}>
-          <a
-            href="https://pay.kiwify.com.br/sNQ2uEH"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/checkout"
             className={styles.ctaButton}
           >
             Fazer Parte do Club
             <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -121,15 +119,13 @@ export default function Header() {
           >
             Parcerias
           </Link>
-          <a
-            href="https://pay.kiwify.com.br/sNQ2uEH"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/checkout"
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileCta}
           >
             Fazer Parte do Club
-          </a>
+          </Link>
         </div>
       )}
     </header>
