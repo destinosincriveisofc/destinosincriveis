@@ -353,11 +353,6 @@
       "main": [
         [
           {
-            "node": "Evolution API Welcome",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Add Comunidade",
             "type": "main",
             "index": 0
