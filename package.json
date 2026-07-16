@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
+    "postbuild": "echo \"importScripts('/custom-sw.js');\" >> public/sw.js",
     "start": "next start",
     "lint": "eslint"
   },

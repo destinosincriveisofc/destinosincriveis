@@ -149,6 +149,192 @@
         600,
         450
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363426800614331@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"add\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "add-comunidade",
+      "name": "Add Comunidade",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363428249013809@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"add\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "add-ofertas",
+      "name": "Add Ofertas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363427911254983@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"add\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "add-dicas",
+      "name": "Add Dicas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363426800614331@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"remove\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "remove-comunidade",
+      "name": "Remove Comunidade",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363428249013809@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"remove\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "remove-ofertas",
+      "name": "Remove Ofertas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        550
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://evolution-api:8080/group/updateParticipant/destinos-incriveis?groupJid=120363427911254983@g.us",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "demo123"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"action\": \"remove\", \"participants\": [\"{{ $json.Customer?.mobile || $json.Customer?.phone || $json.telefone || $json.phone }}\"]}",
+        "options": {}
+      },
+      "id": "remove-dicas",
+      "name": "Remove Dicas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        600,
+        650
+      ]
     }
   ],
   "connections": {
@@ -170,20 +356,65 @@
             "node": "Evolution API Welcome",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Add Comunidade",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add Ofertas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Add Dicas",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Evolution API Cancellation",
             "type": "main",
-            "index": 1
+            "index": 0
+          },
+          {
+            "node": "Remove Comunidade",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Ofertas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Dicas",
+            "type": "main",
+            "index": 0
           }
         ],
         [
           {
             "node": "Evolution API Cancellation",
             "type": "main",
-            "index": 2
+            "index": 0
+          },
+          {
+            "node": "Remove Comunidade",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Ofertas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Dicas",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
