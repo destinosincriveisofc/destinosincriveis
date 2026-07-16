@@ -14,7 +14,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Destinos Incríveis | Clube de Viagens Inteligente",
+  title: "Destinos Incríveis | CLUB DIJA - Clube de Viagens Inteligente",
   description: "A plataforma de inteligência de viagens que monitora promoções, alerta erros tarifários e te ajuda a viajar pagando até 60% menos.",
 };
 

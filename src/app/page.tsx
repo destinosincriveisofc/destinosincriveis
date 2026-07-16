@@ -252,7 +252,7 @@ export default function Home() {
                 📢 <strong>Aviso Importante:</strong> Nossas pesquisas são realizadas em tempo real em horários específicos do dia. Os valores e vagas podem sofrer alterações rápidas pelas companhias e operadoras. Quer garantir os alertas em primeira mão? Entre para o Club Dija!
               </p>
               <Link href="/club" className={styles.bannerBtn}>
-                Fazer Parte do Club →
+                Fazer Parte do Club Dija →
               </Link>
             </div>
 
@@ -297,7 +297,7 @@ export default function Home() {
               <div className={styles.clubText}>
                 <span className={styles.badge}>Acesso Exclusivo</span>
                 <h2 className={styles.sectionTitle}>
-                  Destinos Incríveis Club: <br />
+                  Destinos Incríveis CLUB DIJA: <br />
                   Seu passaporte para viajar mais
                 </h2>
                 <p className={styles.sectionDesc}>
@@ -333,7 +333,7 @@ export default function Home() {
                     href="/club"
                     className={styles.buttonPrimary}
                   >
-                    Entrar no Club por R$ 19,90/mês
+                    Entrar no CLUB DIJA por R$ 19,90/mês
                     <ArrowRight size={18} />
                   </Link>
                 </div>
@@ -354,7 +354,7 @@ export default function Home() {
                         ))}
                       </div>
                       <p className={styles.testimonialQuote}>
-                        &quot;Economizei R$ 4.200 em uma única viagem para a Itália com o alerta do Club! Vale cada centavo.&quot;
+                        &quot;Economizei R$ 4.200 em uma única viagem para a Itália com o alerta do CLUB DIJA! Vale cada centavo.&quot;
                       </p>
                       <span className={styles.testimonialAuthor}>— Mariana S., São Paulo</span>
                     </div>

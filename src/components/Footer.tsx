@@ -70,7 +70,7 @@ export default function Footer() {
               Buscar Ofertas
             </Link>
             <Link href="/club" className={styles.link}>
-              Destinos Incríveis Club
+              CLUB DIJA
             </Link>
             <Link href="/blog" className={styles.link}>
               Dicas de Viagem

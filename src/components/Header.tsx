@@ -40,7 +40,7 @@ export default function Header() {
             Ofertas
           </Link>
           <Link href="/club" className={styles.navLink}>
-            Club Exclusivo
+            Club Dija
           </Link>
           <Link href="/blog" className={styles.navLink}>
             Dicas & Blog
@@ -59,7 +59,7 @@ export default function Header() {
             href="/checkout"
             className={styles.ctaButton}
           >
-            Fazer Parte do Club
+            Fazer Parte do Club Dija
             <ArrowRight size={16} />
           </Link>
         </div>
@@ -96,7 +96,7 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileLink}
           >
-            Club Exclusivo
+            Club Dija
           </Link>
           <Link
             href="/blog"
@@ -124,7 +124,7 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileCta}
           >
-            Fazer Parte do Club
+            Fazer Parte do Club Dija
           </Link>
         </div>
       )}

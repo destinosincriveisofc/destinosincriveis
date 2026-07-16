@@ -44,7 +44,7 @@ export default function ChatWidget() {
       
       const query = inputValue.toLowerCase();
       if (query.includes('clube') || query.includes('club') || query.includes('assinar')) {
-        botResponseText = 'O Destinos Incríveis Club é o nosso clube exclusivo com monitoramento de passagens 24h. Você pode assinar através do link: https://pay.kiwify.com.br/HFIXsiL';
+        botResponseText = 'O CLUB DIJA é o nosso clube exclusivo com monitoramento de passagens 24h. Você pode assinar através do link: https://destinosincriveis.vps-kinghost.net/checkout/';
       } else if (query.includes('oferta') || query.includes('passagem') || query.includes('voo')) {
         botResponseText = 'Temos uma central cheia de promoções atualizadas na página /ofertas. Dê uma olhada!';
       } else if (query.includes('consultoria') || query.includes('roteiro')) {
@@ -147,10 +147,10 @@ export default function ChatWidget() {
             {/* Quick Suggestions */}
             <div className={styles.suggestions}>
               <button
-                onClick={() => handleQuickOption('Como funciona o Club?')}
+                onClick={() => handleQuickOption('Como funciona o Club Dija?')}
                 className={styles.suggestionBtn}
               >
-                Clube de Viagens
+                Club Dija
               </button>
               <button
                 onClick={() => handleQuickOption('Onde vejo passagens baratas?')}

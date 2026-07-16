@@ -41,7 +41,7 @@ export default function HeroSection() {
               href="#clube"
               className={styles.buttonPrimary}
             >
-              Entrar no Clube
+              Fazer Parte do Club Dija
               <ArrowRight size={18} />
             </a>
             <a href="#ofertas" className={styles.buttonOutline}>

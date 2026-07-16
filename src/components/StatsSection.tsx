@@ -20,7 +20,7 @@ export default function StatsSection() {
       id: 3,
       icon: <Award className="text-[#5BA4CF]" size={28} />,
       value: "15 mil+",
-      label: "Membros economizando no Club",
+      label: "Membros economizando no Club Dija",
     },
     {
       id: 4,

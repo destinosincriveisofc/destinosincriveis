@@ -15,7 +15,7 @@ export default function ParceriasPage() {
     {
       icon: <Users size={24} />,
       title: "Criadores de Conteúdo",
-      description: "Divulgue nosso Clube de Viagens para sua audiência e ganhe comissões recorrentes através de nossa plataforma de afiliados."
+      description: "Divulgue o Club Dija para sua audiência e ganhe comissões recorrentes através de nossa plataforma de afiliados."
     },
     {
       icon: <Globe size={24} />,

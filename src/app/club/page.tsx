@@ -115,7 +115,7 @@ export default function ClubPage() {
               href="/checkout"
               className={styles.heroBtn}
             >
-              Entrar no Clube
+              Fazer Parte do Club Dija
               <ArrowRight size={18} />
             </Link>
           </div>
@@ -194,7 +194,7 @@ export default function ClubPage() {
                 <div className={styles.successCard}>
                   <h3 className={styles.successTitle}>🎉 Pagamento Iniciado!</h3>
                   <p className={styles.successText}>
-                    Clique no botão abaixo para entrar no grupo pago do Clube assim que finalizar a sua inscrição na Kiwify.
+                    Clique no botão abaixo para entrar no grupo pago do Club Dija assim que finalizar a sua inscrição na Kiwify.
                   </p>
                   <a
                     href="https://chat.whatsapp.com/C9l2ljLrOB2EmCZxu1cLEM"
@@ -203,7 +203,7 @@ export default function ClubPage() {
                     className={styles.successBtn}
                   >
                     <MessageSquare size={18} />
-                    Entrar no Grupo Pago do Clube
+                    Entrar no Grupo Pago do Club Dija
                   </a>
                 </div>
               )}
@@ -250,7 +250,7 @@ export default function ClubPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <span className={styles.badge}>Perguntas Frequentes</span>
-              <h2 className={styles.sectionTitle}>Dúvidas sobre o Club</h2>
+              <h2 className={styles.sectionTitle}>Dúvidas sobre o Club Dija</h2>
             </div>
 
             <div className={styles.faqsList}>
