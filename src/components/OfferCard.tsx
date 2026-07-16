@@ -83,6 +83,22 @@ export default function OfferCard({ offer }: OfferCardProps) {
     return `📅 Período: ${fmt(depDate)} a ${fmt(retDate)}`;
   };
 
+  const isPasseio = offer.type === 'passeio' || (offer as any).tipo === 'passeio';
+  const showDeparture = (offer.type === 'voo' || offer.type === 'hotel') && !isPasseio;
+
+  const getDestinationTitle = () => {
+    let title = offer.destinationName || "Destino";
+    title = title.replace(/\s*\([A-Z]{3}\)\s*$/i, '').trim();
+    if (isPasseio) {
+      return title;
+    }
+    const destCode = offer.destination ? ` (${offer.destination})` : '';
+    if (title.endsWith(`(${offer.destination})`)) {
+      return title;
+    }
+    return `${title}${destCode}`;
+  };
+
   return (
     <div className={styles.card}>
       {/* Image & Badges */}
@@ -114,12 +130,14 @@ export default function OfferCard({ offer }: OfferCardProps) {
       {/* Content */}
       <div className={styles.content}>
         <div className={styles.routeInfo}>
-          <div className={styles.originText}>
-            <PlaneTakeoff size={12} className="text-[#5BA4CF]" />
-            <span>Saída de {offer.originName || "São Paulo"}</span>
-          </div>
+          {showDeparture && (
+            <div className={styles.originText}>
+              <PlaneTakeoff size={12} className="text-[#5BA4CF]" />
+              <span>Saída de {offer.originName || "São Paulo"}</span>
+            </div>
+          )}
           <h3 className={styles.destinationTitle}>
-            {offer.destinationName || "Destino"} ({offer.destination || ""})
+            {getDestinationTitle()}
           </h3>
           {/* Airline */}
           <div className={styles.airlineText}>
