@@ -1,5 +1,21 @@
 [
   {
+    "id": "UNKNOWN-LISBOA",
+    "origem": null,
+    "destino": "Lisboa",
+    "preco_atual": 150.0,
+    "preco_original": 300.0,
+    "desconto_percent": 50,
+    "companhia": "Passeio Histórico em Lisboa",
+    "link_afiliado": "https://getyourguide.tpx.gr/ltuk5KJm",
+    "imagem_url": "https://images.unsplash.com/photo-1509840841025-9088ba78a826?auto=format&fit=crop&w=800&q=80&sig=78891",
+    "tipo": "passeio",
+    "nota_urgencia": 7,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✨ *Atração:* Passeio Histórico em Lisboa\n📍 *Localização:* Lisboa\n⭐ *Avaliação:* 4.8/5\n\n💰 De ~~R$ 300~~ por apenas *R$ 150*\n📊 Você economiza *50%*\n📅 Datas disponíveis: Oferta válida até 30/06\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-16 17:41:03"
+  },
+  {
     "id": "GRU-LIS",
     "origem": "GRU",
     "destino": "LIS",
