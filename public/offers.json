@@ -1,5 +1,21 @@
 [
   {
+    "id": "UNKNOWN-UNKNOWN",
+    "origem": null,
+    "destino": null,
+    "preco_atual": null,
+    "preco_original": null,
+    "desconto_percent": null,
+    "companhia": null,
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80&sig=62587",
+    "tipo": "voo",
+    "nota_urgencia": null,
+    "texto_venda": null,
+    "ativo": 1,
+    "criado_em": "2026-07-16 17:25:01"
+  },
+  {
     "id": "UNKNOWN-RIO DE JANEIRO",
     "origem": null,
     "destino": "Rio de Janeiro",
