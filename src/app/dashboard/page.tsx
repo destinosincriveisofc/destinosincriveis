@@ -125,7 +125,7 @@ export default function DashboardPage() {
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <span className={styles.sidebarLogoEmoji}>✈️</span>
+          <img src="/logo-oficial.jpg" alt="Logo" className={styles.sidebarLogoImage} />
           <h2 className={styles.sidebarLogoText}>CLUB DIJA</h2>
         </div>
 
@@ -210,7 +210,9 @@ export default function DashboardPage() {
                   <h2>Bem-vindo ao CLUB DIJA! 👑</h2>
                   <p>Você agora tem acesso aos melhores alertas de passagens aéreas e hotéis do Brasil, com descontos de até 70%. Mantenha suas notificações do WhatsApp ativas!</p>
                 </div>
-                <div className={styles.welcomeBannerLogo}>✈️</div>
+                <div className={styles.welcomeBannerLogo}>
+                  <img src="/logo-oficial.jpg" alt="Logo" className={styles.bannerLogoImage} />
+                </div>
               </div>
 
               <div className={styles.statsGrid}>
