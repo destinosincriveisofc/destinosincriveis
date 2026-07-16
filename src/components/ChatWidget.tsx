@@ -3,7 +3,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import styles from './ChatWidget.module.css';
+
+const getUrlForFallback = (text: string): string | null => {
+  const lower = text.toLowerCase();
+  if (lower.includes('checkout') || lower.includes('assinar') || lower.includes('pagar') || lower.includes('pagamento')) {
+    return '/checkout';
+  }
+  if (lower.includes('consultoria')) {
+    return '/consultoria';
+  }
+  if (lower.includes('club') || lower.includes('clube')) {
+    return '/club';
+  }
+  if (lower.includes('whatsapp') || lower.includes('suporte')) {
+    return 'https://wa.me/5511997204445';
+  }
+  return null;
+};
 
 interface Message {
   id: string;
@@ -116,7 +134,7 @@ export default function ChatWidget() {
     const lines = text.split('\n');
     
     return lines.map((line, lineIdx) => {
-      const tokenRegex = /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s)]+)/g;
+      const tokenRegex = /(\*\*[^*]+\*\*|\[[^\]]+\]\s*\([^)]+\)|\[[^\]]+\]|https?:\/\/[^\s)]+)/g;
       const parts = line.split(tokenRegex);
       
       const renderedParts = parts.map((part, partIdx) => {
@@ -124,21 +142,67 @@ export default function ChatWidget() {
           return <strong key={partIdx}>{part.slice(2, -2)}</strong>;
         }
         
-        const mdLinkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        const mdLinkMatch = part.match(/^\[([^\]]+)\]\s*\(([^)]+)\)$/);
         if (mdLinkMatch) {
           const linkText = mdLinkMatch[1];
           const linkUrl = mdLinkMatch[2];
-          return (
-            <a
-              key={partIdx}
-              href={linkUrl}
-              target={linkUrl.startsWith('http') ? '_blank' : '_self'}
-              rel="noopener noreferrer"
-              style={{ color: '#5BA4CF', textDecoration: 'underline', fontWeight: 600 }}
-            >
-              {linkText}
-            </a>
-          );
+          const isRelative = linkUrl.startsWith('/');
+          
+          if (isRelative) {
+            return (
+              <Link
+                key={partIdx}
+                href={linkUrl}
+                className={styles.chatLink}
+              >
+                {linkText}
+              </Link>
+            );
+          } else {
+            return (
+              <a
+                key={partIdx}
+                href={linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.chatLink}
+              >
+                {linkText}
+              </a>
+            );
+          }
+        }
+        
+        const mdLinkNoUrlMatch = part.match(/^\[([^\]]+)\]$/);
+        if (mdLinkNoUrlMatch) {
+          const linkText = mdLinkNoUrlMatch[1];
+          const fallbackUrl = getUrlForFallback(linkText);
+          if (fallbackUrl) {
+            const isRelative = fallbackUrl.startsWith('/');
+            if (isRelative) {
+              return (
+                <Link
+                  key={partIdx}
+                  href={fallbackUrl}
+                  className={styles.chatLink}
+                >
+                  {linkText}
+                </Link>
+              );
+            } else {
+              return (
+                <a
+                  key={partIdx}
+                  href={fallbackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.chatLink}
+                >
+                  {linkText}
+                </a>
+              );
+            }
+          }
         }
         
         if (/^https?:\/\/[^\s]+$/.test(part)) {
@@ -148,7 +212,7 @@ export default function ChatWidget() {
               href={part}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#5BA4CF', textDecoration: 'underline', fontWeight: 600 }}
+              className={styles.chatLink}
             >
               {part}
             </a>

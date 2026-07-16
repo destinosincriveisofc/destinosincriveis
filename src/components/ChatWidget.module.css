@@ -240,3 +240,16 @@
 .toggleBtn:hover {
   transform: scale(1.05);
 }
+
+.chatLink {
+  color: #3b82f6;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.chatLink:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
