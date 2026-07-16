@@ -56,7 +56,7 @@ export default function Header() {
         {/* Desktop CTA */}
         <div className={styles.ctaContainer}>
           <a
-            href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+            href="https://pay.kiwify.com.br/sNQ2uEH"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaButton}
@@ -122,7 +122,7 @@ export default function Header() {
             Parcerias
           </Link>
           <a
-            href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+            href="https://pay.kiwify.com.br/sNQ2uEH"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsMobileMenuOpen(false)}

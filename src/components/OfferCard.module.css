@@ -180,6 +180,7 @@
   gap: 6px;
   box-shadow: 0 4px 10px rgba(255, 212, 59, 0.15);
   transition: all 0.2s ease;
+}
 .ctaButton:hover {
   background-color: #F0B429;
   transform: translateY(-1px);

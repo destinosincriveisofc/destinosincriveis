@@ -39,7 +39,7 @@ export default function ClubPage() {
       price: "R$ 19,90",
       period: "por mês",
       description: "Ideal para testar e planejar sua próxima viagem.",
-      link: "https://pay.kiwify.com.br/HFIXsiL",
+      link: "https://pay.kiwify.com.br/sNQ2uEH",
       popular: true,
       features: [
         "Acesso aos 4 grupos exclusivos (WhatsApp)",
@@ -111,7 +111,7 @@ export default function ClubPage() {
           </p>
           <div>
             <a
-              href="https://destinosincriveisofc.github.io/destinosincriveis/clube.html"
+              href="https://pay.kiwify.com.br/sNQ2uEH"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.heroBtn}
