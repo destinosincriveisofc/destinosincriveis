@@ -1,5 +1,21 @@
 [
   {
+    "id": "UNKNOWN-RIO DE JANEIRO",
+    "origem": null,
+    "destino": "Rio de Janeiro",
+    "preco_atual": 120.0,
+    "preco_original": 240.0,
+    "desconto_percent": 50,
+    "companhia": "Cristo Redentor Tour",
+    "link_afiliado": "https://getyourguide.tpx.gr/ltuk5KJm",
+    "imagem_url": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80&sig=49689",
+    "tipo": "passeio",
+    "nota_urgencia": 8,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✨ *Atração:* Tour no Cristo Redentor\n📍 *Localização:* Rio de Janeiro\n⭐ *Avaliação:* 4.8/5\n\n💰 De ~~R$ 240~~ por apenas *R$ 120*\n📊 Você economiza *50%*\n📅 Datas disponíveis: Novembro e Dezembro de 2024\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-16 05:47:42"
+  },
+  {
     "id": "GRU-SSA",
     "origem": "GRU",
     "destino": "SSA",
