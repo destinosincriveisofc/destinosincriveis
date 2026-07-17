@@ -1,5 +1,22 @@
 [
   {
+    "id": "GRU-RIO DE JANEIRO",
+    "origem": "GRU",
+    "destino": "Rio de Janeiro",
+    "preco_atual": 1800.0,
+    "preco_original": 3600.0,
+    "desconto_percent": 50,
+    "companhia": "Hotel Copacabana Palace",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://picsum.photos/800/600?random=96701",
+    "tipo": "hotel",
+    "nota_urgencia": 7,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Rio de Janeiro*\n🏢 Hotel Copacabana Palace\n\n💰 De ~~R$ 3600~~ por apenas *R$ 1800*\n📊 Você economiza *50%*\n📅 Datas disponíveis: Datas selecionadas de 2024\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-17 23:01:22",
+    "vip_only": 0
+  },
+  {
     "id": "GRU-SSA",
     "origem": "GRU",
     "destino": "SSA",
@@ -14,23 +31,6 @@
     "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Salvador*\n🏢 LATAM\n\n💰 De ~~R$ 720~~ por apenas *R$ 500*\n📊 Você economiza *31%*\n📅 Datas disponíveis: Consulte no site\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
     "ativo": 1,
     "criado_em": "2026-07-17 21:56:22",
-    "vip_only": 0
-  },
-  {
-    "id": "GRU-RIO DE JANEIRO",
-    "origem": "GRU",
-    "destino": "Rio de Janeiro",
-    "preco_atual": 1800.0,
-    "preco_original": 3600.0,
-    "desconto_percent": 50,
-    "companhia": "Hotel Copacabana Palace",
-    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
-    "imagem_url": "https://picsum.photos/800/600?random=90300",
-    "tipo": "pacote",
-    "nota_urgencia": 8,
-    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Rio de Janeiro*\n🏢 Hotel Copacabana Palace\n\n💰 De ~~R$ 3600~~ por apenas *R$ 1800*\n📊 Você economiza *50%*\n📅 Datas disponíveis: Setembro de 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
-    "ativo": 1,
-    "criado_em": "2026-07-17 21:50:14",
     "vip_only": 0
   },
   {
