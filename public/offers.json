@@ -1,5 +1,22 @@
 [
   {
+    "id": "GRU-SSA",
+    "origem": "GRU",
+    "destino": "SSA",
+    "preco_atual": 350.0,
+    "preco_original": 800.0,
+    "desconto_percent": 56,
+    "companhia": "LATAM",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://picsum.photos/800/600?random=34262",
+    "tipo": "voo",
+    "nota_urgencia": 8,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO*",
+    "ativo": 1,
+    "criado_em": "2026-07-17 21:50:54",
+    "vip_only": 0
+  },
+  {
     "id": "GRU-RIO DE JANEIRO",
     "origem": "GRU",
     "destino": "Rio de Janeiro",
