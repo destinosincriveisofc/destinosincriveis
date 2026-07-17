@@ -298,7 +298,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Central de Alertas Section */}
+        {/* 4. Central de Alertas Section - CARROSSEL */}
         <section id="ofertas" className={styles.sectionIce}>
           <div className={styles.container}>
             {/* Warning Banner */}
@@ -327,21 +327,26 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={styles.grid3}>
-              {loading ? (
-                <div style={{ gridColumn: 'span 3', display: 'flex', justifyContent: 'center', padding: '2rem 0', width: '100%' }}>
-                  <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+            {/* CARROSSEL CSS PURO */}
+            {loading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0' }}>
+                <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+              </div>
+            ) : !Array.isArray(alertOffers) || alertOffers.length === 0 ? (
+              <div style={{ textAlign: 'center', color: '#666', padding: '2rem 0' }}>
+                Nenhuma oferta recente encontrada.
+              </div>
+            ) : (
+              <div className={styles.carouselWrapper}>
+                <div className={styles.carouselTrack}>
+                  {[...alertOffers, ...alertOffers].map((offer, i) => (
+                    <div key={i} className={styles.carouselSlide}>
+                      <OfferCard offer={offer} />
+                    </div>
+                  ))}
                 </div>
-              ) : !Array.isArray(alertOffers) || alertOffers.length === 0 ? (
-                <div style={{ gridColumn: 'span 3', textAlign: 'center', color: '#666', padding: '2rem 0', width: '100%' }}>
-                  Nenhuma oferta recente encontrada.
-                </div>
-              ) : (
-                Array.isArray(alertOffers) ? alertOffers.map((offer) => (
-                  <OfferCard key={offer.id || String(Math.random())} offer={offer} />
-                )) : null
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
 
@@ -360,27 +365,22 @@ export default function Home() {
                 </p>
 
                 <div className={styles.clubFeatures}>
-                  <div className={styles.clubFeatureItem}>
-                    <CheckCircle2 size={20} className={styles.featureIcon} />
-                    <div className={styles.featureContent}>
-                      <strong className={styles.featureTitle}>4 Grupos Especializados</strong>
-                      <span className={styles.featureDesc}>Nacionais, Internacionais, Executivas/Primeira Classe e Hotéis.</span>
+                  {[
+                    { icon: '🔔', title: 'Alertas de Erros Tarifários', desc: 'Seja o primeiro a saber e emita antes que a companhia corrija.' },
+                    { icon: '👥', title: '3 Grupos VIP no WhatsApp', desc: 'Ofertas, Dicas e Comunidade de viajantes.' },
+                    { icon: '🤖', title: 'Guia de Bolso 24h (IA)', desc: 'Concierge inteligente para dúvidas e roteiros a qualquer hora.' },
+                    { icon: '📱', title: 'Rede Social de Viajantes', desc: 'Compartilhe experiências com uma comunidade apaixonada.' },
+                    { icon: '🌍', title: 'Área de Membros Exclusiva', desc: 'Vitrine VIP com ofertas que não aparecem ao público.' },
+                    { icon: '📚', title: 'Dicas e Blog de Viagens', desc: 'Conteúdo exclusivo para maximizar cada viagem.' },
+                  ].map((f) => (
+                    <div key={f.title} className={styles.clubFeatureItem}>
+                      <CheckCircle2 size={20} className={styles.featureIcon} />
+                      <div className={styles.featureContent}>
+                        <strong className={styles.featureTitle}>{f.icon} {f.title}</strong>
+                        <span className={styles.featureDesc}>{f.desc}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.clubFeatureItem}>
-                    <CheckCircle2 size={20} className={styles.featureIcon} />
-                    <div className={styles.featureContent}>
-                      <strong className={styles.featureTitle}>Alertas de Erro Tarifário Imediatos</strong>
-                      <span className={styles.featureDesc}>Seja o primeiro a saber e emita antes que a companhia corrija o valor.</span>
-                    </div>
-                  </div>
-                  <div className={styles.clubFeatureItem}>
-                    <CheckCircle2 size={20} className={styles.featureIcon} />
-                    <div className={styles.featureContent}>
-                      <strong className={styles.featureTitle}>Suporte e Dúvidas com Especialistas</strong>
-                      <span className={styles.featureDesc}>Canal direto com o fundador Juliano Amorin e consultores.</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 <div className="pt-2">

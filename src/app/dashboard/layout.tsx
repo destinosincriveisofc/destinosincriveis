@@ -11,7 +11,8 @@ import {
   LogOut, 
   Bell, 
   User,
-  Compass
+  Compass,
+  UserCircle
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -46,6 +47,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     activeTitle = "Guia de Bolso VIP";
   } else if (pathname === '/dashboard/ofertas') {
     activeTitle = "Vitrine Secreta VIP";
+  } else if (pathname === '/dashboard/perfil') {
+    activeTitle = "Meu Perfil";
   } else if (pathname === '/dashboard') {
     if (tab === 'offers') activeTitle = "Ofertas de Viagens VIP";
     if (tab === 'tips') activeTitle = "Dicas & Notícias";
@@ -95,6 +98,13 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
           >
             <BookOpen size={20} />
             <span>Dicas & Notícias</span>
+          </Link>
+          <Link 
+            href="/dashboard/perfil" 
+            className={`${styles.menuItem} ${pathname === '/dashboard/perfil' ? styles.active : ''}`}
+          >
+            <UserCircle size={20} />
+            <span>👤 Perfil</span>
           </Link>
         </nav>
 
@@ -170,11 +180,11 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
           <span>Guia VIP</span>
         </Link>
         <Link 
-          href="/dashboard?tab=tips" 
-          className={`${styles.bottomNavItem} ${pathname === '/dashboard' && tab === 'tips' ? styles.active : ''}`}
+          href="/dashboard/perfil" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/perfil' ? styles.active : ''}`}
         >
-          <BookOpen size={20} />
-          <span>Dicas</span>
+          <UserCircle size={20} />
+          <span>Perfil</span>
         </Link>
       </nav>
     </div>

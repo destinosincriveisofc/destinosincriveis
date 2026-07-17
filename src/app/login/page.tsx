@@ -96,6 +96,23 @@ export default function LoginPage() {
             <span>{loading ? "Entrando..." : "Entrar no Painel"}</span>
             <ArrowRight size={18} />
           </button>
+
+          <div style={{ textAlign: 'center', marginTop: 12 }}>
+            <a
+              href="/recuperar-senha"
+              style={{
+                color: '#60a5fa',
+                fontSize: '0.88rem',
+                textDecoration: 'none',
+                fontWeight: 500,
+                transition: 'color 0.2s'
+              }}
+              onMouseOver={e => (e.currentTarget.style.color = '#93c5fd')}
+              onMouseOut={e => (e.currentTarget.style.color = '#60a5fa')}
+            >
+              🔑 Esqueceu a senha?
+            </a>
+          </div>
         </form>
 
         <div className={styles.footer}>

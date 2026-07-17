@@ -21,7 +21,7 @@ export default function HeroSection() {
             </div>
             <span className={styles.badge}>
               <span className={styles.badgeDot} />
-              220K Seguidores no Instagram
+              Mais de 5.000 membros já economizaram nas viagens dos sonhos
             </span>
           </div>
 

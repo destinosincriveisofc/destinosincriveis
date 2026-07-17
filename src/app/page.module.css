@@ -556,3 +556,60 @@
   filter: brightness(1.05);
 }
 
+/* ==================== CARROSSEL DE OFERTAS ==================== */
+.carouselWrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  border-radius: 16px;
+}
+
+.carouselWrapper::before,
+.carouselWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.carouselWrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #F0F4FF, transparent);
+}
+.carouselWrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #F0F4FF, transparent);
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 24px;
+  animation: carouselScroll 16s linear infinite;
+  width: max-content;
+}
+
+.carouselTrack:hover {
+  animation-play-state: paused;
+}
+
+.carouselSlide {
+  flex-shrink: 0;
+  width: 360px;
+}
+
+@keyframes carouselScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselSlide {
+    width: 280px;
+  }
+}
