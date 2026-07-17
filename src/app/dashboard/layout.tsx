@@ -49,6 +49,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     activeTitle = "Vitrine Secreta VIP";
   } else if (pathname === '/dashboard/perfil') {
     activeTitle = "Meu Perfil";
+  } else if (pathname === '/dashboard/dicas') {
+    activeTitle = "Dicas & Notícias";
   } else if (pathname === '/dashboard') {
     if (tab === 'offers') activeTitle = "Ofertas de Viagens VIP";
     if (tab === 'tips') activeTitle = "Dicas & Notícias";
@@ -93,8 +95,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
             <span>Guia de Bolso VIP</span>
           </Link>
           <Link 
-            href="/dashboard?tab=tips" 
-            className={`${styles.menuItem} ${pathname === '/dashboard' && tab === 'tips' ? styles.active : ''}`}
+            href="/dashboard/dicas" 
+            className={`${styles.menuItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
           >
             <BookOpen size={20} />
             <span>Dicas & Notícias</span>
@@ -178,6 +180,13 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
         >
           <Compass size={20} />
           <span>Guia VIP</span>
+        </Link>
+        <Link 
+          href="/dashboard/dicas" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
+        >
+          <BookOpen size={20} />
+          <span>Dicas</span>
         </Link>
         <Link 
           href="/dashboard/perfil" 
