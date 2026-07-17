@@ -138,6 +138,45 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </main>
+
+      {/* Bottom Navigation for Mobile */}
+      <nav className={styles.bottomNav}>
+        <Link 
+          href="/dashboard" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard' && tab === 'dashboard' ? styles.active : ''}`}
+        >
+          <Home size={20} />
+          <span>Painel</span>
+        </Link>
+        <Link 
+          href="/dashboard/ofertas" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/ofertas' ? styles.active : ''}`}
+        >
+          <Plane size={20} />
+          <span>Ofertas</span>
+        </Link>
+        <Link 
+          href="/dashboard/comunidade" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/comunidade' ? styles.active : ''}`}
+        >
+          <Users size={20} />
+          <span>Comunidade</span>
+        </Link>
+        <Link 
+          href="/dashboard/guia" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/guia' ? styles.active : ''}`}
+        >
+          <Compass size={20} />
+          <span>Guia VIP</span>
+        </Link>
+        <Link 
+          href="/dashboard?tab=tips" 
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard' && tab === 'tips' ? styles.active : ''}`}
+        >
+          <BookOpen size={20} />
+          <span>Dicas</span>
+        </Link>
+      </nav>
     </div>
   );
 }

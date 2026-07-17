@@ -242,7 +242,7 @@
 
 @media (max-width: 768px) {
   .chatContainer {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 200px);
   }
   .suggestionsGrid {
     grid-template-columns: 1fr;
@@ -250,4 +250,11 @@
   .messageBubble {
     max-width: 90%;
   }
+  .messagesList {
+    padding: 16px;
+  }
+  .inputArea {
+    padding: 12px 16px;
+  }
 }
+

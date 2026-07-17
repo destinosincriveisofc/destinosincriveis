@@ -332,3 +332,19 @@
   padding: 40px 0;
   font-size: 0.95rem;
 }
+
+@media (max-width: 768px) {
+  .comunidadeContainer {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  .postCard {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .postContent {
+    font-size: 0.9rem;
+  }
+}
+
