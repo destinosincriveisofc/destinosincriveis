@@ -156,23 +156,12 @@ export default function Home() {
         setConsultoriaOrigem('');
         setConsultoriaDestino('');
         setConsultoriaMensagem('');
-
-        const formattedMessage = encodeURIComponent(
-          `📋 *NOVA SOLICITAÇÃO DE CONSULTORIA VIP!*\n\n` +
-          `👤 *Nome:* ${consultoriaNome}\n` +
-          `📞 *Telefone:* ${consultoriaWhatsapp}\n` +
-          `✈️ *Origem / Destino:* ${consultoriaOrigem} → ${consultoriaDestino}\n` +
-          `✉️ *Mensagem/Roteiro:* ${consultoriaMensagem}`
-        );
-        setTimeout(() => {
-          window.open(`https://wa.me/5544991579205?text=${formattedMessage}`, '_blank');
-        }, 3000);
       } else {
-        alert('Erro ao registrar solicitação. Tente enviar diretamente pelo WhatsApp.');
+        alert('Erro ao registrar solicitação. Tente novamente mais tarde.');
       }
     } catch (err) {
       console.error(err);
-      alert('Erro de conexão. Tente enviar diretamente pelo WhatsApp.');
+      alert('Erro de conexão. Tente novamente mais tarde.');
     } finally {
       setConsultoriaSubmitting(false);
     }
@@ -388,7 +377,7 @@ export default function Home() {
                     href="/club"
                     className={styles.buttonPrimary}
                   >
-                    Entrar no CLUB DIJA por R$ 19,90/mês
+                    Entrar no CLUB DIJA por R$ 9,90/mês
                     <ArrowRight size={18} />
                   </Link>
                 </div>
@@ -512,7 +501,7 @@ export default function Home() {
                   </div>
                   <div className={styles.span2}>
                     <button type="submit" disabled={consultoriaSubmitting} className={styles.submitBtn} style={{ opacity: consultoriaSubmitting ? 0.7 : 1 }}>
-                      {consultoriaSubmitting ? 'Enviando...' : 'Enviar Solicitação via WhatsApp'}
+                      {consultoriaSubmitting ? 'Enviando...' : 'Enviar Solicitação'}
                     </button>
                   </div>
                 </form>
@@ -623,7 +612,7 @@ export default function Home() {
               lineHeight: '1.6',
               marginBottom: '24px',
             }}>
-              Dados enviados com sucesso! Nossa equipe entrará em contato em breve. Aguarde...
+              Solicitação recebida! Nossa equipe entrará em contato em breve.
             </p>
             <button
               onClick={() => setShowConsultoriaSuccess(false)}

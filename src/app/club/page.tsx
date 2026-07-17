@@ -37,7 +37,7 @@ export default function ClubPage() {
   const plans = [
     {
       name: "Assinatura Mensal",
-      price: "R$ 19,90",
+      price: "R$ 9,90",
       period: "por mês",
       description: "Ideal para testar e planejar sua próxima viagem.",
       link: "/checkout",
