@@ -1,5 +1,22 @@
 [
   {
+    "id": "GRU-POA",
+    "origem": "GRU",
+    "destino": "POA",
+    "preco_atual": 319.0,
+    "preco_original": 700.0,
+    "desconto_percent": 54,
+    "companhia": "AD",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://picsum.photos/800/600?random=22052",
+    "tipo": "voo",
+    "nota_urgencia": 10,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Porto Alegre*\n🏢 AD\n\n💰 De ~~R$ 700~~ por apenas *R$ 319*\n📊 Você economiza *54%*\n📅 Datas disponíveis: Agosto de 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-17 23:01:46",
+    "vip_only": 0
+  },
+  {
     "id": "GRU-RIO DE JANEIRO",
     "origem": "GRU",
     "destino": "Rio de Janeiro",
