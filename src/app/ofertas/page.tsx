@@ -167,7 +167,7 @@ export default function OfertasPage() {
             display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center',
             justifyContent: 'center', marginBottom: 40, padding: '24px 0'
           }}>
-            <TravelGlobe width={480} height={350} offers={filteredOffers.map(o => ({
+            <TravelGlobe offers={filteredOffers.map(o => ({
               destination: o.destination,
               origin: o.origin,
               price: o.price

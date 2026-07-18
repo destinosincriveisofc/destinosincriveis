@@ -364,7 +364,7 @@ input, textarea, select {
 
 @media (max-width: 768px) {
   body {
-    padding-bottom: 72px;
+    padding-bottom: max(72px, env(safe-area-inset-bottom, 16px));
   }
 
   .bottomNav {
@@ -379,7 +379,7 @@ input, textarea, select {
     -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid rgba(56, 189, 248, 0.12);
     padding: 8px 0;
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
     justify-content: space-around;
     align-items: center;
     box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.4);
@@ -443,4 +443,8 @@ input, textarea, select {
   .container {
     padding: 0 16px;
   }
+}
+
+.pb-nav {
+  padding-bottom: max(70px, env(safe-area-inset-bottom, 16px));
 }
