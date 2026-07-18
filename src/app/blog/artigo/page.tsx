@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, RefreshCw } from 'lucide-react';
 import Header from '@/components/Header';
@@ -138,16 +139,33 @@ const formatDateStr = (dateStr: string) => {
   }
 };
 
-export default function ArticleDetailClient({ id }: { id: string }) {
+function ArticleReader() {
+  const searchParams = useSearchParams();
+  const id = searchParams?.get('id') || '';
+  const vip = searchParams?.get('vip') === 'true';
+
   const [post, setPost] = useState<any>(null);
   const [related, setRelated] = useState<BlogArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!id) return;
-
     async function loadData() {
+      if (!id) {
+        // Load fallback if no ID is provided
+        setPost({
+          id: MOCK_FALLBACK_ARTICLES[0].id,
+          titulo: MOCK_FALLBACK_ARTICLES[0].title,
+          descricao: MOCK_FALLBACK_ARTICLES[0].excerpt,
+          url: MOCK_FALLBACK_ARTICLES[0].imageUrl,
+          categoria: MOCK_FALLBACK_ARTICLES[0].category,
+          criado_em: MOCK_FALLBACK_ARTICLES[0].date
+        });
+        setRelated(MOCK_FALLBACK_ARTICLES.slice(1, 4));
+        setLoading(false);
+        return;
+      }
+
       try {
         setLoading(true);
         // 1. Fetch current post
@@ -241,30 +259,22 @@ export default function ArticleDetailClient({ id }: { id: string }) {
 
   if (loading) {
     return (
-      <>
-        <Header />
-        <div className={styles.loadingContainer}>
-          <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
-          <p>Carregando conteúdo do artigo...</p>
-        </div>
-        <Footer />
-      </>
+      <div className={styles.loadingContainer}>
+        <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+        <p>Carregando conteúdo do artigo...</p>
+      </div>
     );
   }
 
   if (error || !post) {
     return (
-      <>
-        <Header />
-        <div className={styles.errorContainer}>
-          <h2 className={styles.errorTitle}>Ops!</h2>
-          <p className={styles.errorText}>{error || "Artigo não encontrado."}</p>
-          <Link href="/blog" className={styles.ctaButton}>
-            Voltar para o Blog
-          </Link>
-        </div>
-        <Footer />
-      </>
+      <div className={styles.errorContainer}>
+        <h2 className={styles.errorTitle}>Ops!</h2>
+        <p className={styles.errorText}>{error || "Artigo não encontrado."}</p>
+        <Link href="/blog" className={styles.ctaButton}>
+          Voltar para o Blog
+        </Link>
+      </div>
     );
   }
 
@@ -290,67 +300,82 @@ export default function ArticleDetailClient({ id }: { id: string }) {
   }
 
   const cleanBody = cleanMarkdown(displayBody);
+  const backHref = vip ? "/dashboard/dicas" : "/blog";
+  const backLabel = vip ? "Voltar para as Dicas VIP" : "Voltar para todos os artigos";
 
+  return (
+    <main className={styles.main}>
+      {/* Hero image full width */}
+      <div className={styles.hero}>
+        <img
+          src={post.url || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80'}
+          alt={displayTitle}
+          className={styles.heroImage}
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80';
+          }}
+        />
+        <div className={styles.heroOverlay}></div>
+        <div className={styles.heroContent}>
+          <span className={styles.category}>{displayTag}</span>
+          <h1 className={styles.title}>{displayTitle}</h1>
+          <div className={styles.meta}>
+            <Calendar size={14} />
+            <span>{formatDateStr(post.criado_em)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Article Body Container */}
+      <div className={styles.bodyContainer}>
+        <Link href={backHref} className={styles.backBtn}>
+          <ArrowLeft size={16} />
+          <span>{backLabel}</span>
+        </Link>
+
+        <article className={styles.articleContent}>
+          <div className={styles.articleText}>{cleanBody}</div>
+
+          {/* CTA Section */}
+          <div className={styles.ctaSection}>
+            <h3 className={styles.ctaTitle}>Quero mais dicas assim!</h3>
+            <p className={styles.ctaText}>
+              No Club Dija você recebe alertas em tempo real de passagens com até 90% de desconto e erros tarifários direto no seu celular!
+            </p>
+            <Link href="/checkout" className={styles.ctaButton}>
+              Entrar no Club Dija →
+            </Link>
+          </div>
+        </article>
+
+        {/* Related articles */}
+        {related.length > 0 && !vip && (
+          <div className={styles.relatedSection}>
+            <h2 className={styles.relatedTitle}>Leia também</h2>
+            <div className={styles.relatedGrid}>
+              {related.map((article) => (
+                <BlogCard key={article.id} article={article} compact={true} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </main>
+  );
+}
+
+export default function ArticleDetailPage() {
   return (
     <>
       <Header />
-      <main className={styles.main}>
-        {/* Hero image full width */}
-        <div className={styles.hero}>
-          <img
-            src={post.url || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80'}
-            alt={displayTitle}
-            className={styles.heroImage}
-            onError={(e) => {
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80';
-            }}
-          />
-          <div className={styles.heroOverlay}></div>
-          <div className={styles.heroContent}>
-            <span className={styles.category}>{displayTag}</span>
-            <h1 className={styles.title}>{displayTitle}</h1>
-            <div className={styles.meta}>
-              <Calendar size={14} />
-              <span>{formatDateStr(post.criado_em)}</span>
-            </div>
-          </div>
+      <Suspense fallback={
+        <div className={styles.loadingContainer}>
+          <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+          <p>Carregando leitor de artigos...</p>
         </div>
-
-        {/* Article Body Container */}
-        <div className={styles.bodyContainer}>
-          <Link href="/blog" className={styles.backBtn}>
-            <ArrowLeft size={16} />
-            <span>Voltar para todos os artigos</span>
-          </Link>
-
-          <article className={styles.articleContent}>
-            <div className={styles.articleText}>{cleanBody}</div>
-
-            {/* CTA Section */}
-            <div className={styles.ctaSection}>
-              <h3 className={styles.ctaTitle}>Quero mais dicas assim!</h3>
-              <p className={styles.ctaText}>
-                No Club Dija você recebe alertas em tempo real de passagens com até 90% de desconto e erros tarifários direto no seu celular!
-              </p>
-              <Link href="/checkout" className={styles.ctaButton}>
-                Entrar no Club Dija →
-              </Link>
-            </div>
-          </article>
-
-          {/* Related articles */}
-          {related.length > 0 && (
-            <div className={styles.relatedSection}>
-              <h2 className={styles.relatedTitle}>Leia também</h2>
-              <div className={styles.relatedGrid}>
-                {related.map((article) => (
-                  <BlogCard key={article.id} article={article} compact={true} />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </main>
+      }>
+        <ArticleReader />
+      </Suspense>
       <ChatWidget />
       <Footer />
     </>

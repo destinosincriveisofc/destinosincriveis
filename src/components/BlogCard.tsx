@@ -185,7 +185,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
               <span>Comentar</span>
             </Link>
           </div>
-          <Link href={`/blog/${article.id}`} className={styles.link}>
+          <Link href={`/blog/artigo?id=${article.id}`} className={styles.link}>
             <span>{compact ? "Ler notícia" : "Ler mais"}</span>
             <ArrowRight size={12} className={styles.linkIcon} />
           </Link>

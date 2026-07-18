@@ -284,7 +284,7 @@ export default function DicasPage() {
               <article 
                 key={tip.id} 
                 className={styles.tipCard}
-                onClick={() => setSelectedTip(tip)}
+                onClick={() => router.push(`/blog/artigo?id=${tip.id}&vip=true`)}
               >
                 <div className={styles.imageWrapper}>
                   <img 
