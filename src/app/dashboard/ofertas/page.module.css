@@ -200,7 +200,7 @@
 
 .urgencyBadge {
   position: absolute;
-  bottom: 16px;
+  bottom: 52px;
   right: 16px;
   background: rgba(10, 22, 40, 0.85);
   backdrop-filter: blur(4px);
@@ -213,6 +213,50 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.vipSocialRow {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.vipSocialBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(10, 22, 40, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vipSocialBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.vipLiked {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.vipLiked:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.locationIcon {
+  color: #FFC107;
+  flex-shrink: 0;
 }
 
 .cardBody {
@@ -238,7 +282,8 @@
 
 .routeArrow {
   color: #FFC107;
-  font-size: 0.95rem;
+  display: inline;
+  vertical-align: middle;
 }
 
 .companyTag {

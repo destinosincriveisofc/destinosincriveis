@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand */}
         <div className={styles.column}>
           <Link href="/" className={styles.brand}>
-            <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} />
+            <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} loading="lazy" />
             <span>
               Destinos<span className={styles.logoHighlight}>Incríveis</span>
             </span>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star, RefreshCw, ChevronLeft, ChevronRight, Bell, Zap, Users, BookOpen, Lightbulb, Hotel, MessageCircle, Heart } from 'lucide-react';
 import Link from 'next/link';
 
 import Header from '@/components/Header';
@@ -14,6 +14,7 @@ import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import IaConciergeSection from '@/components/IaConciergeSection';
 import SocialProof from '@/components/SocialProof';
 import { FlightOffer } from '@/lib/travelpayouts';
+import { getDestinationImage } from '@/lib/visual-assets';
 import styles from './page.module.css';
 
 // Mock Blog Articles
@@ -22,6 +23,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "1",
     title: "Como acumular 100 mil milhas em 3 meses sem gastar mais",
     excerpt: "Descubra as principais estratégias de acúmulo orgânico através de compras bonificadas e escolha certa dos cartões de crédito.",
+    content: "Acumular milhas nunca foi tão acessível. Com as estratégias certas, é possível juntar 100 mil milhas em apenas 3 meses sem gastar mais do que você já gasta.\n\nO segredo está em concentrar todos os seus gastos no cartão de crédito que ofereça a melhor pontuação. Cartões como o Infinite da Visa ou o Mastercard Black pontuam de 2,5 a 3 pontos por dólar gasto.\n\nOutra estratégia são as compras bonificadas. Grandes redes como Amazon e Magazine Luiza oferecem até 10 pontos por real gasto quando você acessa através dos shopping centers dos programas de fidelidade.\n\nPor fim, os pacotes de transferência com bônus de até 100% podem transformar 50 mil pontos em 100 mil milhas da noite para o dia.",
     category: "Milhas",
     imageUrl: "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?q=80&w=600&auto=format&fit=crop",
     date: "2026-07-10",
@@ -31,6 +33,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "2",
     title: "10 destinos internacionais baratos para viajar ainda este ano",
     excerpt: "Fizemos o levantamento dos países onde o Real é valorizado e o custo de hospedagem e alimentação é extremamente atrativo para brasileiros.",
+    content: "Viajar para fora do Brasil pode ser mais barato do que você imagina. Selecionamos destinos onde o custo de vida é baixo e o câmbio favorece o turista brasileiro.\n\nNa América do Sul, Peru e Colômbia lideram. Em Lima, uma refeição completa sai por menos de R$ 40. Em Cusco, a diária em hostels começa em R$ 60. Machu Picchu está a um voo de distância.\n\nNa Ásia, Tailândia e Vietnã oferecem acomodações por menos de R$ 100 por noite e comida de rua por R$ 10. Na Europa, Portugal e Polônia têm excelente custo-benefício fora da alta temporada.\n\nA dica: evite alta temporada e compre passagens com 60 dias de antecedência. Use alertas de preço para ser avisado quando o valor cair.",
     category: "Destinos",
     imageUrl: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop",
     date: "2026-07-08",
@@ -40,8 +43,9 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "3",
     title: "O que é e como aproveitar um Erro Tarifário de passagem aérea",
     excerpt: "Entenda a diferença entre promoção comum e bugs no sistema das companhias aéreas, e saiba quais são as regras de emissão.",
+    content: "Erro tarifário é quando uma companhia aérea publica uma passagem com valor muito abaixo do normal por falha no sistema de precificação. Não é promoção: é um bug. E pode gerar economias de até 90%.\n\nSistemas de precificação dinâmica consideram centenas de variáveis. Quando há falha na atualização de taxas ou conversão de moedas, uma passagem internacional pode sair por R$ 1.500 quando o correto seria R$ 8.000.\n\nA rapidez é essencial. Quando um erro é detectado, a companhia costuma corrigi-lo em horas. O Club Dija monitora centenas de rotas 24h para capturar essas oportunidades.\n\nImportante: a emissão é legal. O Código de Defesa do Consumidor garante que o preço exibido no momento da compra deve ser respeitado pela companhia.",
     category: "Economize",
-    imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=600&auto=format&fit=crop",
     date: "2026-07-05",
     slug: "erro-tarifario-guia-completo"
   },
@@ -49,6 +53,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "4",
     title: "Guia definitivo: Como conseguir upgrade para executiva",
     excerpt: "Aprenda as regras de leilão, uso de milhas da mesma aliança e estratégias no balcão de check-in para voar com máximo conforto.",
+    content: "Voar na classe executiva sem pagar o valor cheio é possível com estratégias inteligentes.\n\nA primeira é o leilão de upgrade. Companhias como LATAM e Azul enviam e-mails dias antes do voo convidando passageiros da econômica a dar lances. Um lance de R$ 300 a R$ 800 pode garantir um assento na executiva.\n\nOutra tática é usar milhas para upgrade. O valor em milhas para subir de classe costuma ser bem menor do que para emitir uma passagem executiva inteira.\n\nPor fim, a abordagem no check-in ainda funciona. Se o voo estiver com overbooking na econômica, a companhia pode oferecer upgrade gratuito. Ser educado e chegar cedo aumenta suas chances.",
     category: "Dicas",
     imageUrl: "https://images.unsplash.com/photo-1483450388369-9ed95738483c?q=80&w=600&auto=format&fit=crop",
     date: "2026-06-28",
@@ -58,6 +63,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "5",
     title: "Hotéis de Luxo com desconto de até 50% pelo Booking.com",
     excerpt: "Descubra como o nível Genius do Booking e cupons de afiliado ocultos podem reduzir pela metade a sua diária em resorts.",
+    content: "Hospedar-se em hotéis de luxo pagando metade do preço é estratégia, não sorte. O programa Genius do Booking oferece descontos progressivos que chegam a 20% em mais de 200 mil hotéis.\n\nO nível Genius 3 é o mais vantajoso. Para alcançá-lo, complete 15 reservas ou 30 noites. Os benefícios incluem upgrade de quarto, café da manhã cortesia e descontos exclusivos.\n\nExistem também descontos ocultos de afiliados. Muitos sites parceiros têm tarifas especiais que não aparecem na busca padrão, com descontos adicionais de 5% a 15%.\n\nReserve com 30 dias de antecedência e prefira tarifas reembolsáveis. Assim você pode cancelar sem custo se encontrar preço melhor depois.",
     category: "Economize",
     imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop",
     date: "2026-06-20",
@@ -67,6 +73,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
     id: "6",
     title: "Europa no Inverno: 5 países imperdíveis e baratos",
     excerpt: "Guia completo de viagem pelas cidades mais aconchegantes e baratas do continente europeu durante a temporada de neve.",
+    content: "Viajar pela Europa no inverno é mágico e muito mais em conta. Os preços caem drasticamente entre novembro e março.\n\nPortugal é o número um para brasileiros. Lisboa e Porto têm temperaturas amenas e refeições a partir de 10 euros. A Polônia oferece Cracóvia e Varsóvia com café a 2 euros e refeições por 7 euros.\n\nA Hungria, com Budapeste, é conhecida como a Paris do Leste. A República Tcheca tem cerveja mais barata que água mineral. E a Romênia surpreende com castelos medievais cobertos de neve e preços que lembram o Brasil.",
     category: "Destinos",
     imageUrl: "https://images.unsplash.com/photo-1489440543286-a69330151c0b?q=80&w=600&auto=format&fit=crop",
     date: "2026-06-15",
@@ -76,7 +83,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
 
 async function getRealOffers(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('/offers.json');
+    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers');
     if (!res.ok) {
       throw new Error(`Server returned status ${res.status}`);
     }
@@ -110,18 +117,18 @@ async function getRealOffers(): Promise<FlightOffer[]> {
       GIG: { name: "Rio de Janeiro", country: "Brasil", code: "BR" }
     };
     
-    const validDbOffers = dbOffers.filter((o: any) => o && o.origem && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
+    const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
     if (validDbOffers.length === 0) {
       throw new Error("No valid offers found after filtering out corrupt ones.");
     }
 
     return validDbOffers.map((dbOffer: any) => {
       const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
-      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
+      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "", country: "", code: "" };
       
       return {
         id: dbOffer.id,
-        origin: dbOffer.origem || "GRU",
+        origin: dbOffer.origem || "",
         originName: originInfo.name,
         destination: dbOffer.destino || "",
         destinationName: destInfo.name,
@@ -134,13 +141,13 @@ async function getRealOffers(): Promise<FlightOffer[]> {
         airline: dbOffer.companhia || "Companhia",
         link: dbOffer.link_afiliado || "",
         link_afiliado: dbOffer.link_afiliado || "",
-        type: dbOffer.tipo || "voo",
+        type: dbOffer.tipo || "hotel",
         imagem_url: dbOffer.imagem_url,
         criado_em: dbOffer.criado_em || ""
       };
     });
   } catch (e) {
-    console.error("Robust fetch from /offers.json failed, using fallback:", e);
+    console.error("Robust fetch from API failed, using fallback:", e);
     try {
       const { fetchCheapFlights } = await import('@/lib/travelpayouts');
       return await fetchCheapFlights();
@@ -183,7 +190,7 @@ export default function Home() {
             title: item.titulo || '',
             excerpt: item.descricao || '',
             category: item.categoria === 'blog_publico' ? 'Viagem' : (item.categoria || 'Viagem'),
-            imageUrl: item.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop',
+            imageUrl: item.url || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop',
             date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
             slug: item.id || 'artigo'
           }));
@@ -601,44 +608,50 @@ export default function Home() {
             </div>
 
             <div className={styles.benefitsGrid}>
-              {/* Card 1 */}
               <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>🔔</div>
+                <div className={styles.benefitIcon}>
+                  <Bell size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Alertas de Erros Tarifários</h3>
                 <p className={styles.benefitDesc}>Bugs de passagens em tempo real. Seja o primeiro a saber e emita antes que a companhia corrija.</p>
               </div>
 
-              {/* Card 2 */}
               <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>🤖</div>
+                <div className={styles.benefitIcon}>
+                  <Zap size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Guia de Bolso 24h</h3>
                 <p className={styles.benefitDesc}>IA especialista para montar roteiros completos, tirar dúvidas e auxiliar na sua viagem a qualquer hora.</p>
               </div>
 
-              {/* Card 3 */}
               <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>👥</div>
+                <div className={styles.benefitIcon}>
+                  <Users size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Comunidade Privada</h3>
                 <p className={styles.benefitDesc}>Relatos de viagens e troca de fotos com outros membros em um grupo exclusivo e acolhedor.</p>
               </div>
 
-              {/* Card 4 */}
               <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>💡</div>
+                <div className={styles.benefitIcon}>
+                  <MessageCircle size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Suporte Especializado</h3>
                 <p className={styles.benefitDesc}>Consultoria individual de planejamento de trechos complexos, hotéis e dúvidas de emissão com milhas.</p>
               </div>
 
-              {/* Card 5 */}
               <div className={styles.benefitCard}>
-                <div className={styles.benefitIcon}>📚</div>
+                <div className={styles.benefitIcon}>
+                  <BookOpen size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Guias & Dicas Diárias</h3>
                 <p className={styles.benefitDesc}>Hacks de milhas, cartões de crédito e direitos dos passageiros atualizados 3x ao dia pelos nossos analistas.</p>
               </div>
 
-              {/* Card 6 */}
               <div className={`${styles.benefitCard} ${styles.benefitCardGold}`}>
-                <div className={styles.benefitIcon}>🏨</div>
+                <div className={styles.benefitIcon}>
+                  <Hotel size={26} />
+                </div>
                 <h3 className={styles.benefitTitle}>Economia Exclusiva</h3>
                 <p className={styles.benefitDesc}>Descontos secretos em hotéis, resorts all-inclusive e ingressos de passeios ao redor do mundo.</p>
               </div>

@@ -854,15 +854,22 @@
 }
 
 .benefitIcon {
-  font-size: 2rem;
   width: 56px;
   height: 56px;
-  background-color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, rgba(21, 94, 239, 0.08) 0%, rgba(21, 94, 239, 0.02) 100%);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--azul-bebe-principal, #155EEF);
   box-shadow: 0 4px 12px rgba(10, 22, 40, 0.04);
+  transition: var(--transition-smooth, all 0.3s ease);
+}
+
+.benefitCard:hover .benefitIcon {
+  background: linear-gradient(135deg, var(--azul-bebe-principal, #155EEF) 0%, var(--azul-profundo, #0A1628) 100%);
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
 .benefitTitle {

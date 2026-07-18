@@ -13,7 +13,7 @@ import styles from './page.module.css';
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('/offers.json');
+    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers');
     if (!res.ok) {
       throw new Error(`Server returned status ${res.status}`);
     }
@@ -54,11 +54,11 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
 
     return validDbOffers.map((dbOffer: any) => {
       const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
-      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "São Paulo", country: "Brasil", code: "BR" };
+      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "", country: "", code: "" };
       
       return {
         id: dbOffer.id,
-        origin: dbOffer.origem || "GRU",
+        origin: dbOffer.origem || "",
         originName: originInfo.name,
         destination: dbOffer.destino || "",
         destinationName: destInfo.name,
@@ -71,13 +71,13 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
         airline: dbOffer.companhia || "Companhia",
         link: dbOffer.link_afiliado || "",
         link_afiliado: dbOffer.link_afiliado || "",
-        type: dbOffer.tipo || "voo",
+        type: dbOffer.tipo || "hotel",
         imagem_url: dbOffer.imagem_url,
         criado_em: dbOffer.criado_em || ""
       };
     });
   } catch (e) {
-    console.error("Robust fetch from /offers.json failed, using fallback:", e);
+    console.error("Robust fetch from API failed, using fallback:", e);
     try {
       const { fetchCheapFlights } = await import('@/lib/travelpayouts');
       return await fetchCheapFlights();

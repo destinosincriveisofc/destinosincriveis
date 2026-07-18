@@ -1,7 +1,4 @@
-/* Design System - Destinos Incríveis */
-
 :root {
-  /* Colors */
   --fundo-principal: #FAFBFF;
   --fundo-secundario: #F0F4FF;
   --azul-bebe-principal: #155EEF;
@@ -11,13 +8,19 @@
   --amarelo-escuro: #E0A800;
   --cinza-suave: #8896A9;
   --branco-puro: #FFFFFF;
+  --danger: #dc2626;
+  --success: #16a34a;
 
-  /* Shadows */
   --shadow-soft: 0 8px 30px rgba(10, 22, 40, 0.04);
   --shadow-hover: 0 16px 40px rgba(10, 22, 40, 0.08);
+  --shadow-glow: 0 4px 20px rgba(21, 94, 239, 0.15);
 
-  /* Transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
 }
 
 * {
@@ -60,7 +63,15 @@ button {
   transition: var(--transition-smooth);
 }
 
-/* Utilities */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -73,20 +84,20 @@ button {
   align-items: center;
   justify-content: center;
   padding: 14px 28px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-weight: 600;
   font-size: 0.95rem;
   transition: var(--transition-smooth);
 }
 
 .pill-button-primary {
-  background-color: var(--amarelo-marca);
+  background: linear-gradient(135deg, var(--amarelo-marca) 0%, var(--amarelo-escuro) 100%);
   color: var(--azul-profundo);
 }
 
 .pill-button-primary:hover {
-  background-color: var(--amarelo-escuro);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.3);
 }
 
 .pill-button-outline {
@@ -100,31 +111,35 @@ button {
   transform: translateY(-2px);
 }
 
-.pill-button-dark {
-  background-color: var(--azul-profundo);
-  color: var(--branco-puro);
-}
-
-.pill-button-dark:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
-
 .card {
   background-color: var(--branco-puro);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   transition: var(--transition-smooth);
-  border: 1px solid rgba(91, 164, 207, 0.08);
+  border: 1px solid rgba(21, 94, 239, 0.08);
   overflow: hidden;
 }
 
 .card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-4px);
+  border-color: rgba(21, 94, 239, 0.2);
 }
 
-/* Soft blink animation */
+.gradient-text {
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 @keyframes soft-blink {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(0.96); }
@@ -132,4 +147,29 @@ button {
 
 .blink-animate {
   animation: soft-blink 2s infinite ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--azul-profundo) 0%, var(--azul-bebe-principal) 50%, var(--azul-profundo) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
 }

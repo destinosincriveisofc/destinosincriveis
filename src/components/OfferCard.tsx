@@ -1,48 +1,38 @@
-import React from 'react';
-import { Calendar, PlaneTakeoff, ArrowRight, Tag } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, PlaneTakeoff, ArrowRight, Heart, MessageCircle, MapPin, Tag } from 'lucide-react';
 import AlertBadge from './AlertBadge';
 import { FlightOffer } from '@/lib/travelpayouts';
+import { getDestinationImage, getSocialMetrics, formatPrice, getCountryFlagUrl, getBrandGradient, getCardBadgeVariant } from '@/lib/visual-assets';
 import styles from './OfferCard.module.css';
 
 interface OfferCardProps {
   offer: FlightOffer;
 }
 
-const DESTINATION_IMAGES: Record<string, string> = {
-  EZE: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?q=80&w=600&auto=format&fit=crop", // Buenos Aires
-  SCL: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=600&auto=format&fit=crop", // Santiago
-  MIA: "https://images.unsplash.com/photo-1506422748879-887454f9dbf4?q=80&w=600&auto=format&fit=crop", // Miami
-  MCO: "https://images.unsplash.com/photo-1597466765990-64ad1c35dafc?q=80&w=600&auto=format&fit=crop", // Orlando
-  LIS: "https://images.unsplash.com/photo-1509840841025-9088ba78a826?q=80&w=600&auto=format&fit=crop", // Lisboa
-  MAD: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=600&auto=format&fit=crop", // Madrid
-  CDG: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop", // Paris
-  SDU: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop", // Rio
-  SSA: "https://images.unsplash.com/photo-1582238479700-f9f381297e68?q=80&w=600&auto=format&fit=crop", // Salvador
-  REC: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=600&auto=format&fit=crop", // Recife
-  BSB: "https://images.unsplash.com/photo-1599839619433-28f0b7bf1b20?q=80&w=600&auto=format&fit=crop", // Brasília
-  RIO: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop", // Rio
-};
-
 export default function OfferCard({ offer }: OfferCardProps) {
-  const isImageUrlValid = offer.imagem_url && offer.imagem_url.startsWith('http');
-  const imageUrl = isImageUrlValid 
-    ? offer.imagem_url! 
-    : (DESTINATION_IMAGES[offer.destination || ""] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop");
+  const imageUrl = getDestinationImage(offer.destination, offer.destinationName, offer.imagem_url);
+  const { likes: baseLikes, comments: baseComments } = getSocialMetrics(offer.id);
+
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(baseLikes);
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    const { likes } = getSocialMetrics(offer.id);
+    setLikesCount(likes);
+  }, [offer.id]);
 
   const price = offer.price || 0;
   const originalPrice = offer.originalPrice || price || 1;
   const discount = Math.round(((originalPrice - price) / originalPrice) * 100);
   const isTariffError = price < 500 && (offer.destination || "") !== "SDU";
 
-  // Clean type label text instead of emoji
-  const typeText = offer.type === 'voo' ? 'Voo' : offer.type === 'hotel' ? 'Hotel' : offer.type === 'passeio' ? 'Passeio' : 'Pacote';
-
-  // Dynamic Badge Text and Colors
-  let badgeText = typeText;
+  const badgeInfo = getCardBadgeVariant(offer.type);
+  let badgeText = badgeInfo.text;
   let badgeClass = styles.badgeDefault;
-  
+
   const discountThreshold = discount >= 35 || isTariffError;
-  
+
   if (offer.type === 'voo' && discountThreshold) {
     badgeText = "Erro Tarifário";
     badgeClass = styles.badgeRed;
@@ -55,37 +45,27 @@ export default function OfferCard({ offer }: OfferCardProps) {
   } else if (offer.type === 'pacote') {
     badgeText = "Hotel + Voos";
     badgeClass = styles.badgeGreen;
-  } else {
-    badgeText = "Voo";
-    badgeClass = styles.badgeDark;
   }
 
-  // Dynamic travel period logic
   const getTravelPeriod = () => {
     let depDate = new Date();
     if (offer.departureDate) {
       const parsed = new Date(offer.departureDate);
-      if (!isNaN(parsed.getTime())) {
-        depDate = parsed;
-      }
+      if (!isNaN(parsed.getTime())) depDate = parsed;
     }
-    
     const today = new Date();
     if (depDate < today) {
       depDate = new Date();
       depDate.setDate(today.getDate() + 60);
     }
-    
     const retDate = new Date(depDate);
     retDate.setDate(depDate.getDate() + 10);
-    
     const fmt = (d: Date) => {
       const day = String(d.getDate()).padStart(2, '0');
       const month = String(d.getMonth() + 1).padStart(2, '0');
       return `${day}/${month}`;
     };
-    
-    return `📅 Período: ${fmt(depDate)} a ${fmt(retDate)}`;
+    return `${fmt(depDate)} a ${fmt(retDate)}`;
   };
 
   const isPasseio = offer.type === 'passeio' || (offer as any).tipo === 'passeio';
@@ -94,107 +74,110 @@ export default function OfferCard({ offer }: OfferCardProps) {
   const getDestinationTitle = () => {
     let title = offer.destinationName || "Destino";
     title = title.replace(/\s*\([A-Z]{3}\)\s*$/i, '').trim();
-    if (isPasseio) {
-      return title;
-    }
+    if (isPasseio) return title;
     const destCode = offer.destination ? ` (${offer.destination})` : '';
-    if (title.endsWith(`(${offer.destination})`)) {
-      return title;
-    }
+    if (title.endsWith(`(${offer.destination})`)) return title;
     return `${title}${destCode}`;
   };
 
-  const getFallbackImage = () => {
-    const isBeach = offer.destination === 'REC' || 
-                    (offer.destinationName && (
-                      offer.destinationName.toLowerCase().includes('recife') || 
-                      offer.destinationName.toLowerCase().includes('praia') || 
-                      offer.destinationName.toLowerCase().includes('porto de galinhas') ||
-                      offer.destinationName.toLowerCase().includes('salvador')
-                    ));
-    if (isBeach) {
-      return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80";
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setLiked(!liked);
+    setLikesCount(prev => liked ? prev - 1 : prev + 1);
+  };
+
+  const handleImgError = () => {
+    if (!imgError) {
+      setImgError(true);
     }
-    return "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
   };
 
   return (
     <div className={styles.card}>
-      {/* Image & Badges */}
       <div className={styles.imageArea}>
         <img
-          src={imageUrl}
+          src={imgError ? "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80" : imageUrl}
           alt={offer.destinationName || offer.destination || "Destino"}
-          onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
-          style={{width:'100%', height:'200px', objectFit:'cover'}}
+          onError={handleImgError}
+          loading="lazy"
           className={styles.image}
         />
-        <div className={styles.imageOverlay} />
-        
-        {/* Alerts / Discount Badge */}
+        <div className={styles.imageOverlay} style={{ background: getBrandGradient('bottom') }} />
+        <div className={styles.imageOverlayTop} style={{ background: getBrandGradient('top') }} />
+
         <div className={styles.badgeList}>
           <AlertBadge text={`${discount}% OFF`} />
         </div>
 
-        {/* Country Badge (No emoji) */}
+        <div className={`${styles.typeBadge} ${badgeClass}`}>
+          <Tag size={10} />
+          {badgeText}
+        </div>
+
         <div className={styles.countryBadge}>
           {offer.countryCode && offer.countryCode !== 'UN' ? (
-            <img 
-              src={`https://flagcdn.com/16x12/${offer.countryCode.toLowerCase()}.png`} 
-              alt={offer.countryName} 
-              onError={(e) => { e.currentTarget.style.display = 'none'; }} 
-              style={{ width: '16px', height: '12px', marginRight: '4px', objectFit: 'contain' }}
+            <img
+              src={getCountryFlagUrl(offer.countryCode)}
+              alt={offer.countryName}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              className={styles.flagIcon}
             />
           ) : (
-            <span style={{ marginRight: '4px' }}>📍</span>
+            <MapPin size={12} />
           )}
           <span>{offer.countryName || "Destino"}</span>
         </div>
-
-        {/* Dynamic Type Badge */}
-        <div className={`${styles.typeBadge} ${badgeClass}`}>
-          {badgeText}
-        </div>
       </div>
 
-      {/* Content */}
       <div className={styles.content}>
         <div className={styles.routeInfo}>
           {showDeparture && (
             <div className={styles.originText}>
-              <PlaneTakeoff size={12} className="text-[#155EEF]" />
+              <PlaneTakeoff size={12} />
               <span>Saída de {offer.originName || "São Paulo"}</span>
             </div>
           )}
           <h3 className={styles.destinationTitle}>
             {getDestinationTitle()}
           </h3>
-          {/* Airline */}
           <div className={styles.airlineText}>
-            ✈️ {offer.airline || "Companhia Aérea"}
+            <PlaneTakeoff size={11} />
+            {offer.airline || "Companhia Aérea"}
           </div>
         </div>
 
-        {/* Travel Period */}
         <div className={styles.dates}>
           <span className={styles.dateItem}>
-            {getTravelPeriod()}
+            <Calendar size={12} />
+            <span>{getTravelPeriod()}</span>
           </span>
         </div>
 
-        {/* Price & CTA */}
+        <div className={styles.priceSection}>
+          <div className={styles.priceComparison}>
+            De <span className={styles.oldPrice}>R$ {formatPrice(originalPrice)}</span>
+          </div>
+          <div className={styles.currentPriceRow}>
+            <span className={styles.priceLabel}>por apenas</span>
+            <span className={styles.newPriceVal}>R$ {formatPrice(price)}</span>
+          </div>
+        </div>
+
         <div className={styles.footer}>
-          <div className={styles.priceWrapper}>
-            <div className={styles.priceComparison}>
-              De <span className={styles.oldPrice}>R$ {originalPrice.toLocaleString('pt-BR')}</span> por
-            </div>
-            <div className={styles.newPrice}>
-              Apenas <span className={styles.newPriceVal}>R$ {price.toLocaleString('pt-BR')}</span>
+          <div className={styles.socialActions}>
+            <button onClick={handleLike} className={`${styles.socialBtn} ${liked ? styles.liked : ''}`}>
+              <Heart size={14} fill={liked ? "currentColor" : "none"} />
+              <span>{likesCount}</span>
+            </button>
+            <div className={styles.socialBtn}>
+              <MessageCircle size={14} />
+              <span>{baseComments}</span>
             </div>
           </div>
 
           <a
-            href={offer.link_afiliado || (offer as any).url_afiliado || "https://www.destinosincriveisofc.com.br/#clube"}
+            href={offer.link_afiliado || (offer as any).url_afiliado || "/club"}
             target={offer.link_afiliado || (offer as any).url_afiliado ? "_blank" : undefined}
             rel={offer.link_afiliado || (offer as any).url_afiliado ? "noopener noreferrer" : undefined}
             className={styles.ctaButton}

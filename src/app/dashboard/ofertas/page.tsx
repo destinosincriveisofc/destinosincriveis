@@ -2,18 +2,22 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
-  Sparkles, 
-  Flame, 
-  Plane, 
-  Hotel, 
-  Compass, 
-  Gift, 
+import {
+  Sparkles,
+  Flame,
+  Plane,
+  Hotel,
+  Compass,
+  Gift,
   ExternalLink,
-  Lock,
   Tag,
-  AlertTriangle
+  AlertTriangle,
+  Heart,
+  MessageCircle,
+  MapPin,
+  Clock,
 } from 'lucide-react';
+import { getDestinationImage, formatPrice, getSocialMetrics, getBrandGradient } from '@/lib/visual-assets';
 import styles from './page.module.css';
 
 export default function VIPOffersPage() {
@@ -22,6 +26,7 @@ export default function VIPOffersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [likedOffers, setLikedOffers] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -36,11 +41,11 @@ export default function VIPOffersPage() {
     setLoading(true);
     setError(null);
     try {
-      const baseUrl = typeof window !== 'undefined' && 
+      const baseUrl = typeof window !== 'undefined' &&
         (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
           ? 'http://localhost:5001'
           : 'https://destinosincriveis.vps-kinghost.net';
-      
+
       const response = await fetch(`${baseUrl}/api/dashboard/vip-offers`, {
         method: 'GET',
         headers: {
@@ -77,32 +82,31 @@ export default function VIPOffersPage() {
 
   const getTypeIcon = (tipo: string) => {
     switch (tipo?.toLowerCase()) {
-      case 'voo':
-        return <Plane size={14} />;
-      case 'hotel':
-        return <Hotel size={14} />;
-      case 'pacote':
-        return <Gift size={14} />;
-      case 'passeio':
-        return <Compass size={14} />;
-      default:
-        return <Plane size={14} />;
+      case 'voo': return <Plane size={14} />;
+      case 'hotel': return <Hotel size={14} />;
+      case 'pacote': return <Gift size={14} />;
+      case 'passeio': return <Compass size={14} />;
+      default: return <Plane size={14} />;
     }
   };
 
   const getTypeLabel = (tipo: string) => {
     switch (tipo?.toLowerCase()) {
-      case 'voo':
-        return 'Voo promocional';
-      case 'hotel':
-        return 'Resort / Hotel';
-      case 'pacote':
-        return 'Pacote Completo';
-      case 'passeio':
-        return 'Passeio / Tour';
-      default:
-        return tipo;
+      case 'voo': return 'Voo promocional';
+      case 'hotel': return 'Resort / Hotel';
+      case 'pacote': return 'Pacote Completo';
+      case 'passeio': return 'Passeio / Tour';
+      default: return tipo;
     }
+  };
+
+  const toggleLike = (offerId: string) => {
+    setLikedOffers(prev => {
+      const next = new Set(prev);
+      if (next.has(offerId)) next.delete(offerId);
+      else next.add(offerId);
+      return next;
+    });
   };
 
   const filteredOffers = getFilteredOffers();
@@ -111,7 +115,7 @@ export default function VIPOffersPage() {
     <div className={styles.container}>
       <div className={styles.headerSection}>
         <div className={styles.titleWrapper}>
-          <h2>Vitrine Secreta VIP 👑</h2>
+          <h2>Vitrine Secreta VIP</h2>
           <p>Ofertas exclusivas de hotéis de luxo, bugs tarifários e pacotes garimpados pela nossa IA mineradora.</p>
         </div>
         <div className={styles.vipBadgeHeader}>
@@ -121,35 +125,39 @@ export default function VIPOffersPage() {
       </div>
 
       <div className={styles.filterBar}>
-        <button 
-          onClick={() => setActiveFilter('all')} 
+        <button
+          onClick={() => setActiveFilter('all')}
           className={`${styles.filterBtn} ${activeFilter === 'all' ? styles.active : ''}`}
         >
           Todas as Ofertas
         </button>
-        <button 
-          onClick={() => setActiveFilter('voo')} 
+        <button
+          onClick={() => setActiveFilter('voo')}
           className={`${styles.filterBtn} ${activeFilter === 'voo' ? styles.active : ''}`}
         >
-          ✈️ Voos
+          <Plane size={14} />
+          Voos
         </button>
-        <button 
-          onClick={() => setActiveFilter('hotel')} 
+        <button
+          onClick={() => setActiveFilter('hotel')}
           className={`${styles.filterBtn} ${activeFilter === 'hotel' ? styles.active : ''}`}
         >
-          🏨 Hotéis & Resorts
+          <Hotel size={14} />
+          Hotéis & Resorts
         </button>
-        <button 
-          onClick={() => setActiveFilter('pacote')} 
+        <button
+          onClick={() => setActiveFilter('pacote')}
           className={`${styles.filterBtn} ${activeFilter === 'pacote' ? styles.active : ''}`}
         >
-          📦 Pacotes
+          <Gift size={14} />
+          Pacotes
         </button>
-        <button 
-          onClick={() => setActiveFilter('passeio')} 
+        <button
+          onClick={() => setActiveFilter('passeio')}
           className={`${styles.filterBtn} ${activeFilter === 'passeio' ? styles.active : ''}`}
         >
-          🎟️ Passeios
+          <Compass size={14} />
+          Passeios
         </button>
       </div>
 
@@ -165,36 +173,31 @@ export default function VIPOffersPage() {
         </div>
       ) : filteredOffers.length === 0 ? (
         <div className={styles.emptyContainer}>
-          <Lock size={48} className={styles.emptyIcon} />
+          <AlertTriangle size={48} className={styles.emptyIcon} />
           <p>Nenhuma oferta VIP encontrada nesta categoria no momento.</p>
         </div>
       ) : (
         <div className={styles.offersGrid}>
           {filteredOffers.map((offer) => {
-            const formattedPrice = Number(offer.preco_atual).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-            const formattedOriginalPrice = Number(offer.preco_original).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-            
+            const formattedPrice = formatPrice(Number(offer.preco_atual));
+            const formattedOriginalPrice = formatPrice(Number(offer.preco_original));
+            const imgUrl = getDestinationImage(offer.destino, offer.destino, offer.imagem_url);
+            const { likes, comments } = getSocialMetrics(offer.id);
+            const isLiked = likedOffers.has(offer.id);
+
             return (
               <div key={offer.id} className={styles.offerCard}>
                 <div className={styles.imageContainer}>
-                  <img 
-                    src={offer.imagem_url || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"} 
-                    alt={offer.destino} 
+                  <img
+                    src={imgUrl}
+                    alt={offer.destino}
                     className={styles.offerImage}
+                    loading="lazy"
                     onError={(e) => {
-                      const isBeach = offer.destino === 'REC' || 
-                                      (offer.destino && (
-                                        offer.destino.toLowerCase().includes('rec') || 
-                                        offer.destino.toLowerCase().includes('recife') ||
-                                        offer.destino.toLowerCase().includes('salvador') ||
-                                        offer.destino.toLowerCase().includes('ssa')
-                                      ));
-                      e.currentTarget.src = isBeach 
-                        ? "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" 
-                        : "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
                     }}
                   />
-                  <div className={styles.overlay}></div>
+                  <div className={styles.overlay} style={{ background: getBrandGradient('bottom') }} />
                   <div className={styles.badgesWrapper}>
                     <span className={styles.vipBadge}>
                       <Sparkles size={12} />
@@ -208,17 +211,29 @@ export default function VIPOffersPage() {
                   {offer.nota_urgencia && (
                     <span className={styles.urgencyBadge}>
                       <Flame size={14} />
-                      Urgência: {offer.nota_urgencia}/10
+                      {offer.nota_urgencia}/10
                     </span>
                   )}
+                  <div className={styles.vipSocialRow}>
+                    <button
+                      onClick={() => toggleLike(offer.id)}
+                      className={`${styles.vipSocialBtn} ${isLiked ? styles.vipLiked : ''}`}
+                    >
+                      <Heart size={14} fill={isLiked ? "currentColor" : "none"} />
+                      <span>{isLiked ? likes + 1 : likes}</span>
+                    </button>
+                    <div className={styles.vipSocialBtn}>
+                      <MessageCircle size={14} />
+                      <span>{comments}</span>
+                    </div>
+                  </div>
                 </div>
                 <div className={styles.cardBody}>
                   <div className={styles.locationRow}>
+                    <MapPin size={14} className={styles.locationIcon} />
                     <h3 className={styles.routeTitle}>
                       {offer.origem ? (
-                        <>
-                          {offer.origem} <span className={styles.routeArrow}>✈️</span> {offer.destino}
-                        </>
+                        <>{offer.origem} <Plane size={12} className={styles.routeArrow} /> {offer.destino}</>
                       ) : (
                         offer.destino
                       )}
@@ -246,10 +261,10 @@ export default function VIPOffersPage() {
                     </div>
                   </div>
 
-                  <a 
-                    href={offer.link_afiliado || (offer as any).url_afiliado || "#"} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <a
+                    href={offer.link_afiliado || (offer as any).url_afiliado || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={styles.bookingBtn}
                   >
                     <span>Aproveitar Tarifa VIP</span>

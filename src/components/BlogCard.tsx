@@ -7,6 +7,7 @@ export interface BlogArticle {
   id: string;
   title: string;
   excerpt: string;
+  content?: string;
   category: string;
   imageUrl: string;
   imagem_url?: string;
@@ -143,8 +144,8 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
           <img
             src={article.imagem_url || article.imageUrl || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
             alt={displayTitle}
+            loading="lazy"
             onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
-            style={{width:'100%', height:'200px', objectFit:'cover'}}
             className={styles.image}
           />
           {/* Category Overlay */}
