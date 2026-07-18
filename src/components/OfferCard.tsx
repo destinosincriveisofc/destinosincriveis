@@ -24,8 +24,8 @@ const DESTINATION_IMAGES: Record<string, string> = {
 };
 
 export default function OfferCard({ offer }: OfferCardProps) {
-  const hasValidImage = offer.imagem_url && (offer.imagem_url.startsWith('http://') || offer.imagem_url.startsWith('https://') || offer.imagem_url.startsWith('/'));
-  const imageUrl = hasValidImage 
+  const isImageUrlValid = offer.imagem_url && offer.imagem_url.startsWith('http');
+  const imageUrl = isImageUrlValid 
     ? offer.imagem_url! 
     : (DESTINATION_IMAGES[offer.destination || ""] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop");
 
