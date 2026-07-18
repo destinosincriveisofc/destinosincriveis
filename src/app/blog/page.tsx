@@ -223,7 +223,7 @@ export default function BlogPage() {
           </div>
 
           {/* Articles Grid */}
-          {loading ? (
+          {filteredArticles.length === 0 && loading ? (
             <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
               <RefreshCw className="animate-spin text-[#38BDF8]" size={36} />
             </div>
@@ -233,9 +233,9 @@ export default function BlogPage() {
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div ref={feedRef} className={`${styles.feedContainer} fade-in-up`}>
+            <div ref={feedRef} className={styles.feedContainer}>
               {filteredArticles.map((article, idx) => (
-                <div key={article.id} className={`fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
+                <div key={article.id} style={{ animation: 'fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards', animationDelay: `${idx * 0.08}s` }}>
                   <BlogCard article={article} />
                 </div>
               ))}

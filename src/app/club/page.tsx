@@ -111,13 +111,15 @@ export default function ClubPage() {
             Economize milhares de reais em passagens aéreas e hotéis. Junte-se a mais de 15.000 viajantes que recebem alertas de tarifas imperdíveis e erros no WhatsApp.
           </p>
           <div>
-            <Link
-              href="/checkout"
+            <a
+              href="https://pay.kiwify.com.br/xQfiHvB"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.heroBtn}
             >
               Fazer Parte do Club Dija
               <ArrowRight size={18} />
-            </Link>
+            </a>
           </div>
         </section>
 
