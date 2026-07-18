@@ -6,12 +6,58 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
-import TravelGlobe from '@/components/TravelGlobe';
 import RadarScanner from '@/components/RadarScanner';
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
+
+const MOCK_OFFERS: FlightOffer[] = [
+  {
+    id: "PRESET-1", origin: "GRU", originName: "São Paulo",
+    destination: "MCO", destinationName: "Orlando",
+    countryName: "Estados Unidos", countryCode: "US",
+    price: 2199, originalPrice: 4500,
+    departureDate: "2026-09-15", returnDate: "",
+    airline: "Latam",
+    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    type: "voo",
+    imagem_url: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "PRESET-2", origin: "GRU", originName: "São Paulo",
+    destination: "LIS", destinationName: "Lisboa",
+    countryName: "Portugal", countryCode: "PT",
+    price: 3499, originalPrice: 6800,
+    departureDate: "2026-10-20", returnDate: "",
+    airline: "TAP",
+    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    type: "voo",
+    imagem_url: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "PRESET-3", origin: "", originName: "",
+    destination: "Maragogi", destinationName: "Maragogi",
+    countryName: "Brasil", countryCode: "BR",
+    price: 900, originalPrice: 3000,
+    departureDate: "2026-08-01", returnDate: "",
+    airline: "Salinas Maragogi All Inclusive",
+    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    type: "hotel",
+    imagem_url: "https://images.unsplash.com/photo-1549638441-b787d2e11f14?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "PRESET-4", origin: "GRU", originName: "São Paulo",
+    destination: "MAD", destinationName: "Madri",
+    countryName: "Espanha", countryCode: "ES",
+    price: 2799, originalPrice: 5200,
+    departureDate: "2026-11-05", returnDate: "",
+    airline: "Iberia",
+    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    type: "voo",
+    imagem_url: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80"
+  }
+];
 
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
@@ -122,14 +168,14 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
 }
 
 export default function OfertasPage() {
-  const [offers, setOffers] = useState<FlightOffer[]>([]);
+  const [offers, setOffers] = useState<FlightOffer[]>(MOCK_OFFERS);
   const [filteredOffers, setFilteredOffers] = useState<FlightOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
   const introRef = useScrollReveal<HTMLDivElement>();
   const bannerRef = useScrollReveal<HTMLDivElement>();
   const filtersRef = useScrollReveal<HTMLDivElement>();
-  const globeSectionRef = useScrollReveal<HTMLDivElement>();
+  const radarSectionRef = useScrollReveal<HTMLDivElement>();
 
   // Filters
   const [searchTerm, setSearchTerm] = useState('');
@@ -139,17 +185,22 @@ export default function OfertasPage() {
   useEffect(() => {
     const loadOffers = async () => {
       setLoading(true);
-      const data = await getFlightsClient();
-      
-      // Sort descending by date (criado_em)
-      const sorted = [...data].sort((a: any, b: any) => {
-        const valA = a.criado_em || a.departureDate || "";
-        const valB = b.criado_em || b.departureDate || "";
-        return valB.localeCompare(valA);
-      });
-      
-      setOffers(sorted);
-      setLoading(false);
+      try {
+        const data = await getFlightsClient();
+        
+        if (data && Array.isArray(data) && data.length > 0) {
+          const sorted = [...data].sort((a: any, b: any) => {
+            const valA = a.criado_em || a.departureDate || "";
+            const valB = b.criado_em || b.departureDate || "";
+            return valB.localeCompare(valA);
+          });
+          setOffers(sorted);
+        }
+      } catch (err) {
+        console.error('Falha ao carregar ofertas, mantendo dados locais:', err);
+      } finally {
+        setLoading(false);
+      }
     };
     loadOffers();
   }, []);
@@ -192,16 +243,11 @@ export default function OfertasPage() {
             </p>
           </div>
 
-          {/* Globo 3D + Radar Section */}
-          <div className={`fade-in-up`} ref={globeSectionRef} style={{
+          {/* Radar Scanner Section */}
+          <div className={`fade-in-up`} ref={radarSectionRef} style={{
             display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center',
             justifyContent: 'center', marginBottom: 40, padding: '24px 0'
           }}>
-            <TravelGlobe offers={filteredOffers.map(o => ({
-              destination: o.destination,
-              origin: o.origin,
-              price: o.price
-            }))} />
             <RadarScanner size={180} active={true} offersCount={filteredOffers.length} />
           </div>
 
