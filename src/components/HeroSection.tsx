@@ -60,7 +60,7 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.imageColumn}>
-          <TravelGlobe width={500} height={400} />
+          <TravelGlobe />
         </div>
       </div>
     </section>

@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const Globe = dynamic(() => import('react-globe.gl'), { ssr: false });
 
 const AIRPORTS: Record<string, { lat: number; lng: number }> = {
   GRU: { lat: -23.5505, lng: -46.6333 },
@@ -26,30 +29,28 @@ interface TravelGlobeProps {
     origin?: string;
     price?: number;
   }>;
-  height?: number;
-  width?: number;
 }
 
-export default function TravelGlobe({ offers = [], height = 400, width = 500 }: TravelGlobeProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const globeRef = useRef<any>(null);
-  const [Globe, setGlobe] = useState<any>(null);
-  const [mounted, setMounted] = useState(false);
-
+function useWindowSize() {
+  const [size, setSize] = useState({ width: 500, height: 400 });
   useEffect(() => {
-    setMounted(true);
+    function update() {
+      const w = window.innerWidth;
+      setSize({
+        width: w < 768 ? Math.min(w - 32, 300) : 500,
+        height: w < 768 ? 300 : 400,
+      });
+    }
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, []);
+  return size;
+}
 
-  useEffect(() => {
-    if (!mounted) return;
-    let cancelled = false;
-
-    import('react-globe.gl').then((mod) => {
-      if (!cancelled) setGlobe(() => mod.default);
-    });
-
-    return () => { cancelled = true; };
-  }, [mounted]);
+export default function TravelGlobe({ offers = [] }: TravelGlobeProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { width, height } = useWindowSize();
 
   const arcsData = [
     { startLat: AIRPORTS.GRU.lat, startLng: AIRPORTS.GRU.lng, endLat: AIRPORTS.MIA.lat, endLng: AIRPORTS.MIA.lng, color: ['#38BDF8', '#FFC107'] },
@@ -84,30 +85,8 @@ export default function TravelGlobe({ offers = [], height = 400, width = 500 }: 
       };
     });
 
-  if (!mounted || !Globe) {
-    return (
-      <div
-        ref={containerRef}
-        style={{
-          width,
-          height,
-          borderRadius: 16,
-          background: 'radial-gradient(ellipse at center, rgba(56,189,248,0.03) 0%, transparent 70%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#38BDF8',
-          fontSize: '0.9rem',
-          fontWeight: 600,
-        }}
-      >
-        Inicializando Globo 3D...
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} style={{ width, height, position: 'relative' }}>
+    <div ref={containerRef} style={{ width, height, position: 'relative', margin: '0 auto' }}>
       <Globe
         width={width}
         height={height}
@@ -115,7 +94,6 @@ export default function TravelGlobe({ offers = [], height = 400, width = 500 }: 
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         backgroundColor="rgba(0,0,0,0)"
         showGraticules={true}
-        graticulesColor="rgba(56,189,248,0.08)"
         showAtmosphere={true}
         atmosphereColor="#38BDF8"
         atmosphereAltitude={0.15}
