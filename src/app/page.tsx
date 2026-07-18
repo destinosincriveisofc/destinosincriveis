@@ -944,6 +944,26 @@ export default function Home() {
         </div>
       )}
 
+      {/* Bottom Navigation Bar - Mobile Only */}
+      <nav className={styles.bottomNav}>
+        <a href="/" className={`${styles.bottomNavItem} ${styles.bottomNavItemActive}`}>
+          <span className={styles.bottomNavIcon}>🏠</span>
+          <span className={styles.bottomNavLabel}>Home</span>
+        </a>
+        <a href="/ofertas" className={styles.bottomNavItem}>
+          <span className={styles.bottomNavIcon}>✈️</span>
+          <span className={styles.bottomNavLabel}>Ofertas</span>
+        </a>
+        <a href="/blog" className={styles.bottomNavItem}>
+          <span className={styles.bottomNavIcon}>📰</span>
+          <span className={styles.bottomNavLabel}>Dicas</span>
+        </a>
+        <a href="/club" className={`${styles.bottomNavItem} ${styles.bottomNavCta}`}>
+          <span className={styles.bottomNavIcon}>👤</span>
+          <span className={styles.bottomNavLabel}>Club Dija</span>
+        </a>
+      </nav>
+
       <ChatWidget />
       <Footer />
     </>

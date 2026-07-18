@@ -37,20 +37,6 @@ export default function RootLayout({
       <body>
         <PushRegister />
         {children}
-        <Script
-          id="travelpayouts-drive"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                  var script = document.createElement("script");
-                  script.async = 1;
-                  script.src = 'https://emrldtp.cc/NTUwODk3.js?t=550897';
-                  document.head.appendChild(script);
-              })();
-            `
-          }}
-        />
       </body>
     </html>
   );
