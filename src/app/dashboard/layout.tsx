@@ -50,10 +50,10 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   } else if (pathname === '/dashboard/perfil') {
     activeTitle = "Meu Perfil";
   } else if (pathname === '/dashboard/dicas') {
-    activeTitle = "Dicas & Notícias";
+    activeTitle = "Dicas & Notícias VIP";
   } else if (pathname === '/dashboard') {
     if (tab === 'offers') activeTitle = "Ofertas de Viagens VIP";
-    if (tab === 'tips') activeTitle = "Dicas & Notícias";
+    if (tab === 'tips') activeTitle = "Dicas & Notícias VIP";
   }
 
   return (
@@ -99,7 +99,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
             className={`${styles.menuItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
           >
             <BookOpen size={20} />
-            <span>Dicas & Notícias</span>
+            <span>Dicas & Notícias VIP</span>
           </Link>
           <Link 
             href="/dashboard/perfil" 
@@ -186,7 +186,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
           className={`${styles.bottomNavItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
         >
           <BookOpen size={20} />
-          <span>Dicas</span>
+          <span>Dicas & Notícias VIP</span>
         </Link>
         <Link 
           href="/dashboard/perfil" 

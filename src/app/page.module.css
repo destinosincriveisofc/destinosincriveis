@@ -557,61 +557,129 @@
 }
 
 /* ==================== CARROSSEL DE OFERTAS ==================== */
-.carouselWrapper {
+.offerCarouselWrapper {
   overflow: hidden;
   width: 100%;
   position: relative;
   border-radius: 16px;
+  padding: 16px 0 48px 0;
+  --offer-slide-width: 360px;
+  --offer-gap: 24px;
 }
 
-.carouselWrapper::before,
-.carouselWrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-.carouselWrapper::before {
-  left: 0;
-  background: linear-gradient(to right, #F0F4FF, transparent);
-}
-.carouselWrapper::after {
-  right: 0;
-  background: linear-gradient(to left, #F0F4FF, transparent);
-}
-
-.carouselTrack {
-  display: flex;
-  gap: 24px;
-  animation: carouselScroll 16s linear infinite;
-  width: max-content;
-}
-
-.carouselTrack:hover {
-  animation-play-state: paused;
-}
-
-.carouselSlide {
-  flex-shrink: 0;
-  width: 360px;
-}
-
-@keyframes carouselScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
+@media (max-width: 1024px) {
+  .offerCarouselWrapper {
+    --offer-slide-width: 330px;
+    --offer-gap: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .carouselSlide {
-    width: 280px;
+  .offerCarouselWrapper {
+    --offer-slide-width: 280px;
+    --offer-gap: 16px;
   }
+}
+
+.offerCarouselWrapper::before,
+.offerCarouselWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 48px;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.offerCarouselWrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #F0F4FF, transparent);
+}
+
+.offerCarouselWrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #F0F4FF, transparent);
+}
+
+.offerCarouselTrack {
+  display: flex;
+  gap: var(--offer-gap);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: max-content;
+}
+
+.offerCarouselSlide {
+  flex-shrink: 0;
+  width: var(--offer-slide-width);
+}
+
+/* Arrows */
+.offerCarouselArrowLeft,
+.offerCarouselArrowRight {
+  position: absolute;
+  top: calc(50% - 24px - 24px);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  color: var(--branco-puro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(21, 94, 239, 0.3);
+  transition: all 0.3s ease;
+}
+
+.offerCarouselArrowLeft {
+  left: 12px;
+}
+
+.offerCarouselArrowRight {
+  right: 12px;
+}
+
+.offerCarouselArrowLeft:hover,
+.offerCarouselArrowRight:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(21, 94, 239, 0.45);
+}
+
+.offerCarouselArrowLeft:active,
+.offerCarouselArrowRight:active {
+  transform: scale(0.95);
+}
+
+/* Indicators */
+.offerCarouselIndicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.offerCarouselIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #D0D5DD;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.offerCarouselIndicatorActive {
+  width: 24px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  box-shadow: 0 2px 6px rgba(21, 94, 239, 0.3);
 }
 
 /* ==================== CARROSSEL DO BLOG ==================== */

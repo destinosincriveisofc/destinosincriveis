@@ -175,7 +175,7 @@ export default function BlogPage() {
           {/* Page Intro */}
           <div className={styles.pageIntro}>
             <span className={styles.badge}>Inteligência de Viagem</span>
-            <h1 className={styles.title}>Dicas & Blog</h1>
+            <h1 className={styles.title}>Dicas & Notícias</h1>
             <p className={styles.description}>
               Descubra estratégias exclusivas de milhas, erros tarifários e guias completos para economizar de verdade nas suas viagens.
             </p>

@@ -44,6 +44,33 @@ const MOCK_ARTICLES: BlogArticle[] = [
     imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
     date: "2026-07-05",
     slug: "erro-tarifario-guia-completo"
+  },
+  {
+    id: "4",
+    title: "Guia definitivo: Como conseguir upgrade para executiva",
+    excerpt: "Aprenda as regras de leilão, uso de milhas da mesma aliança e estratégias no balcão de check-in para voar com máximo conforto.",
+    category: "Dicas",
+    imageUrl: "https://images.unsplash.com/photo-1483450388369-9ed95738483c?q=80&w=600&auto=format&fit=crop",
+    date: "2026-06-28",
+    slug: "como-conseguir-upgrade-executiva"
+  },
+  {
+    id: "5",
+    title: "Hotéis de Luxo com desconto de até 50% pelo Booking.com",
+    excerpt: "Descubra como o nível Genius do Booking e cupons de afiliado ocultos podem reduzir pela metade a sua diária em resorts.",
+    category: "Economize",
+    imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop",
+    date: "2026-06-20",
+    slug: "hoteis-luxo-desconto-booking"
+  },
+  {
+    id: "6",
+    title: "Europa no Inverno: 5 países imperdíveis e baratos",
+    excerpt: "Guia completo de viagem pelas cidades mais aconchegantes e baratas do continente europeu durante a temporada de neve.",
+    category: "Destinos",
+    imageUrl: "https://images.unsplash.com/photo-1489440543286-a69330151c0b?q=80&w=600&auto=format&fit=crop",
+    date: "2026-06-15",
+    slug: "europa-inverno-destinos-baratos"
   }
 ];
 
@@ -130,6 +157,7 @@ export default function Home() {
 
   const [blogArticles, setBlogArticles] = useState<BlogArticle[]>(MOCK_ARTICLES);
   const [currentBlogIndex, setCurrentBlogIndex] = useState<number>(0);
+  const [currentOfferIndex, setCurrentOfferIndex] = useState<number>(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
 
@@ -159,7 +187,14 @@ export default function Home() {
             date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
             slug: item.id || 'artigo'
           }));
-          setBlogArticles(mapped);
+          
+          let merged = [...mapped];
+          MOCK_ARTICLES.forEach(mock => {
+            if (merged.length < 6 && !merged.some(m => m.title === mock.title)) {
+              merged.push(mock);
+            }
+          });
+          setBlogArticles(merged);
         } else {
           setBlogArticles(MOCK_ARTICLES);
         }
@@ -173,6 +208,7 @@ export default function Home() {
 
   const itemsPerView = isDesktop ? 3 : (isTablet ? 2 : 1);
   const maxIndex = Math.max(0, blogArticles.length - itemsPerView);
+  const maxOfferIndex = Math.max(0, alertOffers.length - itemsPerView);
 
   useEffect(() => {
     if (blogArticles.length <= itemsPerView) return;
@@ -187,12 +223,33 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [blogArticles.length, itemsPerView, maxIndex]);
 
+  useEffect(() => {
+    if (alertOffers.length <= itemsPerView) return;
+    const interval = setInterval(() => {
+      setCurrentOfferIndex((prevIndex) => {
+        if (prevIndex >= maxOfferIndex) {
+          return 0;
+        }
+        return prevIndex + 1;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [alertOffers.length, itemsPerView, maxOfferIndex]);
+
   const handlePrevBlog = () => {
     setCurrentBlogIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
   };
 
   const handleNextBlog = () => {
     setCurrentBlogIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const handlePrevOffer = () => {
+    setCurrentOfferIndex((prev) => (prev === 0 ? maxOfferIndex : prev - 1));
+  };
+
+  const handleNextOffer = () => {
+    setCurrentOfferIndex((prev) => (prev >= maxOfferIndex ? 0 : prev + 1));
   };
 
   const [consultoriaNome, setConsultoriaNome] = useState('');
@@ -251,11 +308,11 @@ export default function Home() {
           return valB.localeCompare(valA);
         });
 
-        // 1. Get the first item of type 'voo' or 'hotel' (Trip.com)
-        let tripOffer = sortedFlights.find(o => o.type === 'voo' || o.type === 'hotel');
-        if (!tripOffer) {
-          tripOffer = {
-            id: "fallback-trip-default",
+        let publicOffersList = [...sortedFlights];
+        
+        const defaultFallbacks: FlightOffer[] = [
+          {
+            id: "fallback-trip-1",
             origin: "GRU",
             originName: "São Paulo",
             destination: "MIA",
@@ -271,14 +328,9 @@ export default function Home() {
             link_afiliado: "https://trip.tpx.gr/8G2qwgeK",
             type: "voo",
             imagem_url: "https://images.unsplash.com/photo-1535498730771-e735b998cd64?auto=format&fit=crop&w=800&q=80"
-          };
-        }
-
-        // 2. Get the first item of type 'passeio' (GetYourGuide)
-        let gygOffer = sortedFlights.find(o => o.type === 'passeio');
-        if (!gygOffer) {
-          gygOffer = {
-            id: "fallback-gyg-default",
+          },
+          {
+            id: "fallback-gyg-1",
             origin: "GRU",
             originName: "São Paulo",
             destination: "ROM",
@@ -294,10 +346,90 @@ export default function Home() {
             link_afiliado: "https://getyourguide.tpx.gr/ltuk5KJm",
             type: "passeio",
             imagem_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80"
-          };
-        }
+          },
+          {
+            id: "fallback-trip-2",
+            origin: "GIG",
+            originName: "Rio de Janeiro",
+            destination: "LIS",
+            destinationName: "Lisboa",
+            countryName: "Portugal",
+            countryCode: "PT",
+            price: 3200,
+            originalPrice: 6000,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "TAP Portugal",
+            link: "https://trip.tpx.gr/8G2qwgeK",
+            link_afiliado: "https://trip.tpx.gr/8G2qwgeK",
+            type: "voo",
+            imagem_url: "https://images.unsplash.com/photo-1509840144521-179f323a14ff?auto=format&fit=crop&w=800&q=80"
+          },
+          {
+            id: "fallback-gyg-2",
+            origin: "GRU",
+            originName: "São Paulo",
+            destination: "PAR",
+            destinationName: "Paris Tour",
+            countryName: "França",
+            countryCode: "FR",
+            price: 450,
+            originalPrice: 900,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "GetYourGuide",
+            link: "https://getyourguide.tpx.gr/ltuk5KJm",
+            link_afiliado: "https://getyourguide.tpx.gr/ltuk5KJm",
+            type: "passeio",
+            imagem_url: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
+          },
+          {
+            id: "fallback-trip-3",
+            origin: "GRU",
+            originName: "São Paulo",
+            destination: "EZE",
+            destinationName: "Buenos Aires",
+            countryName: "Argentina",
+            countryCode: "AR",
+            price: 1800,
+            originalPrice: 3500,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "LATAM Airlines",
+            link: "https://trip.tpx.gr/8G2qwgeK",
+            link_afiliado: "https://trip.tpx.gr/8G2qwgeK",
+            type: "voo",
+            imagem_url: "https://images.unsplash.com/photo-1589011352121-510c9586143d?auto=format&fit=crop&w=800&q=80"
+          },
+          {
+            id: "fallback-gyg-3",
+            origin: "BSB",
+            originName: "Brasília",
+            destination: "MCO",
+            destinationName: "Disney Tour",
+            countryName: "Estados Unidos",
+            countryCode: "US",
+            price: 600,
+            originalPrice: 1200,
+            departureDate: new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: "GetYourGuide",
+            link: "https://getyourguide.tpx.gr/ltuk5KJm",
+            link_afiliado: "https://getyourguide.tpx.gr/ltuk5KJm",
+            type: "passeio",
+            imagem_url: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80"
+          }
+        ];
 
-        setAlertOffers([tripOffer, gygOffer]);
+        while (publicOffersList.length < 6) {
+          const nextFallback = defaultFallbacks[publicOffersList.length % defaultFallbacks.length];
+          publicOffersList.push({
+            ...nextFallback,
+            id: `${nextFallback.id}-${Math.random().toString(36).substr(2, 4)}`
+          });
+        }
+        
+        setAlertOffers(publicOffersList.slice(0, 6));
       } catch (e) {
         console.error("Error loading offers:", e);
       } finally {
@@ -394,7 +526,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* CARROSSEL CSS PURO */}
+            {/* CARROSSEL MANUAL COM CONTROLES */}
             {loading ? (
               <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0' }}>
                 <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
@@ -404,14 +536,51 @@ export default function Home() {
                 Nenhuma oferta recente encontrada.
               </div>
             ) : (
-              <div className={styles.carouselWrapper}>
-                <div className={styles.carouselTrack}>
-                  {[...alertOffers, ...alertOffers].map((offer, i) => (
-                    <div key={i} className={styles.carouselSlide}>
+              <div className={styles.offerCarouselWrapper}>
+                <div 
+                  className={styles.offerCarouselTrack}
+                  style={{
+                    transform: `translateX(calc(-${currentOfferIndex} * (var(--offer-slide-width) + var(--offer-gap))))`
+                  }}
+                >
+                  {alertOffers.map((offer) => (
+                    <div key={offer.id} className={styles.offerCarouselSlide}>
                       <OfferCard offer={offer} />
                     </div>
                   ))}
                 </div>
+
+                {maxOfferIndex > 0 && (
+                  <>
+                    <button 
+                      onClick={handlePrevOffer}
+                      className={styles.offerCarouselArrowLeft}
+                      aria-label="Oferta anterior"
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button 
+                      onClick={handleNextOffer}
+                      className={styles.offerCarouselArrowRight}
+                      aria-label="Próxima oferta"
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+                  </>
+                )}
+
+                {maxOfferIndex > 0 && (
+                  <div className={styles.offerCarouselIndicators}>
+                    {Array.from({ length: maxOfferIndex + 1 }).map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentOfferIndex(index)}
+                        className={`${styles.offerCarouselIndicator} ${currentOfferIndex === index ? styles.offerCarouselIndicatorActive : ''}`}
+                        aria-label={`Ir para o slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -625,8 +794,8 @@ export default function Home() {
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
-                <span className={styles.badge}>Blog & Dicas</span>
-                <h2 className={styles.sectionTitle}>Últimas novidades do blog</h2>
+                <span className={styles.badge}>Dicas & Notícias</span>
+                <h2 className={styles.sectionTitle}>Jornal de Viagens: Dicas & Notícias</h2>
                 <p className={styles.sectionDesc}>
                   Fique atualizado com as melhores estratégias e rotas selecionadas por nossos analistas.
                 </p>

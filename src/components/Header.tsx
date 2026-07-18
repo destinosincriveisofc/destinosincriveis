@@ -44,7 +44,7 @@ export default function Header() {
             Club Dija
           </Link>
           <Link href="/blog" className={styles.navLink}>
-            Dicas & Blog
+            Dicas & Notícias
           </Link>
           <Link href="/consultoria" className={styles.navLink}>
             Consultoria VIP
@@ -110,7 +110,7 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileLink}
           >
-            Dicas & Blog
+            Dicas & Notícias
           </Link>
           <Link
             href="/consultoria"
