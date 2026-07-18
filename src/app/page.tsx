@@ -233,7 +233,7 @@ export default function Home() {
         <IaConciergeSection />
 
         {/* Carrossel de Ofertas */}
-        <section id="ofertas" ref={offersSectionRef} className={`${styles.sectionIce} fade-in-up`}>
+        <section id="ofertas" ref={offersSectionRef} className={styles.sectionIce}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
@@ -321,7 +321,7 @@ export default function Home() {
         <SocialProof />
 
         {/* Carrossel de Dicas & Notícias */}
-        <section ref={blogSectionRef} className={`${styles.sectionAlt} fade-in-up`}>
+        <section ref={blogSectionRef} className={styles.sectionAlt}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
@@ -405,7 +405,7 @@ export default function Home() {
                   <span>Comunidade privada de viajantes</span>
                 </div>
               </div>
-              <Link href="/checkout" className={`${styles.checkoutBtn} hover-lift`}>
+              <Link href="/club" className={`${styles.checkoutBtn} hover-lift`}>
                 Quero economizar
                 <ArrowRight size={18} />
               </Link>

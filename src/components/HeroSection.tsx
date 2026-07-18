@@ -33,7 +33,7 @@ export default function HeroSection() {
           </p>
 
           <div className={styles.ctaButtons}>
-            <Link href="/checkout" className={styles.buttonPrimary}>
+            <Link href="/club" className={styles.buttonPrimary}>
               Quero viajar pagando menos
               <ArrowRight size={18} />
             </Link>

@@ -361,7 +361,7 @@ function ArticleReader() {
             <p className={styles.ctaText}>
               No Club Dija você recebe alertas em tempo real de passagens com até 90% de desconto e erros tarifários direto no seu celular!
             </p>
-            <Link href="/checkout" className={styles.ctaButton}>
+            <Link href="/club" className={styles.ctaButton}>
               Entrar no Club Dija →
             </Link>
           </div>

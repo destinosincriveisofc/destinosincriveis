@@ -63,7 +63,7 @@ export default function Header() {
             Área de Membros
           </Link>
           <Link
-            href="/checkout"
+            href="/club"
             className={styles.ctaButton}
           >
             Fazer Parte do Club Dija
@@ -134,7 +134,7 @@ export default function Header() {
             Área de Membros
           </Link>
           <Link
-            href="/checkout"
+            href="/club"
             onClick={() => setIsMobileMenuOpen(false)}
             className={styles.mobileCta}
           >
