@@ -362,3 +362,31 @@
   color: #ffffff;
   font-weight: 700;
 }
+
+.likeBtn {
+  background: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.likeBtn:hover {
+  background-color: rgba(255, 193, 7, 0.08);
+  color: #FFC107;
+}
+
+.liked {
+  color: #E53935 !important;
+}
+
+.liked:hover {
+  background-color: rgba(229, 57, 53, 0.08);
+}

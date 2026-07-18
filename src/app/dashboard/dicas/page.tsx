@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { BookOpen, Clock, Calendar, X, ArrowRight, Sparkles, Info } from 'lucide-react';
+import { BookOpen, Clock, Calendar, X, ArrowRight, Sparkles, Info, Heart } from 'lucide-react';
 import styles from './page.module.css';
 
 interface ContentTip {
@@ -20,6 +20,67 @@ export default function DicasPage() {
   const [tips, setTips] = React.useState<ContentTip[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [selectedTip, setSelectedTip] = React.useState<ContentTip | null>(null);
+
+  const [likedTips, setLikedTips] = React.useState<Record<string, boolean>>({});
+  const [likesCounts, setLikesCounts] = React.useState<Record<string, number>>({});
+
+  React.useEffect(() => {
+    if (tips.length > 0) {
+      const counts: Record<string, number> = { ...likesCounts };
+      tips.forEach(tip => {
+        if (counts[tip.id] === undefined) {
+          let hash = 0;
+          for (let i = 0; i < tip.id.length; i++) {
+            hash = tip.id.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          counts[tip.id] = Math.abs(hash % 35) + 5;
+        }
+      });
+      setLikesCounts(counts);
+    }
+  }, [tips]);
+
+  const handleLike = async (e: React.MouseEvent, tipId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isCurrentlyLiked = likedTips[tipId] || false;
+    const currentCount = likesCounts[tipId] || 0;
+
+    setLikedTips(prev => ({ ...prev, [tipId]: !isCurrentlyLiked }));
+    setLikesCounts(prev => ({ ...prev, [tipId]: isCurrentlyLiked ? currentCount - 1 : currentCount + 1 }));
+
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const baseUrl = typeof window !== 'undefined' && 
+        (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+          ? 'http://localhost:5001'
+          : 'https://destinosincriveis.vps-kinghost.net';
+      
+      const response = await fetch(`${baseUrl}/api/posts/like`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ post_id: tipId })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setLikedTips(prev => ({ ...prev, [tipId]: data.liked }));
+          setLikesCounts(prev => ({ ...prev, [tipId]: data.likes_count }));
+        }
+      }
+    } catch (err) {
+      console.error("Error liking tip:", err);
+      setLikedTips(prev => ({ ...prev, [tipId]: isCurrentlyLiked }));
+      setLikesCounts(prev => ({ ...prev, [tipId]: currentCount }));
+    }
+  };
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
@@ -243,10 +304,20 @@ export default function DicasPage() {
                   {tip.descricao.replace(/[#*`>_\-]/g, '').substring(0, 140)}...
                 </p>
                 <div className={styles.cardFooter}>
-                  <span className={styles.dateText}>
-                    <Calendar size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                    {formatDate(tip.criado_em)}
-                  </span>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                    <span className={styles.dateText}>
+                      <Calendar size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
+                      {formatDate(tip.criado_em)}
+                    </span>
+                    <button 
+                      onClick={(e) => handleLike(e, tip.id)} 
+                      className={`${styles.likeBtn} ${likedTips[tip.id] ? styles.liked : ''}`}
+                      title="Curtir dica"
+                    >
+                      <Heart size={12} fill={likedTips[tip.id] ? "currentColor" : "none"} style={{ marginRight: '4px', display: 'inline', verticalAlign: 'middle' }} />
+                      <span>{likesCounts[tip.id] || 0}</span>
+                    </button>
+                  </div>
                   <span className={styles.readMoreLink}>
                     Ler Hack <ArrowRight size={14} />
                   </span>
