@@ -159,7 +159,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-15",
     returnDate: "2026-09-22",
     airline: "Hospedagem + Voo",
-    link: "https://pay.kiwify.com.br/HFIXsiL",
+    link: "https://pay.kiwify.com.br/xQfiHvB",
     type: "pacote"
   },
   {
@@ -175,7 +175,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-10",
     returnDate: "2026-10-20",
     airline: "Universal Studios Hotel",
-    link: "https://pay.kiwify.com.br/HFIXsiL",
+    link: "https://pay.kiwify.com.br/xQfiHvB",
     type: "hotel"
   }
 ];

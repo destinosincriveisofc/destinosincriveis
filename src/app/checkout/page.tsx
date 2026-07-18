@@ -8,7 +8,7 @@ import styles from './page.module.css';
 export default function CheckoutPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.location.href = "https://pay.kiwify.com.br/sNQ2uEH";
+      window.location.href = "https://pay.kiwify.com.br/xQfiHvB";
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
@@ -48,7 +48,7 @@ export default function CheckoutPage() {
         </p>
 
         <a 
-          href="https://pay.kiwify.com.br/sNQ2uEH" 
+          href="https://pay.kiwify.com.br/xQfiHvB" 
           className={styles.redirectButton}
         >
           Caso não seja redirecionado em instantes, clique aqui
