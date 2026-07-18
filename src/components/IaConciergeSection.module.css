@@ -1,6 +1,6 @@
 .section {
   padding: 100px 0;
-  background: radial-gradient(circle at 10% 20%, rgba(10, 22, 40, 0.03) 0%, rgba(10, 22, 40, 0) 100%), #FFFFFF;
+  background: radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.02) 0%, transparent 100%), #0A122C;
   overflow: hidden;
 }
 
@@ -30,9 +30,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(21, 94, 239, 0.06);
-  border: 1px solid rgba(21, 94, 239, 0.12);
-  color: #155EEF;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
   padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.75rem;
@@ -45,7 +45,7 @@
 .title {
   font-size: 2.25rem;
   font-weight: 800;
-  color: #0A1628;
+  color: #ffffff;
   line-height: 1.25;
 }
 
@@ -76,7 +76,7 @@
 
 .featIcon {
   font-size: 1.5rem;
-  background-color: rgba(21, 94, 239, 0.06);
+  background: rgba(56, 189, 248, 0.06);
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -88,7 +88,7 @@
 
 .featItem strong {
   font-size: 0.95rem;
-  color: #0A1628;
+  color: #ffffff;
   display: block;
   margin-bottom: 4px;
 }
@@ -99,7 +99,6 @@
   line-height: 1.4;
 }
 
-/* Smartphone Mockup */
 .mockupSide {
   display: flex;
   justify-content: center;
@@ -110,10 +109,10 @@
   width: 100%;
   max-width: 380px;
   height: 600px;
-  background-color: #0F172A; /* Dark theme phone screen background */
-  border: 10px solid #1E293B; /* outer border of phone */
+  background-color: #0F172A;
+  border: 10px solid #1E293B;
   border-radius: 40px;
-  box-shadow: 0 30px 60px rgba(10, 22, 40, 0.25);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -151,18 +150,18 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #155EEF;
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(21, 94, 239, 0.3);
+  box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
 }
 
 .botName {
   font-size: 0.85rem;
   font-weight: 750;
-  color: #FFFFFF;
+  color: #ffffff;
   display: block;
 }
 
@@ -220,7 +219,7 @@
   height: 24px;
   border-radius: 50%;
   background-color: #475569;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,15 +234,14 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #155EEF;
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-/* Simulated Typing Indicator */
 .typingIndicator {
   background-color: #1E293B;
   padding: 14px 20px;
@@ -270,13 +268,13 @@
 }
 
 .botMsgContent {
-  background-color: #155EEF; /* Royal Blue Background */
-  color: #FFFFFF; /* White text */
+  background: linear-gradient(135deg, #38BDF8 0%, #0284C7 100%);
+  color: #ffffff;
   padding: 16px;
   border-radius: 0 20px 20px 20px;
   font-size: 0.8rem;
   line-height: 1.4;
-  box-shadow: 0 8px 24px rgba(21, 94, 239, 0.15);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
 }
 
 .greetingText {
@@ -325,8 +323,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #FFC107;
-  color: #0A1628;
+  background: linear-gradient(135deg, #FFC107 0%, #F59E0B 100%);
+  color: #0A122C;
   border: none;
   display: flex;
   align-items: center;

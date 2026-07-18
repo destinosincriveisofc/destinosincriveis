@@ -1,9 +1,9 @@
 .card {
-  background-color: var(--branco-puro, #ffffff);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: 20px;
-  box-shadow: var(--shadow-soft, 0 8px 30px rgba(10, 22, 40, 0.04));
-  transition: var(--transition-smooth, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
-  border: 1px solid rgba(21, 94, 239, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(56, 189, 248, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -12,16 +12,16 @@
 }
 
 .card:hover {
-  box-shadow: var(--shadow-hover, 0 16px 40px rgba(10, 22, 40, 0.08));
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   transform: translateY(-6px);
-  border-color: rgba(21, 94, 239, 0.2);
+  border-color: rgba(56, 189, 248, 0.2);
 }
 
 .imageArea {
   position: relative;
   height: 200px;
   overflow: hidden;
-  background-color: var(--fundo-secundario, #f0f4ff);
+  background: rgba(10, 18, 44, 0.5);
 }
 
 .image {
@@ -61,9 +61,9 @@
   position: absolute;
   bottom: 16px;
   left: 16px;
-  background-color: rgba(255, 255, 255, 0.92);
+  background: rgba(10, 18, 44, 0.85);
   backdrop-filter: blur(8px);
-  color: var(--azul-profundo, #0A1628);
+  color: #e2e8f0;
   font-size: 0.7rem;
   font-weight: 700;
   padding: 5px 10px;
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 
@@ -86,7 +86,7 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background-color: rgba(10, 22, 40, 0.75);
+  background: rgba(10, 18, 44, 0.75);
   backdrop-filter: blur(4px);
   color: #ffffff;
   font-size: 0.62rem;
@@ -120,7 +120,7 @@
   align-items: center;
   gap: 6px;
   font-size: 0.7rem;
-  color: var(--cinza-suave, #8896A9);
+  color: #8896A9;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -129,13 +129,13 @@
 .destinationTitle {
   font-size: 1.1rem;
   font-weight: 800;
-  color: var(--azul-profundo, #0A1628);
+  color: #ffffff;
   line-height: 1.2;
 }
 
 .airlineText {
   font-size: 0.75rem;
-  color: #5b6e84;
+  color: #64748b;
   font-weight: 600;
   margin-top: 2px;
   display: flex;
@@ -150,7 +150,7 @@
   column-gap: 16px;
   row-gap: 4px;
   font-size: 0.7rem;
-  color: var(--cinza-suave, #8896A9);
+  color: #64748b;
   font-weight: 500;
 }
 
@@ -162,8 +162,8 @@
 
 .priceSection {
   padding: 12px 0;
-  border-top: 1px solid rgba(21, 94, 239, 0.08);
-  border-bottom: 1px solid rgba(21, 94, 239, 0.08);
+  border-top: 1px solid rgba(56, 189, 248, 0.08);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.08);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -171,7 +171,7 @@
 
 .priceComparison {
   font-size: 0.72rem;
-  color: var(--cinza-suave, #8896A9);
+  color: #64748b;
 }
 
 .oldPrice {
@@ -187,14 +187,14 @@
 
 .priceLabel {
   font-size: 0.75rem;
-  color: var(--cinza-suave, #8896A9);
+  color: #64748b;
   font-weight: 500;
 }
 
 .newPriceVal {
   font-size: 1.4rem;
   font-weight: 900;
-  color: var(--azul-bebe-principal, #155EEF);
+  color: #38BDF8;
   line-height: 1;
 }
 
@@ -216,7 +216,7 @@
   align-items: center;
   gap: 4px;
   font-size: 0.7rem;
-  color: var(--cinza-suave, #8896A9);
+  color: #64748b;
   background: none;
   border: none;
   cursor: pointer;
@@ -226,8 +226,8 @@
 }
 
 .socialBtn:hover {
-  background-color: rgba(21, 94, 239, 0.05);
-  color: var(--azul-bebe-principal, #155EEF);
+  background-color: rgba(56, 189, 248, 0.08);
+  color: #38BDF8;
 }
 
 .liked {
@@ -236,12 +236,12 @@
 
 .liked:hover {
   color: #dc2626;
-  background-color: rgba(220, 38, 38, 0.05);
+  background-color: rgba(220, 38, 38, 0.08);
 }
 
 .ctaButton {
-  background: linear-gradient(135deg, var(--amarelo-marca, #FFC107) 0%, var(--amarelo-escuro, #E0A800) 100%);
-  color: var(--azul-profundo, #0A1628);
+  background: linear-gradient(135deg, #FFC107 0%, #F59E0B 100%);
+  color: #0A122C;
   padding: 8px 16px;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -272,9 +272,9 @@
 }
 
 .badgeDark {
-  background-color: rgba(10, 22, 40, 0.85) !important;
+  background-color: rgba(10, 18, 44, 0.85) !important;
 }
 
 .badgeDefault {
-  background-color: rgba(10, 22, 40, 0.75) !important;
+  background-color: rgba(10, 18, 44, 0.75) !important;
 }

@@ -1,8 +1,8 @@
 .section {
   padding: 48px 0;
-  background-color: #ffffff;
-  border-top: 1px solid rgba(91, 164, 207, 0.1);
-  border-bottom: 1px solid rgba(91, 164, 207, 0.1);
+  background: rgba(10, 18, 44, 0.8);
+  border-top: 1px solid rgba(56, 189, 248, 0.06);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.06);
 }
 
 .container {
@@ -42,7 +42,7 @@
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background-color: #F0F4FF;
+  background: rgba(56, 189, 248, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,7 +58,7 @@
 .value {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #0A1628;
+  color: #ffffff;
   letter-spacing: -0.01em;
 }
 
