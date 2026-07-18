@@ -56,7 +56,7 @@
 }
 
 .logoHighlight {
-  color: #155EEF;
+  color: #38BDF8;
 }
 
 .brandDesc {
@@ -91,8 +91,8 @@
 }
 
 .socialLink:hover {
-  background-color: #155EEF;
-  color: #0A1628;
+  background-color: #38BDF8;
+  color: #0A122C;
   transform: translateY(-2px);
 }
 
@@ -101,7 +101,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #155EEF;
+  color: #38BDF8;
   margin-bottom: 8px;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .iconBlue {
-  color: #155EEF;
+  color: #38BDF8;
   flex-shrink: 0;
 }
 

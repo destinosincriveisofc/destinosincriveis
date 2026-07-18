@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
 import PushRegister from "@/components/PushRegister";
+import BottomNav from "@/components/BottomNav";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,7 +29,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${plusJakartaSans.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#155EEF" />
+        <meta name="theme-color" content="#0A122C" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Destinos Incríveis" />
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body>
         <PushRegister />
         {children}
+        <BottomNav />
       </body>
     </html>
   );

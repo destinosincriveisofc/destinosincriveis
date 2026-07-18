@@ -1,19 +1,19 @@
 :root {
   --fundo-principal: #FAFBFF;
   --fundo-secundario: #F0F4FF;
-  --azul-bebe-principal: #155EEF;
-  --azul-bebe-escuro: #1049C4;
-  --azul-profundo: #0A1628;
+  --azul-bebe-principal: #38BDF8;
+  --azul-bebe-escuro: #0284C7;
+  --azul-profundo: #0A122C;
   --amarelo-marca: #FFC107;
-  --amarelo-escuro: #E0A800;
+  --amarelo-escuro: #F59E0B;
   --cinza-suave: #8896A9;
   --branco-puro: #FFFFFF;
   --danger: #dc2626;
   --success: #16a34a;
 
-  --shadow-soft: 0 8px 30px rgba(10, 22, 40, 0.04);
-  --shadow-hover: 0 16px 40px rgba(10, 22, 40, 0.08);
-  --shadow-glow: 0 4px 20px rgba(21, 94, 239, 0.15);
+  --shadow-soft: 0 8px 30px rgba(10, 18, 44, 0.04);
+  --shadow-hover: 0 16px 40px rgba(10, 18, 44, 0.08);
+  --shadow-glow: 0 4px 20px rgba(56, 189, 248, 0.15);
 
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --radius-sm: 8px;
@@ -33,8 +33,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--fundo-principal);
-  color: var(--azul-profundo);
+  background-color: var(--azul-profundo);
+  color: #e2e8f0;
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,7 +43,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-plus-jakarta-sans), var(--font-inter), sans-serif;
-  color: var(--azul-profundo);
+  color: #ffffff;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -107,37 +107,37 @@ input, textarea, select {
 
 .pill-button-outline:hover {
   background-color: var(--azul-bebe-principal);
-  color: var(--branco-puro);
+  color: var(--azul-profundo);
   transform: translateY(-2px);
 }
 
 .card {
-  background-color: var(--branco-puro);
+  background: rgba(255, 255, 255, 0.04);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   transition: var(--transition-smooth);
-  border: 1px solid rgba(21, 94, 239, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.1);
   overflow: hidden;
 }
 
 .card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-4px);
-  border-color: rgba(21, 94, 239, 0.2);
+  border-color: rgba(56, 189, 248, 0.2);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-bebe-escuro) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.15);
 }
 
 @keyframes soft-blink {
@@ -166,6 +166,78 @@ input, textarea, select {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 4s ease-in-out infinite;
+}
+
+/* Bottom Navigation Bar (mobile only) */
+.bottomNav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px;
+  }
+
+  .bottomNav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #0A122C;
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+    padding: 8px 0;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .bottomNavItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    color: #8896A9;
+    font-size: 0.6rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    padding: 4px 8px;
+    border-radius: 8px;
+    min-width: 60px;
+  }
+
+  .bottomNavItem:hover,
+  .bottomNavItemActive {
+    color: #38BDF8;
+  }
+
+  .bottomNavIcon {
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  .bottomNavLabel {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .bottomNavCta {
+    background: linear-gradient(135deg, var(--amarelo-marca) 0%, var(--amarelo-escuro) 100%);
+    color: #0A122C;
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-weight: 800;
+  }
+
+  .bottomNavCta:hover {
+    filter: brightness(1.1);
+  }
 }
 
 @media (max-width: 768px) {
