@@ -9,6 +9,7 @@ export interface BlogArticle {
   excerpt: string;
   category: string;
   imageUrl: string;
+  imagem_url?: string;
   date: string;
   slug: string;
 }
@@ -139,13 +140,11 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
       {/* Image Container */}
       <div className={styles.imageArea}>
         <img
-          src={imgUrl}
+          src={article.imagem_url || article.imageUrl || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
           alt={displayTitle}
+          onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
+          style={{width:'100%', height:'200px', objectFit:'cover'}}
           className={styles.image}
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.src = getFallbackImage();
-          }}
         />
         {/* Category Overlay */}
         <div className={styles.categoryBadge}>
@@ -186,7 +185,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
               <span>Comentar</span>
             </Link>
           </div>
-          <Link href="/blog" className={styles.link}>
+          <Link href={`/blog/${article.id}`} className={styles.link}>
             <span>{compact ? "Ler notícia" : "Ler mais"}</span>
             <ArrowRight size={12} className={styles.linkIcon} />
           </Link>

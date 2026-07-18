@@ -247,7 +247,7 @@ export default function VIPOffersPage() {
                   </div>
 
                   <a 
-                    href={offer.link_afiliado} 
+                    href={offer.link_afiliado || (offer as any).url_afiliado || "#"} 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className={styles.bookingBtn}

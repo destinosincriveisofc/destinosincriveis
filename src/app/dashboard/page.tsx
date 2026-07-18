@@ -279,7 +279,7 @@ function DashboardPageContent() {
                         <span className={styles.airlineName}>{offer.companhia}</span>
                       </div>
                       <a 
-                        href={offer.link_afiliado} 
+                        href={offer.link_afiliado || (offer as any).url_afiliado || "#"} 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className={styles.buyBtn}

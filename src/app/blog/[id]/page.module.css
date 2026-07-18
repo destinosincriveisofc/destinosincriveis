@@ -1,0 +1,231 @@
+.main {
+  background-color: var(--fundo-principal);
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 2;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  color: var(--branco-puro);
+}
+
+.category {
+  display: inline-block;
+  background-color: var(--azul-bebe-principal);
+  color: var(--branco-puro);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 380px;
+  }
+  .title {
+    font-size: 1.85rem;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.bodyContainer {
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  padding: 0 24px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--azul-profundo);
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 24px;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  color: var(--azul-bebe-principal);
+}
+
+.articleContent {
+  background-color: var(--branco-puro);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(91, 164, 207, 0.1);
+  box-shadow: var(--shadow-soft);
+  color: var(--azul-profundo);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .articleContent {
+    padding: 24px;
+    font-size: 1rem;
+  }
+}
+
+.articleText {
+  white-space: pre-wrap;
+}
+
+.ctaSection {
+  margin-top: 48px;
+  background: linear-gradient(135deg, #155EEF 0%, #0040C1 100%);
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  color: var(--branco-puro);
+  box-shadow: var(--shadow-medium);
+}
+
+.ctaTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.ctaText {
+  font-size: 1rem;
+  opacity: 0.95;
+  margin-bottom: 24px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FFC107;
+  color: #1A202C;
+  font-weight: 800;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  background-color: #FFA000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+.relatedSection {
+  margin-top: 64px;
+}
+
+.relatedTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+  margin-bottom: 24px;
+  border-left: 4px solid var(--azul-bebe-principal);
+  padding-left: 12px;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .relatedGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  min-height: 60vh;
+  gap: 16px;
+  color: var(--azul-profundo);
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 80px 24px;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.errorTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--azul-profundo);
+}
+
+.errorText {
+  color: var(--cinza-suave);
+  margin-bottom: 16px;
+}

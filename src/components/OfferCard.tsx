@@ -121,13 +121,11 @@ export default function OfferCard({ offer }: OfferCardProps) {
       {/* Image & Badges */}
       <div className={styles.imageArea}>
         <img
-          src={imageUrl}
-          alt={offer.destinationName || "Destino"}
+          src={offer.imagem_url || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
+          alt={offer.destinationName || offer.destination || "Destino"}
+          onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
+          style={{width:'100%', height:'200px', objectFit:'cover'}}
           className={styles.image}
-          loading="lazy"
-          onError={(e) => {
-            e.currentTarget.src = getFallbackImage();
-          }}
         />
         <div className={styles.imageOverlay} />
         
@@ -184,9 +182,9 @@ export default function OfferCard({ offer }: OfferCardProps) {
           </div>
 
           <a
-            href={offer.link_afiliado || offer.link || "/ofertas"}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={offer.link_afiliado || (offer as any).url_afiliado || "https://www.destinosincriveisofc.com.br/#clube"}
+            target={offer.link_afiliado || (offer as any).url_afiliado ? "_blank" : undefined}
+            rel={offer.link_afiliado || (offer as any).url_afiliado ? "noopener noreferrer" : undefined}
             className={styles.ctaButton}
           >
             <span>Ver oferta</span>
