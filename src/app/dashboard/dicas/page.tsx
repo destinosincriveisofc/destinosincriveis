@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Clock, Calendar, X, ArrowRight, Sparkles, Info, Heart } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 interface ContentTip {
@@ -249,9 +250,12 @@ export default function DicasPage() {
     });
   };
 
+  const tipsGridRef = useScrollReveal<HTMLDivElement>();
+  const headerSectionRef = useScrollReveal<HTMLDivElement>();
+
   return (
     <div className={styles.container}>
-      <header className={styles.headerSection}>
+      <header className={`${styles.headerSection} fade-in-up`} ref={headerSectionRef}>
         <h1 className={styles.pageTitle}>Dicas & Hacks VIP 💎</h1>
         <p className={styles.pageSubtitle}>
           Aprenda a acumular milhas, obter upgrades de cabine e viajar como um milionário gastando pouco.
@@ -276,14 +280,14 @@ export default function DicasPage() {
           <p>Nenhuma dica VIP disponível para hoje. Volte mais tarde!</p>
         </div>
       ) : (
-        <div className={styles.tipsGrid}>
+        <div className={`${styles.tipsGrid} fade-in-up`} ref={tipsGridRef}>
           {tips.map((tip) => {
             const hasValidImage = tip.url && (tip.url.startsWith('http://') || tip.url.startsWith('https://') || tip.url.startsWith('/'));
             const tipImgUrl = hasValidImage ? tip.url : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
             return (
               <article 
                 key={tip.id} 
-                className={styles.tipCard}
+                className={`${styles.tipCard} fade-in-up hover-lift`}
                 onClick={() => router.push(`/blog/artigo?id=${tip.id}&vip=true`)}
               >
                 <div className={styles.imageWrapper}>

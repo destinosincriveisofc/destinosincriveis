@@ -11,6 +11,7 @@ import {
   Search,
   Send
 } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 function DashboardPageContent() {
@@ -73,6 +74,12 @@ function DashboardPageContent() {
     }
   };
 
+  const welcomeRef = useScrollReveal<HTMLDivElement>();
+  const whatsappRef = useScrollReveal<HTMLDivElement>();
+  const statsRef = useScrollReveal<HTMLDivElement>();
+  const searchRef = useScrollReveal<HTMLDivElement>();
+  const recentRef = useScrollReveal<HTMLDivElement>();
+
   return (
     <>
       {/* TAB 1: DASHBOARD */}
@@ -80,12 +87,12 @@ function DashboardPageContent() {
         <div className={styles.dashboardTab}>
 
           {/* BANNER DE AVISO DE OFERTAS */}
-          <div className={styles.alertBanner}>
+          <div className={`${styles.alertBanner} fade-in-up`} ref={welcomeRef}>
             <span className={styles.alertBannerIcon}>⚡</span>
             <p>Todas as ofertas são buscadas em tempo real. O site é atualizado 3x ao dia. Valores podem sofrer alterações sem aviso prévio.</p>
           </div>
 
-          <div className={styles.welcomeBanner}>
+          <div className={`${styles.welcomeBanner} fade-in-up hover-lift`}>
             <div className={styles.welcomeText}>
               <h2>Bem-vindo ao CLUB DIJA! 👑</h2>
               <p>Você agora tem acesso aos melhores alertas de passagens aéreas e hotéis do Brasil, com descontos de até 70%. Mantenha suas notificações do WhatsApp ativas!</p>
@@ -96,14 +103,14 @@ function DashboardPageContent() {
           </div>
 
           {/* GRUPOS DE WHATSAPP PREMIUM */}
-          <div className={styles.whatsappSection}>
+          <div className={`${styles.whatsappSection} fade-in-up`} ref={whatsappRef}>
             <h3 className={styles.whatsappTitle}>📱 Seus Grupos VIP no WhatsApp</h3>
             <div className={styles.whatsappGrid}>
               <a
                 href="https://chat.whatsapp.com/ofertas-vip"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.whatsappBtn} ${styles.whatsappBtnGold}`}
+                className={`${styles.whatsappBtn} ${styles.whatsappBtnGold} hover-lift`}
               >
                 <span className={styles.whatsappBtnEmoji}>💎</span>
                 <div>
@@ -116,7 +123,7 @@ function DashboardPageContent() {
                 href="https://chat.whatsapp.com/dicas-viagem"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.whatsappBtn} ${styles.whatsappBtnBlue}`}
+                className={`${styles.whatsappBtn} ${styles.whatsappBtnBlue} hover-lift`}
               >
                 <span className={styles.whatsappBtnEmoji}>💡</span>
                 <div>
@@ -129,7 +136,7 @@ function DashboardPageContent() {
                 href="https://chat.whatsapp.com/club-dija-comunidade"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.whatsappBtn} ${styles.whatsappBtnGreen}`}
+                className={`${styles.whatsappBtn} ${styles.whatsappBtnGreen} hover-lift`}
               >
                 <span className={styles.whatsappBtnEmoji}>👥</span>
                 <div>
@@ -141,8 +148,8 @@ function DashboardPageContent() {
             </div>
           </div>
 
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
+          <div className={`${styles.statsGrid} fade-in-up`} ref={statsRef}>
+            <div className={`${styles.statCard} hover-lift`}>
               <div className={styles.statIcon} style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' }}>
                 <Compass size={24} />
               </div>
@@ -151,7 +158,7 @@ function DashboardPageContent() {
                 <p>3 Grupos VIP Ativos</p>
               </div>
             </div>
-            <div className={styles.statCard}>
+            <div className={`${styles.statCard} hover-lift`}>
               <div className={styles.statIcon} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981' }}>
                 <TrendingUp size={24} />
               </div>
@@ -160,7 +167,7 @@ function DashboardPageContent() {
                 <p>Economize até R$ 1.500/viagem</p>
               </div>
             </div>
-            <div className={styles.statCard}>
+            <div className={`${styles.statCard} hover-lift`}>
               <div className={styles.statIcon} style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }}>
                 <CheckCircle size={24} />
               </div>
@@ -172,7 +179,7 @@ function DashboardPageContent() {
           </div>
 
           {/* FORMULÁRIO PESQUISA VIP */}
-          <div className={styles.searchRequestBox}>
+          <div className={`${styles.searchRequestBox} fade-in-up hover-lift`} ref={searchRef}>
             <div className={styles.searchRequestHeader}>
               <Search size={20} />
               <h3>🔍 Pesquisa VIP de Destinos</h3>
@@ -211,8 +218,8 @@ function DashboardPageContent() {
             {searchMsg && <p className={styles.searchMsg}>{searchMsg}</p>}
           </div>
 
-          <div className={styles.sectionRow}>
-            <div className={styles.recentOffersContainer}>
+          <div className={styles.sectionRow} ref={recentRef}>
+            <div className={`${styles.recentOffersContainer} fade-in-up`}>
               <h2>Últimas Ofertas Alertas</h2>
               {loadingOffers ? (
                 <p>Carregando ofertas...</p>
@@ -221,7 +228,7 @@ function DashboardPageContent() {
                   {offers.slice(0, 3).map((offer, idx) => {
                     const destImgKey = (offer.destino || 'travel').toLowerCase().replace(/[^a-z]/g, '');
                     return (
-                      <div key={idx} className={styles.offerItem}>
+                      <div key={idx} className={`${styles.offerItem} hover-lift`}>
                         <div className={styles.offerBadge}>{offer.desconto_percent}% OFF</div>
                         <div className={styles.offerDetails}>
                           <h4>{offer.origem} ➡️ {offer.destino}</h4>
@@ -258,7 +265,7 @@ function DashboardPageContent() {
                    ? offer.imagem_url 
                    : "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop";
                  return (
-                   <div key={index} className={styles.offerCard}>
+                   <div key={index} className={`${styles.offerCard} hover-lift`}>
                      <div className={styles.offerImageWrapper}>
                        <img 
                          src={imgUrl} 
@@ -299,19 +306,19 @@ function DashboardPageContent() {
       {activeTab === 'tips' && (
         <div className={styles.tipsTab}>
           <div className={styles.tipsGrid}>
-            <div className={styles.tipCard}>
+            <div className={`${styles.tipCard} hover-lift`}>
               <div className={styles.tipBadge}>Dica de Ouro</div>
               <h3>Como acumular milhas 5x mais rápido</h3>
               <p>Aprenda a mapear compras do dia a dia em parceiros como Livelo e Esfera para maximizar o acúmulo de milhas aéreas.</p>
               <a href="#" className={styles.readTipLink}>Ler Guia Completo ➡️</a>
             </div>
-            <div className={styles.tipCard}>
+            <div className={`${styles.tipCard} hover-lift`}>
               <div className={styles.tipBadge}>Roteiro VIP</div>
               <h3>Santiago do Chile: Guia Completo de 5 dias</h3>
               <p>O melhor roteiro mapeando vinícolas, passeios na Cordilheira e restaurantes imperdíveis em Santiago.</p>
               <a href="#" className={styles.readTipLink}>Ler Guia Completo ➡️</a>
             </div>
-            <div className={styles.tipCard}>
+            <div className={`${styles.tipCard} hover-lift`}>
               <div className={styles.tipBadge}>Hacks de Viagem</div>
               <h3>Como evitar taxas abusivas de bagagem</h3>
               <p>Macetes práticos para otimizar a mala de mão e quais companhias são mais flexíveis na fiscalização.</p>

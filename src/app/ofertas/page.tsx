@@ -6,8 +6,11 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
+import TravelGlobe from '@/components/TravelGlobe';
+import RadarScanner from '@/components/RadarScanner';
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 // Client-safe flight fetcher
@@ -93,6 +96,11 @@ export default function OfertasPage() {
   const [filteredOffers, setFilteredOffers] = useState<FlightOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const introRef = useScrollReveal<HTMLDivElement>();
+  const bannerRef = useScrollReveal<HTMLDivElement>();
+  const filtersRef = useScrollReveal<HTMLDivElement>();
+  const globeSectionRef = useScrollReveal<HTMLDivElement>();
+
   // Filters
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState<string>('todos');
@@ -146,7 +154,7 @@ export default function OfertasPage() {
       <main className={styles.main}>
         <div className={styles.container}>
           {/* Page Intro */}
-          <div className={styles.pageIntro}>
+          <div className={`${styles.pageIntro} fade-in-up`} ref={introRef}>
             <span className={styles.badge}>Promoções em Tempo Real</span>
             <h1 className={styles.title}>Central de Ofertas</h1>
             <p className={styles.description}>
@@ -154,8 +162,21 @@ export default function OfertasPage() {
             </p>
           </div>
 
+          {/* Globo 3D + Radar Section */}
+          <div className={`fade-in-up`} ref={globeSectionRef} style={{
+            display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center',
+            justifyContent: 'center', marginBottom: 40, padding: '24px 0'
+          }}>
+            <TravelGlobe width={480} height={350} offers={filteredOffers.map(o => ({
+              destination: o.destination,
+              origin: o.origin,
+              price: o.price
+            }))} />
+            <RadarScanner size={180} active={true} offersCount={filteredOffers.length} />
+          </div>
+
           {/* Warning Banner */}
-          <div className={styles.bannerContainer}>
+          <div className={`${styles.bannerContainer} fade-in-up hover-lift`} ref={bannerRef}>
             <p className={styles.bannerText}>
               📢 <strong>Aviso Importante:</strong> Nossas pesquisas são realizadas em tempo real em horários específicos do dia. Os valores e vagas podem sofrer alterações rápidas pelas companhias e operadoras. Quer garantir os alertas em primeira mão? Entre para o Club Dija!
             </p>
@@ -165,7 +186,7 @@ export default function OfertasPage() {
           </div>
 
           {/* Filtering Section */}
-          <div className={styles.filtersContainer}>
+          <div className={`${styles.filtersContainer} fade-in-up`} ref={filtersRef}>
             {/* Search Input */}
             <div className={styles.searchWrapper}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
@@ -242,9 +263,11 @@ export default function OfertasPage() {
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className={styles.grid3}>
+            <div className={`${styles.grid3} fade-in-up`}>
               {Array.isArray(filteredOffers) ? filteredOffers.map((offer) => (
-                <OfferCard key={offer.id || String(Math.random())} offer={offer} />
+                <div key={offer.id || String(Math.random())} className="hover-lift">
+                  <OfferCard offer={offer} />
+                </div>
               )) : null}
             </div>
           )}
