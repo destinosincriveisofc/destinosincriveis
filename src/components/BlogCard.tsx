@@ -132,9 +132,9 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
 
 
   return (
-    <article className={styles.card}>
-      {/* Image Container */}
-      <Link href={`/blog/artigo?id=${article.id}`}>
+    <Link href={`/blog/artigo?id=${article.id}`} className={styles.cardLink}>
+      <article className={styles.card}>
+        {/* Image Container */}
         <div className={styles.imageArea}>
           <img
             src={imgToRender}
@@ -148,49 +148,47 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
             {displayTag}
           </div>
         </div>
-      </Link>
 
-      {/* Content */}
-      <div className={styles.content}>
-        <div className={styles.date}>
-          <Calendar size={12} />
-          <span>{formatDateStr(article.date)}</span>
-        </div>
+        {/* Content */}
+        <div className={styles.content}>
+          <div className={styles.date}>
+            <Calendar size={12} />
+            <span>{formatDateStr(article.date)}</span>
+          </div>
 
-        <Link href={`/blog/artigo?id=${article.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
           <h3 className={styles.title}>
             {displayTitle}
           </h3>
-        </Link>
 
-        {!compact && (
-          <p className={styles.excerpt}>
-            {displayExcerpt}
-          </p>
-        )}
+          {!compact && (
+            <p className={styles.excerpt}>
+              {displayExcerpt}
+            </p>
+          )}
 
-        {/* Social Feed Actions Row */}
-        <div className={styles.socialActions}>
-          <div className={styles.actionGroup}>
-            <button 
-              onClick={handleLike} 
-              className={`${styles.actionBtn} ${liked ? styles.liked : ''}`}
-              title="Curtir post"
-            >
-              <Heart size={14} fill={liked ? "currentColor" : "none"} />
-              <span>{likesCount} {likesCount === 1 ? 'curtida' : 'curtidas'}</span>
-            </button>
-            <Link href="/blog#comments" className={styles.actionBtn}>
-              <MessageCircle size={14} />
-              <span>Comentar</span>
-            </Link>
+          {/* Social Feed Actions Row */}
+          <div className={styles.socialActions}>
+            <div className={styles.actionGroup}>
+              <button 
+                onClick={handleLike} 
+                className={`${styles.actionBtn} ${liked ? styles.liked : ''}`}
+                title="Curtir post"
+              >
+                <Heart size={14} fill={liked ? "currentColor" : "none"} />
+                <span>{likesCount} {likesCount === 1 ? 'curtida' : 'curtidas'}</span>
+              </button>
+              <span className={styles.actionBtn}>
+                <MessageCircle size={14} />
+                <span>Comentar</span>
+              </span>
+            </div>
+            <span className={styles.link}>
+              <span>{compact ? "Ler notícia" : "Ler mais"}</span>
+              <ArrowRight size={12} className={styles.linkIcon} />
+            </span>
           </div>
-          <Link href={`/blog/artigo?id=${article.id}`} className={styles.link}>
-            <span>{compact ? "Ler notícia" : "Ler mais"}</span>
-            <ArrowRight size={12} className={styles.linkIcon} />
-          </Link>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }

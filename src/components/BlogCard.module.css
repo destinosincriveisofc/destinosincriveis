@@ -1,3 +1,9 @@
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .card {
   background-color: #ffffff;
   border-radius: 16px;
@@ -10,7 +16,7 @@
   height: 100%;
 }
 
-.card:hover {
+.cardLink:hover .card {
   box-shadow: 0 10px 25px rgba(10, 22, 40, 0.08);
   transform: translateY(-2px);
 }
@@ -30,7 +36,7 @@
   transition: transform 0.5s ease;
 }
 
-.card:hover .image {
+.cardLink:hover .image {
   transform: scale(1.03);
 }
 
@@ -80,7 +86,7 @@
   height: 2.7em; /* Fallback for clamp */
 }
 
-.card:hover .title {
+.cardLink:hover .title {
   color: #1049C4;
 }
 
@@ -147,7 +153,7 @@
   transition: color 0.2s ease;
 }
 
-.link:hover {
+.cardLink:hover .link {
   color: #0A1628;
 }
 
@@ -155,6 +161,6 @@
   transition: transform 0.2s ease;
 }
 
-.link:hover .linkIcon {
+.cardLink:hover .linkIcon {
   transform: translateX(2px);
 }
