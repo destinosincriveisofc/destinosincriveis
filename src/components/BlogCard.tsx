@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Calendar, ArrowRight, Heart, MessageCircle } from 'lucide-react';
+import { DESTINATION_IMAGES, DEFAULT_FALLBACK } from '@/lib/visual-assets';
 import styles from './BlogCard.module.css';
 
 export interface BlogArticle {
@@ -44,10 +45,12 @@ const formatDateStr = (dateStr: string) => {
 };
 
 export default function BlogCard({ article, compact = false }: BlogCardProps) {
-  const hasValidImage = article.imageUrl && (article.imageUrl.startsWith('http://') || article.imageUrl.startsWith('https://') || article.imageUrl.startsWith('/'));
-  const imgUrl = hasValidImage 
-    ? article.imageUrl 
-    : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
+  const item = {
+    ...article,
+    destino: (article as any).destino || '',
+    imagem_url: article.imagem_url || article.imageUrl || (article as any).url
+  };
+  const imgToRender = (item.imagem_url && item.imagem_url.startsWith('http')) ? item.imagem_url : ((DESTINATION_IMAGES[item.destino]?.url) || DEFAULT_FALLBACK);
 
   // State for likes
   const [liked, setLiked] = useState(false);
@@ -126,15 +129,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
     }
   }
 
-  const getFallbackImage = () => {
-    const isBeach = (displayTitle && displayTitle.toLowerCase().includes('praia')) || 
-                    (displayTag && displayTag.toLowerCase().includes('praia')) ||
-                    (displayExcerpt && displayExcerpt.toLowerCase().includes('praia'));
-    if (isBeach) {
-      return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80";
-    }
-    return "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80";
-  };
+
 
   return (
     <article className={styles.card}>
@@ -142,10 +137,10 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
       <Link href={`/blog/artigo?id=${article.id}`}>
         <div className={styles.imageArea}>
           <img
-            src={article.imagem_url || article.imageUrl || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
+            src={imgToRender}
             alt={displayTitle}
             loading="lazy"
-            onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
+            onError={(e) => { e.currentTarget.src = DEFAULT_FALLBACK }}
             className={styles.image}
           />
           {/* Category Overlay */}

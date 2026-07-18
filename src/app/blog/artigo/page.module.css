@@ -125,6 +125,15 @@
   white-space: pre-wrap;
 }
 
+.paragraph {
+  margin-bottom: 1.6rem;
+  line-height: 1.8;
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
 .ctaSection {
   margin-top: 48px;
   background: linear-gradient(135deg, #155EEF 0%, #0040C1 100%);

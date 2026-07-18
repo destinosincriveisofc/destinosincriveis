@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, PlaneTakeoff, ArrowRight, Heart, MessageCircle, MapPin, Tag } from 'lucide-react';
 import AlertBadge from './AlertBadge';
 import { FlightOffer } from '@/lib/travelpayouts';
-import { getDestinationImage, getSocialMetrics, formatPrice, getCountryFlagUrl, getBrandGradient, getCardBadgeVariant } from '@/lib/visual-assets';
+import { getDestinationImage, getSocialMetrics, formatPrice, getCountryFlagUrl, getBrandGradient, getCardBadgeVariant, DESTINATION_IMAGES, DEFAULT_FALLBACK } from '@/lib/visual-assets';
 import styles from './OfferCard.module.css';
 
 interface OfferCardProps {
@@ -10,7 +10,12 @@ interface OfferCardProps {
 }
 
 export default function OfferCard({ offer }: OfferCardProps) {
-  const imageUrl = getDestinationImage(offer.destination, offer.destinationName, offer.imagem_url);
+  const item = {
+    ...offer,
+    destino: (offer.destination || (offer as any).destino || '').toUpperCase().trim(),
+    imagem_url: offer.imagem_url
+  };
+  const imgToRender = (item.imagem_url && item.imagem_url.startsWith('http')) ? item.imagem_url : ((DESTINATION_IMAGES[item.destino]?.url) || DEFAULT_FALLBACK);
   const { likes: baseLikes, comments: baseComments } = getSocialMetrics(offer.id);
 
   const [liked, setLiked] = useState(false);
@@ -97,7 +102,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
     <div className={styles.card}>
       <div className={styles.imageArea}>
         <img
-          src={imgError ? "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80" : imageUrl}
+          src={imgError ? DEFAULT_FALLBACK : imgToRender}
           alt={offer.destinationName || offer.destination || "Destino"}
           onError={handleImgError}
           loading="lazy"

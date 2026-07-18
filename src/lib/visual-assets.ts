@@ -4,7 +4,9 @@ export interface DestinationImage {
   keywords: string[];
 }
 
-const DESTINATION_IMAGES: Record<string, DestinationImage> = {
+export const DEFAULT_FALLBACK = "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+
+export const DESTINATION_IMAGES: Record<string, DestinationImage> = {
   GRU:      { url: "https://images.unsplash.com/photo-1579551895770-05a2cc20b7a9?q=80&w=800&auto=format&fit=crop", credit: "São Paulo", keywords: ["sp", "sao paulo", "paulista"] },
   TÓQUIO:   { url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop", credit: "Tokyo", keywords: ["toquio", "tokyo", "japao", "japan"] },
   TOKYO:    { url: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=800&auto=format&fit=crop", credit: "Tokyo", keywords: ["toquio", "tokyo", "japao", "japan"] },

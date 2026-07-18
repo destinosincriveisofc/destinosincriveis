@@ -219,6 +219,7 @@ function ArticleReader() {
               id: item.id || String(Math.random()),
               title: item.titulo || '',
               excerpt: item.descricao || '',
+              content: item.conteudo || item.descricao || '',
               category: item.categoria === 'blog_publico' ? 'Viagem' : (item.categoria || 'Viagem'),
               imageUrl: item.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop',
               date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
@@ -295,7 +296,7 @@ function ArticleReader() {
   let displayBody = post.conteudo || post.descricao || "";
   let displayTag = post.categoria === 'blog_publico' ? 'Viagem' : (post.categoria || 'Viagem');
 
-  const parseSource = post.descricao || post.conteudo || "";
+  const parseSource = post.descricao || "";
   if (parseSource.toUpperCase().includes("TEXTO:") || parseSource.toUpperCase().includes("TÍTULO:") || parseSource.toUpperCase().includes("TITULO:")) {
     const titleMatch = parseSource.match(/T[ÍI]TULO:\s*(.*?)(?=\n|$|TEXTO:|TAG:)/i);
     const textMatch = parseSource.match(/TEXTO:\s*(.*?)(?=\n|$|T[ÍI]TULO:|TAG:)/i);
@@ -304,7 +305,7 @@ function ArticleReader() {
     if (titleMatch && titleMatch[1]) {
       displayTitle = titleMatch[1].trim();
     }
-    if (textMatch && textMatch[1]) {
+    if (!post.conteudo && textMatch && textMatch[1]) {
       displayBody = textMatch[1].trim();
     }
     if (tagMatch && tagMatch[1]) {
@@ -348,7 +349,11 @@ function ArticleReader() {
         </Link>
 
         <article className={styles.articleContent}>
-          <div className={styles.articleText}>{cleanBody}</div>
+          <div className={styles.articleText}>
+            {cleanBody.split('\n\n').filter(p => p.trim() !== "").map((para, i) => (
+              <p key={i} className={styles.paragraph}>{para}</p>
+            ))}
+          </div>
 
           {/* CTA Section */}
           <div className={styles.ctaSection}>
