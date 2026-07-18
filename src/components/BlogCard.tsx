@@ -138,19 +138,21 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
   return (
     <article className={styles.card}>
       {/* Image Container */}
-      <div className={styles.imageArea}>
-        <img
-          src={article.imagem_url || article.imageUrl || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
-          alt={displayTitle}
-          onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
-          style={{width:'100%', height:'200px', objectFit:'cover'}}
-          className={styles.image}
-        />
-        {/* Category Overlay */}
-        <div className={styles.categoryBadge}>
-          {displayTag}
+      <Link href={`/blog/artigo?id=${article.id}`}>
+        <div className={styles.imageArea}>
+          <img
+            src={article.imagem_url || article.imageUrl || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
+            alt={displayTitle}
+            onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
+            style={{width:'100%', height:'200px', objectFit:'cover'}}
+            className={styles.image}
+          />
+          {/* Category Overlay */}
+          <div className={styles.categoryBadge}>
+            {displayTag}
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className={styles.content}>
@@ -159,9 +161,11 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
           <span>{formatDateStr(article.date)}</span>
         </div>
 
-        <h3 className={styles.title}>
-          {displayTitle}
-        </h3>
+        <Link href={`/blog/artigo?id=${article.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <h3 className={styles.title}>
+            {displayTitle}
+          </h3>
+        </Link>
 
         {!compact && (
           <p className={styles.excerpt}>
