@@ -3,10 +3,13 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { User, Camera, Lock, Save, CheckCircle, AlertCircle } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const API = 'https://destinosincriveis.vps-kinghost.net';
 
 function PerfilContent() {
+  const profileRef = useScrollReveal<HTMLDivElement>();
+  const formRef = useScrollReveal<HTMLFormElement>();
   const router = useRouter();
   const [profile, setProfile] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
@@ -109,11 +112,11 @@ function PerfilContent() {
 
   return (
     <div style={{ maxWidth: 640, margin: '0 auto' }}>
-      <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: 8 }}>👤 Meu Perfil</h1>
-      <p style={{ color: '#94a3b8', marginBottom: 32, fontSize: '0.95rem' }}>Gerencie suas informações e segurança da conta.</p>
+      <h1 className="fade-in-up" style={{ fontSize: '1.8rem', fontWeight: 800, color: '#fff', marginBottom: 8 }}>👤 Meu Perfil</h1>
+      <p className="fade-in-up" style={{ color: '#94a3b8', marginBottom: 32, fontSize: '0.95rem' }}>Gerencie suas informações e segurança da conta.</p>
 
       {/* Avatar */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 36 }}>
+      <div className="fade-in-up" style={{ display: 'flex', justifyContent: 'center', marginBottom: 36 }}>
         <div style={{ position: 'relative', width: 110, height: 110 }}>
           {profile?.avatar_url ? (
             <img
@@ -149,7 +152,7 @@ function PerfilContent() {
       </div>
 
       {/* Account Info */}
-      <div style={{
+      <div ref={profileRef} className="fade-in-up hover-lift" style={{
         background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
         borderRadius: 14, padding: 20, marginBottom: 24, display: 'grid',
         gridTemplateColumns: '1fr 1fr', gap: '12px 24px'
@@ -184,9 +187,9 @@ function PerfilContent() {
       )}
 
       {/* Edit Form */}
-      <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <form ref={formRef} className="fade-in-up" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         {/* Nome */}
-        <div style={{
+        <div className="hover-lift" style={{
           background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 14, padding: 24
         }}>

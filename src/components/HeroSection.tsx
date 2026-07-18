@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Plane, ShieldCheck, Star, TrendingUp, Bell, Zap } from 'lucide-react';
+import TravelGlobe from './TravelGlobe';
 import styles from './HeroSection.module.css';
 
 export default function HeroSection() {
@@ -59,39 +60,7 @@ export default function HeroSection() {
         </div>
 
         <div className={styles.imageColumn}>
-          <div className={styles.imageWrapper}>
-            <img
-              src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format&fit=crop"
-              alt="Destinos Incríveis pelo mundo"
-              className={styles.image}
-              loading="lazy"
-            />
-            <div className={styles.imageOverlay} />
-            <div className={styles.imageBadge}>
-              <TrendingUp size={16} />
-              <span>Preços monitorados em tempo real</span>
-            </div>
-
-            <div className={styles.floatingAlert}>
-              <div className={styles.alertIcon}>
-                <Bell size={18} fill="currentColor" />
-              </div>
-              <div className={styles.alertText}>
-                <span className={styles.alertLabel}>ALERTA ATIVO</span>
-                <span className={styles.alertTitle}>GRU → Paris: R$ 3.850 (Ida e Volta)</span>
-                <span className={styles.alertTime}>Atualizado há 3 min</span>
-              </div>
-            </div>
-
-            <div className={styles.floatingCard1}>
-              <Plane size={14} />
-              <span>Economia de até 75%</span>
-            </div>
-            <div className={styles.floatingCard2}>
-              <Star size={14} fill="currentColor" />
-              <span>4.9/5 avaliações</span>
-            </div>
-          </div>
+          <TravelGlobe width={500} height={400} />
         </div>
       </div>
     </section>

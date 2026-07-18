@@ -18,6 +18,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { getDestinationImage, formatPrice, getSocialMetrics, getBrandGradient } from '@/lib/visual-assets';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 export default function VIPOffersPage() {
@@ -111,9 +112,13 @@ export default function VIPOffersPage() {
 
   const filteredOffers = getFilteredOffers();
 
+  const offersRef = useScrollReveal<HTMLDivElement>();
+  const headerRef = useScrollReveal<HTMLDivElement>();
+  const filterRef = useScrollReveal<HTMLDivElement>();
+
   return (
     <div className={styles.container}>
-      <div className={styles.headerSection}>
+      <div className={`${styles.headerSection} fade-in-up`} ref={headerRef}>
         <div className={styles.titleWrapper}>
           <h2>Vitrine Secreta VIP</h2>
           <p>Ofertas exclusivas de hotéis de luxo, bugs tarifários e pacotes garimpados pela nossa IA mineradora.</p>
@@ -124,7 +129,7 @@ export default function VIPOffersPage() {
         </div>
       </div>
 
-      <div className={styles.filterBar}>
+      <div className={`${styles.filterBar} fade-in-up`} ref={filterRef}>
         <button
           onClick={() => setActiveFilter('all')}
           className={`${styles.filterBtn} ${activeFilter === 'all' ? styles.active : ''}`}
@@ -186,7 +191,7 @@ export default function VIPOffersPage() {
             const isLiked = likedOffers.has(offer.id);
 
             return (
-              <div key={offer.id} className={styles.offerCard}>
+              <div key={offer.id} className={`${styles.offerCard} fade-in-up hover-lift`}>
                 <div className={styles.imageContainer}>
                   <img
                     src={imgUrl}
