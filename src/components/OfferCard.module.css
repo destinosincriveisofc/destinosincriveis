@@ -1,0 +1,280 @@
+.card {
+  background-color: var(--branco-puro, #ffffff);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft, 0 8px 30px rgba(10, 22, 40, 0.04));
+  transition: var(--transition-smooth, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  border: 1px solid rgba(21, 94, 239, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover, 0 16px 40px rgba(10, 22, 40, 0.08));
+  transform: translateY(-6px);
+  border-color: rgba(21, 94, 239, 0.2);
+}
+
+.imageArea {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--fundo-secundario, #f0f4ff);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.08);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.imageOverlayTop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.badgeList {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+}
+
+.countryBadge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: var(--azul-profundo, #0A1628);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(10, 22, 40, 0.08);
+  z-index: 2;
+}
+
+.flagIcon {
+  width: 18px;
+  height: 13px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.typeBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(10, 22, 40, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.content {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.routeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.originText {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: var(--cinza-suave, #8896A9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.destinationTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--azul-profundo, #0A1628);
+  line-height: 1.2;
+}
+
+.airlineText {
+  font-size: 0.75rem;
+  color: #5b6e84;
+  font-weight: 600;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 4px;
+  font-size: 0.7rem;
+  color: var(--cinza-suave, #8896A9);
+  font-weight: 500;
+}
+
+.dateItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.priceSection {
+  padding: 12px 0;
+  border-top: 1px solid rgba(21, 94, 239, 0.08);
+  border-bottom: 1px solid rgba(21, 94, 239, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.priceComparison {
+  font-size: 0.72rem;
+  color: var(--cinza-suave, #8896A9);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.currentPriceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.priceLabel {
+  font-size: 0.75rem;
+  color: var(--cinza-suave, #8896A9);
+  font-weight: 500;
+}
+
+.newPriceVal {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--azul-bebe-principal, #155EEF);
+  line-height: 1;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.socialActions {
+  display: flex;
+  gap: 12px;
+}
+
+.socialBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: var(--cinza-suave, #8896A9);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.socialBtn:hover {
+  background-color: rgba(21, 94, 239, 0.05);
+  color: var(--azul-bebe-principal, #155EEF);
+}
+
+.liked {
+  color: #dc2626;
+}
+
+.liked:hover {
+  color: #dc2626;
+  background-color: rgba(220, 38, 38, 0.05);
+}
+
+.ctaButton {
+  background: linear-gradient(135deg, var(--amarelo-marca, #FFC107) 0%, var(--amarelo-escuro, #E0A800) 100%);
+  color: var(--azul-profundo, #0A1628);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 193, 7, 0.3);
+}
+
+.badgeRed {
+  background-color: #dc2626 !important;
+}
+
+.badgeBlue {
+  background-color: #2563eb !important;
+}
+
+.badgeGreen {
+  background-color: #16a34a !important;
+}
+
+.badgeDark {
+  background-color: rgba(10, 22, 40, 0.85) !important;
+}
+
+.badgeDefault {
+  background-color: rgba(10, 22, 40, 0.75) !important;
+}

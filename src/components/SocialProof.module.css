@@ -1,0 +1,269 @@
+.section {
+  padding: 100px 0;
+  background-color: #FAFBFF;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  color: #E0A800;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  align-self: center;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 850;
+  color: #0A1628;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 2.75rem;
+  }
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #8896A9;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.statCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(21, 94, 239, 0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(10, 22, 40, 0.02);
+  transition: all 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(21, 94, 239, 0.06);
+}
+
+.statIconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background-color: rgba(21, 94, 239, 0.04);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.statVal {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #155EEF;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: #8896A9;
+  font-weight: 600;
+}
+
+/* Testimonials Grid */
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .testimonialsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonialsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tCard {
+  background: #FFFFFF;
+  border: 1px solid rgba(10, 22, 40, 0.06);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(10, 22, 40, 0.03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.tCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(10, 22, 40, 0.08);
+}
+
+.travelPhotoWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: #0F172A;
+}
+
+.travelPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.tCard:hover .travelPhoto {
+  transform: scale(1.08);
+}
+
+.photoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(10, 22, 40, 0) 50%, rgba(10, 22, 40, 0.4) 100%);
+}
+
+.destinationBadge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background-color: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tBody {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px;
+}
+
+.starsRow {
+  display: flex;
+  color: #FFC107;
+  gap: 2px;
+}
+
+.starIcon {
+  flex-shrink: 0;
+}
+
+.quoteText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #475569;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.profileRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid rgba(10, 22, 40, 0.05);
+  padding-top: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 4px 10px rgba(10, 22, 40, 0.1);
+}
+
+.profileName {
+  font-size: 0.9rem;
+  font-weight: 750;
+  color: #0A1628;
+}
+
+.profileHandle {
+  font-size: 0.75rem;
+  color: #8896A9;
+  display: block;
+}
+
+.roleText {
+  color: #155EEF;
+  font-weight: 600;
+}
+
+.microSocial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: #8896A9;
+  font-weight: 600;
+  border-top: 1px dashed rgba(10, 22, 40, 0.05);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.socialAction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.socialIconActive {
+  color: #EF4444;
+}

@@ -1,0 +1,370 @@
+[
+  {
+    "id": "EMm3AX2Gg9gAtX7Z",
+    "name": "n8n ofertas",
+    "description": null,
+    "active": true,
+    "isArchived": false,
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "cronExpression",
+                "expression": "0 8,11,20 * * *"
+              }
+            ]
+          }
+        },
+        "id": "f766fdfa-86c0-428f-89ef-8fea7328dee6",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [-1312, 112]
+      },
+      {
+        "parameters": {
+          "url": "https://api.travelpayouts.com/v1/prices/cheap?origin=GRU&currency=BRL&token=c5321636039fd04deb68148ee62940a5",
+          "options": {}
+        },
+        "id": "d080385e-d208-412f-96f5-ef9f16f58eef",
+        "name": "Travelpayouts",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-1104, 112]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/agent/strategist",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ Object.assign({}, $json, { campaign_type: 'voo' }) }}",
+          "options": {}
+        },
+        "id": "fe03b4ae-353e-4368-9169-03b48e9034af",
+        "name": "Agente Estrategista",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-912, 112]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/agent/writer",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "e0929fc9-d358-4478-aed1-24b125283346",
+        "name": "Agente Redator",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-704, 112]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/save-offer",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "0d18e914-7ecd-477c-99a3-daf620cc302a",
+        "name": "Salvar no Banco",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-512, 112]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution-api:8080/message/sendMedia/destinos-incriveis",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "demo123"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"number\": \"120363428249013809@g.us\", \"mediatype\": \"image\", \"fileName\": \"oferta_voo.jpg\", \"caption\": $('Agente Redator').item.json.completa, \"media\": $('Salvar no Banco').item.json.imagem_url } }}",
+          "options": {}
+        },
+        "id": "08f277a0-95f4-42cd-b172-2d0e4f269550",
+        "name": "WhatsApp Clube VIP",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-256, 0]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution-api:8080/message/sendMedia/destinos-incriveis",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "demo123"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"number\": \"120363429315264712@g.us\", \"mediatype\": \"image\", \"fileName\": \"oferta_voo_teaser.jpg\", \"caption\": $('Agente Redator').item.json.teaser, \"media\": $('Salvar no Banco').item.json.imagem_url } }}",
+          "options": {}
+        },
+        "id": "7fd9b9b9-105a-418d-b352-7ca0d7ee091d",
+        "name": "WhatsApp Grátis",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-256, 208]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/agent/strategist",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"campaign_type\": \"hotel_tour\", \"destination_city\": $('Agente Estrategista').item.json.destino } }}",
+          "options": {}
+        },
+        "id": "ae9260d8-1111-4ebc-8824-386d5e7ef388",
+        "name": "Agente Estrategista Passeio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-256, 416]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/agent/writer",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "be8142cc-2222-4aed-bd2a-2eb9cd8fa2c4",
+        "name": "Agente Redator Passeio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [-48, 416]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://host.docker.internal:5001/save-offer",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json }}",
+          "options": {}
+        },
+        "id": "cd63b15b-3333-4fde-ba46-0b19283cd1fa",
+        "name": "Salvar no Banco Passeio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [160, 416]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution-api:8080/message/sendMedia/destinos-incriveis",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "demo123"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"number\": \"120363428249013809@g.us\", \"mediatype\": \"image\", \"fileName\": \"oferta_passeio.jpg\", \"caption\": $('Agente Redator Passeio').item.json.completa, \"media\": $('Salvar no Banco Passeio').item.json.imagem_url } }}",
+          "options": {}
+        },
+        "id": "dd724c9c-4444-467f-bc3a-4ef8ca8fb5d8",
+        "name": "WhatsApp Clube VIP Passeio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [416, 304]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://evolution-api:8080/message/sendMedia/destinos-incriveis",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "demo123"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ { \"number\": \"120363429315264712@g.us\", \"mediatype\": \"image\", \"fileName\": \"oferta_passeio_teaser.jpg\", \"caption\": $('Agente Redator Passeio').item.json.teaser, \"media\": $('Salvar no Banco Passeio').item.json.imagem_url } }}",
+          "options": {}
+        },
+        "id": "ed835d0d-5555-4780-af6e-5f98db8ca6eb",
+        "name": "WhatsApp Grátis Passeio",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [416, 512]
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Travelpayouts",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Travelpayouts": {
+        "main": [
+          [
+            {
+              "node": "Agente Estrategista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agente Estrategista": {
+        "main": [
+          [
+            {
+              "node": "Agente Redator",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agente Redator": {
+        "main": [
+          [
+            {
+              "node": "Salvar no Banco",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Salvar no Banco": {
+        "main": [
+          [
+            {
+              "node": "WhatsApp Clube VIP",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "WhatsApp Grátis",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Agente Estrategista Passeio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agente Estrategista Passeio": {
+        "main": [
+          [
+            {
+              "node": "Agente Redator Passeio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agente Redator Passeio": {
+        "main": [
+          [
+            {
+              "node": "Salvar no Banco Passeio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Salvar no Banco Passeio": {
+        "main": [
+          [
+            {
+              "node": "WhatsApp Clube VIP Passeio",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "WhatsApp Grátis Passeio",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "executionOrder": "v1",
+      "binaryMode": "separate",
+      "availableInMCP": false
+    },
+    "staticData": {
+      "node:Schedule Trigger": {
+        "recurrenceRules": [
+          null
+        ],
+        "recurrenceRuleSignatures": [
+          null
+        ]
+      }
+    },
+    "meta": null,
+    "nodeGroups": [],
+    "pinData": {},
+    "versionId": "50955b82-cfbd-488f-b879-6ef0add276fc",
+    "activeVersionId": "50955b82-cfbd-488f-b879-6ef0add276fc",
+    "versionCounter": 23,
+    "triggerCount": 1,
+    "sourceWorkflowId": null,
+    "tags": []
+  }
+]
