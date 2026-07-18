@@ -82,10 +82,40 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
   } catch (e) {
     console.error("Robust fetch from API failed, using fallback:", e);
     try {
+      const localRes = await fetch('/offers.json');
+      if (localRes.ok) {
+        const localData = await localRes.json();
+        if (Array.isArray(localData) && localData.length > 0) {
+          console.log("Loaded offers from local cache (offers.json)");
+          return localData.map((o: any) => ({
+            id: o.id || String(Math.random()),
+            origin: o.origem || "",
+            originName: "",
+            destination: o.destino || "",
+            destinationName: o.destino || "Destino",
+            countryName: "",
+            countryCode: "",
+            price: Number(o.preco_atual) || Number(o.price) || 0,
+            originalPrice: Number(o.preco_original) || Number(o.originalPrice) || 0,
+            departureDate: o.criado_em ? o.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
+            returnDate: "",
+            airline: o.companhia || "Companhia",
+            link: o.link_afiliado || o.link || "",
+            link_afiliado: o.link_afiliado || o.link || "",
+            type: o.tipo || "voo",
+            imagem_url: o.imagem_url,
+            criado_em: o.criado_em || ""
+          }));
+        }
+      }
+    } catch (localErr) {
+      console.warn("Local cache fallback failed:", localErr);
+    }
+    try {
       const { fetchCheapFlights } = await import('@/lib/travelpayouts');
       return await fetchCheapFlights();
     } catch (err) {
-      console.error("Critical: Fallback mock data import failed:", err);
+      console.error("Critical: All fallback sources failed:", err);
       return [];
     }
   }
@@ -189,7 +219,7 @@ export default function OfertasPage() {
           <div className={`${styles.filtersContainer} fade-in-up`} ref={filtersRef}>
             {/* Search Input */}
             <div className={styles.searchWrapper}>
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748b]" size={18} />
               <input
                 type="text"
                 value={searchTerm}
@@ -254,7 +284,7 @@ export default function OfertasPage() {
           {/* Loading state */}
           {loading ? (
             <div className={styles.loadingWrapper}>
-              <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+              <RefreshCw className="animate-spin text-[#38BDF8]" size={36} />
               <span className={styles.loadingText}>Buscando melhores tarifas...</span>
             </div>
           ) : !Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (
@@ -273,9 +303,14 @@ export default function OfertasPage() {
           )}
 
           {/* Travelpayouts Flight Search Widget */}
-          <div className="tp-widget-container my-12 p-6 bg-slate-900/60 rounded-2xl border border-yellow-500/20 max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-yellow-400 mb-2">Pesquise passagens aéreas em tempo real</h2>
-            <p className="text-gray-300 mb-6">
+          <div className="tp-widget-container my-12 p-6 rounded-2xl border max-w-4xl mx-auto text-center" style={{
+            background: 'rgba(10,18,44,0.6)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(56,189,248,0.15)'
+          }}>
+            <h2 className="text-2xl font-bold mb-2" style={{ color: '#FFC107' }}>Pesquise passagens aéreas em tempo real</h2>
+            <p className="mb-6" style={{ color: '#94a3b8' }}>
               Não encontrou a data ideal ou o seu destino nas ofertas? Use nosso buscador parceiro para encontrar as tarifas mais baratas em segundos!
             </p>
             <div className="tp-widget-handle" data-widget-id="flight-search" />

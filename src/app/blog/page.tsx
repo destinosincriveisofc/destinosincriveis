@@ -211,7 +211,7 @@ export default function BlogPage() {
 
             {/* Search Input */}
             <div className={styles.searchWrapper}>
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748b]" size={18} />
               <input
                 type="text"
                 value={searchTerm}
@@ -225,7 +225,7 @@ export default function BlogPage() {
           {/* Articles Grid */}
           {loading ? (
             <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
-              <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+              <RefreshCw className="animate-spin text-[#38BDF8]" size={36} />
             </div>
           ) : filteredArticles.length === 0 ? (
             <div className={styles.emptyState}>
