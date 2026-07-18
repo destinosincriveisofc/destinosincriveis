@@ -122,7 +122,7 @@ export default function BlogPage() {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog');
+        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog', { signal: AbortSignal.timeout(8000) });
         if (!response.ok) throw new Error('Failed to fetch from blog API');
         const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {
