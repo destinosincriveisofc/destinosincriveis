@@ -111,13 +111,22 @@ async function getRealOffers(): Promise<FlightOffer[]> {
   }
 }
 
+const MOCK_OFFERS_HOME: FlightOffer[] = [
+  { id: "home-fb1", origin: "GRU", originName: "São Paulo", destination: "MIA", destinationName: "Miami", countryName: "Estados Unidos", countryCode: "US", price: 2500, originalPrice: 5000, departureDate: "", returnDate: "", airline: "American Airlines", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1535498730771-e735b998cd64?auto=format&fit=crop&w=800&q=80" },
+  { id: "home-fb2", origin: "GRU", originName: "São Paulo", destination: "ROM", destinationName: "Roma", countryName: "Itália", countryCode: "IT", price: 350, originalPrice: 700, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80" },
+  { id: "home-fb3", origin: "GIG", originName: "Rio de Janeiro", destination: "LIS", destinationName: "Lisboa", countryName: "Portugal", countryCode: "PT", price: 3200, originalPrice: 6000, departureDate: "", returnDate: "", airline: "TAP Portugal", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1509840144521-179f323a14ff?auto=format&fit=crop&w=800&q=80" },
+  { id: "home-fb4", origin: "GRU", originName: "São Paulo", destination: "PAR", destinationName: "Paris", countryName: "França", countryCode: "FR", price: 450, originalPrice: 900, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80" },
+  { id: "home-fb5", origin: "GRU", originName: "São Paulo", destination: "EZE", destinationName: "Buenos Aires", countryName: "Argentina", countryCode: "AR", price: 1800, originalPrice: 3500, departureDate: "", returnDate: "", airline: "LATAM", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1589011352121-510c9586143d?auto=format&fit=crop&w=800&q=80" },
+  { id: "home-fb6", origin: "BSB", originName: "Brasília", destination: "MCO", destinationName: "Disney", countryName: "Estados Unidos", countryCode: "US", price: 600, originalPrice: 1200, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80" }
+];
+
 function formatPrice(price: number): string {
   return price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default function Home() {
-  const [alertOffers, setAlertOffers] = useState<FlightOffer[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [alertOffers, setAlertOffers] = useState<FlightOffer[]>(MOCK_OFFERS_HOME);
+  const [loading, setLoading] = useState(false);
   const [blogArticles, setBlogArticles] = useState<BlogArticle[]>(MOCK_ARTICLES);
   const [currentBlogIndex, setCurrentBlogIndex] = useState(0);
   const [currentOfferIndex, setCurrentOfferIndex] = useState(0);
@@ -185,29 +194,16 @@ export default function Home() {
     const loadOffers = async () => {
       try {
         const cheapFlights = await getRealOffers();
-        const sorted = [...cheapFlights].sort((a: any, b: any) => {
-          const va = a.criado_em || a.departureDate || "";
-          const vb = b.criado_em || b.departureDate || "";
-          return vb.localeCompare(va);
-        });
-        let list = [...sorted];
-        const fallbacks: FlightOffer[] = [
-          { id: "fb1", origin: "GRU", originName: "São Paulo", destination: "MIA", destinationName: "Miami", countryName: "Estados Unidos", countryCode: "US", price: 2500, originalPrice: 5000, departureDate: "", returnDate: "", airline: "American Airlines", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1535498730771-e735b998cd64?auto=format&fit=crop&w=800&q=80" },
-          { id: "fb2", origin: "GRU", originName: "São Paulo", destination: "ROM", destinationName: "Roma Tour", countryName: "Itália", countryCode: "IT", price: 350, originalPrice: 700, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80" },
-          { id: "fb3", origin: "GIG", originName: "Rio de Janeiro", destination: "LIS", destinationName: "Lisboa", countryName: "Portugal", countryCode: "PT", price: 3200, originalPrice: 6000, departureDate: "", returnDate: "", airline: "TAP Portugal", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1509840144521-179f323a14ff?auto=format&fit=crop&w=800&q=80" },
-          { id: "fb4", origin: "GRU", originName: "São Paulo", destination: "PAR", destinationName: "Paris Tour", countryName: "França", countryCode: "FR", price: 450, originalPrice: 900, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80" },
-          { id: "fb5", origin: "GRU", originName: "São Paulo", destination: "EZE", destinationName: "Buenos Aires", countryName: "Argentina", countryCode: "AR", price: 1800, originalPrice: 3500, departureDate: "", returnDate: "", airline: "LATAM", link: "", link_afiliado: "", type: "voo", imagem_url: "https://images.unsplash.com/photo-1589011352121-510c9586143d?auto=format&fit=crop&w=800&q=80" },
-          { id: "fb6", origin: "BSB", originName: "Brasília", destination: "MCO", destinationName: "Disney Tour", countryName: "Estados Unidos", countryCode: "US", price: 600, originalPrice: 1200, departureDate: "", returnDate: "", airline: "GetYourGuide", link: "", link_afiliado: "", type: "passeio", imagem_url: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=800&q=80" }
-        ];
-        while (list.length < 6) {
-          const next = fallbacks[list.length % fallbacks.length];
-          list.push({ ...next, id: `${next.id}-${Math.random().toString(36).substr(2, 4)}` });
+        if (cheapFlights && Array.isArray(cheapFlights) && cheapFlights.length > 0) {
+          const sorted = [...cheapFlights].sort((a: any, b: any) => {
+            const va = a.criado_em || a.departureDate || "";
+            const vb = b.criado_em || b.departureDate || "";
+            return vb.localeCompare(va);
+          });
+          setAlertOffers(sorted.slice(0, 6));
         }
-        setAlertOffers(list.slice(0, 6));
       } catch (e) {
         console.error("Error:", e);
-      } finally {
-        setLoading(false);
       }
     };
     loadOffers();
@@ -251,11 +247,7 @@ export default function Home() {
               </div>
             </div>
 
-            {loading ? (
-              <div className={styles.loadingContainer}>
-                <RefreshCw className="animate-spin text-[#38BDF8]" size={32} />
-              </div>
-            ) : alertOffers.length === 0 ? (
+            {alertOffers.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#64748b', padding: '2rem 0' }}>
                 Nenhuma oferta recente encontrada.
               </div>
@@ -268,7 +260,7 @@ export default function Home() {
                   }}
                 >
                   {alertOffers.map((offer, idx) => (
-                    <div key={offer.id} className={`${styles.offerCarouselSlide} fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
+                    <div key={offer.id} className={styles.offerCarouselSlide}>
                       <Link href="/ofertas" className={styles.offerSlideLink}>
                         <div className={`${styles.offerSlideCard} hover-lift`}>
                           <img
@@ -347,7 +339,7 @@ export default function Home() {
                 }}
               >
                   {blogArticles.map((article, idx) => (
-                  <div key={article.id} className={`${styles.blogCarouselSlide} fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
+                  <div key={article.id} className={styles.blogCarouselSlide}>
                     <Link href={`/blog/artigo?id=${article.id}`} className={styles.blogSlideLink}>
                       <div className={`${styles.blogSlideCard} hover-lift`}>
                         <img src={article.imageUrl} alt={article.title} className={styles.blogSlideImage} />

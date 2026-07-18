@@ -328,12 +328,7 @@ export default function OfertasPage() {
           </div>
 
           {/* Loading state */}
-          {loading ? (
-            <div className={styles.loadingWrapper}>
-              <RefreshCw className="animate-spin text-[#38BDF8]" size={36} />
-              <span className={styles.loadingText}>Buscando melhores tarifas...</span>
-            </div>
-          ) : !Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (
+          {!Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (
             <div className={styles.emptyState}>
               <p className={styles.emptyTitle}>Nenhuma oferta encontrada</p>
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
@@ -350,17 +345,10 @@ export default function OfertasPage() {
           )}
 
           {/* Travelpayouts Flight Search Widget */}
-          <div className="tp-widget-container my-12 p-6 rounded-2xl border max-w-4xl mx-auto text-center" style={{
-            background: 'rgba(10,18,44,0.6)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(56,189,248,0.15)'
-          }}>
-            <h2 className="text-2xl font-bold mb-2" style={{ color: '#FFC107' }}>Pesquise passagens aéreas em tempo real</h2>
-            <p className="mb-6" style={{ color: '#94a3b8' }}>
-              Não encontrou a data ideal ou o seu destino nas ofertas? Use nosso buscador parceiro para encontrar as tarifas mais baratas em segundos!
-            </p>
-            <div className="tp-widget-handle" data-widget-id="flight-search" />
+          <div className="max-w-4xl mx-auto my-12">
+            <div dangerouslySetInnerHTML={{ __html: `
+              <script src="https://tp.media/content?marker=550897&shmarker=550897&promo_id=2088&width=100%25&primary=%230a122c&color_button=%23ffc107&color_text=%23ffffff&color_button_text=%230a122c&show_logo=false&multi_city=true&with_hash=true" async></script>
+            `}} />
           </div>
         </div>
       </main>
