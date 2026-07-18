@@ -739,3 +739,158 @@
   background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
   box-shadow: 0 2px 6px rgba(21, 94, 239, 0.3);
 }
+
+/* Glassmorphism benefits grid */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.benefitCard {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(21, 94, 239, 0.15); /* Thin blue border */
+  border-radius: 20px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(10, 22, 40, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefitCardGold {
+  border: 1px solid rgba(255, 193, 7, 0.45); /* Thin gold border */
+}
+
+.benefitCard:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px rgba(10, 22, 40, 0.05);
+}
+
+.benefitIcon {
+  font-size: 2rem;
+  width: 56px;
+  height: 56px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(10, 22, 40, 0.04);
+}
+
+.benefitTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0A1628;
+}
+
+.benefitDesc {
+  font-size: 0.875rem;
+  color: #8896A9;
+  line-height: 1.6;
+}
+
+/* Steps Horizontal Connected Section */
+.stepsSection {
+  padding: 100px 0;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.stepsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .stepsRow {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  
+  /* Connection Line background */
+  .stepsRow::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(21, 94, 239, 0.1), #155EEF, rgba(255, 193, 7, 0.5));
+    z-index: 1;
+  }
+}
+
+.horizontalStepCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.stepIconWrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 4px solid #155EEF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 850;
+  color: #155EEF;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(21, 94, 239, 0.12);
+  transition: all 0.3s ease;
+}
+
+.stepIconWrapperGold {
+  border-color: #FFC107;
+  color: #FFC107;
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.12);
+}
+
+.horizontalStepCard:hover .stepIconWrapper {
+  transform: scale(1.1);
+}
+
+.horizontalStepTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0A1628;
+  margin-bottom: 12px;
+}
+
+.horizontalStepText {
+  font-size: 0.9rem;
+  color: #8896A9;
+  line-height: 1.6;
+  max-width: 280px;
+}
+

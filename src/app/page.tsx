@@ -11,6 +11,8 @@ import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import OfferCard from '@/components/OfferCard';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
+import IaConciergeSection from '@/components/IaConciergeSection';
+import SocialProof from '@/components/SocialProof';
 import { FlightOffer } from '@/lib/travelpayouts';
 import styles from './page.module.css';
 
@@ -313,7 +315,7 @@ export default function Home() {
         <StatsSection />
 
         {/* 3. Como Funciona Section */}
-        <section className={styles.sectionWhite}>
+        <section className={styles.stepsSection}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
               <span className={styles.badge}>Metodologia Inteligente</span>
@@ -323,31 +325,37 @@ export default function Home() {
               </p>
             </div>
 
-            <div className={styles.stepsGrid}>
+            <div className={styles.stepsRow}>
               {/* Step 1 */}
-              <div className={styles.stepCard}>
-                <div className={styles.stepNum}>01</div>
-                <h3 className={styles.stepTitle}>Nós rastreamos</h3>
-                <p className={styles.stepText}>
-                  Algoritmos monitoram tarifas de passagens 24h por dia, identificando quedas bruscas de preços e bugs do sistema.
+              <div className={styles.horizontalStepCard}>
+                <div className={styles.stepIconWrapper}>
+                  1
+                </div>
+                <h3 className={styles.horizontalStepTitle}>Oportunidades Ocultas</h3>
+                <p className={styles.horizontalStepText}>
+                  A inteligência artificial encontra oportunidades ocultas, rastreando tarifas de passagens 24h por dia e identificando quedas bruscas de preços e bugs.
                 </p>
               </div>
 
               {/* Step 2 */}
-              <div className={styles.stepCard}>
-                <div className={styles.stepNum}>02</div>
-                <h3 className={styles.stepTitle}>Você recebe o alerta</h3>
-                <p className={styles.stepText}>
-                  Disparamos alertas instantâneos no seu WhatsApp ou e-mail com o link de reserva direta, sem taxas ou intermediários.
+              <div className={styles.horizontalStepCard}>
+                <div className={styles.stepIconWrapper}>
+                  2
+                </div>
+                <h3 className={styles.horizontalStepTitle}>Alertas & Roteiros</h3>
+                <p className={styles.horizontalStepText}>
+                  Você recebe os alertas instantâneos em primeira mão e recomendações de roteiros otimizados pela nossa IA diretamente no seu celular.
                 </p>
               </div>
 
               {/* Step 3 */}
-              <div className={styles.stepCard}>
-                <div className={styles.stepNum}>03</div>
-                <h3 className={styles.stepTitle}>Você viaja economizando</h3>
-                <p className={styles.stepText}>
-                  Emitindo diretamente com a companhia aérea ou parceiro consolidado, você economiza até 60% em relação ao preço padrão.
+              <div className={styles.horizontalStepCard}>
+                <div className={`${styles.stepIconWrapper} ${styles.stepIconWrapperGold}`}>
+                  3
+                </div>
+                <h3 className={styles.horizontalStepTitle}>Viagem com Economia</h3>
+                <p className={styles.horizontalStepText}>
+                  Você viaja pagando muito menos, emitindo diretamente com a companhia aérea ou parceiro, sem taxas ocultas ou intermediários.
                 </p>
               </div>
             </div>
@@ -406,75 +414,79 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 5. Club Section */}
+        {/* Ia Concierge Section */}
+        <IaConciergeSection />
+
+        {/* 5. Club Section - Benefícios */}
         <section id="clube" className={styles.sectionWhite}>
           <div className={styles.container}>
-            <div className={styles.clubGrid}>
-              <div className={styles.clubText}>
-                <span className={styles.badge}>Acesso Exclusivo</span>
-                <h2 className={styles.sectionTitle}>
-                  Destinos Incríveis CLUB DIJA: <br />
-                  Seu passaporte para viajar mais
-                </h2>
-                <p className={styles.sectionDesc}>
-                  Faça parte do nosso grupo privado. Nossa equipe monitora 24 horas por dia, 7 dias por semana, enviando imediatamente no seu WhatsApp erros tarifários raros e descontos históricos de passagens.
-                </p>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Club Dija Benefícios</span>
+              <h2 className={styles.sectionTitle}>Uma comunidade inteligente de viajantes</h2>
+              <p className={styles.sectionDesc}>
+                Conheça os recursos exclusivos desenvolvidos para você explorar o mundo com economia real e suporte inteligente.
+              </p>
+            </div>
 
-                <div className={styles.clubFeatures}>
-                  {[
-                    { icon: '🔔', title: 'Alertas de Erros Tarifários', desc: 'Seja o primeiro a saber e emita antes que a companhia corrija.' },
-                    { icon: '👥', title: '3 Grupos VIP no WhatsApp', desc: 'Ofertas, Dicas e Comunidade de viajantes.' },
-                    { icon: '🤖', title: 'Guia de Bolso 24h (IA)', desc: 'Concierge inteligente para dúvidas e roteiros a qualquer hora.' },
-                    { icon: '📱', title: 'Rede Social de Viajantes', desc: 'Compartilhe experiências com uma comunidade apaixonada.' },
-                    { icon: '🌍', title: 'Área de Membros Exclusiva', desc: 'Vitrine VIP com ofertas que não aparecem ao público.' },
-                    { icon: '📚', title: 'Dicas e Blog de Viagens', desc: 'Conteúdo exclusivo para maximizar cada viagem.' },
-                  ].map((f) => (
-                    <div key={f.title} className={styles.clubFeatureItem}>
-                      <CheckCircle2 size={20} className={styles.featureIcon} />
-                      <div className={styles.featureContent}>
-                        <strong className={styles.featureTitle}>{f.icon} {f.title}</strong>
-                        <span className={styles.featureDesc}>{f.desc}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="pt-2">
-                  <Link
-                    href="/club"
-                    className={styles.buttonPrimary}
-                  >
-                    Entrar no CLUB DIJA por R$ 9,90/mês
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
+            <div className={styles.benefitsGrid}>
+              {/* Card 1 */}
+              <div className={styles.benefitCard}>
+                <div className={styles.benefitIcon}>🔔</div>
+                <h3 className={styles.benefitTitle}>Alertas de Erros Tarifários</h3>
+                <p className={styles.benefitDesc}>Bugs de passagens em tempo real. Seja o primeiro a saber e emita antes que a companhia corrija.</p>
               </div>
 
-              <div className={styles.clubImageArea}>
-                <div className={styles.clubImageWrapper}>
-                  <img
-                    src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop"
-                    alt="Laptop showing flight details"
-                    className={styles.clubImage}
-                  />
-                  <div className={styles.clubTestimonialOverlay}>
-                    <div className={styles.clubTestimonialBox}>
-                      <div className="flex justify-center text-[#FFC107] mb-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={14} fill="currentColor" />
-                        ))}
-                      </div>
-                      <p className={styles.testimonialQuote}>
-                        &quot;Economizei R$ 4.200 em uma única viagem para a Itália com o alerta do CLUB DIJA! Vale cada centavo.&quot;
-                      </p>
-                      <span className={styles.testimonialAuthor}>— Mariana S., São Paulo</span>
-                    </div>
-                  </div>
-                </div>
+              {/* Card 2 */}
+              <div className={styles.benefitCard}>
+                <div className={styles.benefitIcon}>🤖</div>
+                <h3 className={styles.benefitTitle}>Guia de Bolso 24h</h3>
+                <p className={styles.benefitDesc}>IA especialista para montar roteiros completos, tirar dúvidas e auxiliar na sua viagem a qualquer hora.</p>
               </div>
+
+              {/* Card 3 */}
+              <div className={styles.benefitCard}>
+                <div className={styles.benefitIcon}>👥</div>
+                <h3 className={styles.benefitTitle}>Comunidade Privada</h3>
+                <p className={styles.benefitDesc}>Relatos de viagens e troca de fotos com outros membros em um grupo exclusivo e acolhedor.</p>
+              </div>
+
+              {/* Card 4 */}
+              <div className={styles.benefitCard}>
+                <div className={styles.benefitIcon}>💡</div>
+                <h3 className={styles.benefitTitle}>Suporte Especializado</h3>
+                <p className={styles.benefitDesc}>Consultoria individual de planejamento de trechos complexos, hotéis e dúvidas de emissão com milhas.</p>
+              </div>
+
+              {/* Card 5 */}
+              <div className={styles.benefitCard}>
+                <div className={styles.benefitIcon}>📚</div>
+                <h3 className={styles.benefitTitle}>Guias & Dicas Diárias</h3>
+                <p className={styles.benefitDesc}>Hacks de milhas, cartões de crédito e direitos dos passageiros atualizados 3x ao dia pelos nossos analistas.</p>
+              </div>
+
+              {/* Card 6 */}
+              <div className={`${styles.benefitCard} ${styles.benefitCardGold}`}>
+                <div className={styles.benefitIcon}>🏨</div>
+                <h3 className={styles.benefitTitle}>Economia Exclusiva</h3>
+                <p className={styles.benefitDesc}>Descontos secretos em hotéis, resorts all-inclusive e ingressos de passeios ao redor do mundo.</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '48px' }}>
+              <Link
+                href="/checkout"
+                className={styles.buttonPrimary}
+                style={{ fontSize: '1.05rem', padding: '16px 40px' }}
+              >
+                Quero fazer parte do Club Dija
+                <ArrowRight size={18} />
+              </Link>
             </div>
           </div>
         </section>
+
+        {/* Social Proof & Authority Section */}
+        <SocialProof />
 
         {/* 6. Consultoria VIP Section */}
         <section id="consultoria" className={styles.sectionIce}>

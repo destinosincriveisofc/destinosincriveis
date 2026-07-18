@@ -26,27 +26,26 @@ export default function HeroSection() {
           </div>
 
           <h1 className={styles.headline}>
-            Viaje mais. <br />
-            Pague menos. <br />
-            <span className={styles.headlineHighlight}>Viva melhor.</span>
+            Viaje mais. Pague menos. <br />
+            <span className={styles.headlineHighlight}>Viva experiências inesquecíveis.</span>
           </h1>
 
           <p className={styles.description}>
-            A plataforma de inteligência de viagens que monitora promoções, alerta erros tarifários e te ajuda a viajar mais vezes ao ano pagando até 60% menos.
+            Tenha acesso às melhores oportunidades de viagem, faça parte de uma comunidade apaixonada por explorar o mundo e planeje suas próximas aventuras com o apoio de inteligência artificial.
           </p>
 
           {/* CTA Buttons */}
           <div className={styles.ctaButtons}>
-            <a
-              href="#clube"
+            <Link
+              href="/checkout"
               className={styles.buttonPrimary}
             >
-              Fazer Parte do Club Dija
+              Quero viajar pagando menos
               <ArrowRight size={18} />
-            </a>
-            <a href="#ofertas" className={styles.buttonOutline}>
-              Ver Ofertas Ativas
-              <Plane size={18} />
+            </Link>
+            <a href="#clube" className={styles.buttonOutline}>
+              Conhecer o Club Dija
+              <ArrowRight size={18} />
             </a>
           </div>
 
