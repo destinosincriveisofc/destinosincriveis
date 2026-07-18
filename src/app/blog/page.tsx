@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
-import { Search } from 'lucide-react';
+import { Search, RefreshCw } from 'lucide-react';
 import styles from './page.module.css';
 
 const MOCK_ALL_ARTICLES: BlogArticle[] = [
@@ -70,6 +70,37 @@ export default function BlogPage() {
   const [filteredArticles, setFilteredArticles] = useState<BlogArticle[]>(MOCK_ALL_ARTICLES);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function fetchBlog() {
+      try {
+        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog');
+        if (!response.ok) throw new Error('Failed to fetch from blog API');
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          const mapped: BlogArticle[] = data.map((item: any) => ({
+            id: item.id || String(Math.random()),
+            title: item.titulo || '',
+            excerpt: item.descricao || '',
+            category: item.categoria === 'blog_publico' ? 'Viagem' : (item.categoria || 'Viagem'),
+            imageUrl: item.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop',
+            date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
+            slug: item.id || 'artigo'
+          }));
+          setArticles(mapped);
+        } else {
+          setArticles(MOCK_ALL_ARTICLES);
+        }
+      } catch (err) {
+        console.error('Error fetching blog articles:', err);
+        setArticles(MOCK_ALL_ARTICLES);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBlog();
+  }, []);
 
   useEffect(() => {
     let result = articles;
@@ -91,7 +122,7 @@ export default function BlogPage() {
     setFilteredArticles(result);
   }, [selectedCategory, searchTerm, articles]);
 
-  const categories = ['todos', 'dicas', 'destinos', 'milhas', 'economize'];
+  const categories = ['todos', ...Array.from(new Set(articles.map(a => a.category.toLowerCase())))];
 
   return (
     <>
@@ -117,7 +148,7 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`${styles.filterBtn} ${selectedCategory === cat ? styles.filterBtnActive : ''}`}
                 >
-                  {cat === 'todos' ? 'Todos' : cat}
+                  {cat === 'todos' ? 'Todos' : cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </button>
               ))}
             </div>
@@ -136,7 +167,11 @@ export default function BlogPage() {
           </div>
 
           {/* Articles Grid */}
-          {filteredArticles.length === 0 ? (
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+              <RefreshCw className="animate-spin text-[#155EEF]" size={36} />
+            </div>
+          ) : filteredArticles.length === 0 ? (
             <div className={styles.emptyState}>
               <p className={styles.emptyTitle}>Nenhum artigo encontrado</p>
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>

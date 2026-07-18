@@ -613,3 +613,129 @@
     width: 280px;
   }
 }
+
+/* ==================== CARROSSEL DO BLOG ==================== */
+.blogCarouselWrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  border-radius: 16px;
+  padding: 16px 0 48px 0;
+  --blog-slide-width: 360px;
+  --blog-gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .blogCarouselWrapper {
+    --blog-slide-width: 330px;
+    --blog-gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogCarouselWrapper {
+    --blog-slide-width: 280px;
+    --blog-gap: 16px;
+  }
+}
+
+.blogCarouselWrapper::before,
+.blogCarouselWrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 48px;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.blogCarouselWrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #FAFBFF, transparent);
+}
+
+.blogCarouselWrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #FAFBFF, transparent);
+}
+
+.blogCarouselTrack {
+  display: flex;
+  gap: var(--blog-gap);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: max-content;
+}
+
+.blogCarouselSlide {
+  flex-shrink: 0;
+  width: var(--blog-slide-width);
+}
+
+/* Arrows */
+.blogCarouselArrowLeft,
+.blogCarouselArrowRight {
+  position: absolute;
+  top: calc(50% - 24px - 24px); /* centered vertically within the slide height area */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  color: var(--branco-puro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(21, 94, 239, 0.3);
+  transition: all 0.3s ease;
+}
+
+.blogCarouselArrowLeft {
+  left: 12px;
+}
+
+.blogCarouselArrowRight {
+  right: 12px;
+}
+
+.blogCarouselArrowLeft:hover,
+.blogCarouselArrowRight:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(21, 94, 239, 0.45);
+}
+
+.blogCarouselArrowLeft:active,
+.blogCarouselArrowRight:active {
+  transform: scale(0.95);
+}
+
+/* Indicators */
+.blogCarouselIndicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.blogCarouselIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #D0D5DD;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.blogCarouselIndicatorActive {
+  width: 24px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, var(--azul-bebe-principal) 0%, var(--azul-profundo) 100%);
+  box-shadow: 0 2px 6px rgba(21, 94, 239, 0.3);
+}

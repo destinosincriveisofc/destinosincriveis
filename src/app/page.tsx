@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star, RefreshCw } from 'lucide-react';
+import { Compass, CheckCircle2, ArrowRight, ShieldCheck, Mail, Phone, Star, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import Header from '@/components/Header';
@@ -122,6 +122,73 @@ async function getRealOffers(): Promise<FlightOffer[]> {
 export default function Home() {
   const [alertOffers, setAlertOffers] = useState<FlightOffer[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [blogArticles, setBlogArticles] = useState<BlogArticle[]>(MOCK_ARTICLES);
+  const [currentBlogIndex, setCurrentBlogIndex] = useState<number>(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const loadBlog = async () => {
+      try {
+        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog');
+        if (!response.ok) throw new Error('Failed to fetch from blog API');
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          const mapped: BlogArticle[] = data.map((item: any) => ({
+            id: item.id || String(Math.random()),
+            title: item.titulo || '',
+            excerpt: item.descricao || '',
+            category: item.categoria === 'blog_publico' ? 'Viagem' : (item.categoria || 'Viagem'),
+            imageUrl: item.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop',
+            date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
+            slug: item.id || 'artigo'
+          }));
+          setBlogArticles(mapped);
+        } else {
+          setBlogArticles(MOCK_ARTICLES);
+        }
+      } catch (err) {
+        console.error('Error fetching blog articles on home page:', err);
+        setBlogArticles(MOCK_ARTICLES);
+      }
+    };
+    loadBlog();
+  }, []);
+
+  const itemsPerView = isDesktop ? 3 : (isTablet ? 2 : 1);
+  const maxIndex = Math.max(0, blogArticles.length - itemsPerView);
+
+  useEffect(() => {
+    if (blogArticles.length <= itemsPerView) return;
+    const interval = setInterval(() => {
+      setCurrentBlogIndex((prevIndex) => {
+        if (prevIndex >= maxIndex) {
+          return 0;
+        }
+        return prevIndex + 1;
+      });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [blogArticles.length, itemsPerView, maxIndex]);
+
+  const handlePrevBlog = () => {
+    setCurrentBlogIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
+
+  const handleNextBlog = () => {
+    setCurrentBlogIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
 
   const [consultoriaNome, setConsultoriaNome] = useState('');
   const [consultoriaWhatsapp, setConsultoriaWhatsapp] = useState('');
@@ -557,10 +624,53 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={styles.grid3}>
-              {MOCK_ARTICLES.map((article) => (
-                <BlogCard key={article.id} article={article} />
-              ))}
+            <div className={styles.blogCarouselWrapper}>
+              <div 
+                className={styles.blogCarouselTrack}
+                style={{
+                  transform: `translateX(calc(-${currentBlogIndex} * (var(--blog-slide-width) + var(--blog-gap))))`
+                }}
+              >
+                {blogArticles.map((article) => (
+                  <div key={article.id} className={styles.blogCarouselSlide}>
+                    <BlogCard article={article} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Setas (Arrows) shown only if slider is enabled/needed */}
+              {maxIndex > 0 && (
+                <>
+                  <button 
+                    onClick={handlePrevBlog}
+                    className={styles.blogCarouselArrowLeft}
+                    aria-label="Artigo anterior"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button 
+                    onClick={handleNextBlog}
+                    className={styles.blogCarouselArrowRight}
+                    aria-label="Próximo artigo"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+
+              {/* Indicadores (Dots) shown only if slider is enabled/needed */}
+              {maxIndex > 0 && (
+                <div className={styles.blogCarouselIndicators}>
+                  {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentBlogIndex(index)}
+                      className={`${styles.blogCarouselIndicator} ${currentBlogIndex === index ? styles.blogCarouselIndicatorActive : ''}`}
+                      aria-label={`Ir para o slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
