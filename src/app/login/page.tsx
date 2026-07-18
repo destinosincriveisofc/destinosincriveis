@@ -101,14 +101,14 @@ export default function LoginPage() {
             <a
               href="/recuperar-senha"
               style={{
-                color: '#60a5fa',
+                color: '#FFC107',
                 fontSize: '0.88rem',
                 textDecoration: 'none',
-                fontWeight: 500,
+                fontWeight: 600,
                 transition: 'color 0.2s'
               }}
-              onMouseOver={e => (e.currentTarget.style.color = '#93c5fd')}
-              onMouseOut={e => (e.currentTarget.style.color = '#60a5fa')}
+              onMouseOver={e => (e.currentTarget.style.color = '#FFE082')}
+              onMouseOut={e => (e.currentTarget.style.color = '#FFC107')}
             >
               🔑 Esqueceu a senha?
             </a>

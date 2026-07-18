@@ -122,13 +122,13 @@ function PerfilContent() {
             <img
               src={`${API}${profile.avatar_url}`}
               alt="Avatar"
-              style={{ width: 110, height: 110, borderRadius: '50%', objectFit: 'cover', border: '3px solid #3b82f6' }}
+              style={{ width: 110, height: 110, borderRadius: '50%', objectFit: 'cover', border: '3px solid #38BDF8' }}
             />
           ) : (
             <div style={{
-              width: 110, height: 110, borderRadius: '50%', background: 'linear-gradient(135deg,#3b82f6,#06b6d4)',
+              width: 110, height: 110, borderRadius: '50%', background: 'linear-gradient(135deg,#38BDF8,#0284C7)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '2.4rem', fontWeight: 800, color: '#fff', border: '3px solid #3b82f6'
+              fontSize: '2.4rem', fontWeight: 800, color: '#fff', border: '3px solid #38BDF8'
             }}>
               {initials}
             </div>
@@ -139,7 +139,7 @@ function PerfilContent() {
             style={{
               position: 'absolute', bottom: 0, right: 0,
               width: 36, height: 36, borderRadius: '50%',
-              background: '#3b82f6', border: '2px solid #0A1628',
+              background: '#FFC107', border: '2px solid #0A122C',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer', color: '#fff', transition: 'background 0.2s'
             }}
@@ -153,8 +153,9 @@ function PerfilContent() {
 
       {/* Account Info */}
       <div ref={profileRef} className="fade-in-up hover-lift" style={{
-        background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: 14, padding: 20, marginBottom: 24, display: 'grid',
+        background: 'rgba(10,18,44,0.6)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+        border: '1px solid rgba(56,189,248,0.15)',
+        borderRadius: 16, padding: 20, marginBottom: 24, display: 'grid',
         gridTemplateColumns: '1fr 1fr', gap: '12px 24px'
       }}>
         {[
@@ -189,9 +190,9 @@ function PerfilContent() {
       {/* Edit Form */}
       <form ref={formRef} className="fade-in-up" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         {/* Nome */}
-        <div className="hover-lift" style={{
-          background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: 14, padding: 24
+          <div className="hover-lift" style={{
+          background: 'rgba(10,18,44,0.6)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(56,189,248,0.15)', borderRadius: 16, padding: 24
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <User size={18} color="#60a5fa" />
@@ -205,18 +206,20 @@ function PerfilContent() {
             value={nome}
             onChange={e => setNome(e.target.value)}
             placeholder="Seu nome completo"
+            onFocus={e => e.target.style.borderColor = '#38BDF8'}
+            onBlur={e => e.target.style.borderColor = 'rgba(56,189,248,0.2)'}
             style={{
-              width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)',
+              width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(56,189,248,0.2)',
               borderRadius: 10, padding: '12px 16px', color: '#fff', fontSize: '0.95rem',
-              fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box'
+              fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s'
             }}
           />
         </div>
 
         {/* Senha */}
         <div style={{
-          background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: 14, padding: 24
+          background: 'rgba(10,18,44,0.6)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid rgba(56,189,248,0.15)', borderRadius: 16, padding: 24
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <Lock size={18} color="#60a5fa" />
@@ -237,10 +240,12 @@ function PerfilContent() {
                 value={f.val}
                 onChange={e => f.set(e.target.value)}
                 placeholder={f.ph}
+                onFocus={e => e.target.style.borderColor = '#38BDF8'}
+                onBlur={e => e.target.style.borderColor = 'rgba(56,189,248,0.2)'}
                 style={{
-                  width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)',
+                  width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(56,189,248,0.2)',
                   borderRadius: 10, padding: '12px 16px', color: '#fff', fontSize: '0.95rem',
-                  fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box'
+                  fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s'
                 }}
               />
             </div>
@@ -252,12 +257,12 @@ function PerfilContent() {
           disabled={saving}
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-            background: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
-            color: '#fff', border: 'none', borderRadius: 12,
-            padding: '15px 28px', fontSize: '1rem', fontWeight: 700,
+            background: 'linear-gradient(135deg, #FFC107, #F59E0B)',
+            color: '#0A122C', border: 'none', borderRadius: 12,
+            padding: '15px 28px', fontSize: '1rem', fontWeight: 800,
             cursor: saving ? 'not-allowed' : 'pointer',
             opacity: saving ? 0.7 : 1, transition: 'all 0.2s',
-            boxShadow: '0 4px 14px rgba(59,130,246,0.3)'
+            boxShadow: '0 4px 14px rgba(255,193,7,0.3)'
           }}
         >
           <Save size={18} />
