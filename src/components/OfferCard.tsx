@@ -102,6 +102,20 @@ export default function OfferCard({ offer }: OfferCardProps) {
     return `${title}${destCode}`;
   };
 
+  const getFallbackImage = () => {
+    const isBeach = offer.destination === 'REC' || 
+                    (offer.destinationName && (
+                      offer.destinationName.toLowerCase().includes('recife') || 
+                      offer.destinationName.toLowerCase().includes('praia') || 
+                      offer.destinationName.toLowerCase().includes('porto de galinhas') ||
+                      offer.destinationName.toLowerCase().includes('salvador')
+                    ));
+    if (isBeach) {
+      return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80";
+    }
+    return "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+  };
+
   return (
     <div className={styles.card}>
       {/* Image & Badges */}
@@ -111,6 +125,9 @@ export default function OfferCard({ offer }: OfferCardProps) {
           alt={offer.destinationName || "Destino"}
           className={styles.image}
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = getFallbackImage();
+          }}
         />
         <div className={styles.imageOverlay} />
         

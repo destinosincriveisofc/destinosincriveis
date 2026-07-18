@@ -181,6 +181,18 @@ export default function VIPOffersPage() {
                     src={offer.imagem_url || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"} 
                     alt={offer.destino} 
                     className={styles.offerImage}
+                    onError={(e) => {
+                      const isBeach = offer.destino === 'REC' || 
+                                      (offer.destino && (
+                                        offer.destino.toLowerCase().includes('rec') || 
+                                        offer.destino.toLowerCase().includes('recife') ||
+                                        offer.destino.toLowerCase().includes('salvador') ||
+                                        offer.destino.toLowerCase().includes('ssa')
+                                      ));
+                      e.currentTarget.src = isBeach 
+                        ? "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" 
+                        : "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+                    }}
                   />
                   <div className={styles.overlay}></div>
                   <div className={styles.badgesWrapper}>

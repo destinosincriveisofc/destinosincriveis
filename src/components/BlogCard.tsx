@@ -40,12 +40,21 @@ const formatDateStr = (dateStr: string) => {
     return dateStr;
   }
 };
-
 export default function BlogCard({ article, compact = false }: BlogCardProps) {
   const hasValidImage = article.imageUrl && (article.imageUrl.startsWith('http://') || article.imageUrl.startsWith('https://') || article.imageUrl.startsWith('/'));
   const imgUrl = hasValidImage 
     ? article.imageUrl 
     : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
+
+  const getFallbackImage = () => {
+    const isBeach = (article.title && article.title.toLowerCase().includes('praia')) || 
+                    (article.category && article.category.toLowerCase().includes('praia')) ||
+                    (article.excerpt && article.excerpt.toLowerCase().includes('praia'));
+    if (isBeach) {
+      return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80";
+    }
+    return "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80";
+  };
 
   return (
     <article className={styles.card}>
@@ -56,6 +65,9 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
           alt={article.title}
           className={styles.image}
           loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = getFallbackImage();
+          }}
         />
         {/* Category Overlay */}
         <div className={styles.categoryBadge}>
