@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Check, MessageSquare, Lock } from 'lucide-react';
+import { Check, MessageSquare, Lock, ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function ObrigadoPage() {
@@ -136,6 +136,7 @@ export default function ObrigadoPage() {
               <button type="submit" disabled={loading} className={styles.submitBtn}>
                 <Lock size={18} />
                 <span>{loading ? "Processando..." : "Finalizar Cadastro e Acessar Painel"}</span>
+                {!loading && <ArrowRight size={18} />}
               </button>
             </form>
           </>

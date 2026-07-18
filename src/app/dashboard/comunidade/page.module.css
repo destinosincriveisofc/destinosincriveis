@@ -8,8 +8,10 @@
 }
 
 .createPostForm {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 18, 44, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -34,8 +36,8 @@
 
 .postTextarea:focus {
   outline: none;
-  border-color: #155EEF;
-  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.2);
+  border-color: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
 }
 
 .imagePreviewContainer {
@@ -122,21 +124,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #155EEF, #1049C4);
-  color: #ffffff;
+  background: linear-gradient(135deg, #FFC107, #F59E0B);
+  color: #0A122C;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(21, 94, 239, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
 }
 
 .postSubmitBtn:hover {
-  opacity: 0.95;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+  filter: brightness(1.1);
 }
 
 .postSubmitBtn:disabled {
@@ -152,8 +155,10 @@
 }
 
 .postCard {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 18, 44, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
   border-radius: 16px;
   padding: 24px;
   display: flex;
@@ -302,23 +307,25 @@
 
 .commentInput:focus {
   outline: none;
-  border-color: #155EEF;
+  border-color: #38BDF8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
 }
 
 .commentSubmitBtn {
-  background: #155EEF;
-  color: #ffffff;
+  background: linear-gradient(135deg, #FFC107, #F59E0B);
+  color: #0A122C;
   border: none;
   border-radius: 8px;
   padding: 8px 14px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .commentSubmitBtn:hover {
-  background: #1049C4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
 }
 
 .commentSubmitBtn:disabled {

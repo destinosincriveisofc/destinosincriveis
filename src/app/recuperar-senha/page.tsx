@@ -36,7 +36,7 @@ export default function RecuperarSenhaPage() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #0A1628 0%, #0d1f3a 50%, #0a162e 100%)',
+      background: '#0A122C',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -44,10 +44,11 @@ export default function RecuperarSenhaPage() {
       fontFamily: "'Inter', sans-serif"
     }}>
       <div style={{
-        background: 'rgba(255,255,255,0.04)',
+        background: 'rgba(10,18,44,0.7)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: 24,
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(56,189,248,0.2)',
+        borderRadius: 20,
         padding: '48px 40px',
         maxWidth: 440,
         width: '100%',
@@ -76,9 +77,9 @@ export default function RecuperarSenhaPage() {
             </p>
             <Link href="/login" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
-              color: '#fff', textDecoration: 'none', borderRadius: 10,
-              padding: '12px 24px', fontWeight: 700, fontSize: '0.95rem'
+              background: 'linear-gradient(135deg, #FFC107, #F59E0B)',
+              color: '#0A122C', textDecoration: 'none', borderRadius: 12,
+              padding: '12px 24px', fontWeight: 800, fontSize: '0.95rem'
             }}>
               Voltar ao Login
             </Link>
@@ -110,21 +111,23 @@ export default function RecuperarSenhaPage() {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="seuemail@exemplo.com"
                 required
+                onFocus={e => e.target.style.borderColor = '#38BDF8'}
+                onBlur={e => e.target.style.borderColor = 'rgba(56,189,248,0.2)'}
                 style={{
-                  width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.1)',
+                  width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(56,189,248,0.2)',
                   borderRadius: 12, padding: '14px 16px 14px 44px', color: '#fff', fontSize: '0.95rem',
-                  fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s'
+                  fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s'
                 }}
               />
             </div>
 
             <button type="submit" disabled={loading} style={{
               width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-              background: 'linear-gradient(135deg, #3b82f6, #06b6d4)',
-              color: '#fff', border: 'none', borderRadius: 12, padding: '15px',
-              fontSize: '1rem', fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer',
+              background: 'linear-gradient(135deg, #FFC107, #F59E0B)',
+              color: '#0A122C', border: 'none', borderRadius: 12, padding: '15px',
+              fontSize: '1rem', fontWeight: 800, cursor: loading ? 'not-allowed' : 'pointer',
               opacity: loading ? 0.7 : 1, transition: 'all 0.2s',
-              boxShadow: '0 4px 14px rgba(59,130,246,0.3)'
+              boxShadow: '0 4px 14px rgba(255,193,7,0.3)'
             }}>
               {loading ? 'Enviando...' : 'Enviar Link de Recuperação'}
               {!loading && <ArrowRight size={18} />}
