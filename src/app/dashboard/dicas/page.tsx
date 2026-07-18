@@ -216,19 +216,22 @@ export default function DicasPage() {
         </div>
       ) : (
         <div className={styles.tipsGrid}>
-          {tips.map((tip) => (
-            <article 
-              key={tip.id} 
-              className={styles.tipCard}
-              onClick={() => setSelectedTip(tip)}
-            >
-              <div className={styles.imageWrapper}>
-                <img 
-                  src={tip.url || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"} 
-                  alt={tip.titulo} 
-                  className={styles.cardImage} 
-                />
-                <span className={styles.badge}>HACK VIP</span>
+          {tips.map((tip) => {
+            const hasValidImage = tip.url && (tip.url.startsWith('http://') || tip.url.startsWith('https://') || tip.url.startsWith('/'));
+            const tipImgUrl = hasValidImage ? tip.url : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
+            return (
+              <article 
+                key={tip.id} 
+                className={styles.tipCard}
+                onClick={() => setSelectedTip(tip)}
+              >
+                <div className={styles.imageWrapper}>
+                  <img 
+                    src={tipImgUrl} 
+                    alt={tip.titulo} 
+                    className={styles.cardImage} 
+                  />
+                  <span className={styles.badge}>HACK VIP</span>
                 <span className={styles.readTime}>
                   <Clock size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
                   {getReadingTime(tip.descricao)}
@@ -250,7 +253,8 @@ export default function DicasPage() {
                 </div>
               </div>
             </article>
-          ))}
+          );
+          })}
         </div>
       )}
 
@@ -259,11 +263,17 @@ export default function DicasPage() {
         <div className={styles.modalOverlay} onClick={() => setSelectedTip(null)}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <img 
-                src={selectedTip.url || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"} 
-                alt={selectedTip.titulo} 
-                className={styles.modalHeaderImage} 
-              />
+              {(() => {
+                const hasValidModalImg = selectedTip.url && (selectedTip.url.startsWith('http://') || selectedTip.url.startsWith('https://') || selectedTip.url.startsWith('/'));
+                const modalImgUrl = hasValidModalImg ? selectedTip.url : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
+                return (
+                  <img 
+                    src={modalImgUrl} 
+                    alt={selectedTip.titulo} 
+                    className={styles.modalHeaderImage} 
+                  />
+                );
+              })()}
               <div className={styles.modalHeaderOverlay} />
               <button className={styles.closeButton} onClick={() => setSelectedTip(null)}>
                 <X size={20} />

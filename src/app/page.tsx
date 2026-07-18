@@ -633,7 +633,7 @@ export default function Home() {
               >
                 {blogArticles.map((article) => (
                   <div key={article.id} className={styles.blogCarouselSlide}>
-                    <BlogCard article={article} />
+                    <BlogCard article={article} compact={true} />
                   </div>
                 ))}
               </div>

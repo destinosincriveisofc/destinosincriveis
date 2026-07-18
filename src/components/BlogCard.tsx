@@ -15,15 +15,44 @@ export interface BlogArticle {
 
 interface BlogCardProps {
   article: BlogArticle;
+  compact?: boolean;
 }
 
-export default function BlogCard({ article }: BlogCardProps) {
+const formatDateStr = (dateStr: string) => {
+  if (!dateStr) return "";
+  try {
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      const year = parts[0];
+      const month = parts[1];
+      const day = parts[2];
+      const months = [
+        "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+        "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+      ];
+      const mIdx = parseInt(month, 10) - 1;
+      if (mIdx >= 0 && mIdx < 12) {
+        return `${day} de ${months[mIdx]} de ${year}`;
+      }
+    }
+    return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  } catch {
+    return dateStr;
+  }
+};
+
+export default function BlogCard({ article, compact = false }: BlogCardProps) {
+  const hasValidImage = article.imageUrl && (article.imageUrl.startsWith('http://') || article.imageUrl.startsWith('https://') || article.imageUrl.startsWith('/'));
+  const imgUrl = hasValidImage 
+    ? article.imageUrl 
+    : "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop";
+
   return (
     <article className={styles.card}>
       {/* Image Container */}
       <div className={styles.imageArea}>
         <img
-          src={article.imageUrl}
+          src={imgUrl}
           alt={article.title}
           className={styles.image}
           loading="lazy"
@@ -38,20 +67,22 @@ export default function BlogCard({ article }: BlogCardProps) {
       <div className={styles.content}>
         <div className={styles.date}>
           <Calendar size={12} />
-          <span>{new Date(article.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+          <span>{formatDateStr(article.date)}</span>
         </div>
 
         <h3 className={styles.title}>
           {article.title}
         </h3>
 
-        <p className={styles.excerpt}>
-          {article.excerpt}
-        </p>
+        {!compact && (
+          <p className={styles.excerpt}>
+            {article.excerpt}
+          </p>
+        )}
 
         <div className={styles.footer}>
           <Link href="/blog" className={styles.link}>
-            <span>Ler mais</span>
+            <span>{compact ? "Ler notícia completa" : "Ler mais"}</span>
             <ArrowRight size={14} className={styles.linkIcon} />
           </Link>
         </div>
@@ -59,3 +90,4 @@ export default function BlogCard({ article }: BlogCardProps) {
     </article>
   );
 }
+

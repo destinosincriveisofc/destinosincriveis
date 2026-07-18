@@ -62,6 +62,42 @@ const MOCK_ALL_ARTICLES: BlogArticle[] = [
     imageUrl: "https://images.unsplash.com/photo-1489440543286-a69330151c0b?q=80&w=600&auto=format&fit=crop",
     date: "2026-06-15",
     slug: "europa-inverno-destinos-baratos"
+  },
+  {
+    id: "7",
+    title: "Como funciona o stopover gratuito de companhias aéreas",
+    excerpt: "Conheça as regras para adicionar uma parada gratuita de alguns dias na cidade de conexão do seu voo sem pagar a mais na passagem.",
+    category: "Milhas",
+    imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-12",
+    slug: "como-funciona-stopover-gratuito"
+  },
+  {
+    id: "8",
+    title: "Os segredos do seguro viagem do cartão de crédito",
+    excerpt: "Entenda como acionar a cobertura de saúde, atraso de bagagem ou cancelamento oferecida gratuitamente pelo seu cartão Visa, Master ou Amex.",
+    category: "Dicas",
+    imageUrl: "https://images.unsplash.com/photo-1589758438311-18e4724a6b20?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-15",
+    slug: "segredos-seguro-viagem-cartao"
+  },
+  {
+    id: "9",
+    title: "Como planejar um mochilão pela América do Sul gastando pouco",
+    excerpt: "Do planejamento de rotas terrestres ao uso de hostels e alimentação local, tudo que você precisa para explorar Peru, Bolívia e Chile.",
+    category: "Destinos",
+    imageUrl: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-16",
+    slug: "mochilao-america-do-sul"
+  },
+  {
+    id: "10",
+    title: "ChatGPT para Viagens: Como montar roteiros perfeitos em minutos",
+    excerpt: "Aprenda a estruturar prompts inteligentes para criar roteiros otimizados, encontrar atrações fora do óbvio e otimizar seu tempo.",
+    category: "Dicas",
+    imageUrl: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-17",
+    slug: "chatgpt-roteiros-viagem"
   }
 ];
 
@@ -88,7 +124,14 @@ export default function BlogPage() {
             date: item.criado_em ? item.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
             slug: item.id || 'artigo'
           }));
-          setArticles(mapped);
+          
+          const merged = [...mapped];
+          MOCK_ALL_ARTICLES.forEach(mock => {
+            if (merged.length < 10 && !merged.some(m => m.title === mock.title)) {
+              merged.push(mock);
+            }
+          });
+          setArticles(merged);
         } else {
           setArticles(MOCK_ALL_ARTICLES);
         }
@@ -177,7 +220,7 @@ export default function BlogPage() {
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className={styles.grid3}>
+            <div className={styles.feedContainer}>
               {filteredArticles.map((article) => (
                 <BlogCard key={article.id} article={article} />
               ))}

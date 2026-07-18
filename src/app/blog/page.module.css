@@ -163,6 +163,15 @@
   gap: 32px;
 }
 
+.feedContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 768px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .grid3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));

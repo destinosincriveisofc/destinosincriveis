@@ -22,7 +22,10 @@ const DESTINATION_IMAGES: Record<string, string> = {
 };
 
 export default function OfferCard({ offer }: OfferCardProps) {
-  const imageUrl = offer.imagem_url || DESTINATION_IMAGES[offer.destination || ""] || "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop";
+  const hasValidImage = offer.imagem_url && (offer.imagem_url.startsWith('http://') || offer.imagem_url.startsWith('https://') || offer.imagem_url.startsWith('/'));
+  const imageUrl = hasValidImage 
+    ? offer.imagem_url! 
+    : (DESTINATION_IMAGES[offer.destination || ""] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop");
 
   const price = offer.price || 0;
   const originalPrice = offer.originalPrice || price || 1;

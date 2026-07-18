@@ -253,17 +253,19 @@ function DashboardPageContent() {
           ) : (
             <div className={styles.offersGrid}>
               {offers.map((offer, index) => {
-                const destKey = (offer.destino || 'travel').toLowerCase().replace(/[^a-z]/g, '');
-                const imgUrl = offer.imagem_url || `https://source.unsplash.com/400x300/?${destKey},travel`;
-                return (
-                  <div key={index} className={styles.offerCard}>
-                    <div className={styles.offerImageWrapper}>
-                      <img 
-                        src={imgUrl} 
-                        alt={offer.destino} 
-                        className={styles.offerImage}
-                        onError={(e) => { (e.target as HTMLImageElement).src = `https://source.unsplash.com/400x300/?travel,vacation`; }}
-                      />
+                 const hasValidImg = offer.imagem_url && (offer.imagem_url.startsWith('http://') || offer.imagem_url.startsWith('https://') || offer.imagem_url.startsWith('/'));
+                 const imgUrl = hasValidImg 
+                   ? offer.imagem_url 
+                   : "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop";
+                 return (
+                   <div key={index} className={styles.offerCard}>
+                     <div className={styles.offerImageWrapper}>
+                       <img 
+                         src={imgUrl} 
+                         alt={offer.destino} 
+                         className={styles.offerImage}
+                         onError={(e) => { (e.target as HTMLImageElement).src = `https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop`; }}
+                       />
                       <span className={styles.discountTag}>{offer.desconto_percent}% de Desconto</span>
                     </div>
                     <div className={styles.offerBody}>
