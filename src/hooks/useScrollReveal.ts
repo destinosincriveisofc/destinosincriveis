@@ -1,34 +1,40 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
 export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   options?: IntersectionObserverInit
 ) {
-  const ref = useRef<T>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const ref = useCallback((node: T | null) => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+    if (node) {
+      observerRef.current = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            node.classList.add('visible');
+            observerRef.current?.unobserve(node);
+          }
+        },
+        {
+          threshold: 0.08,
+          rootMargin: '0px 0px -40px 0px',
+          ...options,
+        }
+      );
+      observerRef.current.observe(node);
+    }
+  }, [options?.threshold, options?.rootMargin]);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('visible');
-          observer.unobserve(el);
-        }
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px',
-        ...options,
-      }
-    );
-
-    observer.observe(el);
-
-    return () => observer.disconnect();
-  }, [options?.threshold, options?.rootMargin]);
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+    };
+  }, []);
 
   return ref;
 }

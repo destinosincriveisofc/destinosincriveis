@@ -62,7 +62,7 @@ const MOCK_ARTICLES: BlogArticle[] = [
 
 async function getRealOffers(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers');
+    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers', { signal: AbortSignal.timeout(8000) });
     if (!res.ok) throw new Error(`Server returned status ${res.status}`);
     const contentType = res.headers.get("content-type");
     if (contentType && !contentType.includes("application/json")) throw new Error(`Invalid content type: ${contentType}`);
@@ -157,7 +157,7 @@ export default function Home() {
   useEffect(() => {
     const loadBlog = async () => {
       try {
-        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog');
+        const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog', { signal: AbortSignal.timeout(8000) });
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         if (Array.isArray(data) && data.length > 0) {

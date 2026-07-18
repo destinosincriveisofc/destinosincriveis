@@ -62,7 +62,7 @@ const MOCK_OFFERS: FlightOffer[] = [
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers');
+    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers', { signal: AbortSignal.timeout(8000) });
     if (!res.ok) {
       throw new Error(`Server returned status ${res.status}`);
     }
@@ -128,7 +128,7 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
   } catch (e) {
     console.error("Robust fetch from API failed, using fallback:", e);
     try {
-      const localRes = await fetch('/offers.json');
+      const localRes = await fetch('/offers.json', { signal: AbortSignal.timeout(5000) });
       if (localRes.ok) {
         const localData = await localRes.json();
         if (Array.isArray(localData) && localData.length > 0) {
@@ -339,9 +339,10 @@ export default function OfertasPage() {
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className={`${styles.grid3} fade-in-up`}>
-              {Array.isArray(filteredOffers) ? filteredOffers.map((offer) => (
-                <div key={offer.id || String(Math.random())} className="hover-lift">
+            <div className={styles.grid3}>
+              {Array.isArray(filteredOffers) ? filteredOffers.map((offer, idx) => (
+                <div key={offer.id || String(Math.random())} className="hover-lift"
+                     style={{ animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards`, animationDelay: `${(idx % 8) * 0.08}s` }}>
                   <OfferCard offer={offer} />
                 </div>
               )) : null}
