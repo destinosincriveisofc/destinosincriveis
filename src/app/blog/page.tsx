@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import { Search, RefreshCw } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 const MOCK_ALL_ARTICLES: BlogArticle[] = [
@@ -177,6 +178,8 @@ export default function BlogPage() {
 
   const categories = ['todos', ...Array.from(new Set(articles.map(a => a.category.toLowerCase())))];
 
+  const feedRef = useScrollReveal<HTMLDivElement>();
+
   return (
     <>
       <Header />
@@ -230,9 +233,11 @@ export default function BlogPage() {
               <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className={styles.feedContainer}>
-              {filteredArticles.map((article) => (
-                <BlogCard key={article.id} article={article} />
+            <div ref={feedRef} className={`${styles.feedContainer} fade-in-up`}>
+              {filteredArticles.map((article, idx) => (
+                <div key={article.id} className={`fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
+                  <BlogCard article={article} />
+                </div>
               ))}
             </div>
           )}

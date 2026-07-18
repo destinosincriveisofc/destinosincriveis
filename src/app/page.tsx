@@ -12,6 +12,7 @@ import IaConciergeSection from '@/components/IaConciergeSection';
 import SocialProof from '@/components/SocialProof';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import { FlightOffer } from '@/lib/travelpayouts';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
 const MOCK_ARTICLES: BlogArticle[] = [
@@ -217,6 +218,10 @@ export default function Home() {
   const handlePrevBlog = () => setCurrentBlogIndex((p) => (p === 0 ? maxIndex : p - 1));
   const handleNextBlog = () => setCurrentBlogIndex((p) => (p >= maxIndex ? 0 : p + 1));
 
+  const offersSectionRef = useScrollReveal<HTMLElement>();
+  const blogSectionRef = useScrollReveal<HTMLElement>();
+  const checkoutSectionRef = useScrollReveal<HTMLElement>();
+
   return (
     <>
       <Header />
@@ -228,7 +233,7 @@ export default function Home() {
         <IaConciergeSection />
 
         {/* Carrossel de Ofertas */}
-        <section id="ofertas" className={styles.sectionIce}>
+        <section id="ofertas" ref={offersSectionRef} className={`${styles.sectionIce} fade-in-up`}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
@@ -262,10 +267,10 @@ export default function Home() {
                     transform: `translateX(calc(-${currentOfferIndex} * (var(--offer-slide-width) + var(--offer-gap))))`
                   }}
                 >
-                  {alertOffers.map((offer) => (
-                    <div key={offer.id} className={styles.offerCarouselSlide}>
+                  {alertOffers.map((offer, idx) => (
+                    <div key={offer.id} className={`${styles.offerCarouselSlide} fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
                       <Link href="/ofertas" className={styles.offerSlideLink}>
-                        <div className={styles.offerSlideCard}>
+                        <div className={`${styles.offerSlideCard} hover-lift`}>
                           <img
                             src={offer.imagem_url || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop"}
                             alt={offer.destinationName || "Destino"}
@@ -316,7 +321,7 @@ export default function Home() {
         <SocialProof />
 
         {/* Carrossel de Dicas & Notícias */}
-        <section className={styles.sectionAlt}>
+        <section ref={blogSectionRef} className={`${styles.sectionAlt} fade-in-up`}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
               <div className={styles.sectionHeaderLeft}>
@@ -341,10 +346,10 @@ export default function Home() {
                   transform: `translateX(calc(-${currentBlogIndex} * (var(--blog-slide-width) + var(--blog-gap))))`
                 }}
               >
-                {blogArticles.map((article) => (
-                  <div key={article.id} className={styles.blogCarouselSlide}>
+                  {blogArticles.map((article, idx) => (
+                  <div key={article.id} className={`${styles.blogCarouselSlide} fade-in-up-fast delay-${Math.min(idx + 1, 6)}`}>
                     <Link href={`/blog/artigo?id=${article.id}`} className={styles.blogSlideLink}>
-                      <div className={styles.blogSlideCard}>
+                      <div className={`${styles.blogSlideCard} hover-lift`}>
                         <img src={article.imageUrl} alt={article.title} className={styles.blogSlideImage} />
                         <div className={styles.blogSlideTag}>{article.category}</div>
                         <h3 className={styles.blogSlideTitle}>{article.title}</h3>
@@ -380,7 +385,7 @@ export default function Home() {
         </section>
 
         {/* Checkout Rápido R$9,90/mês */}
-        <section className={styles.checkoutSection}>
+        <section ref={checkoutSectionRef} className={`${styles.checkoutSection} fade-in-up`}>
           <div className={styles.container}>
             <div className={styles.checkoutCard}>
               <span className={styles.badge}>Club Dija</span>
@@ -400,7 +405,7 @@ export default function Home() {
                   <span>Comunidade privada de viajantes</span>
                 </div>
               </div>
-              <Link href="/checkout" className={styles.checkoutBtn}>
+              <Link href="/checkout" className={`${styles.checkoutBtn} hover-lift`}>
                 Quero economizar
                 <ArrowRight size={18} />
               </Link>

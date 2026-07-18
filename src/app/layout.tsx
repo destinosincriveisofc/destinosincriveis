@@ -4,6 +4,7 @@ import Script from "next/script";
 import "@/styles/globals.css";
 import PushRegister from "@/components/PushRegister";
 import BottomNav from "@/components/BottomNav";
+import SoundEffectProvider from "@/components/SoundEffectProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,8 +36,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Destinos Incríveis" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body>
+      <body className="bg-glow-container">
         <PushRegister />
+        <SoundEffectProvider />
         {children}
         <BottomNav />
       </body>
