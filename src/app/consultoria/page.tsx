@@ -281,9 +281,9 @@ export default function ConsultoriaPage() {
                         fontSize: '0.9rem', 
                         fontWeight: '600',
                         textAlign: 'center',
-                        backgroundColor: statusType === 'success' ? '#e6f4ea' : '#fce8e6', 
-                        color: statusType === 'success' ? '#137333' : '#c5221f',
-                        border: `1px solid ${statusType === 'success' ? '#ceead6' : '#fad2cf'}`
+                        backgroundColor: statusType === 'success' ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', 
+                        color: statusType === 'success' ? '#6ee7b7' : '#fca5a5',
+                        border: `1px solid ${statusType === 'success' ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'}`
                       }}
                     >
                       {statusMsg}
