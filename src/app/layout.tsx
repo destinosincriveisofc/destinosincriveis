@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "@/styles/globals.css";
 import PushRegister from "@/components/PushRegister";
 
@@ -36,6 +37,20 @@ export default function RootLayout({
       <body>
         <PushRegister />
         {children}
+        <Script
+          id="travelpayouts-drive"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                  var script = document.createElement("script");
+                  script.async = 1;
+                  script.src = 'https://emrldtp.cc/NTUwODk3.js?t=550897';
+                  document.head.appendChild(script);
+              })();
+            `
+          }}
+        />
       </body>
     </html>
   );

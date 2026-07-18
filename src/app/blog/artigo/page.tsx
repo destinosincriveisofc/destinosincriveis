@@ -367,6 +367,15 @@ function ArticleReader() {
           </div>
         </article>
 
+        {/* Travelpayouts Hotel Search Widget */}
+        <div className="tp-widget-container-hotel my-8 p-6 bg-slate-900/60 rounded-2xl border border-blue-500/20 max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-blue-400 mb-2">Encontre Hotéis com até 60% de Desconto</h2>
+          <p className="text-gray-300 mb-6">
+            Pronto para planejar sua estadia? Pesquise hotéis e resorts no nosso buscador de hospedagens parceiro.
+          </p>
+          <div className="tp-widget-handle-hotel" data-widget-id="hotel-search" />
+        </div>
+
         {/* Related articles */}
         {related.length > 0 && !vip && (
           <div className={styles.relatedSection}>

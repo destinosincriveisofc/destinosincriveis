@@ -248,6 +248,15 @@ export default function OfertasPage() {
               )) : null}
             </div>
           )}
+
+          {/* Travelpayouts Flight Search Widget */}
+          <div className="tp-widget-container my-12 p-6 bg-slate-900/60 rounded-2xl border border-yellow-500/20 max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-yellow-400 mb-2">Pesquise passagens aéreas em tempo real</h2>
+            <p className="text-gray-300 mb-6">
+              Não encontrou a data ideal ou o seu destino nas ofertas? Use nosso buscador parceiro para encontrar as tarifas mais baratas em segundos!
+            </p>
+            <div className="tp-widget-handle" data-widget-id="flight-search" />
+          </div>
         </div>
       </main>
       <ChatWidget />
