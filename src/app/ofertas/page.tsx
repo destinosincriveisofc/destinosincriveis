@@ -41,7 +41,10 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       SSA: { name: "Salvador", country: "Brasil", code: "BR" },
       REC: { name: "Recife", country: "Brasil", code: "BR" },
       GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
-      VCP: { name: "Campinas", country: "Brasil", code: "BR" }
+      VCP: { name: "Campinas", country: "Brasil", code: "BR" },
+      BSB: { name: "Brasília", country: "Brasil", code: "BR" },
+      RIO: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
+      GIG: { name: "Rio de Janeiro", country: "Brasil", code: "BR" }
     };
     
     const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);

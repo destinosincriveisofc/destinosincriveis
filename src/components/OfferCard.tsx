@@ -19,6 +19,8 @@ const DESTINATION_IMAGES: Record<string, string> = {
   SDU: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop", // Rio
   SSA: "https://images.unsplash.com/photo-1582238479700-f9f381297e68?q=80&w=600&auto=format&fit=crop", // Salvador
   REC: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=600&auto=format&fit=crop", // Recife
+  BSB: "https://images.unsplash.com/photo-1599839619433-28f0b7bf1b20?q=80&w=600&auto=format&fit=crop", // Brasília
+  RIO: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop", // Rio
 };
 
 export default function OfferCard({ offer }: OfferCardProps) {
@@ -121,7 +123,7 @@ export default function OfferCard({ offer }: OfferCardProps) {
       {/* Image & Badges */}
       <div className={styles.imageArea}>
         <img
-          src={offer.imagem_url || 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80'}
+          src={imageUrl}
           alt={offer.destinationName || offer.destination || "Destino"}
           onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80' }}
           style={{width:'100%', height:'200px', objectFit:'cover'}}
@@ -136,6 +138,16 @@ export default function OfferCard({ offer }: OfferCardProps) {
 
         {/* Country Badge (No emoji) */}
         <div className={styles.countryBadge}>
+          {offer.countryCode && offer.countryCode !== 'UN' ? (
+            <img 
+              src={`https://flagcdn.com/16x12/${offer.countryCode.toLowerCase()}.png`} 
+              alt={offer.countryName} 
+              onError={(e) => { e.currentTarget.style.display = 'none'; }} 
+              style={{ width: '16px', height: '12px', marginRight: '4px', objectFit: 'contain' }}
+            />
+          ) : (
+            <span style={{ marginRight: '4px' }}>📍</span>
+          )}
           <span>{offer.countryName || "Destino"}</span>
         </div>
 
