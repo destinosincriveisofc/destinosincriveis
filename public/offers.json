@@ -1,5 +1,22 @@
 [
   {
+    "id": "GRU-CWB",
+    "origem": "GRU",
+    "destino": "CWB",
+    "preco_atual": 381.0,
+    "preco_original": 1200.0,
+    "desconto_percent": 68,
+    "companhia": "AZUL",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK",
+    "imagem_url": "https://picsum.photos/800/600?random=69956",
+    "tipo": "voo",
+    "nota_urgencia": 10,
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Curitiba*\n🏢 Azul\n\n💰 De ~~R$ 1200~~ por apenas *R$ 381*\n📊 Você economiza *68%*\n📅 Datas disponíveis: Datas selecionadas do segundo semestre de 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "ativo": 1,
+    "criado_em": "2026-07-18 14:00:23",
+    "vip_only": 0
+  },
+  {
     "id": "GRU-RIO DE JANEIRO",
     "origem": "GRU",
     "destino": "Rio de Janeiro",
