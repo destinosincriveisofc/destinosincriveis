@@ -179,9 +179,9 @@ export default function OfferCard({ offer }: OfferCardProps) {
           </div>
 
           <a
-            href={offer.link_afiliado || (offer as any).url_afiliado || "/club"}
-            target={offer.link_afiliado || (offer as any).url_afiliado ? "_blank" : undefined}
-            rel={offer.link_afiliado || (offer as any).url_afiliado ? "noopener noreferrer" : undefined}
+            href={offer.link_afiliado || (offer as any).url_afiliado || offer.link || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.ctaButton}
           >
             <span>Ver oferta</span>
