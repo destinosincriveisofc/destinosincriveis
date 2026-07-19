@@ -12,7 +12,12 @@ interface Message {
 
 export default function GuiaPage() {
   const router = useRouter();
-  const [token, setToken] = React.useState<string | null>(null);
+  const [token, setToken] = React.useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem("token");
+    }
+    return null;
+  });
   const [messages, setMessages] = React.useState<Message[]>([]);
   const [input, setInput] = React.useState("");
   const [isTyping, setIsTyping] = React.useState(false);
@@ -22,8 +27,6 @@ export default function GuiaPage() {
     const storedToken = localStorage.getItem("token");
     if (!storedToken) {
       router.push("/login");
-    } else {
-      setToken(storedToken);
     }
   }, [router]);
 

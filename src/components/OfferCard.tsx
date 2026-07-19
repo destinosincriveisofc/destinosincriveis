@@ -24,11 +24,6 @@ export default function OfferCard({ offer }: OfferCardProps) {
   const [likesCount, setLikesCount] = useState(baseLikes);
   const [imgError, setImgError] = useState(false);
 
-  useEffect(() => {
-    const { likes } = getSocialMetrics(offer.id);
-    setLikesCount(likes);
-  }, [offer.id]);
-
   const price = offer.price || 0;
   const originalPrice = offer.originalPrice || price || 1;
   const discount = Math.round(((originalPrice - price) / originalPrice) * 100);

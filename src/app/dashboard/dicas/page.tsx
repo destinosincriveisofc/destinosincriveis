@@ -25,22 +25,6 @@ export default function DicasPage() {
   const [likedTips, setLikedTips] = React.useState<Record<string, boolean>>({});
   const [likesCounts, setLikesCounts] = React.useState<Record<string, number>>({});
 
-  React.useEffect(() => {
-    if (tips.length > 0) {
-      const counts: Record<string, number> = { ...likesCounts };
-      tips.forEach(tip => {
-        if (counts[tip.id] === undefined) {
-          let hash = 0;
-          for (let i = 0; i < tip.id.length; i++) {
-            hash = tip.id.charCodeAt(i) + ((hash << 5) - hash);
-          }
-          counts[tip.id] = Math.abs(hash % 35) + 5;
-        }
-      });
-      setLikesCounts(counts);
-    }
-  }, [tips]);
-
   const handleLike = async (e: React.MouseEvent, tipId: string) => {
     e.preventDefault();
     e.stopPropagation();
@@ -83,15 +67,6 @@ export default function DicasPage() {
     }
   };
 
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-    fetchTips(token);
-  }, [router]);
-
   const fetchTips = async (token: string) => {
     setLoading(true);
     try {
@@ -102,7 +77,20 @@ export default function DicasPage() {
       });
       if (response.ok) {
         const data = await response.json();
-        setTips(Array.isArray(data) ? data : []);
+        const tipsData = Array.isArray(data) ? data : [];
+        setTips(tipsData);
+        
+        const counts: Record<string, number> = { ...likesCounts };
+        tipsData.forEach(tip => {
+          if (counts[tip.id] === undefined) {
+            let hash = 0;
+            for (let i = 0; i < tip.id.length; i++) {
+              hash = tip.id.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            counts[tip.id] = Math.abs(hash % 35) + 5;
+          }
+        });
+        setLikesCounts(counts);
       } else if (response.status === 401) {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
@@ -114,6 +102,17 @@ export default function DicasPage() {
       setLoading(false);
     }
   };
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+    setTimeout(() => {
+      fetchTips(token);
+    }, 0);
+  }, [router]);
 
   // Estimate reading time in minutes based on words
   const getReadingTime = (text: string): string => {

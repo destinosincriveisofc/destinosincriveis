@@ -171,7 +171,6 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
 
 export default function OfertasPage() {
   const [offers, setOffers] = useState<FlightOffer[]>(MOCK_OFFERS);
-  const [filteredOffers, setFilteredOffers] = useState<FlightOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
   const introRef = useScrollReveal<HTMLDivElement>();
@@ -210,8 +209,7 @@ export default function OfertasPage() {
     loadOffers();
   }, []);
 
-  // Filter application
-  useEffect(() => {
+  const filteredOffers = React.useMemo(() => {
     let result = offers;
 
     if (searchTerm.trim() !== '') {
@@ -230,8 +228,7 @@ export default function OfertasPage() {
 
     result = result.filter(o => o.price <= maxPrice);
 
-    // Limit to the latest 8 offers matching the filters
-    setFilteredOffers(result.slice(0, 8));
+    return result.slice(0, 8);
   }, [searchTerm, selectedType, maxPrice, offers]);
 
   return (
@@ -343,7 +340,7 @@ export default function OfertasPage() {
           ) : (
             <div className={styles.grid3}>
               {Array.isArray(filteredOffers) ? filteredOffers.map((offer, idx) => (
-                <div key={offer.id || String(Math.random())} className="hover-lift"
+                <div key={offer.id || `offer-${idx}`} className="hover-lift"
                      style={{ animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards`, animationDelay: `${(idx % 8) * 0.08}s` }}>
                   <OfferCard offer={offer} />
                 </div>

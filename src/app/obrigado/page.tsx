@@ -6,25 +6,31 @@ import { Check, MessageSquare, Lock, ArrowRight } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function ObrigadoPage() {
-  const [email, setEmail] = React.useState("");
-  const [nome, setNome] = React.useState("");
+  const [email, setEmail] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('email') || "";
+    }
+    return "";
+  });
+  const [nome, setNome] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('nome') || "";
+    }
+    return "";
+  });
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  const [showForm, setShowForm] = React.useState(false);
-
-  React.useEffect(() => {
+  const [showForm, setShowForm] = React.useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
-      const emailParam = params.get('email');
-      setEmail(emailParam || "");
-      setNome(params.get('nome') || "");
-      if (emailParam !== null) {
-        setShowForm(true);
-      }
+      return params.get('email') !== null;
     }
-  }, []);
+    return false;
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

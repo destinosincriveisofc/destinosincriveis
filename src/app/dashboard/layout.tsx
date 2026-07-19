@@ -17,7 +17,13 @@ import {
 import styles from './page.module.css';
 
 function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<any>(null);
+  const [user, setUser] = React.useState<any>(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem("user");
+      return storedUser ? JSON.parse(storedUser) : null;
+    }
+    return null;
+  });
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -25,11 +31,8 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
     if (!token) {
       router.push("/login");
-    } else if (storedUser) {
-      setUser(JSON.parse(storedUser));
     }
   }, [router]);
 

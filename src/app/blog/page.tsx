@@ -98,7 +98,6 @@ async function fetchBlogArticles(): Promise<BlogArticle[]> {
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<BlogArticle[]>([]);
-  const [filteredArticles, setFilteredArticles] = useState<BlogArticle[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState(true);
@@ -110,15 +109,12 @@ export default function BlogPage() {
         const data = await fetchBlogArticles();
         if (data && data.length > 0) {
           setArticles(data);
-          setFilteredArticles(data);
         } else {
           setArticles(MOCK_ARTICLES);
-          setFilteredArticles(MOCK_ARTICLES);
         }
       } catch (err) {
         console.warn('Failed to fetch blog articles, using mock fallback:', err);
         setArticles(MOCK_ARTICLES);
-        setFilteredArticles(MOCK_ARTICLES);
       } finally {
         setLoading(false);
       }
@@ -126,22 +122,15 @@ export default function BlogPage() {
     load();
   }, []);
 
-  useEffect(() => {
-    let result = articles;
-    if (selectedCategory !== 'todos') {
-      result = result.filter(a => a.category.toLowerCase() === selectedCategory.toLowerCase());
-    }
-    if (searchTerm.trim() !== '') {
-      const term = searchTerm.toLowerCase();
-      result = result.filter(
-        a =>
-          a.title.toLowerCase().includes(term) ||
-          a.excerpt.toLowerCase().includes(term) ||
-          a.category.toLowerCase().includes(term)
-      );
-    }
-    setFilteredArticles(result);
-  }, [selectedCategory, searchTerm, articles]);
+  const filteredArticles = articles.filter(a => {
+    const categoryMatches = selectedCategory === 'todos' || a.category.toLowerCase() === selectedCategory.toLowerCase();
+    const term = searchTerm.toLowerCase().trim();
+    const searchMatches = term === '' || 
+      a.title.toLowerCase().includes(term) ||
+      a.excerpt.toLowerCase().includes(term) ||
+      a.category.toLowerCase().includes(term);
+    return categoryMatches && searchMatches;
+  });
 
   const categories = ['todos', 'dicas', 'destinos', 'milhas', 'economize'];
 

@@ -30,16 +30,7 @@ export default function VIPOffersPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [likedOffers, setLikedOffers] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-    fetchVIPOffers(token);
-  }, [router]);
-
-  const fetchVIPOffers = async (token: string) => {
+  async function fetchVIPOffers(token: string) {
     setLoading(true);
     setError(null);
     try {
@@ -75,7 +66,18 @@ export default function VIPOffersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+    setTimeout(() => {
+      fetchVIPOffers(token);
+    }, 0);
+  }, [router]);
 
   const getFilteredOffers = () => {
     if (activeFilter === 'all') return offers;

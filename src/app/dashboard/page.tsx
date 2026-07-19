@@ -26,11 +26,7 @@ function DashboardPageContent() {
   const [searchSubmitting, setSearchSubmitting] = React.useState(false);
   const [searchMsg, setSearchMsg] = React.useState('');
 
-  React.useEffect(() => {
-    fetchOffers();
-  }, []);
-
-  const fetchOffers = async () => {
+  async function fetchOffers() {
     setLoadingOffers(true);
     try {
       const token = localStorage.getItem('token');
@@ -46,7 +42,13 @@ function DashboardPageContent() {
     } finally {
       setLoadingOffers(false);
     }
-  };
+  }
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      fetchOffers();
+    }, 0);
+  }, []);
 
   const handleSearchSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -27,7 +27,12 @@ interface Post {
 
 export default function ComunidadePage() {
   const router = useRouter();
-  const [token, setToken] = React.useState<string | null>(null);
+  const [token, setToken] = React.useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem("token");
+    }
+    return null;
+  });
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [newPostText, setNewPostText] = React.useState("");
@@ -38,16 +43,6 @@ export default function ComunidadePage() {
   
   const [uploading, setUploading] = React.useState(false);
   const [commentInputs, setCommentInputs] = React.useState<Record<string, string>>({});
-
-  React.useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (!storedToken) {
-      router.push("/login");
-    } else {
-      setToken(storedToken);
-      fetchFeed(storedToken);
-    }
-  }, [router]);
 
   const fetchFeed = async (authToken: string) => {
     setLoading(true);
@@ -69,6 +64,17 @@ export default function ComunidadePage() {
       setLoading(false);
     }
   };
+
+  React.useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (!storedToken) {
+      router.push("/login");
+    } else {
+      setTimeout(() => {
+        fetchFeed(storedToken);
+      }, 0);
+    }
+  }, [router]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {

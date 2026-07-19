@@ -52,20 +52,15 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
   };
   const imgToRender = (item.imagem_url && item.imagem_url.startsWith('http')) ? item.imagem_url : ((DESTINATION_IMAGES[item.destino]?.url) || DEFAULT_FALLBACK);
 
-  // State for likes
   const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
-
-  // Initialize random but stable like count based on ID
-  useEffect(() => {
+  const [likesCount, setLikesCount] = useState(() => {
     let hash = 0;
     const str = article.id || "";
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const initialLikes = Math.abs(hash % 45) + 3;
-    setLikesCount(initialLikes);
-  }, [article.id]);
+    return Math.abs(hash % 45) + 3;
+  });
 
   const handleLike = async (e: React.MouseEvent) => {
     e.preventDefault();
