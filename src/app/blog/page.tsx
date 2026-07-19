@@ -198,7 +198,7 @@ export default function BlogPage() {
               <p className="text-sm text-slate-400">Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex flex-col gap-8 max-w-xl mx-auto">
               {filteredArticles.map((article) => (
                 <BlogCard key={article.id} article={article} />
               ))}

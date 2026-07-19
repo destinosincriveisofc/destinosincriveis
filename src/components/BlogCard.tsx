@@ -133,7 +133,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
 
   return (
     <Link href={`/blog/artigo?id=${article.id}`} className={styles.cardLink}>
-      <article className={styles.card}>
+      <article className="bg-[#0a122c]/60 backdrop-blur-md border border-sky-500/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-sky-500/5 hover:border-sky-500/20 transition-all duration-300 flex flex-col h-full">
         {/* Image Container */}
         <div className={styles.imageArea}>
           <img

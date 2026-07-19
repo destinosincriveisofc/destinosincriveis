@@ -1,8 +1,12 @@
+"use client";
+
 import React from 'react';
 import { Users, Award, ShieldCheck, Flame } from 'lucide-react';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './StatsSection.module.css';
 
 export default function StatsSection() {
+  const revealRef = useScrollReveal();
   const stats = [
     {
       id: 1,
@@ -31,7 +35,7 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} fade-in-up`} ref={revealRef}>
       <div className={styles.container}>
         {stats.map((stat) => (
           <div key={stat.id} className={styles.statCard}>

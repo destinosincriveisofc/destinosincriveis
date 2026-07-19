@@ -216,7 +216,7 @@ export default async function Home() {
               </div>
 
               {/* Consultation Form */}
-              <div className={styles.formBox}>
+              <div className="bg-[#0a122c]/60 backdrop-blur-md border border-sky-500/20 rounded-2xl p-8 max-w-lg mx-auto shadow-2xl hover:shadow-sky-500/10 transition-all duration-300">
                 <h3 className={styles.formTitle}>Solicitar Roteiro Personalizado</h3>
                 <form className={styles.formGrid}>
                   <div className={styles.formField}>
@@ -224,7 +224,7 @@ export default async function Home() {
                     <input
                       type="text"
                       placeholder="Ex: Juliano Amorin"
-                      className={styles.input}
+                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
                     />
                   </div>
                   <div className={styles.formField}>
@@ -232,7 +232,7 @@ export default async function Home() {
                     <input
                       type="tel"
                       placeholder="Ex: (11) 99720-4445"
-                      className={styles.input}
+                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
                     />
                   </div>
                   <div className={styles.formField}>
@@ -240,7 +240,7 @@ export default async function Home() {
                     <input
                       type="text"
                       placeholder="Ex: São Paulo (GRU)"
-                      className={styles.input}
+                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
                     />
                   </div>
                   <div className={styles.formField}>
@@ -248,7 +248,7 @@ export default async function Home() {
                     <input
                       type="text"
                       placeholder="Ex: Roma, Itália"
-                      className={styles.input}
+                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
                     />
                   </div>
                   <div className={`${styles.formField} ${styles.span2}`}>
@@ -256,11 +256,11 @@ export default async function Home() {
                     <textarea
                       rows={3}
                       placeholder="Nos fale sobre a sua viagem dos sonhos e o período preferido..."
-                      className={`${styles.input} ${styles.textarea}`}
+                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
                     />
                   </div>
                   <div className={styles.span2}>
-                    <button type="submit" className={styles.submitBtn}>
+                    <button type="submit" className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#0a122c] font-bold p-4 rounded-lg shadow-lg hover:from-amber-500 hover:to-amber-600 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
                       Enviar Solicitação via WhatsApp
                     </button>
                   </div>

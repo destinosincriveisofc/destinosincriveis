@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --fundo-principal: #FAFBFF;
   --fundo-secundario: #F0F4FF;

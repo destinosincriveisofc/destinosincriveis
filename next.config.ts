@@ -5,6 +5,8 @@ import withPWA from "next-pwa";
 const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
+  basePath: '',
+  assetPrefix: '',
   images: { unoptimized: true },
   allowedDevOrigins: [
     '177.153.195.66',

@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+
 import { ArrowRight } from 'lucide-react';
 
 interface ApiArticle {
@@ -78,6 +80,7 @@ const FALLBACK_ARTICLES: BlogArticle[] = [
 
 export default function BlogSection() {
   const [articles, setArticles] = useState<BlogArticle[]>(FALLBACK_ARTICLES);
+  const revealRef = useScrollReveal();
 
   useEffect(() => {
     fetchLiveArticles().then(live => {
@@ -86,17 +89,17 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section className="bg-[#F7F9FC] py-20">
+    <section className="bg-transparent py-20 fade-in-up" ref={revealRef}>
       <div className="container">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Blog & Dicas</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0A1628] mt-2">Últimas novidades do blog</h2>
-            <p className="text-sm md:text-base text-[#8896A9] mt-2">
+            <span className="text-xs font-bold text-[#38BDF8] uppercase tracking-wider">Blog & Dicas</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2">Últimas novidades do blog</h2>
+            <p className="text-sm md:text-base text-slate-400 mt-2">
               Fique atualizado com as melhores estratégias e rotas selecionadas por nossos analistas.
             </p>
           </div>
-          <Link href="/blog" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 border border-[#0A1628] text-[#0A1628] rounded-full text-sm font-semibold hover:bg-[#0A1628] hover:text-white transition-all">
+          <Link href="/blog" className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 border border-sky-500/30 text-sky-400 rounded-full text-sm font-semibold hover:bg-sky-500/20 transition-all">
             Ver todos os artigos
             <ArrowRight size={16} />
           </Link>
@@ -109,7 +112,7 @@ export default function BlogSection() {
         </div>
 
         <div className="text-center mt-10 md:hidden">
-          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#0A1628] text-[#0A1628] rounded-full text-sm font-semibold hover:bg-[#0A1628] hover:text-white transition-all">
+          <Link href="/blog" className="inline-flex items-center gap-2 px-5 py-2.5 border border-sky-500/30 text-sky-400 rounded-full text-sm font-semibold hover:bg-sky-500/20 transition-all">
             Ver todos os artigos
             <ArrowRight size={16} />
           </Link>
