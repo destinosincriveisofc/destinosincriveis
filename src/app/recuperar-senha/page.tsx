@@ -107,6 +107,7 @@ export default function RecuperarSenhaPage() {
               <Mail size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
               <input
                 type="email"
+                className="premium-input"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="seuemail@exemplo.com"

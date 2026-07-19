@@ -298,13 +298,13 @@ export default function DicasPage() {
                   <span className={styles.badge}>HACK VIP</span>
                 <span className={styles.readTime}>
                   <Clock size={12} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'middle' }} />
-                  {getReadingTime(tip.descricao)}
+                  {getReadingTime(tip.descricao || (tip as any).conteudo || (tip as any).content || "")}
                 </span>
               </div>
               <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{tip.titulo}</h3>
                 <p className={styles.cardTextPreview}>
-                  {tip.descricao.replace(/[#*`>_\-]/g, '').substring(0, 140)}...
+                  {(tip.descricao || (tip as any).conteudo || (tip as any).content || "").replace(/[#*`>_\-]/g, '').substring(0, 140)}...
                 </p>
                 <div className={styles.cardFooter}>
                   <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>

@@ -112,6 +112,7 @@ function NovaSenhaContent() {
                   <Lock size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
                   <input
                     type="password"
+                    className="premium-input"
                     value={f.val}
                     onChange={e => f.set(e.target.value)}
                     placeholder={f.ph}
