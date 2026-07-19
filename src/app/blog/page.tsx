@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import { Search } from 'lucide-react';
+import styles from './page.module.css';
 
 const MOCK_ARTICLES: BlogArticle[] = [
   {
@@ -137,57 +138,53 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-transparent pt-32 pb-20">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
-            <span className="text-xs font-bold text-[#38BDF8] uppercase tracking-wider">Inteligência de Viagem</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white">Dicas & Blog</h1>
-            <p className="text-sm md:text-base text-slate-400">
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.pageIntro}>
+            <span className={styles.badge}>Inteligência de Viagem</span>
+            <h1 className={styles.title}>Dicas & Blog</h1>
+            <p className={styles.description}>
               Descubra estratégias exclusivas de milhas, erros tarifários e guias completos para economizar de verdade nas suas viagens.
             </p>
           </div>
 
-          <div className="bg-slate-950/40 backdrop-blur-md p-6 rounded-2xl border border-slate-800 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10">
-            <div className="flex flex-wrap gap-2 w-full lg:w-auto">
+          <div className={styles.filtersContainer}>
+            <div className={styles.btnGroup}>
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
-                    selectedCategory === cat
-                      ? 'bg-[#38BDF8] text-[#0A122C]'
-                      : 'bg-slate-900 text-slate-300 hover:bg-[#38BDF8]/20'
-                  }`}
+                  className={`${styles.filterBtn} ${selectedCategory === cat ? styles.filterBtnActive : ''}`}
                 >
                   {cat === 'todos' ? 'Todos' : cat}
                 </button>
               ))}
             </div>
 
-            <div className="relative w-full lg:max-w-xs">
+            <div className={styles.searchWrapper}>
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Buscar artigo..."
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-900/60 border border-slate-800 rounded-full text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] transition-colors"
+                className={styles.searchInput}
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-center py-20 bg-transparent border border-slate-800 rounded-2xl shadow-sm">
+            <div className={styles.emptyState}>
               <div className="animate-spin w-8 h-8 border-4 border-[#38BDF8] border-t-transparent rounded-full mx-auto mb-4" />
-              <p className="text-base font-semibold text-white">Carregando artigos...</p>
+              <h3 className={styles.emptyTitle}>Carregando artigos...</h3>
             </div>
           ) : filteredArticles.length === 0 ? (
-            <div className="text-center py-20 bg-transparent border border-slate-800 rounded-2xl shadow-sm">
-              <p className="text-base font-semibold text-white mb-2">Nenhum artigo encontrado</p>
-              <p className="text-sm text-slate-400">Tente redefinir seus filtros ou buscar por outro termo.</p>
+            <div className={styles.emptyState}>
+              <h3 className={styles.emptyTitle}>Nenhum artigo encontrado</h3>
+              <p className={styles.emptyText}>Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
-            <div className="flex flex-col gap-8 max-w-xl mx-auto">
+            <div className={styles.feedContainer}>
               {filteredArticles.map((article) => (
                 <BlogCard key={article.id} article={article} />
               ))}

@@ -155,7 +155,7 @@ export default function ConsultoriaPage() {
 
             {/* Form Column */}
             <div className={styles.formColumn}>
-              <div className="bg-[#0a122c]/60 backdrop-blur-md border border-sky-500/20 rounded-2xl p-8 max-w-lg mx-auto shadow-2xl hover:shadow-sky-500/10 transition-all duration-300">
+              <div className={styles.formCard}>
                 <h3 className={styles.formTitle}>Solicitar Orçamento de Roteiro</h3>
                 
                 <form onSubmit={handleSubmit} className={styles.formGrid}>
@@ -167,10 +167,10 @@ export default function ConsultoriaPage() {
                       value={nome}
                       onChange={e => setNome(e.target.value)}
                       placeholder="Ex: Juliano Amorin"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   <div className={styles.formField}>
                     <label className={styles.label}>WhatsApp de Contato</label>
                     <input
@@ -179,10 +179,10 @@ export default function ConsultoriaPage() {
                       value={whatsapp}
                       onChange={e => setWhatsapp(e.target.value)}
                       placeholder="Ex: (44) 99157-9205"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   <div className={styles.formField}>
                     <label className={styles.label}>Cidade de Origem</label>
                     <input
@@ -191,10 +191,10 @@ export default function ConsultoriaPage() {
                       value={origem}
                       onChange={e => setOrigem(e.target.value)}
                       placeholder="Ex: São Paulo (GRU)"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   <div className={styles.formField}>
                     <label className={styles.label}>Destino Desejado</label>
                     <input
@@ -203,16 +203,16 @@ export default function ConsultoriaPage() {
                       value={destino}
                       onChange={e => setDestino(e.target.value)}
                       placeholder="Ex: Roma ou Paris"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   <div className={styles.formField}>
                     <label className={styles.label}>Quantidade de Passageiros</label>
                     <select
                       value={passageiros}
                       onChange={e => setPassageiros(e.target.value)}
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.select}
                     >
                       <option value="1">1 Passageiro</option>
                       <option value="2">2 Passageiros</option>
@@ -220,20 +220,20 @@ export default function ConsultoriaPage() {
                       <option value="4">4+ Passageiros</option>
                     </select>
                   </div>
-
+ 
                   <div className={styles.formField}>
                     <label className={styles.label}>Classe Recomendada</label>
                     <select
                       value={classe}
                       onChange={e => setClasse(e.target.value)}
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.select}
                     >
                       <option value="economica">Classe Econômica</option>
                       <option value="executiva">Classe Executiva</option>
                       <option value="primeira">Primeira Classe</option>
                     </select>
                   </div>
-
+ 
                   {/* Added Budget Field */}
                   <div className={styles.formField}>
                     <label className={styles.label}>Orçamento Estimado (por pessoa)</label>
@@ -243,10 +243,10 @@ export default function ConsultoriaPage() {
                       value={orcamento}
                       onChange={e => setOrcamento(e.target.value)}
                       placeholder="Ex: R$ 5.000 a R$ 10.000"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   {/* Added Period Field */}
                   <div className={styles.formField}>
                     <label className={styles.label}>Período Estimado da Viagem</label>
@@ -256,10 +256,10 @@ export default function ConsultoriaPage() {
                       value={periodo}
                       onChange={e => setPeriodo(e.target.value)}
                       placeholder="Ex: Segunda quinzena de Outubro/2026"
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.input}
                     />
                   </div>
-
+ 
                   <div className={`${styles.formField} ${styles.span2}`}>
                     <label className={styles.label}>Mensagem / Observações</label>
                     <textarea
@@ -267,10 +267,10 @@ export default function ConsultoriaPage() {
                       value={mensagem}
                       onChange={e => setMensagem(e.target.value)}
                       placeholder="Fale um pouco sobre o estilo da sua viagem (se prefere hotéis boutique, viagens românticas, aventura) e datas sugeridas..."
-                      className="w-full bg-slate-950/40 border border-sky-500/30 rounded-lg p-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all duration-200"
+                      className={styles.textarea}
                     />
                   </div>
-
+ 
                   {/* Form Submission status msg */}
                   {statusMsg && (
                     <div 
@@ -289,12 +289,12 @@ export default function ConsultoriaPage() {
                       {statusMsg}
                     </div>
                   )}
-
+ 
                   <div className={`${styles.span2}`} style={{ paddingTop: '8px' }}>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#0a122c] font-bold p-4 rounded-lg shadow-lg hover:from-amber-500 hover:to-amber-600 transform hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
+                      className={styles.submitBtn}
                       style={{ opacity: isSubmitting ? 0.7 : 1 }}
                     >
                       <span>{isSubmitting ? 'Registrando...' : 'Enviar Solicitação de Consultoria'}</span>
