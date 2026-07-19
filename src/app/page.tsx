@@ -151,7 +151,7 @@ export default async function Home() {
                   </div>
                 </div>
 
-                <div className="pt-2">
+                <div className={styles.clubCtaWrapper}>
                   <a
                     href="https://pay.kiwify.com.br/xQfiHvB"
                     target="_blank"
@@ -173,7 +173,7 @@ export default async function Home() {
                   />
                   <div className={styles.clubTestimonialOverlay}>
                     <div className={styles.clubTestimonialBox}>
-                      <div className="flex justify-center text-[#FFD43B] mb-2">
+                      <div className={styles.starsWrapper}>
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} size={14} fill="currentColor" />
                         ))}

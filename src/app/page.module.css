@@ -617,3 +617,379 @@
   box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
   filter: brightness(1.1);
 }
+
+/* ==================== STEPS SECTION ==================== */
+.stepsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .stepsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.stepCard {
+  background: rgba(10, 18, 44, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  border-radius: 20px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.stepCard:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(56, 189, 248, 0.08);
+}
+
+.stepNum {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: rgba(56, 189, 248, 0.25);
+  line-height: 1;
+}
+
+.stepTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.stepText {
+  font-size: 0.875rem;
+  color: #8896A9;
+  line-height: 1.6;
+}
+
+/* ==================== GRID ==================== */
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .grid3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==================== CLUB SECTION ==================== */
+.clubGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .clubGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.clubText {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.clubFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.clubFeatureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.featureIcon {
+  color: #FFC107;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.featureTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.featureDesc {
+  font-size: 0.82rem;
+  color: #8896A9;
+  line-height: 1.5;
+}
+
+.clubImageArea {
+  position: relative;
+}
+
+.clubImageWrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.clubImage {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.clubTestimonialOverlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.clubTestimonialBox {
+  background: rgba(10, 18, 44, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 14px;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.clubCtaWrapper {
+  margin-top: 8px;
+}
+
+.starsWrapper {
+  display: flex;
+  justify-content: center;
+  color: #FFD43B;
+  margin-bottom: 8px;
+}
+
+.testimonialQuote {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-style: italic;
+  margin: 8px 0 6px 0;
+}
+
+.testimonialAuthor {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* ==================== CONSULTING SECTION ==================== */
+.consultingGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .consultingGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.consultingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: #8896A9;
+}
+
+.contactIcon {
+  color: #38BDF8;
+  flex-shrink: 0;
+}
+
+/* ==================== FORM ==================== */
+.formCard {
+  background: rgba(10, 18, 44, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 520px;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.formCard:hover {
+  box-shadow: 0 20px 60px rgba(56, 189, 248, 0.08);
+}
+
+.formTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.span2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+  .span2 {
+    grid-column: span 1;
+  }
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #8896A9;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  background: rgba(10, 18, 44, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #4a5568;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: #FFC107;
+  box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.15);
+}
+
+.textarea {
+  resize: none;
+}
+
+.submitBtn {
+  width: 100%;
+  background: linear-gradient(135deg, #FFC107 0%, #F59E0B 100%);
+  color: #0A122C;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.3);
+}
+
+/* ==================== PARTNERS ==================== */
+.partnersContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+}
+
+.partnersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.partnerBadge {
+  background: rgba(10, 18, 44, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  color: #8896A9;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.partnerBadge:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38BDF8;
+}
+
+.partnerLink {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38BDF8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.partnerLink:hover {
+  color: #FFC107;
+}
