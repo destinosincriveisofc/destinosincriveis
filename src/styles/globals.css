@@ -449,3 +449,17 @@ input, textarea, select {
 .pb-nav {
   padding-bottom: max(70px, env(safe-area-inset-bottom, 16px));
 }
+
+/* Responsive helper classes */
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex !important;
+  }
+  .lg\:hidden {
+    display: none !important;
+  }
+}

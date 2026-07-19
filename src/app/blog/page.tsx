@@ -97,17 +97,17 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF] pt-28 pb-20">
+      <main className="min-h-screen bg-transparent pt-28 pb-20">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
-            <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Inteligência de Viagem</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0A1628]">Dicas & Blog</h1>
-            <p className="text-sm md:text-base text-[#8896A9]">
+            <span className="text-xs font-bold text-[#38BDF8] uppercase tracking-wider">Inteligência de Viagem</span>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white">Dicas & Blog</h1>
+            <p className="text-sm md:text-base text-slate-400">
               Descubra estratégias exclusivas de milhas, erros tarifários e guias completos para economizar de verdade nas suas viagens.
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10">
+          <div className="bg-slate-950/40 backdrop-blur-md p-6 rounded-2xl border border-slate-800 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10">
             <div className="flex flex-wrap gap-2 w-full lg:w-auto">
               {categories.map((cat) => (
                 <button
@@ -115,8 +115,8 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
                     selectedCategory === cat
-                      ? 'bg-[#0A1628] text-white'
-                      : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
+                      ? 'bg-[#38BDF8] text-[#0A122C]'
+                      : 'bg-slate-900 text-slate-300 hover:bg-[#38BDF8]/20'
                   }`}
                 >
                   {cat === 'todos' ? 'Todos' : cat}
@@ -125,26 +125,26 @@ export default function BlogPage() {
             </div>
 
             <div className="relative w-full lg:max-w-xs">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Buscar artigo..."
-                className="w-full pl-10 pr-4 py-2.5 bg-[#FAFBFF] border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#5BA4CF] transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-900/60 border border-slate-800 rounded-full text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#38BDF8] transition-colors"
               />
             </div>
           </div>
 
           {loading ? (
-            <div className="text-center py-20 bg-white border border-gray-100 rounded-2xl shadow-sm">
-              <div className="animate-spin w-8 h-8 border-4 border-[#5BA4CF] border-t-transparent rounded-full mx-auto mb-4" />
-              <p className="text-base font-semibold text-[#0A1628]">Carregando artigos...</p>
+            <div className="text-center py-20 bg-transparent border border-slate-800 rounded-2xl shadow-sm">
+              <div className="animate-spin w-8 h-8 border-4 border-[#38BDF8] border-t-transparent rounded-full mx-auto mb-4" />
+              <p className="text-base font-semibold text-white">Carregando artigos...</p>
             </div>
           ) : filteredArticles.length === 0 ? (
-            <div className="text-center py-20 bg-white border border-gray-100 rounded-2xl shadow-sm">
-              <p className="text-base font-semibold text-[#0A1628] mb-2">Nenhum artigo encontrado</p>
-              <p className="text-sm text-[#8896A9]">Tente redefinir seus filtros ou buscar por outro termo.</p>
+            <div className="text-center py-20 bg-transparent border border-slate-800 rounded-2xl shadow-sm">
+              <p className="text-base font-semibold text-white mb-2">Nenhum artigo encontrado</p>
+              <p className="text-sm text-slate-400">Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -33,7 +33,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} hidden lg:flex`}>
           <Link href="/" className={styles.navLink}>
             Home
           </Link>
@@ -55,7 +55,7 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className={styles.ctaContainer}>
+        <div className={`${styles.ctaContainer} hidden lg:flex`}>
           <Link
             href="/login"
             className={styles.loginButton}
@@ -74,7 +74,7 @@ export default function Header() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={styles.menuButton}
+          className={`${styles.menuButton} lg:hidden`}
           aria-label="Toggle Menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

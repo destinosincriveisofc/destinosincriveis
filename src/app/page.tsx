@@ -9,6 +9,7 @@ import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import OfferCard from '@/components/OfferCard';
 import BlogSection from '@/components/BlogSection';
+import TravelSearchWidget from '@/components/TravelSearchWidget';
 import { fetchCheapFlights } from '@/lib/travelpayouts';
 import styles from './page.module.css';
 
@@ -22,6 +23,8 @@ export default async function Home() {
       <main className={styles.main}>
         {/* 1. Hero Section */}
         <HeroSection />
+
+        <TravelSearchWidget />
 
         {/* 2. Stats Section */}
         <StatsSection />
