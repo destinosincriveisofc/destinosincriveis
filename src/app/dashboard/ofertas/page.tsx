@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { getDestinationImage, formatPrice, getSocialMetrics, getBrandGradient } from '@/lib/visual-assets';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import SearchWidget from '@/components/SearchWidget';
 import styles from './page.module.css';
 
 export default function VIPOffersPage() {
@@ -165,6 +166,8 @@ export default function VIPOffersPage() {
           Passeios
         </button>
       </div>
+
+      <SearchWidget />
 
       {loading ? (
         <div className={styles.loadingContainer}>
