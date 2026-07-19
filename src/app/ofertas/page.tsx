@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
 import RadarScanner from '@/components/RadarScanner';
+
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -196,9 +197,12 @@ export default function OfertasPage() {
             return valB.localeCompare(valA);
           });
           setOffers(sorted);
+        } else {
+          setOffers(MOCK_OFFERS);
         }
       } catch (err) {
-        console.error('Falha ao carregar ofertas, mantendo dados locais:', err);
+        console.error('Falha ao carregar ofertas, usando fallback local:', err);
+        setOffers(MOCK_OFFERS);
       } finally {
         setLoading(false);
       }
@@ -328,6 +332,8 @@ export default function OfertasPage() {
             </div>
           </div>
 
+          <TravelSearchWidget variant="offers" />
+
           {/* Loading state */}
           {!Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (
             <div className={styles.emptyState}>
@@ -345,7 +351,7 @@ export default function OfertasPage() {
             </div>
           )}
 
-          <TravelSearchWidget variant="offers" />
+
         </div>
       </main>
       <ChatWidget />

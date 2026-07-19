@@ -168,6 +168,8 @@ export default function VIPOffersPage() {
         </button>
       </div>
 
+
+
       {loading ? (
         <div className={styles.loadingContainer}>
           <div className={styles.spinner}></div>

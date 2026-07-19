@@ -8,6 +8,7 @@ import ChatWidget from '@/components/ChatWidget';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import OfferCard from '@/components/OfferCard';
+import SearchWidget from '@/components/SearchWidget';
 import BlogSection from '@/components/BlogSection';
 import TravelSearchWidget from '@/components/TravelSearchWidget';
 import { fetchCheapFlights } from '@/lib/travelpayouts';
@@ -29,7 +30,21 @@ export default async function Home() {
         {/* 2. Stats Section */}
         <StatsSection />
 
-        {/* 3. Como Funciona Section */}
+        {/* 3. Buscador de Viagens */}
+        <section className={styles.sectionWhite}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.badge}>Busca Inteligente</span>
+              <h2 className={styles.sectionTitle}>Encontre sua próxima viagem</h2>
+              <p className={styles.sectionDesc}>
+                Pesquise voos, hotéis e pacotes com as melhores tarifas do mercado.
+              </p>
+            </div>
+            <SearchWidget />
+          </div>
+        </section>
+
+        {/* 4. Como Funciona Section */}
         <section className={styles.sectionWhite}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
@@ -71,7 +86,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 4. Central de Alertas Section */}
+        {/* 5. Central de Alertas Section */}
         <section className={styles.sectionIce}>
           <div className={styles.container}>
             <div className={styles.alertHeaderRow}>
@@ -98,7 +113,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 5. Club Section */}
+        {/* 6. Club Section */}
         <section className={styles.sectionWhite}>
           <div className={styles.container}>
             <div className={styles.clubGrid}>
@@ -175,7 +190,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 6. Consultoria VIP Section */}
+        {/* 7. Consultoria VIP Section */}
         <section id="consultoria" className={styles.sectionIce}>
           <div className={styles.container}>
             <div className={styles.consultingGrid}>
@@ -255,7 +270,7 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* 7. Parceiros & Afiliados Section */}
+        {/* 8. Parceiros & Afiliados Section */}
         <section className={styles.sectionWhite}>
           <div className={styles.container}>
             <div className={styles.partnersContainer}>

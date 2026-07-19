@@ -1,8 +1,13 @@
 .main {
+  background-color: #FAFBFF;
+  min-height: 100vh;
+  padding-top: 128px;
+}
+
+.main {
   background-color: transparent;
   min-height: 100vh;
-  padding-top: 112px;
-  padding-bottom: 80px;
+  padding-top: 128px;
 }
 
 .container {
