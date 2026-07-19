@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className={styles.container}>
+      <div className={`${styles.container} max-w-7xl px-4 justify-between`}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} loading="lazy" />
@@ -33,23 +33,23 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={`${styles.nav} hidden lg:flex`}>
-          <Link href="/" className={styles.navLink}>
+        <nav className={`${styles.nav} hidden lg:flex gap-4`}>
+          <Link href="/" className={`${styles.navLink} text-sm`}>
             Home
           </Link>
-          <Link href="/ofertas" className={styles.navLink}>
+          <Link href="/ofertas" className={`${styles.navLink} text-sm`}>
             Ofertas
           </Link>
-          <Link href="/club" className={styles.navLink}>
+          <Link href="/club" className={`${styles.navLink} text-sm`}>
             Club Dija
           </Link>
-          <Link href="/blog" className={styles.navLink}>
+          <Link href="/blog" className={`${styles.navLink} text-sm`}>
             Dicas & Notícias
           </Link>
-          <Link href="/consultoria" className={styles.navLink}>
+          <Link href="/consultoria" className={`${styles.navLink} text-sm`}>
             Consultoria VIP
           </Link>
-          <Link href="/parcerias" className={styles.navLink}>
+          <Link href="/parcerias" className={`${styles.navLink} text-sm`}>
             Parcerias
           </Link>
         </nav>

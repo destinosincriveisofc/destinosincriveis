@@ -463,3 +463,29 @@ input, textarea, select {
     display: none !important;
   }
 }
+
+.text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.gap-4 {
+  gap: 1rem !important;
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-left: 1rem !important;
+}
+
+.max-w-7xl {
+  max-width: 80rem !important;
+}
+
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+.justify-between {
+  justify-content: space-between !important;
+}
