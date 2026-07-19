@@ -1,20 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "@/styles/globals.css";
 import PushRegister from "@/components/PushRegister";
 import BottomNav from "@/components/BottomNav";
 import SoundEffectProvider from "@/components/SoundEffectProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta-sans",
-  subsets: ["latin"],
-});
+const FONT_URL = "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap";
 
 export const metadata: Metadata = {
   title: "Destinos Incríveis | CLUB DIJA - Clube de Viagens Inteligente",
@@ -27,8 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${plusJakartaSans.variable}`}>
+    <html lang="pt-BR">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href={FONT_URL} />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0A122C" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -36,7 +30,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Destinos Incríveis" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body className="bg-glow-container">
+      <body className="bg-glow-container" style={{ fontFamily: "'Inter', 'Plus Jakarta Sans', system-ui, sans-serif" }}>
         <PushRegister />
         <SoundEffectProvider />
         {children}

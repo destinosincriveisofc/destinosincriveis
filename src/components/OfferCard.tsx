@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Calendar, PlaneTakeoff, ArrowRight, Heart, MessageCircle, MapPin, Tag } from 'lucide-react';
 import AlertBadge from './AlertBadge';
