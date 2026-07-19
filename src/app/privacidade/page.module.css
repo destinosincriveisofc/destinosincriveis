@@ -1,0 +1,50 @@
+.main {
+  background-color: transparent;
+  min-height: 100vh;
+  padding-top: 128px;
+  padding-bottom: 80px;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.lastUpdate {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 48px;
+}
+
+.section {
+  margin-bottom: 36px;
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #38BDF8;
+  margin-bottom: 12px;
+}
+
+.text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+
+.link {
+  color: #38BDF8;
+  text-decoration: underline;
+}

@@ -102,7 +102,7 @@ async function fetchBlogArticles(): Promise<BlogArticle[]> {
 }
 
 export default function BlogPage() {
-  const [articles, setArticles] = useState<BlogArticle[]>([]);
+  const [articles, setArticles] = useState<BlogArticle[]>(MOCK_ARTICLES);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [loading, setLoading] = useState(true);

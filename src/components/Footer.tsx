@@ -130,8 +130,8 @@ export default function Footer() {
       <div className={styles.bottomBar}>
         <p>© {new Date().getFullYear()} Destinos Incríveis. Todos os direitos reservados.</p>
         <p className={styles.bottomLinks}>
-          <Link href="/" className={styles.bottomLink}>Termos de Uso</Link>
-          <Link href="/" className={styles.bottomLink}>Políticas de Privacidade</Link>
+          <Link href="/termos" className={styles.bottomLink}>Termos de Uso</Link>
+          <Link href="/privacidade" className={styles.bottomLink}>Políticas de Privacidade</Link>
         </p>
       </div>
     </footer>

@@ -1,6 +1,26 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, ShieldCheck, Star, Zap } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'CLUB DIJA | Destinos Incríveis - Clube de Viagens Inteligente',
+  description: 'Economize até 60% em passagens aéreas e hotéis. Receba alertas de erros tarifários em tempo real no seu WhatsApp.',
+  openGraph: {
+    title: 'CLUB DIJA | Destinos Incríveis - Clube de Viagens Inteligente',
+    description: 'Economize até 60% em passagens aéreas e hotéis. Receba alertas de erros tarifários em tempo real no seu WhatsApp.',
+    type: 'website',
+    locale: 'pt_BR',
+    siteName: 'Destinos Incríveis',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CLUB DIJA | Destinos Incríveis',
+    description: 'Economize até 60% em passagens aéreas e hotéis. Alertas de erros tarifários no WhatsApp.',
+    images: ['/og-image.png'],
+  },
+};
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
