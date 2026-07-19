@@ -16,7 +16,7 @@ import styles from './page.module.css';
 
 export default async function Home() {
   const cheapFlights = await fetchCheapFlights();
-  const alertOffers = cheapFlights.slice(0, 3); // Display top 3 alerts in central section
+  const displayOffers = cheapFlights.slice(0, 4); // Display top 4 alerts in central section
 
   return (
     <>
@@ -106,7 +106,7 @@ export default async function Home() {
             </div>
 
             <div className={styles.grid3}>
-              {alertOffers.map((offer) => (
+              {displayOffers.map((offer) => (
                 <OfferCard key={offer.id} offer={offer} />
               ))}
             </div>

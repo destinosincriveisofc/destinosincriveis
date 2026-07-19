@@ -199,7 +199,7 @@ export default function VIPOffersPage() {
         </div>
       ) : (
         <div className={styles.offersGrid}>
-          {filteredOffers.map((offer) => {
+          {filteredOffers.slice(0, 20).map((offer) => {
             const formattedPrice = formatPrice(Number(offer.preco_atual));
             const formattedOriginalPrice = formatPrice(Number(offer.preco_original));
             const imgUrl = getDestinationImage(offer.destino, offer.destino, offer.imagem_url);

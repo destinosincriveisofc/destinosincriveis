@@ -266,7 +266,7 @@ function DashboardPageContent() {
             <div className={styles.loadingWrapper}>Carregando ofertas VIP...</div>
           ) : (
             <div className={styles.offersGrid}>
-              {offers.map((offer) => {
+              {offers.slice(0, 20).map((offer) => {
                  const hasValidImg = offer.imagem_url && (offer.imagem_url.startsWith('http://') || offer.imagem_url.startsWith('https://') || offer.imagem_url.startsWith('/'));
                  const imgUrl = hasValidImg 
                    ? offer.imagem_url 

@@ -341,7 +341,7 @@ export default function OfertasPage() {
             </div>
           ) : (
             <div className={styles.grid3}>
-              {Array.isArray(filteredOffers) ? filteredOffers.map((offer, idx) => (
+              {Array.isArray(filteredOffers) ? filteredOffers.slice(0, 10).map((offer, idx) => (
                 <div key={offer.id || `offer-${idx}`} className="hover-lift"
                      style={{ animation: `fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards`, animationDelay: `${(idx % 8) * 0.08}s` }}>
                   <OfferCard offer={offer} />
