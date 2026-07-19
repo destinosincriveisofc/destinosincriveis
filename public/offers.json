@@ -1,19 +1,19 @@
 [
   {
-    "id": "GRU-CWB",
+    "id": "GRU-FLN",
     "origem": "GRU",
-    "destino": "CWB",
-    "preco_atual": 381.0,
+    "destino": "FLN",
+    "preco_atual": 447.0,
     "preco_original": 1200.0,
-    "desconto_percent": 68,
-    "companhia": "GOL",
+    "desconto_percent": 63,
+    "companhia": "LATAM",
     "link_afiliado": "https://www.trip.com/hotels/list?allianceid=YOUR_ID&sid=YOUR_SID",
-    "imagem_url": "https://picsum.photos/800/600?random=63039",
+    "imagem_url": "https://picsum.photos/800/600?random=414",
     "tipo": "voo",
     "nota_urgencia": 10,
-    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Curitiba*\n🏢 GOL\n\n💰 De ~~R$ 1200~~ por apenas *R$ 381*\n📊 Você economiza *68%*\n📅 Datas disponíveis: Datas selecionadas do segundo semestre de 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
+    "texto_venda": "🚨 *ALERTA EXCLUSIVO - Destinos Incríveis Club*\n\n✈️ *São Paulo → Florianópolis*\n🏢 LATAM\n\n💰 De ~~R$ 1200~~ por apenas *R$ 447*\n📊 Você economiza *63%*\n📅 Datas disponíveis: Datas selecionadas do segundo semestre de 2026\n\n🔗 Reservar agora (link exclusivo):\nhttps://www.destinosincriveisofc.com.br/ofertas\n\n⚡ _Oferta por tempo limitado!_",
     "ativo": 1,
-    "criado_em": "2026-07-19 11:00:32",
+    "criado_em": "2026-07-19 14:00:28",
     "vip_only": 0
   }
 ]
