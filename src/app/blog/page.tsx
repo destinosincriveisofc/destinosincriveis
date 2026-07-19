@@ -7,6 +7,45 @@ import ChatWidget from '@/components/ChatWidget';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
 import { Search } from 'lucide-react';
 
+const MOCK_ARTICLES: BlogArticle[] = [
+  {
+    id: "mock-1",
+    title: "O que é e como aproveitar um Erro Tarifário de passagem aérea",
+    excerpt: "Entenda a diferença entre promoção comum e bugs no sistema das companhias aéreas, e saiba quais são as regras de emissão.",
+    category: "Dicas",
+    imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-15",
+    slug: "o-que-e-e-como-aproveitar-um-erro-tarifario-de-passagem-aerea"
+  },
+  {
+    id: "mock-2",
+    title: "Como usar milhas para voar na Classe Executiva pagando preço de Econômica",
+    excerpt: "Estratégias avançadas de emissão com milhas para upgrades de cabine nas principais alianças aéreas mundiais.",
+    category: "Milhas",
+    imageUrl: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-10",
+    slug: "como-usar-milhas-para-voar-na-classe-executiva-pagando-preco-de-economica"
+  },
+  {
+    id: "mock-3",
+    title: "Destinos nacionais com melhor custo-benefício em 2026",
+    excerpt: "Selecionamos os 10 destinos brasileiros onde seu dinheiro rende mais: hospedagem, alimentação e passeios baratos.",
+    category: "Destinos",
+    imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-05",
+    slug: "destinos-nacionais-com-melhor-custo-beneficio-em-2026"
+  },
+  {
+    id: "mock-4",
+    title: "Guia completo: Como monitorar preços de passagens 24/7",
+    excerpt: "Ferramentas gratuitas e pagas, extensões de navegador e automações para nunca mais perder uma promoção relâmpago.",
+    category: "Economize",
+    imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=600&auto=format&fit=crop",
+    date: "2026-07-01",
+    slug: "guia-completo-como-monitorar-precos-de-passagens-24-7"
+  }
+];
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -67,10 +106,22 @@ export default function BlogPage() {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      const data = await fetchBlogArticles();
-      setArticles(data);
-      setFilteredArticles(data);
-      setLoading(false);
+      try {
+        const data = await fetchBlogArticles();
+        if (data && data.length > 0) {
+          setArticles(data);
+          setFilteredArticles(data);
+        } else {
+          setArticles(MOCK_ARTICLES);
+          setFilteredArticles(MOCK_ARTICLES);
+        }
+      } catch (err) {
+        console.warn('Failed to fetch blog articles, using mock fallback:', err);
+        setArticles(MOCK_ARTICLES);
+        setFilteredArticles(MOCK_ARTICLES);
+      } finally {
+        setLoading(false);
+      }
     };
     load();
   }, []);
@@ -97,7 +148,7 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF] pt-32 pb-20">
+      <main className="min-h-screen bg-transparent pt-32 pb-20">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
             <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Inteligência de Viagem</span>
@@ -137,12 +188,12 @@ export default function BlogPage() {
           </div>
 
           {loading ? (
-            <div className="text-center py-20 bg-white border border-gray-100 rounded-2xl shadow-sm">
+            <div className="text-center py-20 bg-transparent border border-sky-500/10 rounded-2xl shadow-sm">
               <div className="animate-spin w-8 h-8 border-4 border-[#5BA4CF] border-t-transparent rounded-full mx-auto mb-4" />
               <p className="text-base font-semibold text-[#0A1628]">Carregando artigos...</p>
             </div>
           ) : filteredArticles.length === 0 ? (
-            <div className="text-center py-20 bg-white border border-gray-100 rounded-2xl shadow-sm">
+            <div className="text-center py-20 bg-transparent border border-sky-500/10 rounded-2xl shadow-sm">
               <p className="text-base font-semibold text-[#0A1628] mb-2">Nenhum artigo encontrado</p>
               <p className="text-sm text-[#8896A9]">Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>

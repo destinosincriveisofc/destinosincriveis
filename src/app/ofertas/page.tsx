@@ -196,9 +196,12 @@ export default function OfertasPage() {
             return valB.localeCompare(valA);
           });
           setOffers(sorted);
+        } else {
+          setOffers(MOCK_OFFERS);
         }
       } catch (err) {
-        console.error('Falha ao carregar ofertas, mantendo dados locais:', err);
+        console.error('Falha ao carregar ofertas, usando fallback local:', err);
+        setOffers(MOCK_OFFERS);
       } finally {
         setLoading(false);
       }

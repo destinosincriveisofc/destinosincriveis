@@ -4,6 +4,12 @@
   padding-top: 128px;
 }
 
+.main {
+  background-color: transparent;
+  min-height: 100vh;
+  padding-top: 128px;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
