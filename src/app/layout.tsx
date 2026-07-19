@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "@/styles/globals.css";
+import "@/styles/tokens.css";
 import PushRegister from "@/components/PushRegister";
 import BottomNav from "@/components/BottomNav";
 import SoundEffectProvider from "@/components/SoundEffectProvider";
