@@ -347,12 +347,7 @@ export default function OfertasPage() {
             </div>
           )}
 
-          {/* Travelpayouts Flight Search Widget */}
-          <div className="max-w-4xl mx-auto my-12">
-            <div dangerouslySetInnerHTML={{ __html: `
-              <script src="https://tp.media/content?marker=550897&shmarker=550897&promo_id=2088&width=100%25&primary=%230a122c&color_button=%23ffc107&color_text=%23ffffff&color_button_text=%230a122c&show_logo=false&multi_city=true&with_hash=true" async></script>
-            `}} />
-          </div>
+
         </div>
       </main>
       <ChatWidget />

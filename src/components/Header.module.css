@@ -52,7 +52,7 @@
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .nav {
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .ctaContainer {
     display: flex;
     align-items: center;
@@ -111,7 +111,7 @@
   display: block;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .menuButton {
     display: none;
   }
