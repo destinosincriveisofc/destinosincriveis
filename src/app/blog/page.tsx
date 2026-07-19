@@ -83,8 +83,12 @@ function mapApiToBlogArticle(api: ApiArticle): BlogArticle {
 
 async function fetchBlogArticles(): Promise<BlogArticle[]> {
   try {
-    const apiBase = process.env.NEXT_PUBLIC_HERMES_API || 'https://destinosincriveis.vps-kinghost.net:5001';
-    const res = await fetch(`${apiBase}/api/blog`, { cache: 'no-store' });
+    const res = await fetch('/api/blog', { cache: 'no-store' })
+      .catch(err => {
+        console.error("Blog fetch aborted/blocked, falling back:", err);
+        return null;
+      });
+    if (!res) return [];
     if (res.ok) {
       const data: ApiArticle[] = await res.json();
       if (Array.isArray(data) && data.length > 0) {
@@ -92,7 +96,7 @@ async function fetchBlogArticles(): Promise<BlogArticle[]> {
       }
     }
   } catch (e) {
-    console.warn('Failed to fetch from Hermes API, using fallback:', e);
+    console.warn('Failed to fetch blog articles, using fallback:', e);
   }
   return [];
 }

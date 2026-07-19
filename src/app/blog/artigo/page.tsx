@@ -4,6 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, RefreshCw } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
@@ -180,7 +181,7 @@ function ArticleReader() {
       try {
         setLoading(true);
         // 1. Fetch current post
-        const res = await fetch(`https://destinosincriveis.vps-kinghost.net/api/blog/${id}`);
+        const res = await fetchWithTimeout(`https://destinosincriveis.vps-kinghost.net/api/blog/${id}`);
         let currentPost = null;
 
         if (res.ok) {
@@ -210,7 +211,7 @@ function ArticleReader() {
         setPost(currentPost);
 
         // 2. Fetch all to get related
-        const listRes = await fetch('https://destinosincriveis.vps-kinghost.net/api/blog');
+        const listRes = await fetchWithTimeout('https://destinosincriveis.vps-kinghost.net/api/blog');
         let articlesList: BlogArticle[] = [];
         if (listRes.ok) {
           const data = await listRes.json();

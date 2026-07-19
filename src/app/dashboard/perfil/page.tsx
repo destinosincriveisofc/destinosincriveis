@@ -3,6 +3,7 @@
 import React, { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { User, Camera, Lock, Save, CheckCircle, AlertCircle } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const API = 'https://destinosincriveis.vps-kinghost.net';
@@ -27,7 +28,7 @@ function PerfilContent() {
   React.useEffect(() => {
     const token = getToken();
     if (!token) { router.push('/login'); return; }
-    fetch(`${API}/api/members/profile`, { headers: { Authorization: `Bearer ${token}` } })
+    fetchWithTimeout(`${API}/api/members/profile`, { headers: { Authorization: `Bearer ${token}` } })
       .then(r => r.json())
       .then(data => {
         setProfile(data);
@@ -52,7 +53,7 @@ function PerfilContent() {
     try {
       const body: any = { nome };
       if (novaSenha) { body.senha_atual = senhaAtual; body.nova_senha = novaSenha; }
-      const res = await fetch(`${API}/api/members/profile`, {
+      const res = await fetchWithTimeout(`${API}/api/members/profile`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
         body: JSON.stringify(body),
@@ -81,7 +82,7 @@ function PerfilContent() {
     try {
       const form = new FormData();
       form.append('file', file);
-      const res = await fetch(`${API}/api/members/avatar`, {
+      const res = await fetchWithTimeout(`${API}/api/members/avatar`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${getToken()}` },
         body: form,

@@ -1,3 +1,5 @@
+import { fetchWithTimeout } from './fetchWithTimeout';
+
 export interface FlightOffer {
   id: string;
   origin: string;
@@ -232,9 +234,9 @@ export async function fetchCheapFlights(): Promise<FlightOffer[]> {
 
   try {
     // API endpoint for cheap flights from GRU
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       `https://api.travelpayouts.com/v1/prices/cheap?origin=GRU&page=1&currency=BRL&token=${token}`,
-      { next: { revalidate: 14400 } } // 4 hours cache in Next.js Fetch API
+      { next: { revalidate: 14400 }, timeoutMs: 20000 }
     );
 
     if (!response.ok) {

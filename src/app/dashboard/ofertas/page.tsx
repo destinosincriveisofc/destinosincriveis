@@ -17,6 +17,7 @@ import {
   MapPin,
   Clock,
 } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { getDestinationImage, formatPrice, getSocialMetrics, getBrandGradient } from '@/lib/visual-assets';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import TravelSearchWidget from '@/components/TravelSearchWidget';
@@ -30,7 +31,7 @@ export default function VIPOffersPage() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [likedOffers, setLikedOffers] = useState<Set<string>>(new Set());
 
-  async function fetchVIPOffers(token: string) {
+  const fetchVIPOffers = async (token: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -39,7 +40,7 @@ export default function VIPOffersPage() {
           ? 'http://localhost:5001'
           : 'https://destinosincriveis.vps-kinghost.net';
 
-      const response = await fetch(`${baseUrl}/api/dashboard/vip-offers`, {
+      const response = await fetchWithTimeout(`${baseUrl}/api/dashboard/vip-offers`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -77,6 +78,15 @@ export default function VIPOffersPage() {
     setTimeout(() => {
       fetchVIPOffers(token);
     }, 0);
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+    fetchVIPOffers(token);
   }, [router]);
 
   const getFilteredOffers = () => {

@@ -64,13 +64,14 @@ const MOCK_OFFERS: FlightOffer[] = [
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/offers', { signal: AbortSignal.timeout(8000) });
+    const res = await fetch('/api/offers', { signal: AbortSignal.timeout(8000) })
+      .catch(err => {
+        console.error("Fetch aborted/blocked by browser, falling back:", err);
+        return null;
+      });
+    if (!res) return [];
     if (!res.ok) {
       throw new Error(`Server returned status ${res.status}`);
-    }
-    const contentType = res.headers.get("content-type");
-    if (contentType && !contentType.includes("application/json")) {
-      throw new Error(`Invalid content type: ${contentType}`);
     }
     const dbOffers = await res.json();
     if (!Array.isArray(dbOffers)) {
@@ -128,15 +129,16 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       };
     });
   } catch (e) {
-    console.error("Robust fetch from API failed, using fallback:", e);
+    console.error("API fetch failed, using fallback:", e);
     try {
-      const localRes = await fetch('/offers.json', { signal: AbortSignal.timeout(5000) });
-      if (localRes.ok) {
+      const localRes = await fetch('/offers.json', { signal: AbortSignal.timeout(5000) })
+        .catch(() => null);
+      if (localRes && localRes.ok) {
         const localData = await localRes.json();
         if (Array.isArray(localData) && localData.length > 0) {
           console.log("Loaded offers from local cache (offers.json)");
-          return localData.map((o: any) => ({
-            id: o.id || String(Math.random()),
+          return localData.map((o: any, i: number) => ({
+            id: o.id || `local-${i}`,
             origin: o.origem || "",
             originName: "",
             destination: o.destino || "",
@@ -163,7 +165,7 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       const { fetchCheapFlights } = await import('@/lib/travelpayouts');
       return await fetchCheapFlights();
     } catch (err) {
-      console.error("Critical: All fallback sources failed:", err);
+      console.error("All fallback sources failed:", err);
       return [];
     }
   }

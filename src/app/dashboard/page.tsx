@@ -2,6 +2,7 @@
 
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { 
   TrendingUp, 
   Compass, 
@@ -26,11 +27,11 @@ function DashboardPageContent() {
   const [searchSubmitting, setSearchSubmitting] = React.useState(false);
   const [searchMsg, setSearchMsg] = React.useState('');
 
-  async function fetchOffers() {
+  const fetchOffers = async () => {
     setLoadingOffers(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch("https://destinosincriveis.vps-kinghost.net/api/dashboard/vip-offers", {
+      const response = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/dashboard/vip-offers", {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (response.ok) {
@@ -50,13 +51,17 @@ function DashboardPageContent() {
     }, 0);
   }, []);
 
+  React.useEffect(() => {
+    fetchOffers();
+  }, []);
+
   const handleSearchSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSearchSubmitting(true);
     setSearchMsg('');
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/members/search-requests', {
+      const res = await fetchWithTimeout('https://destinosincriveis.vps-kinghost.net/api/members/search-requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ destino: searchDestino, preco_maximo: searchPreco ? Number(searchPreco) : null })
@@ -227,10 +232,10 @@ function DashboardPageContent() {
                 <p>Carregando ofertas...</p>
               ) : (
                 <div className={styles.recentOffersList}>
-                  {offers.slice(0, 3).map((offer, idx) => {
+                  {offers.slice(0, 3).map((offer) => {
                     const destImgKey = (offer.destino || 'travel').toLowerCase().replace(/[^a-z]/g, '');
                     return (
-                      <div key={idx} className={`${styles.offerItem} hover-lift`}>
+                      <div key={offer.id} className={`${styles.offerItem} hover-lift`}>
                         <div className={styles.offerBadge}>{offer.desconto_percent}% OFF</div>
                         <div className={styles.offerDetails}>
                           <h4>{offer.origem} ➡️ {offer.destino}</h4>
@@ -261,13 +266,13 @@ function DashboardPageContent() {
             <div className={styles.loadingWrapper}>Carregando ofertas VIP...</div>
           ) : (
             <div className={styles.offersGrid}>
-              {offers.map((offer, index) => {
+              {offers.map((offer) => {
                  const hasValidImg = offer.imagem_url && (offer.imagem_url.startsWith('http://') || offer.imagem_url.startsWith('https://') || offer.imagem_url.startsWith('/'));
                  const imgUrl = hasValidImg 
                    ? offer.imagem_url 
                    : "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop";
                  return (
-                   <div key={index} className={`${styles.offerCard} hover-lift`}>
+                   <div key={offer.id} className={`${styles.offerCard} hover-lift`}>
                      <div className={styles.offerImageWrapper}>
                        <img 
                          src={imgUrl} 

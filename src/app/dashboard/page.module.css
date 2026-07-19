@@ -979,6 +979,24 @@
   }
 }
 
+.headerTitleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboardTab {
+  width: 100%;
+}
+
+.sectionRow {
+  margin-top: 0;
+}
+
+.tipsTab {
+  width: 100%;
+}
+
 @media (max-width: 768px) {
   .dashboardContainer {
     flex-direction: column;

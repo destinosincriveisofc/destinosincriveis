@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import { Calendar, Phone, Mail, User, Compass, ArrowRight, Shield } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './page.module.css';
 
 export default function ConsultoriaPage() {
@@ -29,7 +30,7 @@ export default function ConsultoriaPage() {
     setStatusType('');
 
     try {
-      const response = await fetch('https://destinosincriveis.vps-kinghost.net/api/consultoria', {
+      const response = await fetchWithTimeout('https://destinosincriveis.vps-kinghost.net/api/consultoria', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

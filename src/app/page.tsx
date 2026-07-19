@@ -158,7 +158,7 @@ export default async function Home() {
                     rel="noopener noreferrer"
                     className={styles.buttonPrimary}
                   >
-                    Entrar no Club por R$ 29,90/mês
+                    Fazer parte do Club por R$ 9,90/mês
                     <ArrowRight size={18} />
                   </a>
                 </div>

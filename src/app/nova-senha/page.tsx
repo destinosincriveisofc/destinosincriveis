@@ -4,6 +4,7 @@ import React, { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Lock, ArrowRight, CheckCircle } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 
 function NovaSenhaContent() {
   const searchParams = useSearchParams();
@@ -23,7 +24,7 @@ function NovaSenhaContent() {
     if (!token) { setError('Token inválido. Solicite um novo link de recuperação.'); return; }
     setLoading(true);
     try {
-      const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/auth/reset-password', {
+      const res = await fetchWithTimeout('https://destinosincriveis.vps-kinghost.net/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, nova_senha: novaSenha }),
