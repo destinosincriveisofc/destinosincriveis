@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, ArrowRight, CheckCircle } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 
 export default function RecuperarSenhaPage() {
   const [email, setEmail] = React.useState('');
@@ -15,7 +16,7 @@ export default function RecuperarSenhaPage() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('https://destinosincriveis.vps-kinghost.net/api/auth/forgot-password', {
+      const res = await fetchWithTimeout('https://destinosincriveis.vps-kinghost.net/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

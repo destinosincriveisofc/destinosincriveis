@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Send, Sparkles } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './page.module.css';
 
 interface Message {
@@ -46,7 +47,7 @@ export default function GuiaPage() {
         text: m.text
       }));
 
-      const res = await fetch("https://destinosincriveis.vps-kinghost.net/api/members/agent", {
+      const res = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/members/agent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

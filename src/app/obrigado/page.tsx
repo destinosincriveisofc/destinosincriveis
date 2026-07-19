@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Check, MessageSquare, Lock, ArrowRight } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './page.module.css';
 
 export default function ObrigadoPage() {
@@ -48,7 +49,7 @@ export default function ObrigadoPage() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://destinosincriveis.vps-kinghost.net/api/auth/register", {
+      const response = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

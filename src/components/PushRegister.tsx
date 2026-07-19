@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 
 const VAPID_PUBLIC_KEY = "BDdKSUpIdhMv_jhpy1pl-JrMCAUN-208tdAsKOQNCPeaYYMMkc_R7A4SgB9D-x6bfltrAlqKJ5r8_yf06iDSOTM";
 const SUBSCRIBE_URL = "https://destinosincriveis.vps-kinghost.net/api/push/subscribe";
@@ -58,7 +59,7 @@ export default function PushRegister() {
           console.log("Existing Push Subscription found:", subscription);
         }
 
-        const response = await fetch(SUBSCRIBE_URL, {
+        const response = await fetchWithTimeout(SUBSCRIBE_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

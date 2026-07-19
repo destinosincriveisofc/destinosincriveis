@@ -82,8 +82,12 @@ function mapApiToBlogArticle(api: ApiArticle): BlogArticle {
 
 async function fetchBlogArticles(): Promise<BlogArticle[]> {
   try {
-    const apiBase = process.env.NEXT_PUBLIC_HERMES_API || 'https://destinosincriveis.vps-kinghost.net:5001';
-    const res = await fetch(`${apiBase}/api/blog`, { cache: 'no-store' });
+    const res = await fetch('/api/blog', { cache: 'no-store' })
+      .catch(err => {
+        console.error("Blog fetch aborted/blocked, falling back:", err);
+        return null;
+      });
+    if (!res) return [];
     if (res.ok) {
       const data: ApiArticle[] = await res.json();
       if (Array.isArray(data) && data.length > 0) {
@@ -91,7 +95,7 @@ async function fetchBlogArticles(): Promise<BlogArticle[]> {
       }
     }
   } catch (e) {
-    console.warn('Failed to fetch from Hermes API, using fallback:', e);
+    console.warn('Failed to fetch blog articles, using fallback:', e);
   }
   return [];
 }
@@ -152,13 +156,13 @@ export default function BlogPage() {
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
             <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Inteligência de Viagem</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-[#0A1628]">Dicas & Blog</h1>
-            <p className="text-sm md:text-base text-[#8896A9]">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white">Dicas & Blog</h1>
+            <p className="text-sm md:text-base text-[#94A3B8]">
               Descubra estratégias exclusivas de milhas, erros tarifários e guias completos para economizar de verdade nas suas viagens.
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10">
+          <div className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-sm flex flex-col lg:flex-row gap-6 items-center justify-between mb-10 backdrop-blur-sm">
             <div className="flex flex-wrap gap-2 w-full lg:w-auto">
               {categories.map((cat) => (
                 <button
@@ -166,8 +170,8 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors ${
                     selectedCategory === cat
-                      ? 'bg-[#0A1628] text-white'
-                      : 'bg-[#F0F4FF] text-[#0A1628] hover:bg-[#5BA4CF]/10'
+                      ? 'bg-white text-[#0A122C]'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10'
                   }`}
                 >
                   {cat === 'todos' ? 'Todos' : cat}
@@ -182,7 +186,7 @@ export default function BlogPage() {
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Buscar artigo..."
-                className="w-full pl-10 pr-4 py-2.5 bg-[#FAFBFF] border border-gray-200 rounded-full text-sm focus:outline-none focus:border-[#5BA4CF] transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-white focus:outline-none focus:border-[#5BA4CF] transition-colors placeholder-gray-400"
               />
             </div>
           </div>
@@ -190,12 +194,12 @@ export default function BlogPage() {
           {loading ? (
             <div className="text-center py-20 bg-transparent border border-sky-500/10 rounded-2xl shadow-sm">
               <div className="animate-spin w-8 h-8 border-4 border-[#5BA4CF] border-t-transparent rounded-full mx-auto mb-4" />
-              <p className="text-base font-semibold text-[#0A1628]">Carregando artigos...</p>
+              <p className="text-base font-semibold text-white">Carregando artigos...</p>
             </div>
           ) : filteredArticles.length === 0 ? (
             <div className="text-center py-20 bg-transparent border border-sky-500/10 rounded-2xl shadow-sm">
-              <p className="text-base font-semibold text-[#0A1628] mb-2">Nenhum artigo encontrado</p>
-              <p className="text-sm text-[#8896A9]">Tente redefinir seus filtros ou buscar por outro termo.</p>
+              <p className="text-base font-semibold text-white mb-2">Nenhum artigo encontrado</p>
+              <p className="text-sm text-[#94A3B8]">Tente redefinir seus filtros ou buscar por outro termo.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

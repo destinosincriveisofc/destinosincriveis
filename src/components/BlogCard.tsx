@@ -1,8 +1,11 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Calendar, ArrowRight, Heart, MessageCircle } from 'lucide-react';
 import { DESTINATION_IMAGES, DEFAULT_FALLBACK } from '@/lib/visual-assets';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './BlogCard.module.css';
+import offerCardStyles from './OfferCard.module.css';
 
 export interface BlogArticle {
   id: string;
@@ -85,7 +88,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
           ? 'http://localhost:5001'
           : 'https://destinosincriveis.vps-kinghost.net';
       
-      const response = await fetch(`${baseUrl}/api/posts/like`, {
+      const response = await fetchWithTimeout(`${baseUrl}/api/posts/like`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -133,15 +136,15 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
 
   return (
     <Link href={`/blog/artigo?id=${article.id}`} className={styles.cardLink}>
-      <article className={styles.card}>
+      <article className={`${offerCardStyles.card} ${styles.card}`}>
         {/* Image Container */}
-        <div className={styles.imageArea}>
+        <div className={offerCardStyles.imageArea}>
           <img
             src={imgToRender}
             alt={displayTitle}
             loading="lazy"
             onError={(e) => { e.currentTarget.src = DEFAULT_FALLBACK }}
-            className={styles.image}
+            className={offerCardStyles.image}
           />
           {/* Category Overlay */}
           <div className={styles.categoryBadge}>
@@ -150,7 +153,7 @@ export default function BlogCard({ article, compact = false }: BlogCardProps) {
         </div>
 
         {/* Content */}
-        <div className={styles.content}>
+        <div className={offerCardStyles.content}>
           <div className={styles.date}>
             <Calendar size={12} />
             <span>{formatDateStr(article.date)}</span>

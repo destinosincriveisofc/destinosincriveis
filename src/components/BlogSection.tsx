@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import BlogCard, { BlogArticle } from '@/components/BlogCard';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { ArrowRight } from 'lucide-react';
 
 interface ApiArticle {
@@ -42,7 +43,7 @@ function mapApiToBlogArticle(api: ApiArticle): BlogArticle {
 async function fetchLiveArticles(): Promise<BlogArticle[]> {
   try {
     const apiBase = process.env.NEXT_PUBLIC_HERMES_API || 'https://destinosincriveis.vps-kinghost.net:5001';
-    const res = await fetch(`${apiBase}/api/blog`, { cache: 'no-store' });
+    const res = await fetchWithTimeout(`${apiBase}/api/blog`, { cache: 'no-store' });
     if (res.ok) {
       const data: ApiArticle[] = await res.json();
       if (Array.isArray(data) && data.length > 0) {

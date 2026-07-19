@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ThumbsUp, MessageSquare, Image as ImageIcon, Send, X, Loader } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './page.module.css';
 
 interface Comment {
@@ -52,7 +53,7 @@ export default function ComunidadePage() {
   const fetchFeed = async (authToken: string) => {
     setLoading(true);
     try {
-      const res = await fetch("https://destinosincriveis.vps-kinghost.net/api/posts/feed", {
+      const res = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/feed", {
         headers: {
           "Authorization": `Bearer ${authToken}`
         }
@@ -100,7 +101,7 @@ export default function ComunidadePage() {
         const formData = new FormData();
         formData.append("file", selectedImage);
         
-        const uploadRes = await fetch("https://destinosincriveis.vps-kinghost.net/api/posts/upload", {
+        const uploadRes = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/upload", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${token}`
@@ -120,7 +121,7 @@ export default function ComunidadePage() {
         }
       }
 
-      const createRes = await fetch("https://destinosincriveis.vps-kinghost.net/api/posts/create", {
+      const createRes = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -165,7 +166,7 @@ export default function ComunidadePage() {
     );
 
     try {
-      const res = await fetch("https://destinosincriveis.vps-kinghost.net/api/posts/like", {
+      const res = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/like", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -189,7 +190,7 @@ export default function ComunidadePage() {
     if (!commentText || !commentText.trim() || !token) return;
 
     try {
-      const res = await fetch("https://destinosincriveis.vps-kinghost.net/api/posts/comment", {
+      const res = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

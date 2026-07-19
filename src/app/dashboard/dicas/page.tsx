@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Clock, Calendar, X, ArrowRight, Sparkles, Info, Heart } from 'lucide-react';
+import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import styles from './page.module.css';
 
@@ -20,6 +21,7 @@ export default function DicasPage() {
   const router = useRouter();
   const [tips, setTips] = React.useState<ContentTip[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const [fetchError, setFetchError] = React.useState("");
   const [selectedTip, setSelectedTip] = React.useState<ContentTip | null>(null);
 
   const [likedTips, setLikedTips] = React.useState<Record<string, boolean>>({});
@@ -60,7 +62,7 @@ export default function DicasPage() {
           ? 'http://localhost:5001'
           : 'https://destinosincriveis.vps-kinghost.net';
       
-      const response = await fetch(`${baseUrl}/api/posts/like`, {
+      const response = await fetchWithTimeout(`${baseUrl}/api/posts/like`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -94,12 +96,17 @@ export default function DicasPage() {
 
   const fetchTips = async (token: string) => {
     setLoading(true);
+    setFetchError("");
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
       const response = await fetch("https://destinosincriveis.vps-kinghost.net/api/dashboard/contents", {
+        signal: controller.signal,
         headers: {
           "Authorization": `Bearer ${token}`
         }
       });
+      clearTimeout(timeoutId);
       if (response.ok) {
         const data = await response.json();
         setTips(Array.isArray(data) ? data : []);
@@ -110,6 +117,11 @@ export default function DicasPage() {
       }
     } catch (err) {
       console.error("Error fetching tips:", err);
+      if ((err as any)?.name === "AbortError") {
+        setFetchError("O servidor demorou muito para responder. Tente novamente mais tarde.");
+      } else {
+        setFetchError("Não foi possível carregar as dicas agora. Tente novamente mais tarde.");
+      }
     } finally {
       setLoading(false);
     }
@@ -273,6 +285,11 @@ export default function DicasPage() {
         <div className={styles.loadingContainer}>
           <div className={styles.spinner} />
           <p>Buscando os hacks exclusivos de hoje...</p>
+        </div>
+      ) : fetchError ? (
+        <div className={styles.emptyState}>
+          <Info size={48} style={{ color: '#dc2626', marginBottom: '16px' }} />
+          <p style={{ color: '#dc2626' }}>{fetchError}</p>
         </div>
       ) : tips.length === 0 ? (
         <div className={styles.emptyState}>
