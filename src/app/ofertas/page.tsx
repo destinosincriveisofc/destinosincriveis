@@ -7,10 +7,11 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
 import RadarScanner from '@/components/RadarScanner';
-import SearchWidget from '@/components/SearchWidget';
+
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import TravelSearchWidget from '@/components/TravelSearchWidget';
 import styles from './page.module.css';
 
 const MOCK_OFFERS: FlightOffer[] = [
@@ -333,7 +334,7 @@ export default function OfertasPage() {
             </div>
           </div>
 
-          <SearchWidget />
+          <TravelSearchWidget variant="offers" />
 
           {/* Loading state */}
           {!Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (

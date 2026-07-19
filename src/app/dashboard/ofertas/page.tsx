@@ -20,7 +20,7 @@ import {
 import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import { getDestinationImage, formatPrice, getSocialMetrics, getBrandGradient } from '@/lib/visual-assets';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import SearchWidget from '@/components/SearchWidget';
+import TravelSearchWidget from '@/components/TravelSearchWidget';
 import styles from './page.module.css';
 
 export default function VIPOffersPage() {
@@ -120,6 +120,7 @@ export default function VIPOffersPage() {
 
   return (
     <div className={styles.container}>
+      <TravelSearchWidget variant="vip" />
       <div className={`${styles.headerSection} fade-in-up`} ref={headerRef}>
         <div className={styles.titleWrapper}>
           <h2>Vitrine Secreta VIP</h2>
@@ -168,7 +169,7 @@ export default function VIPOffersPage() {
         </button>
       </div>
 
-      <SearchWidget />
+
 
       {loading ? (
         <div className={styles.loadingContainer}>

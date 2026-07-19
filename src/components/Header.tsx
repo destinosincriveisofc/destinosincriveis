@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
-      <div className={styles.container}>
+      <div className={`${styles.container} max-w-7xl px-4 justify-between`}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
           <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} loading="lazy" />
@@ -33,29 +33,29 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className={styles.nav}>
-          <Link href="/" className={styles.navLink}>
+        <nav className={`${styles.nav} hidden lg:flex gap-4`}>
+          <Link href="/" className={`${styles.navLink} text-sm`}>
             Home
           </Link>
-          <Link href="/ofertas" className={styles.navLink}>
+          <Link href="/ofertas" className={`${styles.navLink} text-sm`}>
             Ofertas
           </Link>
-          <Link href="/club" className={styles.navLink}>
+          <Link href="/club" className={`${styles.navLink} text-sm`}>
             Club Dija
           </Link>
-          <Link href="/blog" className={styles.navLink}>
+          <Link href="/blog" className={`${styles.navLink} text-sm`}>
             Dicas & Notícias
           </Link>
-          <Link href="/consultoria" className={styles.navLink}>
+          <Link href="/consultoria" className={`${styles.navLink} text-sm`}>
             Consultoria VIP
           </Link>
-          <Link href="/parcerias" className={styles.navLink}>
+          <Link href="/parcerias" className={`${styles.navLink} text-sm`}>
             Parcerias
           </Link>
         </nav>
 
         {/* Desktop CTA */}
-        <div className={styles.ctaContainer}>
+        <div className={`${styles.ctaContainer} hidden lg:flex`}>
           <Link
             href="/login"
             className={styles.loginButton}
@@ -74,7 +74,7 @@ export default function Header() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={styles.menuButton}
+          className={`${styles.menuButton} lg:hidden`}
           aria-label="Toggle Menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
