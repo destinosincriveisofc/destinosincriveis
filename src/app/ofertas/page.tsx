@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import OfferCard from '@/components/OfferCard';
 import RadarScanner from '@/components/RadarScanner';
+import SearchWidget from '@/components/SearchWidget';
 import { FlightOffer } from '@/lib/travelpayouts';
 import { Search, SlidersHorizontal, RefreshCw } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -326,6 +327,8 @@ export default function OfertasPage() {
               />
             </div>
           </div>
+
+          <SearchWidget />
 
           {/* Loading state */}
           {!Array.isArray(filteredOffers) || filteredOffers.length === 0 ? (

@@ -97,7 +97,7 @@ export default function BlogPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFBFF] pt-28 pb-20">
+      <main className="min-h-screen bg-[#FAFBFF] pt-32 pb-20">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12 flex flex-col gap-3">
             <span className="text-xs font-bold text-[#5BA4CF] uppercase tracking-wider">Inteligência de Viagem</span>
