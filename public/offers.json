@@ -1,5 +1,23 @@
 [
   {
+    "id": "UNKNOWN-CANCÚN",
+    "origem": null,
+    "destino": "Cancún",
+    "preco_atual": null,
+    "preco_original": null,
+    "desconto_percent": null,
+    "companhia": "Chichén Itzá Tour",
+    "link_afiliado": "https://getyourguide.tpx.gr/Ituk5KJm?u=https%3A//www.getyourguide.com.br/s%3Fq%3DCanc%25C3%25BAn",
+    "imagem_url": "https://picsum.photos/800/600?random=57303",
+    "tipo": "passeio",
+    "nota_urgencia": 8,
+    "texto_venda": "Tour por Cancún e Chichén Itzá",
+    "ativo": 1,
+    "criado_em": "2026-07-20 19:30:10",
+    "vip_only": 0,
+    "valido_ate": null
+  },
+  {
     "id": "GRU-MIA",
     "origem": "GRU",
     "destino": "MIA",
