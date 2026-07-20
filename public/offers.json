@@ -1,5 +1,23 @@
 [
   {
+    "id": "GRU-JJG",
+    "origem": "GRU",
+    "destino": "JJG",
+    "preco_atual": 455.0,
+    "preco_original": 1200.0,
+    "desconto_percent": 62,
+    "companhia": "LATAM",
+    "link_afiliado": "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DJJG",
+    "imagem_url": "https://picsum.photos/800/600?random=96460",
+    "tipo": "voo",
+    "nota_urgencia": 10,
+    "texto_venda": null,
+    "ativo": 1,
+    "criado_em": "2026-07-20 20:19:17",
+    "vip_only": 0,
+    "valido_ate": null
+  },
+  {
     "id": "GRU-FERNANDO DE NORONHA",
     "origem": "GRU",
     "destino": "Fernando de Noronha",
