@@ -1,5 +1,23 @@
 [
   {
+    "id": "GRU-USHUAIA",
+    "origem": "GRU",
+    "destino": "Ushuaia",
+    "preco_atual": 2490.0,
+    "preco_original": 4980.0,
+    "desconto_percent": 50,
+    "companhia": "Ciatrip Pacotes",
+    "link_afiliado": "https://ciatrip.com/ushuaia-verao-2/?ref=844",
+    "imagem_url": "https://picsum.photos/800/600?random=54890",
+    "tipo": "pacote",
+    "nota_urgencia": null,
+    "texto_venda": "Pacote Exclusivo Ushuaia Fim do Mundo com Roteiro Personalizado Ciatrip!",
+    "ativo": 1,
+    "criado_em": "2026-07-20 20:55:32",
+    "vip_only": 0,
+    "valido_ate": null
+  },
+  {
     "id": "GRU-BARILOCHE",
     "origem": "GRU",
     "destino": "Bariloche",
