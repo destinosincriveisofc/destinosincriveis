@@ -31,14 +31,14 @@ const CITY_MAP: Record<string, string> = {
 
 export function generateTripFlightLink(origin: string, destination: string, depDate?: string, retDate?: string): string {
   const destUpper = destination.toUpperCase();
-  if (destUpper.includes("BUENOS AIRES") || destUpper === "EZE" || destUpper === "BUE") {
-    return "https://ciatrip.com/buenos-aires/?ref=844";
-  }
   if (destUpper.includes("BARILOCHE")) {
-    return "https://ciatrip.com/bariloche-pacotes/?ref=844";
+    return "https://ciatrip.com/produto/pacote-viva-bariloche-6-dias-e-5-noites/?ref=844";
   }
   if (destUpper.includes("USHUAIA")) {
-    return "https://ciatrip.com/ushuaia-verao-2/?ref=844";
+    return "https://ciatrip.com/produto/pacote-ushuaia-el-calafate-economico-8-dias-e-7-noites/?ref=844";
+  }
+  if (destUpper.includes("BUENOS AIRES") || destUpper === "EZE" || destUpper === "BUE") {
+    return "https://ciatrip.com/buenos-aires/?ref=844";
   }
   if (destUpper.includes("JORDANIA") || destUpper.includes("JORDÂNIA")) {
     return "https://ciatrip.com/jordania/?ref=844";
