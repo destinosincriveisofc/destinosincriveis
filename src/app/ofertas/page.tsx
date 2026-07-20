@@ -99,7 +99,7 @@ async function getFlightsClient(): Promise<FlightOffer[]> {
       GIG: { name: "Rio de Janeiro", country: "Brasil", code: "BR" }
     };
     
-    const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.preco_atual !== null && o.preco_atual !== undefined);
+    const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.link_afiliado);
     if (validDbOffers.length === 0) {
       throw new Error("No valid offers found after filtering out corrupt ones.");
     }

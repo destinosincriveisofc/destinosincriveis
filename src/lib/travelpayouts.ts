@@ -33,7 +33,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-12",
     returnDate: "2026-09-19",
     airline: "Flybondi",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1209EZE19091",
+    link: generateTripFlightLink("GRU", "EZE", "2026-09-12", "2026-09-19"),
     type: "voo"
   },
   {
@@ -49,7 +49,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-05",
     returnDate: "2026-10-12",
     airline: "JetSMART",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0510SCL12101",
+    link: generateTripFlightLink("GRU", "SCL", "2026-10-05", "2026-10-12"),
     type: "voo"
   },
   {
@@ -65,7 +65,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-11-01",
     returnDate: "2026-11-10",
     airline: "Copa Airlines",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0111MIA10111",
+    link: generateTripFlightLink("GRU", "MIA", "2026-11-01", "2026-11-10"),
     type: "voo"
   },
   {
@@ -81,7 +81,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-20",
     returnDate: "2026-09-30",
     airline: "TAP Air Portugal",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2009LIS30091",
+    link: generateTripFlightLink("GRU", "LIS", "2026-09-20", "2026-09-30"),
     type: "voo"
   },
   {
@@ -97,7 +97,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-15",
     returnDate: "2026-10-25",
     airline: "LATAM Airlines",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1510CDG25101",
+    link: generateTripFlightLink("GRU", "CDG", "2026-10-15", "2026-10-25"),
     type: "voo"
   },
   {
@@ -113,7 +113,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-11-10",
     returnDate: "2026-11-20",
     airline: "Air Europa",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1011MAD20111",
+    link: generateTripFlightLink("GRU", "MAD", "2026-11-10", "2026-11-20"),
     type: "voo"
   },
   {
@@ -129,7 +129,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-08-20",
     returnDate: "2026-08-25",
     airline: "GOL",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2008SDU25081",
+    link: generateTripFlightLink("GRU", "SDU", "2026-08-20", "2026-08-25"),
     type: "voo"
   },
   {
@@ -145,7 +145,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-05",
     returnDate: "2026-09-12",
     airline: "Azul",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0509SSA12091",
+    link: generateTripFlightLink("GRU", "SSA", "2026-09-05", "2026-09-12"),
     type: "voo"
   },
   {
@@ -161,7 +161,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-15",
     returnDate: "2026-09-22",
     airline: "Hospedagem + Voo",
-    link: "https://pay.kiwify.com.br/xQfiHvB",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fwww.trip.com%2Fhotels%2Flist%3FcityName%3DPorto%2Bde%2BGalinhas%26checkin%3D2026-09-15%26checkout%3D2026-09-22",
     type: "pacote"
   },
   {
@@ -177,10 +177,20 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-10",
     returnDate: "2026-10-20",
     airline: "Universal Studios Hotel",
-    link: "https://pay.kiwify.com.br/xQfiHvB",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fwww.trip.com%2Fhotels%2Flist%3FcityName%3DOrlando%26checkin%3D2026-10-10%26checkout%3D2026-10-20",
     type: "hotel"
   }
 ];
+
+function generateTripFlightLink(origin: string, destination: string, depDate: string, retDate?: string): string {
+  const travelType = retDate ? "rt" : "oneway";
+  const ddate = depDate || new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0];
+  const rdate = retDate || "";
+  let u = `https://www.trip.com/flights/list?dcity=${origin}&acity=${destination}&ddate=${ddate}`;
+  if (retDate) u += `&rdate=${retDate}`;
+  u += `&traveltype=${travelType}&class=y&cabin=y`;
+  return `https://trip.tpx.gr/8G2qwgeK?u=${encodeURIComponent(u)}`;
+}
 
 const AIRPORT_NAMES: Record<string, { name: string; country: string; code: string }> = {
   EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
@@ -196,19 +206,7 @@ const AIRPORT_NAMES: Record<string, { name: string; country: string; code: strin
 };
 
 export function generateAffiliateLink(origin: string, destination: string, date: string): string {
-  const marker = process.env.TRAVELPAYOUTS_MARKER || "748517";
-  
-  let dateStr = "";
-  if (date) {
-    const cleanDate = date.split('T')[0].split(' ')[0];
-    const parts = cleanDate.split('-');
-    if (parts.length === 3) {
-      dateStr = `${parts[2]}${parts[1]}`; // DDMM
-    }
-  }
-  
-  const searchUrl = `https://www.aviasales.com/search/${origin || "GRU"}${dateStr}${destination || ""}1`;
-  return `https://tp.media/r?marker=${marker}&p=4114&u=${encodeURIComponent(searchUrl)}`;
+  return generateTripFlightLink(origin, destination, date);
 }
 
 // Memory cache with expiration
