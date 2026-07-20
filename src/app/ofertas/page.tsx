@@ -22,7 +22,8 @@ const MOCK_OFFERS: FlightOffer[] = [
     price: 2199, originalPrice: 4500,
     departureDate: "2026-09-15", returnDate: "",
     airline: "Latam",
-    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DOrlando",
+    link_afiliado: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DOrlando",
     type: "voo",
     imagem_url: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=800&q=80"
   },
@@ -33,7 +34,8 @@ const MOCK_OFFERS: FlightOffer[] = [
     price: 3499, originalPrice: 6800,
     departureDate: "2026-10-20", returnDate: "",
     airline: "TAP",
-    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DLisboa",
+    link_afiliado: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DLisboa",
     type: "voo",
     imagem_url: "https://images.unsplash.com/photo-1585208798174-6cedd86e019a?auto=format&fit=crop&w=800&q=80"
   },
@@ -44,7 +46,8 @@ const MOCK_OFFERS: FlightOffer[] = [
     price: 900, originalPrice: 3000,
     departureDate: "2026-08-01", returnDate: "",
     airline: "Salinas Maragogi All Inclusive",
-    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DMaragogi",
+    link_afiliado: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DMaragogi",
     type: "hotel",
     imagem_url: "https://images.unsplash.com/photo-1549638441-b787d2e11f14?auto=format&fit=crop&w=800&q=80"
   },
@@ -55,7 +58,8 @@ const MOCK_OFFERS: FlightOffer[] = [
     price: 2799, originalPrice: 5200,
     departureDate: "2026-11-05", returnDate: "",
     airline: "Iberia",
-    link: "https://www.trip.com/", link_afiliado: "https://www.trip.com/",
+    link: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DMadrid",
+    link_afiliado: "https://trip.tpx.gr/8G2qwgeK?u=https%3A%2F%2Fbr.trip.com%2Fhotels%2Flist%3FcityName%3DMadrid",
     type: "voo",
     imagem_url: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80"
   }
@@ -64,111 +68,60 @@ const MOCK_OFFERS: FlightOffer[] = [
 // Client-safe flight fetcher
 async function getFlightsClient(): Promise<FlightOffer[]> {
   try {
-    const res = await fetch('/api/offers', { signal: AbortSignal.timeout(8000) })
-      .catch(err => {
-        console.error("Fetch aborted/blocked by browser, falling back:", err);
-        return null;
-      });
-    if (!res) return [];
-    if (!res.ok) {
-      throw new Error(`Server returned status ${res.status}`);
-    }
-    const dbOffers = await res.json();
-    if (!Array.isArray(dbOffers)) {
-      throw new Error("Response is not a JSON array");
-    }
-    if (dbOffers.length === 0) {
-      throw new Error("JSON array is empty");
-    }
+    const res = await fetch('/offers.json', { cache: 'no-store', signal: AbortSignal.timeout(8000) })
+      .catch(() => null);
+    if (res && res.ok) {
+      const dbOffers = await res.json();
+      if (Array.isArray(dbOffers) && dbOffers.length > 0) {
+        const airportNames: Record<string, { name: string; country: string; code: string }> = {
+          EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
+          SCL: { name: "Santiago", country: "Chile", code: "CL" },
+          MIA: { name: "Miami", country: "Estados Unidos", code: "US" },
+          MCO: { name: "Orlando", country: "Estados Unidos", code: "US" },
+          LIS: { name: "Lisboa", country: "Portugal", code: "PT" },
+          MAD: { name: "Madri", country: "Espanha", code: "ES" },
+          CDG: { name: "Paris", country: "França", code: "FR" },
+          SDU: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
+          SSA: { name: "Salvador", country: "Brasil", code: "BR" },
+          REC: { name: "Recife", country: "Brasil", code: "BR" },
+          GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
+          VCP: { name: "Campinas", country: "Brasil", code: "BR" },
+          BSB: { name: "Brasília", country: "Brasil", code: "BR" },
+          RIO: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
+          GIG: { name: "Rio de Janeiro", country: "Brasil", code: "BR" }
+        };
 
-    const airportNames: Record<string, { name: string; country: string; code: string }> = {
-      EZE: { name: "Buenos Aires", country: "Argentina", code: "AR" },
-      SCL: { name: "Santiago", country: "Chile", code: "CL" },
-      MIA: { name: "Miami", country: "Estados Unidos", code: "US" },
-      MCO: { name: "Orlando", country: "Estados Unidos", code: "US" },
-      LIS: { name: "Lisboa", country: "Portugal", code: "PT" },
-      MAD: { name: "Madri", country: "Espanha", code: "ES" },
-      CDG: { name: "Paris", country: "França", code: "FR" },
-      SDU: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
-      SSA: { name: "Salvador", country: "Brasil", code: "BR" },
-      REC: { name: "Recife", country: "Brasil", code: "BR" },
-      GRU: { name: "São Paulo", country: "Brasil", code: "BR" },
-      VCP: { name: "Campinas", country: "Brasil", code: "BR" },
-      BSB: { name: "Brasília", country: "Brasil", code: "BR" },
-      RIO: { name: "Rio de Janeiro", country: "Brasil", code: "BR" },
-      GIG: { name: "Rio de Janeiro", country: "Brasil", code: "BR" }
-    };
-    
-    const validDbOffers = dbOffers.filter((o: any) => o && o.destino && o.link_afiliado);
-    if (validDbOffers.length === 0) {
-      throw new Error("No valid offers found after filtering out corrupt ones.");
-    }
-
-    return validDbOffers.map((dbOffer: any) => {
-      const destInfo = airportNames[dbOffer.destino?.toUpperCase()] || { name: dbOffer.destino || "Destino", country: "Destino", code: "UN" };
-      const originInfo = airportNames[dbOffer.origem?.toUpperCase()] || { name: dbOffer.origem || "", country: "", code: "" };
-      
-      return {
-        id: dbOffer.id,
-        origin: dbOffer.origem || "",
-        originName: originInfo.name,
-        destination: dbOffer.destino || "",
-        destinationName: destInfo.name,
-        countryName: destInfo.country,
-        countryCode: destInfo.code,
-        price: Number(dbOffer.preco_atual) || 0,
-        originalPrice: Number(dbOffer.preco_original) || Number(dbOffer.preco_atual) || 0,
-        departureDate: dbOffer.criado_em ? dbOffer.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
-        returnDate: "",
-        airline: dbOffer.companhia || "Companhia",
-        link: dbOffer.link_afiliado || "",
-        link_afiliado: dbOffer.link_afiliado || "",
-        type: dbOffer.tipo || "hotel",
-        imagem_url: dbOffer.imagem_url,
-        criado_em: dbOffer.criado_em || ""
-      };
-    });
-  } catch (e) {
-    console.error("API fetch failed, using fallback:", e);
-    try {
-      const localRes = await fetch('/offers.json', { signal: AbortSignal.timeout(5000) })
-        .catch(() => null);
-      if (localRes && localRes.ok) {
-        const localData = await localRes.json();
-        if (Array.isArray(localData) && localData.length > 0) {
-          console.log("Loaded offers from local cache (offers.json)");
-          return localData.map((o: any, i: number) => ({
-            id: o.id || `local-${i}`,
+        return dbOffers.map((o: any, i: number) => {
+          const destInfo = airportNames[o.destino?.toUpperCase()] || { name: o.destino || "Destino", country: "Destino", code: "UN" };
+          const originInfo = airportNames[o.origem?.toUpperCase()] || { name: o.origem || "", country: "", code: "" };
+          const cityClean = (o.destino || 'Orlando').replace(/,.*$/, '').trim();
+          const cleanLink = o.link_afiliado || "https://ciatrip.com/ref/844/";
+          return {
+            id: o.id || `offer-${i}`,
             origin: o.origem || "",
-            originName: "",
+            originName: originInfo.name,
             destination: o.destino || "",
-            destinationName: o.destino || "Destino",
-            countryName: "",
-            countryCode: "",
+            destinationName: destInfo.name,
+            countryName: destInfo.country,
+            countryCode: destInfo.code,
             price: Number(o.preco_atual) || Number(o.price) || 0,
             originalPrice: Number(o.preco_original) || Number(o.originalPrice) || 0,
             departureDate: o.criado_em ? o.criado_em.split(' ')[0] : new Date().toISOString().split('T')[0],
             returnDate: "",
             airline: o.companhia || "Companhia",
-            link: o.link_afiliado || o.link || "",
-            link_afiliado: o.link_afiliado || o.link || "",
+            link: cleanLink,
+            link_afiliado: cleanLink,
             type: o.tipo || "voo",
             imagem_url: o.imagem_url,
             criado_em: o.criado_em || ""
-          }));
-        }
+          };
+        });
       }
-    } catch (localErr) {
-      console.warn("Local cache fallback failed:", localErr);
     }
-    try {
-      const { fetchCheapFlights } = await import('@/lib/travelpayouts');
-      return await fetchCheapFlights();
-    } catch (err) {
-      console.error("All fallback sources failed:", err);
-      return [];
-    }
+  } catch (e) {
+    console.error("Fetch from offers.json failed:", e);
   }
+  return MOCK_OFFERS;
 }
 
 export default function OfertasPage() {

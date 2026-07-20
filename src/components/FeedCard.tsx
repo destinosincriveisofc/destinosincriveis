@@ -147,13 +147,25 @@ export default function FeedCard({
       </div>
 
       <div className={styles.footer}>
-        <Link
-          href={actionHref}
-          className={`${styles.cta} ${isOffer ? styles.ctaGold : styles.ctaBlue}`}
-        >
-          {label}
-          <ArrowRight className={styles.ctaIcon} />
-        </Link>
+        {actionHref.startsWith('http') ? (
+          <a
+            href={actionHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${styles.cta} ${isOffer ? styles.ctaGold : styles.ctaBlue}`}
+          >
+            {label}
+            <ArrowRight className={styles.ctaIcon} />
+          </a>
+        ) : (
+          <Link
+            href={actionHref}
+            className={`${styles.cta} ${isOffer ? styles.ctaGold : styles.ctaBlue}`}
+          >
+            {label}
+            <ArrowRight className={styles.ctaIcon} />
+          </Link>
+        )}
       </div>
     </article>
   );

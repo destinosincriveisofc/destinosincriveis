@@ -37,7 +37,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/agent/strategist",
+          "url": "http://172.17.0.1:5001/agent/strategist",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ Object.assign({}, $json, { campaign_type: 'voo' }) }}",
@@ -52,7 +52,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/agent/writer",
+          "url": "http://172.17.0.1:5001/agent/writer",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ $json }}",
@@ -67,7 +67,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/save-offer",
+          "url": "http://172.17.0.1:5001/save-offer",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ $json }}",
@@ -138,7 +138,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/agent/strategist",
+          "url": "http://172.17.0.1:5001/agent/strategist",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ { \"campaign_type\": \"hotel_tour\", \"destination_city\": $('Agente Estrategista').item.json.destino } }}",
@@ -153,7 +153,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/agent/writer",
+          "url": "http://172.17.0.1:5001/agent/writer",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ $json }}",
@@ -168,7 +168,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "http://host.docker.internal:5001/save-offer",
+          "url": "http://172.17.0.1:5001/save-offer",
           "sendBody": true,
           "specifyBody": "json",
           "jsonBody": "={{ $json }}",

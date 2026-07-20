@@ -169,7 +169,12 @@ offers = [
     }
 ]
 
+import sys
+sys.path.append("/opt/hermes/router")
+from agent_trip_specialist import get_affiliate_link_for_offer
+
 for o in offers:
+    link_trip = get_affiliate_link_for_offer(o.get("tipo"), o.get("destino"), o.get("origem"))
     cursor.execute("""
         INSERT OR REPLACE INTO offers (
             id, origem, destino, preco_atual, preco_original, desconto_percent,
@@ -177,7 +182,7 @@ for o in offers:
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         o["id"], o["origem"], o["destino"], o["preco_atual"], o["preco_original"], o["desconto_percent"],
-        o["companhia"], o["link_afiliado"], o["imagem_url"], o["tipo"], o["nota_urgencia"], o["texto_venda"], o["ativo"], o["criado_em"]
+        o["companhia"], link_trip, o["imagem_url"], o["tipo"], o["nota_urgencia"], o["texto_venda"], o["ativo"], o["criado_em"]
     ))
 
 conn.commit()
