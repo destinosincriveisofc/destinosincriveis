@@ -33,7 +33,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-12",
     returnDate: "2026-09-19",
     airline: "Flybondi",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1209EZE19091",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1209EZE19091",
     type: "voo"
   },
   {
@@ -49,7 +49,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-05",
     returnDate: "2026-10-12",
     airline: "JetSMART",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0510SCL12101",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0510SCL12101",
     type: "voo"
   },
   {
@@ -65,7 +65,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-11-01",
     returnDate: "2026-11-10",
     airline: "Copa Airlines",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0111MIA10111",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0111MIA10111",
     type: "voo"
   },
   {
@@ -81,7 +81,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-20",
     returnDate: "2026-09-30",
     airline: "TAP Air Portugal",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2009LIS30091",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2009LIS30091",
     type: "voo"
   },
   {
@@ -97,7 +97,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-10-15",
     returnDate: "2026-10-25",
     airline: "LATAM Airlines",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1510CDG25101",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1510CDG25101",
     type: "voo"
   },
   {
@@ -113,7 +113,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-11-10",
     returnDate: "2026-11-20",
     airline: "Air Europa",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1011MAD20111",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU1011MAD20111",
     type: "voo"
   },
   {
@@ -129,7 +129,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-08-20",
     returnDate: "2026-08-25",
     airline: "GOL",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2008SDU25081",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU2008SDU25081",
     type: "voo"
   },
   {
@@ -145,7 +145,7 @@ const MOCK_OFFERS: FlightOffer[] = [
     departureDate: "2026-09-05",
     returnDate: "2026-09-12",
     airline: "Azul",
-    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=550897&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0509SSA12091",
+    link: "https://c111.travelpayouts.com/click?shmarker=748517&promo_id=4114&source_type=link&type=click&trs=250000&destination_url=https%3A%2F%2Fwww.aviasales.com%2Fsearch%2FGRU0509SSA12091",
     type: "voo"
   },
   {
