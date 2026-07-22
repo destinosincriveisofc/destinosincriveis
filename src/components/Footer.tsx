@@ -4,31 +4,26 @@ import { Mail, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-primary-bg border-t border-white/10 pt-16 pb-8 text-gray-400">
+    <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-default)] pt-16 pb-8 text-[var(--text-secondary)]">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-        {/* Brand */}
         <div className="flex flex-col gap-4">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-gold p-0.5 flex items-center justify-center shadow-md">
-              <div className="w-full h-full bg-primary-bg rounded-[10px] flex items-center justify-center">
-                <span className="text-lg font-black text-brand-blue">DI</span>
-              </div>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-[var(--brand-blue)] flex items-center justify-center shadow-sm transition-transform group-hover:scale-105">
+              <span className="text-sm font-black text-white">DI</span>
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">
-              Destinos<span className="text-brand-blue">Incríveis</span>
+            <span className="text-lg font-bold tracking-tight text-[var(--text-primary)]">
+              Destinos<span className="text-[var(--brand-blue)]">Incríveis</span>
             </span>
           </Link>
-          <p className="text-sm leading-relaxed text-gray-400">
-            O copiloto inteligente para descobrir, planejar e viver experiências de viagem incríveis pelo mundo.
+          <p className="text-sm leading-relaxed text-[var(--text-muted)] max-w-xs">
+            A plataforma brasileira para descobrir, planejar e viver experiências de viagem autênticas pelo Brasil.
           </p>
-          {/* Social Links */}
           <div className="flex items-center gap-3 mt-2">
-            {/* Instagram */}
             <a
               href="https://www.instagram.com/destinosincriveis.ofc/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
               aria-label="Instagram"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -37,24 +32,22 @@ export default function Footer() {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
             </a>
-            {/* TikTok */}
             <a
               href="https://www.tiktok.com/@destinosincriveis.ofc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5.006 5.004" />
               </svg>
             </a>
-            {/* YouTube */}
             <a
               href="https://www.youtube.com/@destinosincriveis.oficial"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
               aria-label="YouTube"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,65 +58,61 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Explorar</h4>
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Descobrir</h4>
           <nav className="flex flex-col gap-2.5 text-sm">
-            <Link href="/explorar" className="hover:text-brand-blue transition-colors">Descobrir Destinos</Link>
-            <Link href="/destinos" className="hover:text-brand-blue transition-colors">Países & Roteiros</Link>
-            <Link href="/guias" className="hover:text-brand-blue transition-colors">Revista & Guias</Link>
-            <Link href="/experiencias" className="hover:text-brand-blue transition-colors">Experiências Únicas</Link>
-            <Link href="/dija-ai" className="hover:text-brand-blue transition-colors">Copiloto DIJA AI</Link>
-            <Link href="/club" className="hover:text-brand-blue transition-colors">Clube de Viajantes</Link>
+            <Link href="/explorar" className="hover:text-[var(--brand-blue)] transition-colors">Descobrir Destinos</Link>
+            <Link href="/destinos" className="hover:text-[var(--brand-blue)] transition-colors">Destinos</Link>
+            <Link href="/experiencias" className="hover:text-[var(--brand-blue)] transition-colors">Experiências</Link>
+            <Link href="/guias" className="hover:text-[var(--brand-blue)] transition-colors">Guias de Viagem</Link>
+            <Link href="/dija-ai" className="hover:text-[var(--brand-blue)] transition-colors">DIJA AI</Link>
+            <Link href="/club" className="hover:text-[var(--brand-blue)] transition-colors">Clube</Link>
           </nav>
         </div>
 
-        {/* Support */}
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Atendimento</h4>
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Atendimento</h4>
           <div className="flex flex-col gap-3 text-sm">
             <a
               href="https://wa.me/5511997204445"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-white transition-colors group"
+              className="flex items-center gap-2 hover:text-[var(--brand-blue)] transition-colors group"
             >
-              <MessageSquare size={16} className="text-brand-blue" />
-              <span>WhatsApp Oficial</span>
+              <MessageSquare size={16} className="text-[var(--brand-blue)]" />
+              <span>WhatsApp</span>
               <ArrowUpRight size={12} className="opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
               href="tel:+5511997204445"
-              className="flex items-center gap-2 hover:text-white transition-colors"
+              className="flex items-center gap-2 hover:text-[var(--text-primary)] transition-colors"
             >
-              <Phone size={16} className="text-brand-blue" />
+              <Phone size={16} className="text-[var(--brand-blue)]" />
               <span>+55 (11) 99720-4445</span>
             </a>
             <a
               href="mailto:suporte@destinosincriveis.com.br"
-              className="flex items-center gap-2 hover:text-white transition-colors"
+              className="flex items-center gap-2 hover:text-[var(--text-primary)] transition-colors"
             >
-              <Mail size={16} className="text-brand-blue" />
+              <Mail size={16} className="text-[var(--brand-blue)]" />
               <span>suporte@destinosincriveis.com.br</span>
             </a>
           </div>
         </div>
 
-        {/* Founder */}
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
-          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Sobre</h4>
-          <p className="text-sm leading-relaxed text-gray-400">
-            Idealizado para democratizar e elevar o planejamento de viagens a outro patamar, o ecossistema une tecnologia de ponta com curadoria especializada de turismo.
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+          <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Sobre</h4>
+          <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+        Uma plataforma brasileira que une tecnologia e curadoria para transformar a forma como você descobre o Brasil.
           </p>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <p>© {new Date().getFullYear()} Destinos Incríveis. Todos os direitos reservados.</p>
+      <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
+        <p>&copy; {new Date().getFullYear()} Destinos Incríveis. Todos os direitos reservados.</p>
         <div className="flex gap-6">
-          <Link href="/termos" className="hover:text-white transition-colors">Termos de Uso</Link>
-          <Link href="/privacidade" className="hover:text-white transition-colors">Políticas de Privacidade</Link>
+          <Link href="/termos" className="hover:text-[var(--brand-blue)] transition-colors">Termos de Uso</Link>
+          <Link href="/privacidade" className="hover:text-[var(--brand-blue)] transition-colors">Privacidade</Link>
         </div>
       </div>
     </footer>

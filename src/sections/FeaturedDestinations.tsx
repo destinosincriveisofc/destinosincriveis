@@ -1,53 +1,53 @@
 "use client";
 
 import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight, Compass } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ExperienceCard from '@/components/ExperienceCard';
 
 const CURATED_EXPERIENCES = [
   {
-    title: "Cultura milenar e tecnologia no Japão",
-    location: "Tóquio & Quioto, Japão",
-    duration: "14 dias",
-    description: "Explore templos antigos sob as cerejeiras e mergulhe em centros de inovação tecnológica de última geração.",
+    title: "Flutuação na Nascente do Rio Sucuri",
+    location: "Bonito, Mato Grosso do Sul",
+    duration: "1 dia",
+    description: "Flutue em um dos rios de águas mais transparentes do planeta, cercado por peixes tropicais e mata ciliar intocada.",
     imageUrl: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800&auto=format&fit=crop",
-    category: "Futurismo 🧠",
+    category: "Natureza 💧",
     matchScore: 99,
   },
   {
-    title: "Expedição Glaciares e Lagos da Patagônia",
-    location: "El Calafate, Argentina",
-    duration: "8 dias",
-    description: "Caminhe sobre o lendário Glaciar Perito Moreno e contemple picos andinos refletidos em lagoas azuis profundas.",
+    title: "Amanhecer no Mirante do Vale do Pati",
+    location: "Chapada Diamantina, Bahia",
+    duration: "4 dias",
+    description: "Contemple o nascer do sol sobre as muralhas rochosas de um dos vales mais isolados e imponentes da América do Sul.",
     imageUrl: "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?q=80&w=800&auto=format&fit=crop",
-    category: "Aventura 🏔",
-    matchScore: 97,
-  },
-  {
-    title: "Aurora Boreal e Termas de Gelo na Islândia",
-    location: "Reykjavík, Islândia",
-    duration: "7 dias",
-    description: "Relaxe em piscinas termais vulcânicas sob o espetáculo de luzes celestes da Aurora Boreal no círculo polar.",
-    imageUrl: "https://images.unsplash.com/photo-1483168527879-c66136b56105?q=80&w=800&auto=format&fit=crop",
-    category: "Exclusivo 🌌",
+    category: "Aventura ⛰",
     matchScore: 98,
   },
   {
-    title: "Navegação na Costa Amalfitana",
-    location: "Positano, Itália",
-    duration: "6 dias",
-    description: "Navegue ao longo de vilas coloridas cravadas em desfiladeiros sobre a água cintilante do Mar Tirreno.",
+    title: "Kayak no Arquipélago de Anavilhanas",
+    location: "Novo Airão, Amazonas",
+    duration: "5 dias",
+    description: "Navegue de kayak pelas águas escuras do segundo maior arquipélago fluvial do mundo, observando botos e a floresta amazônica.",
+    imageUrl: "https://images.unsplash.com/photo-1483168527879-c66136b56105?q=80&w=800&auto=format&fit=crop",
+    category: "Ecoturismo 🌳",
+    matchScore: 97,
+  },
+  {
+    title: "Rota das Queijarias na Serra da Canastra",
+    location: "São Roque de Minas, Minas Gerais",
+    duration: "3 dias",
+    description: "Explore as fazendas produtoras de queijo artesanal de casca amarela nas colinas verdejantes mineiras, vivenciando a cultura local.",
     imageUrl: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800&auto=format&fit=crop",
-    category: "Romance ❤️",
+    category: "Cultura 🧀",
     matchScore: 96,
   },
   {
-    title: "Safári Fotográfico nas Planícies do Serengeti",
-    location: "Serengeti, Tanzânia",
-    duration: "9 dias",
-    description: "Presencie a Grande Migração e encontre os cinco grandes mamíferos da savana africana de perto.",
+    title: "Caminhada nos Glaciares da Patagônia",
+    location: "El Calafate, Argentina",
+    duration: "8 dias",
+    description: "Caminhe sobre o gelo milenar no Glaciar Perito Moreno como destino internacional secundário.",
     imageUrl: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800&auto=format&fit=crop",
-    category: "Natureza 🦁",
+    category: "Mundo 🏔",
     matchScore: 95,
   },
 ];
@@ -64,19 +64,19 @@ export default function FeaturedDestinations() {
   };
 
   return (
-    <section className="py-20 bg-primary-bg/70 border-y border-white/5 relative" id="destinos-destaque">
+    <section className="py-20 bg-[var(--bg-primary)]/70 border-y border-[var(--border-default)] relative" id="destinos-destaque">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header Section */}
         <div className="flex items-end justify-between mb-10">
           <div>
-            <span className="text-brand-blue text-xs font-bold uppercase tracking-widest bg-brand-blue/10 px-4 py-1.5 rounded-full">
-              Destaques Editoriais
+            <span className="text-[var(--brand-blue)] text-xs font-bold uppercase tracking-widest bg-[var(--brand-blue-light)] px-4 py-1.5 rounded-full border border-[var(--border-default)]">
+              Curadoria de Experiências
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-4 font-heading">
-              Experiências que marcam vidas
+            <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--text-primary)] mt-4 font-heading tracking-tight">
+              Histórias que marcam vidas no Brasil
             </h2>
-            <p className="text-gray-400 mt-2 text-sm max-w-lg">
-              Seleções no estilo de catálogo por streaming. Arraste para o lado para explorar experiências curadas de alto impacto.
+            <p className="text-[var(--text-muted)] mt-2 text-sm max-w-lg leading-relaxed">
+              Arraste para o lado para explorar catálogos de expedições imersivas e roteiros focados na natureza brasileira.
             </p>
           </div>
 
@@ -84,14 +84,14 @@ export default function FeaturedDestinations() {
           <div className="flex gap-2">
             <button
               onClick={() => scroll('left')}
-              className="w-11 h-11 rounded-full border border-white/10 hover:border-brand-blue hover:text-brand-blue flex items-center justify-center text-white transition-all bg-white/[0.02]"
+              className="w-11 h-11 rounded-full border border-[var(--border-default)] hover:border-[var(--brand-blue)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all bg-[var(--bg-secondary)] hover:bg-[var(--brand-blue-light)]"
               aria-label="Anterior"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-11 h-11 rounded-full border border-white/10 hover:border-brand-blue hover:text-brand-blue flex items-center justify-center text-white transition-all bg-white/[0.02]"
+              className="w-11 h-11 rounded-full border border-[var(--border-default)] hover:border-[var(--brand-blue)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all bg-[var(--bg-secondary)] hover:bg-[var(--brand-blue-light)]"
               aria-label="Próximo"
             >
               <ChevronRight size={20} />
@@ -102,7 +102,7 @@ export default function FeaturedDestinations() {
         {/* Scrollable Container */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-white/10 scroll-smooth"
+          className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scroll-smooth"
           style={{ scrollSnapType: 'x mandatory' }}
         >
           {CURATED_EXPERIENCES.map((exp, idx) => (

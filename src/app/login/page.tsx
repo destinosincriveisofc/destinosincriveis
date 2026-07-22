@@ -38,9 +38,36 @@ export default function LoginPage() {
         throw new Error(data.error || "E-mail ou senha incorretos.");
       }
 
-      // Save credentials in localStorage
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const token = data.access_token || data.token;
+      if (!token) {
+        throw new Error("Token não fornecido pelo servidor.");
+      }
+
+      // Save token in localStorage
+      localStorage.setItem("token", token);
+
+      // Fetch user profile info
+      try {
+        const baseUrl = typeof window !== 'undefined' &&
+          (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:8001'
+            : 'https://destinosincriveis.vps-kinghost.net';
+
+        const meRes = await fetchWithTimeout(`${baseUrl}/api/auth/me`, {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+        });
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          localStorage.setItem("user", JSON.stringify(meData));
+        } else {
+          localStorage.setItem("user", JSON.stringify({ email, full_name: email.split('@')[0] }));
+        }
+      } catch (meErr) {
+        console.error("Error fetching user profile:", meErr);
+        localStorage.setItem("user", JSON.stringify({ email, full_name: email.split('@')[0] }));
+      }
 
       // Redirect to dashboard
       window.location.href = "/dashboard";

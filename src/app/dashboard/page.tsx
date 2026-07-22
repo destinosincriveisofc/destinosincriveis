@@ -475,7 +475,7 @@ function DashboardPageContent() {
                               border: selected ? '1px solid #38BDF8' : '1px solid rgba(255,255,255,0.06)',
                               borderRadius: 14, padding: '14px 16px', color: selected ? '#38BDF8' : '#94a3b8',
                               fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', textAlign: 'left',
-                              display: 'flex', alignItems: 'center', justifyContent: 'between', transition: 'all 0.2s'
+                              display: 'flex', alignItems: 'center', justifyContent: 'space-between', transition: 'all 0.2s'
                             }}
                           >
                             <span>{st.label}</span>
@@ -560,7 +560,7 @@ function DashboardPageContent() {
                               border: selected ? '1px solid #38BDF8' : '1px solid rgba(255,255,255,0.06)',
                               borderRadius: 14, padding: '14px 16px', color: selected ? '#38BDF8' : '#94a3b8',
                               fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', textAlign: 'left',
-                              display: 'flex', alignItems: 'center', justifyContent: 'between', transition: 'all 0.2s'
+                              display: 'flex', alignItems: 'center', justifyContent: 'space-between', transition: 'all 0.2s'
                             }}
                           >
                             <span>🌍 {c}</span>
@@ -792,7 +792,7 @@ function DashboardPageContent() {
                         background: 'rgba(0,0,0,0.18)', border: '1px solid rgba(255,255,255,0.03)',
                         borderRadius: 16, padding: 18, position: 'relative'
                       }}>
-                        <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'start', width: '100%', marginBottom: 10 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', width: '100%', marginBottom: 10 }}>
                           <div>
                             <h4 style={{ margin: 0, color: '#fff', fontSize: '0.9rem', fontWeight: 800 }}>{city.name}</h4>
                             <span style={{ fontSize: '0.72rem', color: '#38BDF8', fontWeight: 700 }}>Score: {scorePercentage}/100</span>

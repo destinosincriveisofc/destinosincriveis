@@ -611,7 +611,7 @@ function PerfilContent() {
             background: 'rgba(10, 18, 44, 0.45)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: 20, padding: 32
           }}>
-            <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'center', marginBottom: 28 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <Settings size={20} className="text-brand-blue" />
                 <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 800, color: '#fff' }}>Preferências Declaradas</h3>
@@ -865,7 +865,7 @@ function PerfilContent() {
                       gap: 8,
                       position: 'relative'
                     }}>
-                      <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'start', width: '100%' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', width: '100%' }}>
                         <span style={{
                           fontSize: '0.75rem',
                           fontWeight: 800,

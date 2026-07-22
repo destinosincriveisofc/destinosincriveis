@@ -59,8 +59,10 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     if (tab === 'tips') activeTitle = "Dicas & Notícias VIP";
   }
 
+  const isAiThemeActive = pathname === '/dashboard/guia';
+
   return (
-    <div className={styles.dashboardContainer}>
+    <div className={`${styles.dashboardContainer} ${isAiThemeActive ? 'dark-theme-ai' : ''}`}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
@@ -109,7 +111,7 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
             className={`${styles.menuItem} ${pathname === '/dashboard/perfil' ? styles.active : ''}`}
           >
             <UserCircle size={20} />
-            <span>👤 Perfil</span>
+            <span>Perfil</span>
           </Link>
         </nav>
 

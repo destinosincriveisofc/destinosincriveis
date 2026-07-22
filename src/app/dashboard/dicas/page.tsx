@@ -43,7 +43,7 @@ export default function DicasPage() {
     try {
       const baseUrl = typeof window !== 'undefined' && 
         (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-          ? 'http://localhost:5001'
+          ? 'http://localhost:8001'
           : 'https://destinosincriveis.vps-kinghost.net';
       
       const response = await fetchWithTimeout(`${baseUrl}/api/posts/like`, {

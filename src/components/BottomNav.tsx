@@ -3,14 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Compass, Plane, BookOpen, Brain, Star } from 'lucide-react';
+import { Compass, Map, Brain, User, Home } from 'lucide-react';
 
 const navItems = [
+  { href: '/', label: 'Início', icon: Home },
   { href: '/explorar', label: 'Explorar', icon: Compass },
-  { href: '/destinos', label: 'Destinos', icon: Plane },
-  { href: '/guias', label: 'Guias', icon: BookOpen },
-  { href: '/dija-ai', label: 'DIJA AI', icon: Brain },
-  { href: '/club', label: 'Clube', icon: Star },
+  { href: '/destinos', label: 'Mapa', icon: Map },
+  { href: '/dija-ai', label: 'DIJA', icon: Brain },
+  { href: '/dashboard', label: 'Perfil', icon: User },
 ];
 
 export default function BottomNav() {
@@ -25,7 +25,7 @@ export default function BottomNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`bottomNavItem ${isActive ? 'bottomNavItemActive' : ''} ${item.href === '/club' ? 'bottomNavCta' : ''}`}
+            className={`bottomNavItem ${isActive ? 'bottomNavItemActive' : ''} ${item.href === '/explorar' ? 'bottomNavCta' : ''}`}
           >
             <Icon size={20} />
             <span className="bottomNavLabel">{item.label}</span>

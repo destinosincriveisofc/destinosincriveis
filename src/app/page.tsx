@@ -3,18 +3,19 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/sections/HeroSection';
-import ExploreSection from '@/sections/ExploreSection';
-import FeaturedDestinations from '@/sections/FeaturedDestinations';
-import AISection from '@/sections/AISection';
-import GuidesSection from '@/sections/GuidesSection';
-import ClubSection from '@/sections/ClubSection';
+import BrasilEmNumeros from '@/sections/BrasilEmNumeros';
+import BentoGrid from '@/sections/BentoGrid';
+import DescubraPorEstilo from '@/sections/DescubraPorEstilo';
+import BrasilAgora from '@/sections/BrasilAgora';
+import Depoimentos from '@/sections/Depoimentos';
+import CTA_Final from '@/sections/CTA_Final';
 
 export const metadata: Metadata = {
-  title: 'Destinos Incríveis 2.0 | Copiloto Inteligente de Viagens',
-  description: 'O copiloto inteligente para descobrir, planejar e viver viagens incríveis. Conheça roteiros curados por tecnologia e nossa inteligência artificial DIJA AI.',
+  title: 'Destinos Incríveis | Descubra o Brasil que poucos conhecem',
+  description: 'Experiências únicas, roteiros inteligentes e uma comunidade inteira explorando o Brasil. Descubra seu próximo destino com a DIJA AI.',
   openGraph: {
-    title: 'Destinos Incríveis 2.0 | Copiloto Inteligente de Viagens',
-    description: 'O copiloto inteligente para descobrir, planejar e viver viagens incríveis. Conheça roteiros curados por tecnologia e nossa inteligência artificial DIJA AI.',
+    title: 'Destinos Incríveis | Descubra o Brasil que poucos conhecem',
+    description: 'Experiências únicas, roteiros inteligentes e uma comunidade inteira explorando o Brasil.',
     type: 'website',
     locale: 'pt_BR',
     siteName: 'Destinos Incríveis',
@@ -22,8 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Destinos Incríveis 2.0',
-    description: 'Descubra seu próximo destino com o auxílio da inteligência artificial DIJA AI.',
+    title: 'Destinos Incríveis',
+    description: 'Descubra o Brasil que poucos conhecem.',
     images: ['/og-image.png'],
   },
 };
@@ -34,7 +35,7 @@ export default function Home() {
     "@type": "WebSite",
     "name": "Destinos Incríveis",
     "url": "https://destinosincriveis.com.br",
-    "description": "O copiloto inteligente para descobrir, planejar e viver viagens incríveis. Conheça roteiros curados por tecnologia e nossa inteligência artificial DIJA AI.",
+    "description": "A plataforma brasileira para descobrir, planejar e viver experiências de viagem autênticas pelo Brasil.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://destinosincriveis.com.br/explorar?q={search_term_string}",
@@ -48,30 +49,18 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* Premium Header/Navigation */}
       <Navbar />
 
-      <main className="bg-primary-bg min-h-screen text-white">
-        {/* 1. Cinematic Hero Section */}
+      <main className="bg-[var(--bg-primary)] min-h-screen text-[var(--text-secondary)]">
         <HeroSection />
-
-        {/* 2. Categorized Descovery area */}
-        <ExploreSection />
-
-        {/* 3. Streaming/Netflix Curated Experiences */}
-        <FeaturedDestinations />
-
-        {/* 4. AI Copilot Simulation Presentation */}
-        <AISection />
-
-        {/* 5. Editorial guides (Travel Magazine) */}
-        <GuidesSection />
-
-        {/* 6. VIP Membership Community Space */}
-        <ClubSection />
+        <BrasilEmNumeros />
+        <BentoGrid />
+        <DescubraPorEstilo />
+        <BrasilAgora />
+        <Depoimentos />
+        <CTA_Final />
       </main>
 
-      {/* Premium Footer */}
       <Footer />
     </>
   );
