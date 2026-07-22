@@ -49,14 +49,25 @@
   color: #FFC107;
 }
 
-/* Grid Layout */
 .tipsGrid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 24px;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .tipsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tipsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* Card Style */

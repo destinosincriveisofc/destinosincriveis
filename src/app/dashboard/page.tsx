@@ -398,32 +398,27 @@ function DashboardPageContent() {
               </div>
             </div>
           ) : (
-            <div style={{
-              background: 'rgba(10, 18, 44, 0.75)', border: '1px solid rgba(56, 189, 248, 0.25)',
-              borderRadius: 28, width: '100%', maxWidth: 640, minHeight: 400, display: 'flex', flexDirection: 'column',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.6)', overflow: 'hidden', position: 'relative'
-            }}>
+            <div className="bg-[#0A122C]/95 border border-brand-blue/20 rounded-3xl w-full max-w-lg md:max-w-2xl min-h-[400px] flex flex-col shadow-2xl overflow-hidden relative mx-4">
               {/* Header */}
-              <div style={{ padding: '24px 32px', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+              <div className="p-5 md:py-6 md:px-8 border-b border-white/5 bg-white/[0.01]">
+                <div className="flex items-center gap-2 mb-1">
                   <Brain size={20} className="text-brand-blue" />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#38BDF8', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Onboarding Inteligente DIJA AI</span>
+                  <span className="text-[10px] font-black text-brand-blue tracking-wider uppercase">Onboarding Inteligente DIJA AI</span>
                 </div>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 900, color: '#fff', margin: 0 }}>Configure sua Próxima Aventura</h2>
+                <h2 className="text-lg md:text-xl font-black text-white leading-snug">Configure sua Próxima Aventura</h2>
               </div>
 
               {/* Steps Progress dots */}
-              <div style={{ display: 'flex', padding: '16px 32px 0 32px', gap: 6 }}>
+              <div className="flex px-5 md:px-8 pt-4 gap-2">
                 {[1, 2, 3, 4].map(s => (
-                  <div key={s} style={{
-                    flex: 1, height: 4, borderRadius: 2,
+                  <div key={s} className="flex-1 h-1 rounded-full" style={{
                     background: s <= onboardingStep ? 'linear-gradient(90deg, #FFC107, #F59E0B)' : 'rgba(255,255,255,0.08)'
                   }} />
                 ))}
               </div>
 
               {/* Step Content container */}
-              <div style={{ flex: 1, padding: 32, display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div className="flex-1 p-5 md:p-8 flex flex-col gap-6">
                 {/* STEP 1: Nickname & Bio */}
                 {onboardingStep === 1 && (
                   <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -579,10 +574,7 @@ function DashboardPageContent() {
               </div>
 
               {/* Footer */}
-              <div style={{
-                padding: '24px 32px', borderTop: '1px solid rgba(255,255,255,0.05)', background: 'rgba(255,255,255,0.01)',
-                display: 'flex', justifyContent: 'between', alignItems: 'center', gap: 12
-              }}>
+              <div className="p-5 md:py-6 md:px-8 border-t border-white/5 bg-white/[0.01] flex justify-between items-center gap-3">
                 <button
                   disabled={onboardingStep === 1}
                   onClick={() => setOnboardingStep(prev => prev - 1)}
@@ -594,7 +586,7 @@ function DashboardPageContent() {
                 >
                   Voltar
                 </button>
-                <div style={{ marginLeft: 'auto', display: 'flex', gap: 12 }}>
+                <div className="ml-auto flex gap-3">
                   {onboardingStep < 4 ? (
                     <button
                       onClick={() => setOnboardingStep(prev => prev + 1)}
@@ -675,7 +667,7 @@ function DashboardPageContent() {
                   </button>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 20 }}>
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-5">
                   {/* Gauge style score */}
                   <div style={{
                     width: 70, height: 70, borderRadius: '50%', background: 'rgba(0,0,0,0.3)',
@@ -686,7 +678,7 @@ function DashboardPageContent() {
                     <span style={{ fontSize: '0.52rem', textTransform: 'uppercase', color: '#64748b', fontWeight: 800 }}>Sinc</span>
                   </div>
                   
-                  <div>
+                  <div className="text-center sm:text-left">
                     <h4 style={{ color: '#fff', margin: '0 0 4px 0', fontSize: '0.9rem', fontWeight: 700 }}>Inteligência em Evolução</h4>
                     <p style={{ color: '#94a3b8', fontSize: '0.78rem', margin: 0, lineHeight: 1.4 }}>
                       DIJA está adaptando as buscas ao seu perfil. Converse no chat para que ela aprenda seus hábitos.

@@ -238,3 +238,36 @@
   color: var(--cinza-suave);
   margin-bottom: 16px;
 }
+
+/* VIP Overrides */
+.mainVip {
+  background: #0A122C !important;
+  color: #ffffff;
+}
+
+.articleContentVip {
+  background: rgba(10, 18, 44, 0.6) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.paragraphVip {
+  color: #cbd5e1 !important;
+}
+
+.backBtnVip {
+  color: #38BDF8 !important;
+}
+
+.backBtnVip:hover {
+  color: #FFC107 !important;
+}
+
+.relatedTitleVip {
+  color: #ffffff !important;
+  border-left-color: #FFC107 !important;
+}
+

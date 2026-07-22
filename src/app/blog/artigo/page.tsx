@@ -319,7 +319,7 @@ function ArticleReader() {
   const backLabel = vip ? "Voltar para as Dicas VIP" : "Voltar para todos os artigos";
 
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} ${vip ? styles.mainVip : ''}`}>
       {/* Hero image full width */}
       <div className={styles.hero}>
         <img
@@ -344,15 +344,15 @@ function ArticleReader() {
 
       {/* Article Body Container */}
       <div className={styles.bodyContainer}>
-        <Link href={backHref} className={styles.backBtn}>
+        <Link href={backHref} className={`${styles.backBtn} ${vip ? styles.backBtnVip : ''}`}>
           <ArrowLeft size={16} />
           <span>{backLabel}</span>
         </Link>
 
-        <article className={styles.articleContent}>
+        <article className={`${styles.articleContent} ${vip ? styles.articleContentVip : ''}`}>
           <div className={styles.articleText}>
             {cleanBody.split('\n\n').filter(p => p.trim() !== "").map((para, i) => (
-              <p key={i} className={styles.paragraph}>{para}</p>
+              <p key={i} className={`${styles.paragraph} ${vip ? styles.paragraphVip : ''}`}>{para}</p>
             ))}
           </div>
 

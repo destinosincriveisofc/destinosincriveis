@@ -484,7 +484,7 @@ function PerfilContent() {
               <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>Perfil de Viajante</h3>
             </div>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
               <div>
                 <label style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                   Nome completo
@@ -548,7 +548,7 @@ function PerfilContent() {
             </div>
             <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '0 0 20px 0' }}>Preencha apenas se desejar redefinir sua senha.</p>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 8 }}>
                   Nova senha
