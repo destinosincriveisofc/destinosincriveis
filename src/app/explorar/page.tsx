@@ -56,7 +56,7 @@ const ALL_DESTINATIONS = [
   {
     name: "Salar de Uyuni",
     description: "O maior deserto de sal do planeta, criando um reflexo perfeito do céu e proporcionando paisagens surreais de baixo custo.",
-    imageUrl: "https://images.unsplash.com/photo-1463130456064-07386d8376e1?q=80&w=800&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=800&auto=format&fit=crop",
     bestSeason: "Maio a Outubro",
     profile: "Exploradores e Mochileiros",
     experienceType: "Econômico 🎒",

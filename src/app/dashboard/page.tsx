@@ -648,13 +648,10 @@ function DashboardPageContent() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               
               {/* MINHA DIJA AI WIDGET */}
-              <div ref={dijaRef} className="fade-in-up hover-lift" style={{
-                background: 'rgba(10, 18, 44, 0.45)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: 20, padding: 24, position: 'relative'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+              <div ref={dijaRef} className={`${styles.bentoCard} fade-in-up hover-lift`} style={{ position: 'relative' }}>
+                <div className={styles.bentoCardHeader}>
                   <Brain size={22} className="text-brand-blue" />
-                  <h3 style={{ margin: 0, color: '#fff', fontSize: '1.05rem', fontWeight: 800 }}>Minha DIJA AI</h3>
+                  <h3 className={styles.bentoCardTitle}>Minha DIJA AI</h3>
                   <button
                     onClick={() => { setOnboardingStep(1); setShowOnboarding(true); }}
                     style={{
@@ -706,32 +703,21 @@ function DashboardPageContent() {
               </div>
 
               {/* SEUS DESTINOS SALVOS (FAVORITOS) */}
-              <div className="fade-in-up hover-lift" style={{
-                background: 'rgba(10, 18, 44, 0.45)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: 20, padding: 24
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+              <div className={`${styles.bentoCard} fade-in-up hover-lift`}>
+                <div className={styles.bentoCardHeader}>
                   <Heart size={20} className="text-red-400" />
-                  <h3 style={{ margin: 0, color: '#fff', fontSize: '1.05rem', fontWeight: 800 }}>Destinos Salvos ({favoriteCities.length})</h3>
+                  <h3 className={styles.bentoCardTitle}>Destinos Salvos ({favoriteCities.length})</h3>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div className={styles.bentoCardBody}>
                   {favoriteCities.map((city: any) => (
-                    <div key={city.id} style={{
-                      display: 'flex', alignItems: 'center', gap: 14,
-                      padding: 12, background: 'rgba(0,0,0,0.15)', borderRadius: 12,
-                      border: '1px solid rgba(255,255,255,0.02)'
-                    }}>
-                      <div style={{
-                        width: 36, height: 36, borderRadius: 8, background: 'rgba(255,193,7,0.1)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFC107',
-                        fontWeight: 800, fontSize: '0.85rem'
-                      }}>
+                    <div key={city.id} className={styles.bentoItem}>
+                      <div className={styles.bentoItemCode}>
                         {city.iata_code}
                       </div>
-                      <div style={{ flex: 1 }}>
-                        <h4 style={{ margin: 0, color: '#fff', fontSize: '0.85rem', fontWeight: 700 }}>{city.name}</h4>
-                        <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Orçamento: {city.metadata_json.budget_level?.toUpperCase()}</span>
+                      <div className={styles.bentoItemInfo}>
+                        <h4 className={styles.bentoItemName}>{city.name}</h4>
+                        <span className={styles.bentoItemSub}>Orçamento: {city.metadata_json.budget_level?.toUpperCase()}</span>
                       </div>
                       <button
                         onClick={() => handleToggleFavorite(city.id, true)}
@@ -749,19 +735,9 @@ function DashboardPageContent() {
                   ))}
                   
                   {favoriteCities.length === 0 && (
-                    <div style={{ 
-                      padding: '30px 10px', textAlign: 'center', color: '#475569', 
-                      background: 'rgba(0,0,0,0.1)', borderRadius: 12, border: '1px dashed rgba(255,255,255,0.05)'
-                    }}>
+                    <div className={styles.bentoEmptyState}>
                       <p style={{ fontSize: '0.8rem', margin: '0 0 10px 0' }}>Sua lista de destinos salvos está vazia.</p>
-                      <button
-                        onClick={() => window.location.href = '/dija-ai'}
-                        style={{
-                          background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.2)',
-                          color: '#38BDF8', fontSize: '0.72rem', fontWeight: 700, padding: '6px 12px',
-                          borderRadius: 8, cursor: 'pointer'
-                        }}
-                      >
+                      <button onClick={() => window.location.href = '/dija-ai'} className={styles.ctaBtn}>
                         Descobrir Destinos na DIJA
                       </button>
                     </div>
@@ -772,30 +748,24 @@ function DashboardPageContent() {
 
             {/* RIGHT COLUMN: RECOMENDAÇÕES DA DIJA */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <div className="fade-in-up hover-lift" style={{
-                background: 'rgba(10, 18, 44, 0.45)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: 20, padding: 24, height: '100%'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+              <div className={`${styles.bentoCard} fade-in-up hover-lift`} style={{ height: '100%' }}>
+                <div className={styles.bentoCardHeader}>
                   <Sparkles size={20} className="text-brand-gold animate-bounce" />
-                  <h3 style={{ margin: 0, color: '#fff', fontSize: '1.05rem', fontWeight: 800 }}>Curadoria de Destinos DIJA</h3>
+                  <h3 className={styles.bentoCardTitle}>Curadoria de Destinos DIJA</h3>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div className={styles.bentoCardBody}>
                   {recommendations.map((rec) => {
                     const city = rec.destination;
                     const scorePercentage = Math.round(rec.score * 25);
                     const isSaved = favorites.some(fav => fav.item_id === city.id);
 
                     return (
-                      <div key={city.id} style={{
-                        background: 'rgba(0,0,0,0.18)', border: '1px solid rgba(255,255,255,0.03)',
-                        borderRadius: 16, padding: 18, position: 'relative'
-                      }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', width: '100%', marginBottom: 10 }}>
+                      <div key={city.id} className={styles.bentoRecCard}>
+                        <div className={styles.bentoRecHeader}>
                           <div>
-                            <h4 style={{ margin: 0, color: '#fff', fontSize: '0.9rem', fontWeight: 800 }}>{city.name}</h4>
-                            <span style={{ fontSize: '0.72rem', color: '#38BDF8', fontWeight: 700 }}>Score: {scorePercentage}/100</span>
+                            <h4 className={styles.bentoRecName}>{city.name}</h4>
+                            <span className={styles.bentoRecScore}>Score: {scorePercentage}/100</span>
                           </div>
                           
                           <button
@@ -810,15 +780,11 @@ function DashboardPageContent() {
                           </button>
                         </div>
 
-                        {/* Reason bubble */}
-                        <div style={{
-                          background: 'rgba(255,255,255,0.02)', padding: '10px 14px', borderRadius: 10,
-                          fontSize: '0.78rem', color: '#94a3b8', borderLeft: '3px solid #FFC107', fontStyle: 'italic'
-                        }}>
+                        <div className={styles.bentoRecReason}>
                           💡 {rec.reasons[0] || "Destino de alta afinidade"}
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+                        <div className={styles.bentoRecAction}>
                           <button
                             onClick={() => window.location.href = '/dija-ai'}
                             style={{
@@ -836,9 +802,7 @@ function DashboardPageContent() {
                   })}
 
                   {recommendations.length === 0 && (
-                    <div style={{ 
-                      padding: '40px 10px', textAlign: 'center', color: '#475569'
-                    }}>
+                    <div className={styles.bentoEmptyState} style={{ padding: '40px 10px' }}>
                       <Brain size={32} style={{ margin: '0 auto 12px auto', display: 'block' }} />
                       <p style={{ fontSize: '0.82rem', margin: 0 }}>Nenhuma recomendação processada. Configure seu onboarding de preferências.</p>
                     </div>

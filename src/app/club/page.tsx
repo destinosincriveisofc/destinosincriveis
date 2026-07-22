@@ -89,7 +89,7 @@ export default function ClubPage() {
         {/* Hero Section */}
         <section className="section-padding">
           <div className="container-premium">
-            <div className="max-w-4xl mx-auto text-center flex flex-col gap-6 items-center">
+            <div className="max-w-[720px] mx-auto text-center flex flex-col gap-6 items-center">
               <h1 className="text-4xl md:text-6xl font-extrabold text-[var(--text-primary)] tracking-tight leading-tight">
                 Descubra o Brasil que poucos conhecem
               </h1>

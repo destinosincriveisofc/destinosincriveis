@@ -14,7 +14,7 @@ const categories = [
 
 export default function ExplorarPage() {
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">Explorar Destinos</h2>
         <p className="text-sm text-[var(--text-muted)]">

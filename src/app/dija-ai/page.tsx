@@ -11,7 +11,7 @@ export default function DijaAiPage() {
     <>
       <Navbar />
       <main className="bg-[var(--bg-primary)] min-h-screen pt-28 pb-16">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           {/* Hero */}
           <section className="flex flex-col items-center text-center mb-24">
             <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[var(--brand-blue-light)] text-[var(--brand-blue)] border border-[var(--brand-blue)]/20 mb-6">

@@ -21,7 +21,7 @@ const destaques = [
     temperatura: '32°C',
     compatibilidade: 94,
     viajantes: 12,
-    imagem: 'https://images.unsplash.com/photo-1463130456064-07386d8376e1?q=80&w=600&auto=format&fit=crop',
+    imagem: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=600&auto=format&fit=crop',
     mensagem: 'O Jalapão está seco e perfeito para explorar fervedouros.',
   },
   {

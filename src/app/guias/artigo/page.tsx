@@ -88,7 +88,7 @@ const MOCK_FALLBACK_ARTICLES: BlogArticle[] = [
     excerpt: "Entenda como acionar a cobertura de saúde, atraso de bagagem ou cancelamento oferecida gratuitamente pelo seu cartão Visa, Master ou Amex.",
     content: "Seu cartão de crédito pode oferecer seguros viagem gratuitos que poucos conhecem. Dependendo da bandeira e categoria, as coberturas podem chegar a US$ 500 mil em despesas médicas.\n\nCartões Visa Infinite e Mastercard Black oferecem seguro de saúde internacional com cobertura de até US$ 500 mil para o titular e dependentes. Além disso, incluem seguro de bagagem (até US$ 3 mil) e de cancelamento de viagem.\n\nPara acionar, guarde todos os documentos: bilhete aéreo, comprovante do cartão utilizado na compra, relatório médico e boletim de ocorrência em caso de furto. Cada seguradora tem um prazo de 30 a 60 dias para reembolso.\n\nImportante: a compra da passagem deve ser feita integralmente com o cartão que oferece o benefício. Leia as condições gerais do seu cartão para conhecer exatamente os limites e exclusões de cada cobertura.",
     category: "Dicas",
-    imageUrl: "https://images.unsplash.com/photo-1589758438311-18e4724a6b20?q=80&w=600&auto=format&fit=crop",
+    imageUrl: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop",
     date: "2026-07-15",
     slug: "segredos-seguro-viagem-cartao"
   },

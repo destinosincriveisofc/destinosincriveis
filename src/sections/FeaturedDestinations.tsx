@@ -34,7 +34,7 @@ const DESTINATIONS = [
     name: 'Jalapao',
     state: 'TO',
     description: 'Aventura no maior conjunto de dunas do Brasil',
-    image: 'https://images.unsplash.com/photo-1463130456064-07386d8376e1?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?q=80&w=800&auto=format&fit=crop',
   },
   {
     name: 'Vale do Pati',

@@ -8,9 +8,9 @@ import TravelGlobe from '@/components/TravelGlobe';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-28 pb-16 overflow-hidden bg-[var(--bg-primary)]">
-      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-        <div className="lg:col-span-7 flex flex-col gap-6 text-left">
+    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[var(--bg-primary)]">
+      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
+        <div className="lg:col-span-6 flex flex-col gap-8 text-left">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed max-w-lg"
+            className="text-lg md:text-xl lg:text-2xl text-[var(--text-secondary)] leading-relaxed max-w-xl"
           >
             Experiências únicas, roteiros inteligentes e uma comunidade inteira explorando o Brasil.
           </motion.p>
@@ -46,18 +46,18 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-3 mt-2"
+            className="flex flex-col sm:flex-row gap-4 mt-4"
           >
             <Link
               href="/explorar"
-              className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold bg-[var(--brand-gold)] text-white shadow-[var(--shadow-btn-gold)] hover:bg-[var(--brand-gold-hover)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold bg-[var(--brand-gold)] text-white shadow-[var(--shadow-btn-gold)] hover:bg-[var(--brand-gold-hover)] hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               Explorar o Brasil
               <ArrowRight size={16} />
             </Link>
             <Link
               href="/club"
-              className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base font-semibold text-white border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               <Star size={16} />
               Club DIJA — R$ 9,90/mês
@@ -89,9 +89,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 flex justify-center items-center relative"
+          className="lg:col-span-6 flex justify-center items-center relative"
         >
-          <div className="relative z-10 w-full flex justify-center">
+          <div className="relative z-10 w-full flex justify-center scale-110 lg:scale-125">
             <TravelGlobe />
           </div>
         </motion.div>
