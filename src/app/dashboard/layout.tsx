@@ -1,22 +1,22 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { 
-  Home, 
-  Plane, 
-  Users, 
-  BookOpen, 
-  LogOut, 
-  Bell, 
-  User,
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  Home,
   Compass,
-  UserCircle
+  Users,
+  Sparkles,
+  BookOpen,
+  UserCircle,
+  LogOut,
+  Bell,
+  User,
 } from 'lucide-react';
 import styles from './page.module.css';
 
-function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [user, setUser] = React.useState<any>(() => {
     if (typeof window !== 'undefined') {
       const storedUser = localStorage.getItem("user");
@@ -26,8 +26,6 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   });
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const tab = searchParams.get('tab') || 'dashboard';
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,72 +40,62 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
     router.push("/login");
   };
 
-  // Determine active tab title
-  let activeTitle = "Painel Geral";
-  if (pathname === '/dashboard/comunidade') {
-    activeTitle = "Comunidade Social";
-  } else if (pathname === '/dashboard/guia') {
-    activeTitle = "Guia de Bolso VIP";
-  } else if (pathname === '/dashboard/ofertas') {
-    activeTitle = "Vitrine Secreta VIP";
-  } else if (pathname === '/dashboard/perfil') {
-    activeTitle = "Meu Perfil";
-  } else if (pathname === '/dashboard/dicas') {
-    activeTitle = "Dicas & Notícias VIP";
-  } else if (pathname === '/dashboard') {
-    if (tab === 'offers') activeTitle = "Ofertas de Viagens VIP";
-    if (tab === 'tips') activeTitle = "Dicas & Notícias VIP";
-  }
-
-  const isAiThemeActive = pathname === '/dashboard/guia';
+  let activeTitle = "Dashboard";
+  if (pathname === '/dashboard/explorar') activeTitle = "Explorar Destinos";
+  else if (pathname === '/dashboard/comunidade') activeTitle = "Comunidade";
+  else if (pathname === '/dashboard/guia') activeTitle = "DIJA AI";
+  else if (pathname === '/dashboard/dicas') activeTitle = "Dicas";
+  else if (pathname === '/dashboard/perfil') activeTitle = "Perfil";
 
   return (
-    <div className={`${styles.dashboardContainer} ${isAiThemeActive ? 'dark-theme-ai' : ''}`}>
+    <div className={styles.dashboardContainer}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <img src="/logo-oficial.jpg" alt="Logo" className={styles.sidebarLogoImage} />
-          <h2 className={styles.sidebarLogoText}>CLUB DIJA</h2>
+          <div className={styles.sidebarLogo}>
+            <span className={styles.sidebarLogoBox}>DI</span>
+            <span className={styles.sidebarLogoText}>Destinos Incriveis</span>
+          </div>
         </div>
 
         <nav className={styles.menu}>
-          <Link 
-            href="/dashboard" 
-            className={`${styles.menuItem} ${pathname === '/dashboard' && tab === 'dashboard' ? styles.active : ''}`}
+          <Link
+            href="/dashboard"
+            className={`${styles.menuItem} ${pathname === '/dashboard' ? styles.active : ''}`}
           >
             <Home size={20} />
             <span>Dashboard</span>
           </Link>
-          <Link 
-            href="/dashboard/ofertas" 
-            className={`${styles.menuItem} ${pathname === '/dashboard/ofertas' ? styles.active : ''}`}
+          <Link
+            href="/dashboard/explorar"
+            className={`${styles.menuItem} ${pathname === '/dashboard/explorar' ? styles.active : ''}`}
           >
-            <Plane size={20} />
-            <span>Ofertas VIP</span>
+            <Compass size={20} />
+            <span>Explorar Destinos</span>
           </Link>
-          <Link 
-            href="/dashboard/comunidade" 
+          <Link
+            href="/dashboard/comunidade"
             className={`${styles.menuItem} ${pathname === '/dashboard/comunidade' ? styles.active : ''}`}
           >
             <Users size={20} />
             <span>Comunidade</span>
           </Link>
-          <Link 
-            href="/dashboard/guia" 
+          <Link
+            href="/dashboard/guia"
             className={`${styles.menuItem} ${pathname === '/dashboard/guia' ? styles.active : ''}`}
           >
-            <Compass size={20} />
-            <span>Guia de Bolso VIP</span>
+            <Sparkles size={20} />
+            <span>DIJA AI</span>
           </Link>
-          <Link 
-            href="/dashboard/dicas" 
+          <Link
+            href="/dashboard/dicas"
             className={`${styles.menuItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
           >
             <BookOpen size={20} />
-            <span>Dicas & Notícias VIP</span>
+            <span>Dicas</span>
           </Link>
-          <Link 
-            href="/dashboard/perfil" 
+          <Link
+            href="/dashboard/perfil"
             className={`${styles.menuItem} ${pathname === '/dashboard/perfil' ? styles.active : ''}`}
           >
             <UserCircle size={20} />
@@ -117,12 +105,12 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
 
         <div className={styles.sidebarFooter}>
           <div className={styles.userInfo}>
-            <div className={styles.userAvatarWrapper}>
+            <div className={styles.userAvatar}>
               <User size={18} />
             </div>
             <div className={styles.userDetails}>
               <p className={styles.userName}>{user?.nome || "Carregando..."}</p>
-              <span className={styles.userRole}>VIP Member</span>
+              <span className={styles.userRole}>Membro</span>
             </div>
           </div>
           <button onClick={handleLogout} className={styles.logoutBtn}>
@@ -132,69 +120,68 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <main className={styles.mainContent}>
         {/* Top Header */}
         <header className={styles.topHeader}>
           <div className={styles.headerTitleContainer}>
             <h1 className={styles.headerTitle}>{activeTitle}</h1>
             <p className={styles.headerSubtitle}>
-              Seja bem-vindo, {user?.nome || "Membro"}!
+              Bem-vindo, {user?.nome || "Membro"}!
             </p>
           </div>
           <div className={styles.headerActions}>
             <div className={styles.bellIconWrapper}>
               <Bell size={20} />
-              <span className={styles.bellBadge}></span>
+              <span className={styles.bellBadge} />
             </div>
           </div>
         </header>
 
-        {/* Tab/Page Content */}
         <div className={styles.tabContainer}>
           {children}
         </div>
       </main>
 
-      {/* Bottom Navigation for Mobile */}
+      {/* Bottom Navigation (Mobile) */}
       <nav className={styles.bottomNav}>
-        <Link 
-          href="/dashboard" 
-          className={`${styles.bottomNavItem} ${pathname === '/dashboard' && tab === 'dashboard' ? styles.active : ''}`}
+        <Link
+          href="/dashboard"
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard' ? styles.active : ''}`}
         >
           <Home size={20} />
-          <span>Painel</span>
+          <span>Dashboard</span>
         </Link>
-        <Link 
-          href="/dashboard/ofertas" 
-          className={`${styles.bottomNavItem} ${pathname === '/dashboard/ofertas' ? styles.active : ''}`}
+        <Link
+          href="/dashboard/explorar"
+          className={`${styles.bottomNavItem} ${pathname === '/dashboard/explorar' ? styles.active : ''}`}
         >
-          <Plane size={20} />
-          <span>Ofertas</span>
+          <Compass size={20} />
+          <span>Explorar</span>
         </Link>
-        <Link 
-          href="/dashboard/comunidade" 
+        <Link
+          href="/dashboard/comunidade"
           className={`${styles.bottomNavItem} ${pathname === '/dashboard/comunidade' ? styles.active : ''}`}
         >
           <Users size={20} />
           <span>Comunidade</span>
         </Link>
-        <Link 
-          href="/dashboard/guia" 
+        <Link
+          href="/dashboard/guia"
           className={`${styles.bottomNavItem} ${pathname === '/dashboard/guia' ? styles.active : ''}`}
         >
-          <Compass size={20} />
-          <span>Guia VIP</span>
+          <Sparkles size={20} />
+          <span>DIJA AI</span>
         </Link>
-        <Link 
-          href="/dashboard/dicas" 
+        <Link
+          href="/dashboard/dicas"
           className={`${styles.bottomNavItem} ${pathname === '/dashboard/dicas' ? styles.active : ''}`}
         >
           <BookOpen size={20} />
-          <span>Dicas & Notícias VIP</span>
+          <span>Dicas</span>
         </Link>
-        <Link 
-          href="/dashboard/perfil" 
+        <Link
+          href="/dashboard/perfil"
           className={`${styles.bottomNavItem} ${pathname === '/dashboard/perfil' ? styles.active : ''}`}
         >
           <UserCircle size={20} />
@@ -202,13 +189,5 @@ function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
         </Link>
       </nav>
     </div>
-  );
-}
-
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <Suspense fallback={<div style={{ padding: '20px', color: '#ffffff' }}>Carregando...</div>}>
-      <DashboardLayoutContent>{children}</DashboardLayoutContent>
-    </Suspense>
   );
 }

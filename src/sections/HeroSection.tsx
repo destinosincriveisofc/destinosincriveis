@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, BrainCircuit } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Users, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import TravelGlobe from '@/components/TravelGlobe';
 
@@ -11,6 +11,16 @@ export default function HeroSection() {
     <section className="relative min-h-[90vh] flex items-center pt-28 pb-16 overflow-hidden bg-[var(--bg-primary)]">
       <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         <div className="lg:col-span-7 flex flex-col gap-6 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[var(--brand-blue-light)] text-[var(--brand-blue)] border border-[var(--brand-blue)]/20 self-start"
+          >
+            <Users size={14} />
+            +3.400 viajantes explorando o Brasil
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,11 +56,11 @@ export default function HeroSection() {
               <ArrowRight size={16} />
             </Link>
             <Link
-              href="/dija-ai"
-              className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-[var(--text-secondary)] border border-[var(--border-default)] bg-[var(--bg-secondary)] hover:border-[var(--brand-blue)] hover:text-[var(--brand-blue)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+              href="/club"
+              className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-full text-base font-semibold text-white border-2 border-[var(--brand-gold)] bg-[var(--brand-gold)]/10 hover:bg-[var(--brand-gold)]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              <BrainCircuit size={16} />
-              Conversar com a DIJA AI
+              <Star size={16} />
+              Club DIJA — R$ 9,90/mês
             </Link>
           </motion.div>
 

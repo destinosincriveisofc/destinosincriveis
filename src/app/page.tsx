@@ -4,11 +4,14 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroSection from '@/sections/HeroSection';
 import BrasilEmNumeros from '@/sections/BrasilEmNumeros';
-import BentoGrid from '@/sections/BentoGrid';
-import DescubraPorEstilo from '@/sections/DescubraPorEstilo';
-import BrasilAgora from '@/sections/BrasilAgora';
+import FeaturedDestinations from '@/sections/FeaturedDestinations';
+import AISection from '@/sections/AISection';
+import ComunidadeSection from '@/sections/ComunidadeSection';
+import ExploreSection from '@/sections/ExploreSection';
 import Depoimentos from '@/sections/Depoimentos';
+import ClubSection from '@/sections/ClubSection';
 import CTA_Final from '@/sections/CTA_Final';
+import PricingSection from '@/sections/PricingSection';
 
 export const metadata: Metadata = {
   title: 'Destinos Incríveis | Descubra o Brasil que poucos conhecem',
@@ -54,10 +57,13 @@ export default function Home() {
       <main className="bg-[var(--bg-primary)] min-h-screen text-[var(--text-secondary)]">
         <HeroSection />
         <BrasilEmNumeros />
-        <BentoGrid />
-        <DescubraPorEstilo />
-        <BrasilAgora />
+        <FeaturedDestinations />
+        <AISection />
+        <ComunidadeSection />
+        <ExploreSection />
         <Depoimentos />
+        <PricingSection />
+        <ClubSection />
         <CTA_Final />
       </main>
 

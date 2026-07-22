@@ -4,7 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Send, Sparkles } from 'lucide-react';
 import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
-import styles from './page.module.css';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -44,7 +43,6 @@ export default function GuiaPage() {
     setIsTyping(true);
 
     try {
-      // Map history format to match what server expects: { role, text }
       const history = messages.map(m => ({
         role: m.role,
         text: m.text
@@ -70,11 +68,11 @@ export default function GuiaPage() {
           setMessages(prev => [...prev, { role: 'assistant', text: "Erro ao gerar resposta: " + (data.error || "Tente novamente.") }]);
         }
       } else {
-        setMessages(prev => [...prev, { role: 'assistant', text: "Erro de conexão com o servidor. Verifique sua sessão." }]);
+        setMessages(prev => [...prev, { role: 'assistant', text: "Erro de conexao com o servidor. Verifique sua sessao." }]);
       }
     } catch (err) {
       console.error("Error calling agent:", err);
-      setMessages(prev => [...prev, { role: 'assistant', text: "Ocorreu um erro ao processar sua solicitação." }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: "Ocorreu um erro ao processar sua solicitacao." }]);
     } finally {
       setIsTyping(false);
     }
@@ -89,65 +87,57 @@ export default function GuiaPage() {
     handleSend(text);
   };
 
-  // Custom Inline Markdown Renderer for rich layouts
   const renderMessageContent = (text: string) => {
     if (!text) return null;
     const lines = text.split("\n");
     return lines.map((line, idx) => {
       let cleanLine = line;
 
-      // Header H3
       if (cleanLine.startsWith("### ")) {
         return (
-          <h4 key={idx} style={{ color: '#FFC107', marginTop: '14px', marginBottom: '6px', fontWeight: '800', fontSize: '1.05rem' }}>
+          <h4 key={idx} style={{ color: 'var(--text-primary)', marginTop: '14px', marginBottom: '6px', fontWeight: '800', fontSize: '1.05rem' }}>
             {replaceInlineStyles(cleanLine.substring(4))}
           </h4>
         );
       }
-      // Header H2
       if (cleanLine.startsWith("## ")) {
         return (
-          <h3 key={idx} style={{ color: '#FFC107', marginTop: '18px', marginBottom: '8px', fontWeight: '800', fontSize: '1.15rem' }}>
+          <h3 key={idx} style={{ color: 'var(--text-primary)', marginTop: '18px', marginBottom: '8px', fontWeight: '800', fontSize: '1.15rem' }}>
             {replaceInlineStyles(cleanLine.substring(3))}
           </h3>
         );
       }
-      // Header H1
       if (cleanLine.startsWith("# ")) {
         return (
-          <h2 key={idx} style={{ color: '#FFC107', marginTop: '22px', marginBottom: '10px', fontWeight: '900', fontSize: '1.3rem' }}>
+          <h2 key={idx} style={{ color: 'var(--text-primary)', marginTop: '22px', marginBottom: '10px', fontWeight: '900', fontSize: '1.3rem' }}>
             {replaceInlineStyles(cleanLine.substring(2))}
           </h2>
         );
       }
 
-      // Unordered List
       if (cleanLine.startsWith("- ") || cleanLine.startsWith("* ")) {
         return (
-          <li key={idx} style={{ marginLeft: '16px', marginBottom: '4px', listStyleType: 'disc', color: '#e2e8f0' }}>
+          <li key={idx} style={{ marginLeft: '16px', marginBottom: '4px', listStyleType: 'disc', color: 'var(--text-secondary)' }}>
             {replaceInlineStyles(cleanLine.substring(2))}
           </li>
         );
       }
 
-      // Ordered List
       const orderedMatch = cleanLine.match(/^(\d+)\.\s(.*)/);
       if (orderedMatch) {
         return (
-          <li key={idx} style={{ marginLeft: '16px', marginBottom: '4px', listStyleType: 'decimal', color: '#e2e8f0' }}>
+          <li key={idx} style={{ marginLeft: '16px', marginBottom: '4px', listStyleType: 'decimal', color: 'var(--text-secondary)' }}>
             {replaceInlineStyles(orderedMatch[2])}
           </li>
         );
       }
 
-      // Empty Lines
       if (cleanLine.trim() === "") {
         return <div key={idx} style={{ height: '8px' }} />;
       }
 
-      // Normal Paragraph
       return (
-        <p key={idx} style={{ marginBottom: '8px', color: '#e2e8f0', fontSize: '0.95rem' }}>
+        <p key={idx} style={{ marginBottom: '8px', color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
           {replaceInlineStyles(cleanLine)}
         </p>
       );
@@ -155,18 +145,16 @@ export default function GuiaPage() {
   };
 
   const replaceInlineStyles = (text: string) => {
-    // Bold matching: **text**
     const parts = text.split(/(\*\*[^*]+\*\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith("**") && part.endsWith("**")) {
         return (
-          <strong key={i} style={{ color: '#ffffff', fontWeight: '800' }}>
+          <strong key={i} style={{ color: 'var(--text-primary)', fontWeight: '800' }}>
             {part.slice(2, -2)}
           </strong>
         );
       }
 
-      // Links: [text](url)
       const linkParts = part.split(/(\[[^\]]+\]\([^)]+\))/g);
       return linkParts.map((lPart, j) => {
         const m = lPart.match(/\[([^\]]+)\]\(([^)]+)\)/);
@@ -177,7 +165,7 @@ export default function GuiaPage() {
               href={m[2]}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#60a5fa', textDecoration: 'underline', fontWeight: '600' }}
+              style={{ color: 'var(--brand-blue)', textDecoration: 'underline', fontWeight: '600' }}
             >
               {m[1]}
             </a>
@@ -189,58 +177,61 @@ export default function GuiaPage() {
   };
 
   return (
-    <div className={styles.chatContainer}>
-      {/* Messages Scroll Area */}
-      <div className={styles.messagesList}>
+    <div className="flex flex-col h-[calc(100vh-160px)] max-w-[900px] mx-auto bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-[16px] overflow-hidden shadow-sm">
+      <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-5 scroll-smooth">
         {messages.length === 0 ? (
-          <div className={styles.emptyState}>
-            <div className={styles.emptyStateLogo}>
-              <Sparkles size={40} style={{ color: '#FFC107' }} />
+          <div className="flex flex-col items-center justify-center m-auto text-center max-w-[550px] p-5">
+            <div className="mb-4">
+              <Sparkles size={40} style={{ color: 'var(--brand-blue)' }} />
             </div>
-            <h2 className={styles.emptyStateTitle}>Roteiros & Dicas do Guia de Bolso VIP ✈️</h2>
-            <p className={styles.emptyStateSubtitle}>
-              Olá! Como Concierge de luxo do CLUB DIJA, estou aqui para te ajudar. Escreva um destino abaixo e farei um roteiro inesquecível para você!
+            <h2 className="text-2xl font-extrabold text-[var(--text-primary)] m-0 mb-2.5">Roteiros & Dicas do Guia de Bolso</h2>
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
+              Ola! Como Concierge do CLUB DIJA, estou aqui para te ajudar. Escreva um destino abaixo e farei um roteiro inesquecivel para voce!
             </p>
-            <div className={styles.suggestionsGrid}>
-              <button 
-                onClick={() => handleSuggestionClick("Monte um roteiro de 5 dias completo por Roma com dicas fora da rota turística")}
-                className={styles.suggestionCard}
+            <div className="grid grid-cols-2 gap-3 w-full">
+              <button
+                onClick={() => handleSuggestionClick("Monte um roteiro de 5 dias completo por Roma com dicas fora da rota turistica")}
+                className="bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-[12px] p-3.5 text-left text-[var(--text-secondary)] text-sm cursor-pointer transition-all hover:bg-[var(--brand-blue-light)] hover:border-[var(--brand-blue)] hover:text-[var(--text-primary)]"
               >
-                🇮🇹 Roteiro de 5 dias em Roma
+                Roteiro de 5 dias em Roma
               </button>
-              <button 
-                onClick={() => handleSuggestionClick("Me dê hacks de viagem e economia em hotéis de Orlando")}
-                className={styles.suggestionCard}
+              <button
+                onClick={() => handleSuggestionClick("Me de hacks de viagem e economia em hoteis de Orlando")}
+                className="bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-[12px] p-3.5 text-left text-[var(--text-secondary)] text-sm cursor-pointer transition-all hover:bg-[var(--brand-blue-light)] hover:border-[var(--brand-blue)] hover:text-[var(--text-primary)]"
               >
-                🇺🇸 Hacks de economia em Orlando
+                Dicas de economia em Orlando
               </button>
-              <button 
-                onClick={() => handleSuggestionClick("Indique 5 restaurantes secretos e imperdíveis em Paris")}
-                className={styles.suggestionCard}
+              <button
+                onClick={() => handleSuggestionClick("Indique 5 restaurantes secretos e imperdiveis em Paris")}
+                className="bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-[12px] p-3.5 text-left text-[var(--text-secondary)] text-sm cursor-pointer transition-all hover:bg-[var(--brand-blue-light)] hover:border-[var(--brand-blue)] hover:text-[var(--text-primary)]"
               >
-                🇫🇷 Lugares secretos em Paris
+                Lugares secretos em Paris
               </button>
-              <button 
+              <button
                 onClick={() => handleSuggestionClick("Crie um guia completo de passeios e milhas para Fernando de Noronha")}
-                className={styles.suggestionCard}
+                className="bg-[var(--bg-secondary)] border border-[var(--border-default)] rounded-[12px] p-3.5 text-left text-[var(--text-secondary)] text-sm cursor-pointer transition-all hover:bg-[var(--brand-blue-light)] hover:border-[var(--brand-blue)] hover:text-[var(--text-primary)]"
               >
-                🇧🇷 Guia Fernando de Noronha
+                Guia Fernando de Noronha
               </button>
             </div>
           </div>
         ) : (
           messages.map((msg, index) => (
-            <div 
-              key={index} 
-              className={`${styles.messageRow} ${msg.role === 'user' ? styles.messageRowUser : styles.messageRowAssistant}`}
+            <div
+              key={index}
+              className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div 
-                className={`${styles.messageBubble} ${msg.role === 'user' ? styles.messageBubbleUser : styles.messageBubbleAssistant}`}
+              <div
+                className={`max-w-[75%] p-4 rounded-[16px] text-sm leading-relaxed ${
+                  msg.role === 'user'
+                    ? 'bg-[var(--brand-blue-light)] text-[var(--text-primary)] rounded-br-[4px]'
+                    : 'bg-[var(--bg-secondary)] border border-[var(--border-default)] text-[var(--text-secondary)] rounded-bl-[4px]'
+                }`}
               >
                 {msg.role === 'assistant' && (
-                  <div className={styles.agentHeader}>
-                    <Sparkles size={12} style={{ marginRight: '4px' }} />
-                    <span>Guia de Bolso VIP</span>
+                  <div className="flex items-center gap-2 text-[var(--brand-blue)] font-bold text-xs uppercase tracking-wide mb-2">
+                    <Sparkles size={12} />
+                    <span>Guia de Bolso</span>
                   </div>
                 )}
                 {msg.role === 'user' ? msg.text : renderMessageContent(msg.text)}
@@ -250,32 +241,31 @@ export default function GuiaPage() {
         )}
 
         {isTyping && (
-          <div className={`${styles.messageRow} ${styles.messageRowAssistant}`}>
-            <div className={`${styles.messageBubble} ${styles.messageBubbleAssistant} ${styles.loadingBubble}`}>
-              <div className={styles.dot}></div>
-              <div className={styles.dot}></div>
-              <div className={styles.dot}></div>
+          <div className="flex w-full justify-start">
+            <div className="max-w-[75%] rounded-[16px] rounded-bl-[4px] bg-[var(--bg-secondary)] border border-[var(--border-default)] flex items-center gap-1.5 px-4 py-3">
+              <span className="w-2 h-2 rounded-full bg-[var(--text-muted)] animate-bounce" style={{ animationDelay: '0ms' }}></span>
+              <span className="w-2 h-2 rounded-full bg-[var(--text-muted)] animate-bounce" style={{ animationDelay: '150ms' }}></span>
+              <span className="w-2 h-2 rounded-full bg-[var(--text-muted)] animate-bounce" style={{ animationDelay: '300ms' }}></span>
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Typing/Input Bottom Bar */}
-      <div className={styles.inputArea}>
-        <form onSubmit={handleFormSubmit} className={styles.inputForm}>
+      <div className="border-t border-[var(--border-default)] p-4 bg-[var(--bg-secondary)]">
+        <form onSubmit={handleFormSubmit} className="flex gap-3 items-center">
           <input
             type="text"
-            placeholder="Pergunte ao seu Concierge VIP sobre hotéis, restaurantes, roteiros ou voos..."
+            placeholder="Pergunte ao seu Concierge sobre hoteis, restaurantes, roteiros ou voos..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={isTyping}
-            className={styles.chatInput}
+            className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-[12px] px-4 py-3.5 text-[var(--text-primary)] text-sm focus:outline-none focus:border-[var(--brand-blue)] focus:shadow-[0_0_0_3px_var(--brand-blue-light)] disabled:opacity-50"
           />
-          <button 
-            type="submit" 
-            disabled={!input.trim() || isTyping} 
-            className={styles.sendBtn}
+          <button
+            type="submit"
+            disabled={!input.trim() || isTyping}
+            className="bg-[var(--brand-blue)] text-white rounded-[12px] w-12 h-12 flex items-center justify-center cursor-pointer transition-all hover:bg-[var(--brand-blue-hover)] disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
           >
             <Send size={18} />
           </button>

@@ -1,150 +1,389 @@
-.main {
-  background-color: var(--fundo-principal);
+.page {
+  background-color: var(--bg-primary);
   min-height: 100vh;
-  padding-top: 24px;
-  padding-bottom: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.checkoutHeader {
+.header {
   width: 100%;
-  max-width: 1000px;
+  max-width: 512px;
   padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(91, 164, 207, 0.15);
-  background-color: var(--branco-puro);
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
 }
 
 .logo {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--azul-profundo);
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
 }
 
+.logoBox {
+  width: 32px;
+  height: 32px;
+  background-color: var(--brand-blue);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
 .logoHighlight {
-  color: var(--azul-bebe-principal);
+  color: var(--brand-blue);
 }
 
 .securityBadge {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: #15803d; /* green-700 */
+  gap: 6px;
+  font-size: 0.75rem;
   font-weight: 600;
-  background-color: #f0fdf4; /* green-50 */
-  padding: 6px 12px;
+  color: var(--brand-green);
+  background-color: var(--brand-green-light);
+  padding: 5px 10px;
   border-radius: 9999px;
-  border: 1px solid #dcfce7;
+  border: 1px solid var(--brand-green-border);
+  white-space: nowrap;
 }
 
-.transitionContainer {
+.content {
   width: 100%;
-  max-width: 600px;
-  background-color: var(--branco-puro);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(91, 164, 207, 0.15);
-  padding: 48px 32px;
+  max-width: 512px;
+  padding: 0 24px 48px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  gap: 32px;
 }
 
-.transitionTitle {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--azul-profundo);
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.transitionText {
-  font-size: 1rem;
-  color: var(--cinza-suave);
-  margin-bottom: 32px;
-  line-height: 1.5;
-  max-width: 400px;
-}
-
-.redirectButton {
-  display: inline-flex;
+.socialProof {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 28px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--azul-bebe-principal);
-  background-color: transparent;
-  border: 2px solid rgba(91, 164, 207, 0.3);
+  padding: 10px 16px;
   border-radius: 9999px;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  background-color: var(--brand-blue-light);
+  border: 1px solid var(--brand-blue-border, rgba(59, 130, 246, 0.2));
+  font-size: 0.82rem;
+  color: var(--brand-blue);
+  font-weight: 500;
 }
 
-.redirectButton:hover {
-  background-color: rgba(91, 164, 207, 0.05);
-  border-color: var(--azul-bebe-principal);
-  transform: translateY(-1px);
-}
-
-.backButton {
-  display: flex;
+.guaranteeBadge {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.9rem;
-  color: var(--cinza-suave);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: var(--brand-green-light, rgba(16, 185, 129, 0.1));
+  border: 1px solid var(--brand-green-border, rgba(16, 185, 129, 0.2));
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--brand-green, #10b981);
+  margin-bottom: 12px;
 }
 
-.backButton:hover {
-  color: var(--azul-profundo);
-}
-
-.securityFooter {
-  margin-top: 24px;
+.priceCard {
+  background-color: var(--bg-secondary);
+  border-radius: 20px;
+  border: 1px solid var(--border-default);
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: var(--cinza-suave);
-  font-size: 0.8rem;
   text-align: center;
-  max-width: 600px;
+  box-shadow: var(--shadow-card);
 }
 
-.securityIcons {
+.priceAmount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.pricePeriod {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.priceLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.benefitsSection {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.benefitsTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.benefitsSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.benefitIcon {
+  color: var(--brand-green);
+  flex-shrink: 0;
+}
+
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ctaButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--brand-gold);
+  border-radius: 9999px;
+  border: none;
+  box-shadow: var(--shadow-btn-gold);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  background-color: var(--brand-gold-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+.trustRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.trustIcon {
+  color: var(--brand-blue);
+  flex-shrink: 0;
+}
+
+.testimonialsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.testimonialCard {
+  background-color: var(--bg-secondary);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  padding: 16px 18px;
+}
+
+.testimonialText {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
   margin-bottom: 8px;
 }
 
-.securityIcon {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 500;
+.testimonialAuthor {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
-@media (max-width: 640px) {
-  .checkoutHeader {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    padding: 20px;
-  }
+.faqSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faqItem {
+  background-color: var(--bg-secondary);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  padding: 16px 18px;
+}
+
+.faqQuestion {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.faqAnswer {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.footer {
+  width: 100%;
+  max-width: 512px;
+  padding: 0 24px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footerText {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.footerLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.footerLink {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footerLink:hover {
+  color: var(--brand-blue);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 24px;
+}
+
+.modal {
+  background-color: var(--bg-secondary);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+}
+
+.modalTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.modalText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.modalActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modalConfirmButton {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: var(--brand-gold);
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.modalConfirmButton:hover {
+  background-color: var(--brand-gold-hover);
+}
+
+.modalCancelButton {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.modalCancelButton:hover {
+  background-color: var(--bg-primary);
 }

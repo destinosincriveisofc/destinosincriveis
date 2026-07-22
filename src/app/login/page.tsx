@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Lock, Mail, ArrowRight } from 'lucide-react';
+import { Lock, Mail } from 'lucide-react';
 import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
 import styles from './page.module.css';
 
@@ -26,9 +26,7 @@ export default function LoginPage() {
     try {
       const response = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
 
@@ -40,13 +38,11 @@ export default function LoginPage() {
 
       const token = data.access_token || data.token;
       if (!token) {
-        throw new Error("Token não fornecido pelo servidor.");
+        throw new Error("Token nao fornecido pelo servidor.");
       }
 
-      // Save token in localStorage
       localStorage.setItem("token", token);
 
-      // Fetch user profile info
       try {
         const baseUrl = typeof window !== 'undefined' &&
           (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
@@ -54,9 +50,7 @@ export default function LoginPage() {
             : 'https://destinosincriveis.vps-kinghost.net';
 
         const meRes = await fetchWithTimeout(`${baseUrl}/api/auth/me`, {
-          headers: {
-            "Authorization": `Bearer ${token}`
-          }
+          headers: { "Authorization": `Bearer ${token}` }
         });
         if (meRes.ok) {
           const meData = await meRes.json();
@@ -69,7 +63,6 @@ export default function LoginPage() {
         localStorage.setItem("user", JSON.stringify({ email, full_name: email.split('@')[0] }));
       }
 
-      // Redirect to dashboard
       window.location.href = "/dashboard";
     } catch (err: any) {
       setError(err.message || "Falha ao se conectar com o servidor.");
@@ -79,24 +72,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.loginCard}>
-        <div className={styles.logoContainer}>
-          <img src="/logo-oficial.jpg" alt="Logo Oficial" className={styles.logoImage} />
-          <h1 className={styles.brandTitle}>CLUB DIJA</h1>
-          <p className={styles.brandSubtitle}>Área de Membros Exclusiva</p>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <div className={styles.logo}>
+          <span className={styles.logoBox}>DI</span>
+          <span className={styles.logoText}>Destinos Incriveis</span>
         </div>
 
-        <form onSubmit={handleLogin} className={styles.form}>
-          {error && <div className={styles.errorBox}>{error}</div>}
+        <h1 className={styles.title}>Entrar</h1>
+        <p className={styles.subtitle}>Acesse sua conta</p>
 
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>E-mail</label>
-            <div className={styles.inputContainer}>
-              <Mail className={styles.inputIcon} size={18} />
+        <form onSubmit={handleLogin} className={styles.form}>
+          {error && <div className={styles.error}>{error}</div>}
+
+          <div className={styles.field}>
+            <div className={styles.inputWrap}>
+              <Mail className={styles.icon} size={18} />
               <input
                 type="email"
-                placeholder="seuemail@exemplo.com"
+                placeholder="Seu e-mail"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={styles.input}
@@ -105,13 +99,12 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Senha</label>
-            <div className={styles.inputContainer}>
-              <Lock className={styles.inputIcon} size={18} />
+          <div className={styles.field}>
+            <div className={styles.inputWrap}>
+              <Lock className={styles.icon} size={18} />
               <input
                 type="password"
-                placeholder="Sua senha de acesso"
+                placeholder="Sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.input}
@@ -120,35 +113,21 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className={styles.submitBtn}>
-            <span>{loading ? "Entrando..." : "Entrar no Painel"}</span>
-            <ArrowRight size={18} />
+          <button type="submit" disabled={loading} className={styles.button}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
-
-          <div style={{ textAlign: 'center', marginTop: 12 }}>
-            <a
-              href="/recuperar-senha"
-              style={{
-                color: '#FFC107',
-                fontSize: '0.88rem',
-                textDecoration: 'none',
-                fontWeight: 600,
-                transition: 'color 0.2s'
-              }}
-              onMouseOver={e => (e.currentTarget.style.color = '#FFE082')}
-              onMouseOut={e => (e.currentTarget.style.color = '#FFC107')}
-            >
-              🔑 Esqueceu a senha?
-            </a>
-          </div>
         </form>
 
-        <div className={styles.footer}>
-          <p>Esqueceu seus dados ou precisa de ajuda?</p>
-          <a href="https://wa.me/5511997204445" target="_blank" rel="noopener noreferrer" className={styles.supportLink}>
-            Fale com o suporte no WhatsApp 💬
-          </a>
-        </div>
+        <a href="/recuperar-senha" className={styles.forgot}>
+          Esqueceu a senha?
+        </a>
+
+        <p className={styles.signup}>
+          Ainda nao e membro?{" "}
+          <Link href="/club" className={styles.signupLink}>
+            Descubra o Clube
+          </Link>
+        </p>
       </div>
     </div>
   );

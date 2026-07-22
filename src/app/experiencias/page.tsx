@@ -4,86 +4,84 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ExperienceCard from '@/components/ExperienceCard';
-import { Compass, Sparkles } from 'lucide-react';
+import { Compass } from 'lucide-react';
 
 const ALL_EXPERIENCES = [
   {
-    title: "Cultura milenar e tecnologia no Japão",
-    location: "Tóquio & Quioto, Japão",
-    duration: "14 dias",
-    description: "Explore templos antigos sob as cerejeiras e mergulhe em centros de inovação tecnológica de última geração.",
-    imageUrl: "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=800&auto=format&fit=crop",
-    category: "Futurismo 🧠",
-    matchScore: 99,
-  },
-  {
-    title: "Expedição Glaciares e Lagos da Patagônia",
-    location: "El Calafate, Argentina",
-    duration: "8 dias",
-    description: "Caminhe sobre o lendário Glaciar Perito Moreno e contemple picos andinos refletidos em lagoas azuis profundas.",
-    imageUrl: "https://images.unsplash.com/photo-1473163928189-364b2c4e1135?q=80&w=800&auto=format&fit=crop",
-    category: "Aventura 🏔",
-    matchScore: 97,
-  },
-  {
-    title: "Aurora Boreal e Termas de Gelo na Islândia",
-    location: "Reykjavík, Islândia",
-    duration: "7 dias",
-    description: "Relaxe em piscinas termais vulcânicas sob o espetáculo de luzes celestes da Aurora Boreal no círculo polar.",
-    imageUrl: "https://images.unsplash.com/photo-1483168527879-c66136b56105?q=80&w=800&auto=format&fit=crop",
-    category: "Exclusivo 🌌",
+    title: "Chapada dos Veadeiros",
+    location: "Goias",
+    duration: "6 dias",
+    description: "Travessia de 3 dias pelo Cerrado com cachoeiras, canyons e paisagens que parecem de outro planeta.",
+    imageUrl: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=800&auto=format&fit=crop",
+    category: "Natureza",
     matchScore: 98,
   },
   {
-    title: "Navegação na Costa Amalfitana",
-    location: "Positano, Itália",
-    duration: "6 dias",
-    description: "Navegue ao longo de vilas coloridas cravadas em desfiladeiros sobre a água cintilante do Mar Tirreno.",
-    imageUrl: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=800&auto=format&fit=crop",
-    category: "Romance ❤️",
+    title: "Lencois Maranhenses",
+    location: "Maranhao",
+    duration: "5 dias",
+    description: "Explore o maior deserto de aguas cristalinas do Brasil em uma expedicao inesquecivel.",
+    imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800&auto=format&fit=crop",
+    category: "Aventura",
+    matchScore: 97,
+  },
+  {
+    title: "Caminho da Costa Verde",
+    location: "Rio de Janeiro / Sao Paulo",
+    duration: "7 dias",
+    description: "Trekking pela Mata Atlantica entre praias selvagens e vilas cairacas historicas.",
+    imageUrl: "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?q=80&w=800&auto=format&fit=crop",
+    category: "Aventura",
     matchScore: 96,
   },
   {
-    title: "Safári Fotográfico nas Planícies do Serengeti",
-    location: "Serengeti, Tanzânia",
-    duration: "9 dias",
-    description: "Presencie a Grande Migração e encontre os cinco grandes mamíferos da savana africana de perto.",
-    imageUrl: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=800&auto=format&fit=crop",
-    category: "Natureza 🦁",
+    title: "Fernando de Noronha",
+    location: "Pernambuco",
+    duration: "5 dias",
+    description: "Mergulhe em aguas cristalinas e conviva com a natureza preservada do arquipelago.",
+    imageUrl: "https://images.unsplash.com/photo-1509225770129-c9b4e8e28c3e?q=80&w=800&auto=format&fit=crop",
+    category: "Praia",
+    matchScore: 99,
+  },
+  {
+    title: "Jalapao",
+    location: "Tocantins",
+    duration: "6 dias",
+    description: "Aventura nas maiores dunas e fervedouros do Brasil. Um paraiso escondido no Cerrado.",
+    imageUrl: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop",
+    category: "Aventura",
     matchScore: 95,
   },
   {
-    title: "Mergulho de Cilindro nos Recifes de Cozumel",
-    location: "Cozumel, México",
-    duration: "5 dias",
-    description: "Explore paredões de corais monumentais e interaja com tartarugas em águas com visibilidade de mais de 30 metros.",
-    imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=800&auto=format&fit=crop",
-    category: "Praia 🏖",
+    title: "Serra do Cipo",
+    location: "Minas Gerais",
+    duration: "4 dias",
+    description: "Trekking entre cachoeiras e formacoes rochosas unicas na regiao central de Minas Gerais.",
+    imageUrl: "https://images.unsplash.com/photo-1518495971274-2f4f5f5b5f5b?q=80&w=800&auto=format&fit=crop",
+    category: "Natureza",
     matchScore: 94,
-  }
+  },
 ];
 
 export default function ExperienciasPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-primary-bg min-h-screen pt-28 pb-16 text-white">
+      <main className="bg-[var(--bg-primary)] min-h-screen pt-28 pb-16">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Header Title */}
           <div className="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center gap-4">
-            <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-brand-blue/10 border border-brand-blue/20 text-brand-blue backdrop-blur-md">
-              <Sparkles size={14} />
-              <span>Experiências Conceito</span>
+            <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[var(--brand-blue-light)] text-[var(--brand-blue)] border border-[var(--brand-blue)]/20">
+              <Compass size={14} />
+              <span>Experiencias</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-heading">
-              Vivências Selecionadas
+            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-[var(--text-primary)]">
+              Vivencias selecionadas para voce
             </h1>
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed">
-              Descubra roteiros desenhados por nossa comunidade e inteligência artificial para inspirar sua mente a cruzar novas fronteiras.
+            <p className="text-[var(--text-muted)] text-sm md:text-base leading-relaxed">
+              Cada experiencia e curada para proporcionar momentos unicos pelo Brasil.
             </p>
           </div>
 
-          {/* Cards grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {ALL_EXPERIENCES.map((exp, idx) => (
               <ExperienceCard

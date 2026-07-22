@@ -4,9 +4,9 @@ import { Mail, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-default)] pt-16 pb-8 text-[var(--text-secondary)]">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-        <div className="flex flex-col gap-4">
+    <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-default)] pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-14">
+        <div className="flex flex-col gap-5">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-[var(--brand-blue)] flex items-center justify-center shadow-sm transition-transform group-hover:scale-105">
               <span className="text-sm font-black text-white">DI</span>
@@ -18,12 +18,12 @@ export default function Footer() {
           <p className="text-sm leading-relaxed text-[var(--text-muted)] max-w-xs">
             A plataforma brasileira para descobrir, planejar e viver experiências de viagem autênticas pelo Brasil.
           </p>
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex items-center gap-3 mt-1">
             <a
               href="https://www.instagram.com/destinosincriveis.ofc/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--brand-blue-light)] hover:bg-[var(--brand-blue)] hover:text-white flex items-center justify-center text-[var(--text-muted)] transition-all"
               aria-label="Instagram"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -36,7 +36,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@destinosincriveis.ofc"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--brand-blue-light)] hover:bg-[var(--brand-blue)] hover:text-white flex items-center justify-center text-[var(--text-muted)] transition-all"
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -47,7 +47,7 @@ export default function Footer() {
               href="https://www.youtube.com/@destinosincriveis.oficial"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-[var(--bg-surface)] hover:bg-[var(--brand-blue-light)] hover:text-[var(--brand-blue)] flex items-center justify-center text-[var(--text-secondary)] transition-all"
+              className="w-9 h-9 rounded-lg bg-[var(--brand-blue-light)] hover:bg-[var(--brand-blue)] hover:text-white flex items-center justify-center text-[var(--text-muted)] transition-all"
               aria-label="YouTube"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -58,52 +58,52 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+        <div className="flex flex-col gap-5 lg:pl-10 lg:border-l lg:border-[var(--border-subtle)]">
           <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Descobrir</h4>
-          <nav className="flex flex-col gap-2.5 text-sm">
-            <Link href="/explorar" className="hover:text-[var(--brand-blue)] transition-colors">Descobrir Destinos</Link>
-            <Link href="/destinos" className="hover:text-[var(--brand-blue)] transition-colors">Destinos</Link>
-            <Link href="/experiencias" className="hover:text-[var(--brand-blue)] transition-colors">Experiências</Link>
-            <Link href="/guias" className="hover:text-[var(--brand-blue)] transition-colors">Guias de Viagem</Link>
-            <Link href="/dija-ai" className="hover:text-[var(--brand-blue)] transition-colors">DIJA AI</Link>
-            <Link href="/club" className="hover:text-[var(--brand-blue)] transition-colors">Clube</Link>
+          <nav className="flex flex-col gap-3 text-sm">
+            <Link href="/explorar" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">Descobrir Destinos</Link>
+            <Link href="/destinos" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">Destinos</Link>
+            <Link href="/experiencias" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">Experiências</Link>
+            <Link href="/guias" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">Guias de Viagem</Link>
+            <Link href="/dija-ai" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">DIJA AI</Link>
+            <Link href="/club" className="text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors">Clube</Link>
           </nav>
         </div>
 
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+        <div className="flex flex-col gap-5 lg:pl-10 lg:border-l lg:border-[var(--border-subtle)]">
           <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Atendimento</h4>
           <div className="flex flex-col gap-3 text-sm">
             <a
               href="https://wa.me/5511997204445"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-[var(--brand-blue)] transition-colors group"
+              className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--brand-blue)] transition-colors group"
             >
-              <MessageSquare size={16} className="text-[var(--brand-blue)]" />
+              <MessageSquare size={16} className="text-[var(--brand-blue)] shrink-0" />
               <span>WhatsApp</span>
               <ArrowUpRight size={12} className="opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
               href="tel:+5511997204445"
-              className="flex items-center gap-2 hover:text-[var(--text-primary)] transition-colors"
+              className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
             >
-              <Phone size={16} className="text-[var(--brand-blue)]" />
+              <Phone size={16} className="text-[var(--brand-blue)] shrink-0" />
               <span>+55 (11) 99720-4445</span>
             </a>
             <a
               href="mailto:suporte@destinosincriveis.com.br"
-              className="flex items-center gap-2 hover:text-[var(--text-primary)] transition-colors"
+              className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
             >
-              <Mail size={16} className="text-[var(--brand-blue)]" />
+              <Mail size={16} className="text-[var(--brand-blue)] shrink-0" />
               <span>suporte@destinosincriveis.com.br</span>
             </a>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-[var(--border-subtle)]">
+        <div className="flex flex-col gap-5 lg:pl-10 lg:border-l lg:border-[var(--border-subtle)]">
           <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Sobre</h4>
           <p className="text-sm leading-relaxed text-[var(--text-muted)]">
-        Uma plataforma brasileira que une tecnologia e curadoria para transformar a forma como você descobre o Brasil.
+            Uma plataforma brasileira que une tecnologia e curadoria para transformar a forma como você descobre o Brasil.
           </p>
         </div>
       </div>

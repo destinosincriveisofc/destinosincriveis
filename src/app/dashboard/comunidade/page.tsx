@@ -4,7 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ThumbsUp, MessageSquare, Image as ImageIcon, Send, X, Loader } from 'lucide-react';
 import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
-import styles from './page.module.css';
 
 interface Comment {
   id: number;
@@ -37,11 +36,10 @@ export default function ComunidadePage() {
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [newPostText, setNewPostText] = React.useState("");
-  
-  // Image Upload States
+
   const [selectedImage, setSelectedImage] = React.useState<File | null>(null);
   const [selectedImagePreview, setSelectedImagePreview] = React.useState<string | null>(null);
-  
+
   const [uploading, setUploading] = React.useState(false);
   const [commentInputs, setCommentInputs] = React.useState<Record<string, string>>({});
 
@@ -81,7 +79,7 @@ export default function ComunidadePage() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setSelectedImage(file);
-      
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImagePreview(reader.result as string);
@@ -106,7 +104,7 @@ export default function ComunidadePage() {
       if (selectedImage) {
         const formData = new FormData();
         formData.append("file", selectedImage);
-        
+
         const uploadRes = await fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/posts/upload", {
           method: "POST",
           headers: {
@@ -114,7 +112,7 @@ export default function ComunidadePage() {
           },
           body: formData
         });
-        
+
         if (uploadRes.ok) {
           const uploadData = await uploadRes.json();
           if (uploadData.success) {
@@ -156,9 +154,8 @@ export default function ComunidadePage() {
 
   const handleLike = async (postId: string) => {
     if (!token) return;
-    
-    // Optimistic Update
-    setPosts(prevPosts => 
+
+    setPosts(prevPosts =>
       prevPosts.map(post => {
         if (post.id === postId) {
           return {
@@ -181,7 +178,6 @@ export default function ComunidadePage() {
         body: JSON.stringify({ post_id: postId })
       });
       if (!res.ok) {
-        // Revert on error
         fetchFeed(token);
       }
     } catch (err) {
@@ -209,7 +205,7 @@ export default function ComunidadePage() {
         setCommentInputs(prev => ({ ...prev, [postId]: "" }));
         fetchFeed(token);
       } else {
-        alert("Falha ao adicionar comentário.");
+        alert("Falha ao adicionar comentario.");
       }
     } catch (err) {
       console.error("Error commenting on post:", err);
@@ -221,36 +217,35 @@ export default function ComunidadePage() {
   };
 
   const getInitials = (name: string) => {
-    if (!name) return "VIP";
+    if (!name) return "?";
     const parts = name.split(" ");
     if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   };
 
   return (
-    <div className={styles.comunidadeContainer}>
-      {/* Create Post Card */}
-      <form onSubmit={handleCreatePost} className={styles.createPostForm}>
+    <div className="max-w-[700px] mx-auto py-4 flex flex-col gap-6">
+      <form onSubmit={handleCreatePost} className="rounded-[16px] p-5 bg-[var(--bg-secondary)] border border-[var(--border-default)] flex flex-col gap-4">
         <textarea
-          placeholder="Dúvidas sobre milhas? Dicas de viagem? Compartilhe com a nossa comunidade VIP!"
+          placeholder="Duvidas sobre milhas? Dicas de viagem? Compartilhe com a nossa comunidade!"
           value={newPostText}
           onChange={(e) => setNewPostText(e.target.value)}
-          className={styles.postTextarea}
+          className="w-full min-h-[100px] bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-[12px] p-3.5 text-[var(--text-primary)] text-sm resize-vertical focus:outline-none focus:border-[var(--brand-blue)] focus:shadow-[0_0_0_3px_var(--brand-blue-light)]"
           required={!selectedImage}
         />
 
         {selectedImagePreview && (
-          <div className={styles.imagePreviewContainer}>
-            <img src={selectedImagePreview} alt="Preview" className={styles.imagePreview} />
-            <button type="button" onClick={handleRemoveImage} className={styles.removeImageBtn}>
+          <div className="relative w-full max-h-[300px] rounded-[12px] overflow-hidden border border-[var(--border-default)]">
+            <img src={selectedImagePreview} alt="Preview" className="w-full h-[250px] object-cover" />
+            <button type="button" onClick={handleRemoveImage} className="absolute top-2.5 right-2.5 bg-black/60 text-white border-none rounded-full w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-red-500">
               <X size={18} />
             </button>
           </div>
         )}
 
-        <div className={styles.formActions}>
-          <div className={styles.fileInputWrapper}>
-            <button type="button" className={styles.uploadLabelBtn}>
+        <div className="flex justify-between items-center flex-wrap gap-3">
+          <div className="relative overflow-hidden inline-block">
+            <button type="button" className="flex items-center gap-2 bg-[var(--bg-surface)] border border-[var(--border-default)] text-[var(--brand-blue)] px-4 py-2.5 rounded-[10px] text-sm font-semibold cursor-pointer hover:bg-[var(--brand-blue-light)] hover:border-[var(--brand-blue)]">
               <ImageIcon size={18} />
               <span>Adicionar Foto</span>
             </button>
@@ -258,14 +253,14 @@ export default function ComunidadePage() {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className={styles.fileInput}
+              className="absolute left-0 top-0 opacity-0 cursor-pointer w-full h-full"
             />
           </div>
 
           <button
             type="submit"
             disabled={uploading || (!newPostText.trim() && !selectedImage)}
-            className={styles.postSubmitBtn}
+            className="flex items-center gap-2 bg-[var(--brand-blue)] text-white px-5 py-2.5 rounded-[10px] text-sm font-bold cursor-pointer hover:bg-[var(--brand-blue-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {uploading ? (
               <>
@@ -282,35 +277,35 @@ export default function ComunidadePage() {
         </div>
       </form>
 
-      {/* Feed Area */}
       {loading ? (
-        <div className={styles.loadingText}>Carregando publicações da comunidade...</div>
+        <div className="text-center text-[var(--text-muted)] py-10 text-sm">Carregando publicacoes da comunidade...</div>
       ) : posts.length === 0 ? (
-        <div className={styles.noPostsText}>Nenhum post publicado ainda. Seja o primeiro! ✈️</div>
+        <div className="text-center text-[var(--text-muted)] py-10 text-sm">Nenhum post publicado ainda. Seja o primeiro!</div>
       ) : (
-        <div className={styles.postsFeed}>
+        <div className="flex flex-col gap-5">
           {posts.map((post) => (
-            <div key={post.id} className={styles.postCard}>
-              <div className={styles.postHeader}>
-                <div className={styles.postAvatar}>{getInitials(post.member_nome)}</div>
-                <div className={styles.postAuthorInfo}>
-                  <h4 className={styles.postAuthorName}>{post.member_nome}</h4>
-                  <span className={styles.postMeta}>
-                    {post.member_role === 'admin' ? '👑 Fundador CLUB DIJA' : '🌎 Membro VIP'} • {new Date(post.criado_em).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+            <div key={post.id} className="rounded-[16px] p-6 bg-[var(--bg-secondary)] border border-[var(--border-default)] flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-full bg-[var(--brand-blue)] flex items-center justify-center text-white text-base font-bold">
+                  {getInitials(post.member_nome)}
+                </div>
+                <div className="flex flex-col">
+                  <h4 className="text-sm font-bold text-[var(--text-primary)] m-0">{post.member_nome}</h4>
+                  <span className="text-xs text-[var(--text-muted)]">
+                    {post.member_role === 'admin' ? 'Fundador' : 'Membro'} • {new Date(post.criado_em).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
               </div>
 
-              {post.conteudo && <p className={styles.postContent}>{post.conteudo}</p>}
+              {post.conteudo && <p className="text-sm leading-relaxed text-[var(--text-secondary)] m-0 whitespace-pre-wrap">{post.conteudo}</p>}
 
               {post.midia_url && (
-                <div className={styles.postImageWrapper}>
+                <div className="w-full max-h-[450px] rounded-[12px] overflow-hidden border border-[var(--border-subtle)]">
                   <img
                     src={post.midia_url}
                     alt="Post media"
-                    className={styles.postImage}
+                    className="w-full h-auto max-h-[450px] object-cover"
                     onError={(e) => {
-                      // fallback logic if port is wrong or domain is local
                       const target = e.target as HTMLImageElement;
                       if (target.src.includes('host.docker.internal')) {
                         target.src = target.src.replace('host.docker.internal:5001', 'destinosincriveis.vps-kinghost.net');
@@ -320,42 +315,42 @@ export default function ComunidadePage() {
                 </div>
               )}
 
-              <div className={styles.postStats}>
+              <div className="flex gap-5 border-y border-[var(--border-subtle)] py-3">
                 <button
                   onClick={() => handleLike(post.id)}
-                  className={`${styles.likeBtn} ${post.liked_by_me ? styles.liked : ''}`}
+                  className={`flex items-center gap-2 text-sm bg-transparent border-none cursor-pointer font-semibold transition-colors ${
+                    post.liked_by_me ? 'text-[var(--brand-blue)]' : 'text-[var(--text-muted)] hover:text-[var(--brand-blue)]'
+                  }`}
                 >
-                  <ThumbsUp size={18} fill={post.liked_by_me ? "#FFC107" : "transparent"} />
+                  <ThumbsUp size={18} fill={post.liked_by_me ? "var(--brand-blue)" : "transparent"} />
                   <span>{post.likes_count} Curtidas</span>
                 </button>
-                <div className={styles.commentCountBtn}>
+                <div className="flex items-center gap-2 text-[var(--text-muted)] text-sm font-semibold">
                   <MessageSquare size={18} />
-                  <span>{post.comments.length} Comentários</span>
+                  <span>{post.comments.length} Comentarios</span>
                 </div>
               </div>
 
-              {/* Comments Section */}
-              <div className={styles.commentsSection}>
+              <div className="bg-[var(--bg-surface)] rounded-[12px] p-4 flex flex-col gap-3">
                 {post.comments.map((comment) => (
-                  <div key={comment.id} className={styles.commentItem}>
-                    <span className={styles.commentAuthor}>{comment.member_nome}:</span>
+                  <div key={comment.id} className="text-sm text-[var(--text-secondary)] border-b border-[var(--border-subtle)] pb-2 last:border-b-0 last:pb-0">
+                    <span className="font-bold text-[var(--text-primary)] mr-1.5">{comment.member_nome}:</span>
                     <span>{comment.comentario}</span>
                   </div>
                 ))}
 
-                {/* Comment input form */}
-                <form onSubmit={(e) => handleCommentSubmit(e, post.id)} className={styles.commentForm}>
+                <form onSubmit={(e) => handleCommentSubmit(e, post.id)} className="flex gap-2.5 mt-2">
                   <input
                     type="text"
-                    placeholder="Escreva um comentário..."
+                    placeholder="Escreva um comentario..."
                     value={commentInputs[post.id] || ""}
                     onChange={(e) => handleCommentInputChange(post.id, e.target.value)}
-                    className={styles.commentInput}
+                    className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-default)] rounded-[8px] px-3 py-2 text-[var(--text-primary)] text-sm focus:outline-none focus:border-[var(--brand-blue)]"
                   />
                   <button
                     type="submit"
                     disabled={!commentInputs[post.id] || !commentInputs[post.id].trim()}
-                    className={styles.commentSubmitBtn}
+                    className="bg-[var(--brand-blue)] text-white rounded-[8px] px-3.5 py-2 text-sm font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[var(--brand-blue-hover)] transition-colors"
                   >
                     Enviar
                   </button>
