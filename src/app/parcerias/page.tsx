@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '@/components/Header';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import { ArrowRight, Handshake, Users, Globe, Building, Landmark } from 'lucide-react';
@@ -26,7 +26,7 @@ export default function ParceriasPage() {
 
   return (
     <>
-      <Header />
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.container}>
           {/* Page Intro */}

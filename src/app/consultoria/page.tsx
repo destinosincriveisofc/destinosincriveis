@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import Header from '@/components/Header';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ChatWidget from '@/components/ChatWidget';
 import { Calendar, Phone, Mail, User, Compass, ArrowRight, Shield } from 'lucide-react';
@@ -83,7 +83,7 @@ export default function ConsultoriaPage() {
 
   return (
     <>
-      <Header />
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.container}>
           {/* Header */}

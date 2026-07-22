@@ -1,31 +1,34 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mail, Phone, MessageSquare, ArrowUpRight } from 'lucide-react';
-import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
+    <footer className="bg-primary-bg border-t border-white/10 pt-16 pb-8 text-gray-400">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         {/* Brand */}
-        <div className={styles.column}>
-          <Link href="/" className={styles.brand}>
-            <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} loading="lazy" />
-            <span>
-              Destinos<span className={styles.logoHighlight}>Incríveis</span>
+        <div className="flex flex-col gap-4">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-gold p-0.5 flex items-center justify-center shadow-md">
+              <div className="w-full h-full bg-primary-bg rounded-[10px] flex items-center justify-center">
+                <span className="text-lg font-black text-brand-blue">DI</span>
+              </div>
+            </div>
+            <span className="text-xl font-bold tracking-tight text-white">
+              Destinos<span className="text-brand-blue">Incríveis</span>
             </span>
           </Link>
-          <p className={styles.brandDesc}>
-            Monitoramos e alertamos passagens imperdíveis, erros tarifários e oportunidades exclusivas de viagem.
+          <p className="text-sm leading-relaxed text-gray-400">
+            O copiloto inteligente para descobrir, planejar e viver experiências de viagem incríveis pelo mundo.
           </p>
           {/* Social Links */}
-          <div className={styles.socials}>
+          <div className="flex items-center gap-3 mt-2">
             {/* Instagram */}
             <a
               href="https://www.instagram.com/destinosincriveis.ofc/"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.socialLink}
+              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
               aria-label="Instagram"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -39,7 +42,7 @@ export default function Footer() {
               href="https://www.tiktok.com/@destinosincriveis.ofc"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.socialLink}
+              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
               aria-label="TikTok"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,7 +54,7 @@ export default function Footer() {
               href="https://www.youtube.com/@destinosincriveis.oficial"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.socialLink}
+              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-blue/15 hover:text-brand-blue flex items-center justify-center text-gray-300 transition-all"
               aria-label="YouTube"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -63,76 +66,65 @@ export default function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div className={`${styles.column} ${styles.borderLeft}`}>
-          <h4 className={styles.title}>Navegação</h4>
-          <nav className={styles.navGroup}>
-            <Link href="/" className={styles.link}>
-              Home
-            </Link>
-            <Link href="/ofertas" className={styles.link}>
-              Buscar Ofertas
-            </Link>
-            <Link href="/club" className={styles.link}>
-              CLUB DIJA
-            </Link>
-            <Link href="/blog" className={styles.link}>
-              Dicas de Viagem
-            </Link>
-            <Link href="/consultoria" className={styles.link}>
-              Consultoria VIP
-            </Link>
-            <Link href="/parcerias" className={styles.link}>
-              Parcerias Comercial
-            </Link>
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
+          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Explorar</h4>
+          <nav className="flex flex-col gap-2.5 text-sm">
+            <Link href="/explorar" className="hover:text-brand-blue transition-colors">Descobrir Destinos</Link>
+            <Link href="/destinos" className="hover:text-brand-blue transition-colors">Países & Roteiros</Link>
+            <Link href="/guias" className="hover:text-brand-blue transition-colors">Revista & Guias</Link>
+            <Link href="/experiencias" className="hover:text-brand-blue transition-colors">Experiências Únicas</Link>
+            <Link href="/dija-ai" className="hover:text-brand-blue transition-colors">Copiloto DIJA AI</Link>
+            <Link href="/club" className="hover:text-brand-blue transition-colors">Clube de Viajantes</Link>
           </nav>
         </div>
 
         {/* Support */}
-        <div className={`${styles.column} ${styles.borderLeft}`}>
-          <h4 className={styles.title}>Atendimento</h4>
-          <div className={styles.navGroup}>
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
+          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Atendimento</h4>
+          <div className="flex flex-col gap-3 text-sm">
             <a
               href="https://wa.me/5511997204445"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.supportLink}
+              className="flex items-center gap-2 hover:text-white transition-colors group"
             >
-              <MessageSquare size={16} className={styles.iconBlue} />
-              <span>WhatsApp Geral</span>
-              <ArrowUpRight size={12} className={styles.iconOpacity} />
+              <MessageSquare size={16} className="text-brand-blue" />
+              <span>WhatsApp Oficial</span>
+              <ArrowUpRight size={12} className="opacity-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
             <a
               href="tel:+5511997204445"
-              className={styles.supportLink}
+              className="flex items-center gap-2 hover:text-white transition-colors"
             >
-              <Phone size={16} className={styles.iconBlue} />
+              <Phone size={16} className="text-brand-blue" />
               <span>+55 (11) 99720-4445</span>
             </a>
             <a
               href="mailto:suporte@destinosincriveis.com.br"
-              className={styles.supportLink}
+              className="flex items-center gap-2 hover:text-white transition-colors"
             >
-              <Mail size={16} className={styles.iconBlue} />
+              <Mail size={16} className="text-brand-blue" />
               <span>suporte@destinosincriveis.com.br</span>
             </a>
           </div>
         </div>
 
-        {/* Legal / Founder */}
-        <div className={`${styles.column} ${styles.borderLeft}`}>
-          <h4 className={styles.title}>Sobre</h4>
-          <p className={styles.brandDesc}>
-            Fundado por <strong className={styles.founder}>Juliano Amorin</strong>, o portal tem a missão de democratizar as viagens pelo mundo por meio de inteligência tarifária.
+        {/* Founder */}
+        <div className="flex flex-col gap-4 lg:pl-8 lg:border-l lg:border-white/5">
+          <h4 className="text-sm font-bold text-white uppercase tracking-wider">Sobre</h4>
+          <p className="text-sm leading-relaxed text-gray-400">
+            Idealizado para democratizar e elevar o planejamento de viagens a outro patamar, o ecossistema une tecnologia de ponta com curadoria especializada de turismo.
           </p>
         </div>
       </div>
 
-      <div className={styles.bottomBar}>
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
         <p>© {new Date().getFullYear()} Destinos Incríveis. Todos os direitos reservados.</p>
-        <p className={styles.bottomLinks}>
-          <Link href="/termos" className={styles.bottomLink}>Termos de Uso</Link>
-          <Link href="/privacidade" className={styles.bottomLink}>Políticas de Privacidade</Link>
-        </p>
+        <div className="flex gap-6">
+          <Link href="/termos" className="hover:text-white transition-colors">Termos de Uso</Link>
+          <Link href="/privacidade" className="hover:text-white transition-colors">Políticas de Privacidade</Link>
+        </div>
       </div>
     </footer>
   );

@@ -2,6 +2,18 @@
 @source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 @source "../components/**/*.{js,ts,jsx,tsx,mdx}";
 
+@theme {
+  --color-primary-bg: #0A122C;
+  --color-brand-blue: #38BDF8;
+  --color-brand-blue-dark: #0284C7;
+  --color-brand-gold: #FFC107;
+  --color-brand-gold-dark: #F59E0B;
+  --color-surface: rgba(255, 255, 255, 0.06);
+  --color-card-bg: rgba(10, 18, 44, 0.6);
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: var(--font-plus-jakarta-sans), sans-serif;
+}
+
 
 :root {
   --fundo-principal: #0A122C;
