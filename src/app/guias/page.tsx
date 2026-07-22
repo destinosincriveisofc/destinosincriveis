@@ -120,6 +120,18 @@ export default function GuiasPage() {
           </div>
 
           {/* Magazine Grid */}
+          {filtered.length === 0 ? (
+            <div className="text-center py-16 text-gray-500 flex flex-col items-center gap-2">
+              <BookOpen size={48} className="text-gray-600" />
+              <p className="text-sm font-medium">Nenhum guia encontrado para esta categoria.</p>
+              <button
+                onClick={() => setSelectedTag('all')}
+                className="text-xs text-brand-blue hover:underline mt-2 font-semibold"
+              >
+                Ver todos os guias
+              </button>
+            </div>
+          ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((guide, idx) => (
               <GuideCard
@@ -134,6 +146,7 @@ export default function GuiasPage() {
               />
             ))}
           </div>
+          )}
         </div>
       </main>
       <Footer />

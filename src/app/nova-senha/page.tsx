@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Lock, ArrowRight, CheckCircle } from 'lucide-react';
 import { fetchWithTimeout } from '@/lib/fetchWithTimeout';
+import styles from './page.module.css';
 
 function NovaSenhaContent() {
   const searchParams = useSearchParams();
@@ -44,59 +45,36 @@ function NovaSenhaContent() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#0A122C',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '20px', fontFamily: "'Inter', sans-serif"
-    }}>
-      <div style={{
-        background: 'rgba(10,18,44,0.7)', backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(56,189,248,0.2)', borderRadius: 20,
-        padding: '48px 40px', maxWidth: 440, width: '100%',
-        boxShadow: '0 24px 60px rgba(0,0,0,0.4)'
-      }}>
-        <div style={{ textAlign: 'center', marginBottom: 36 }}>
-          <img src="/logo-oficial.jpg" alt="Logo" style={{ width: 64, height: 64, borderRadius: '50%', border: '2px solid #FFC107', marginBottom: 16 }} />
-          <h1 style={{ fontSize: '1.6rem', fontWeight: 900, color: '#fff', margin: '0 0 8px 0' }}>CLUB DIJA</h1>
-          <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Criar nova senha</p>
+    <div className={styles.main}>
+      <div className={styles.card}>
+        <div className={styles.logoContainer}>
+          <img src="/logo-oficial.jpg" alt="Logo" className={styles.logoImage} />
+          <h1 className={styles.brandTitle}>CLUB DIJA</h1>
+          <p className={styles.brandSubtitle}>Criar nova senha</p>
         </div>
 
         {success ? (
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              width: 72, height: 72, borderRadius: '50%',
-              background: 'rgba(16,185,129,0.15)', border: '2px solid rgba(16,185,129,0.4)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 20px'
-            }}>
+          <div className={styles.successContainer}>
+            <div className={styles.successIconWrapper}>
               <CheckCircle size={36} color="#10b981" />
             </div>
-            <h2 style={{ color: '#fff', fontSize: '1.3rem', fontWeight: 700, marginBottom: 12 }}>Senha redefinida!</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: 8 }}>
+            <h2 className={styles.successTitle}>Senha redefinida!</h2>
+            <p className={styles.successText}>
               Sua senha foi atualizada com sucesso.
             </p>
-            <p style={{ color: '#60a5fa', fontSize: '0.85rem' }}>Redirecionando para o login...</p>
+            <p className={styles.redirectText}>Redirecionando para o login...</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.form}>
             {!token && (
-              <div style={{
-                background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.3)',
-                borderRadius: 10, padding: '12px 16px', color: '#fca5a5',
-                fontSize: '0.88rem', marginBottom: 20, textAlign: 'center'
-              }}>
-                Token inválido ou expirado. <Link href="/recuperar-senha" style={{ color: '#60a5fa' }}>Solicite um novo link.</Link>
+              <div className={styles.tokenErrorBox}>
+                Token inválido ou expirado.{' '}
+                <Link href="/recuperar-senha" className={styles.tokenErrorLink}>Solicite um novo link.</Link>
               </div>
             )}
 
             {error && (
-              <div style={{
-                background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.3)',
-                borderRadius: 10, padding: '12px 16px', color: '#fca5a5',
-                fontSize: '0.88rem', marginBottom: 20, textAlign: 'center'
-              }}>
+              <div className={styles.errorBox}>
                 {error}
               </div>
             )}
@@ -105,45 +83,29 @@ function NovaSenhaContent() {
               { label: 'Nova senha', val: novaSenha, set: setNovaSenha, ph: 'Mínimo 6 caracteres' },
               { label: 'Confirmar nova senha', val: confirmar, set: setConfirmar, ph: 'Repita a nova senha' },
             ].map(f => (
-              <div key={f.label} style={{ marginBottom: 20 }}>
-                <label style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: 8 }}>
-                  {f.label}
-                </label>
-                <div style={{ position: 'relative' }}>
-                  <Lock size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+              <div key={f.label} className={styles.inputWrapper}>
+                <label className={styles.label}>{f.label}</label>
+                <div className={styles.inputContainer}>
+                  <Lock size={18} className={styles.inputIcon} />
                   <input
                     type="password"
-                    className="premium-input"
+                    className={styles.input}
                     value={f.val}
                     onChange={e => f.set(e.target.value)}
                     placeholder={f.ph}
                     required
-                    onFocus={e => e.target.style.borderColor = '#38BDF8'}
-                    onBlur={e => e.target.style.borderColor = 'rgba(56,189,248,0.2)'}
-                    style={{
-                      width: '100%', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(56,189,248,0.2)',
-                      borderRadius: 12, padding: '14px 16px 14px 44px', color: '#fff', fontSize: '0.95rem',
-                      fontFamily: 'inherit', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s'
-                    }}
                   />
                 </div>
               </div>
             ))}
 
-            <button type="submit" disabled={loading || !token} style={{
-              width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-              background: 'linear-gradient(135deg, #FFC107, #F59E0B)',
-              color: '#0A122C', border: 'none', borderRadius: 12, padding: '15px',
-              fontSize: '1rem', fontWeight: 800, cursor: (loading || !token) ? 'not-allowed' : 'pointer',
-              opacity: (loading || !token) ? 0.6 : 1, transition: 'all 0.2s',
-              boxShadow: '0 4px 14px rgba(255,193,7,0.3)'
-            }}>
+            <button type="submit" disabled={loading || !token} className={styles.submitBtn}>
               {loading ? 'Salvando...' : 'Redefinir Senha'}
               {!loading && <ArrowRight size={18} />}
             </button>
 
-            <div style={{ textAlign: 'center', marginTop: 24 }}>
-              <Link href="/login" style={{ color: '#60a5fa', fontSize: '0.88rem', textDecoration: 'none', fontWeight: 500 }}>
+            <div className={styles.footer}>
+              <Link href="/login" className={styles.backLink}>
                 ← Voltar para o login
               </Link>
             </div>
@@ -156,7 +118,7 @@ function NovaSenhaContent() {
 
 export default function NovaSenhaPage() {
   return (
-    <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: '#0A1628', color: '#94a3b8' }}>Carregando...</div>}>
+    <Suspense fallback={<div className={styles.loadingFallback}>Carregando...</div>}>
       <NovaSenhaContent />
     </Suspense>
   );

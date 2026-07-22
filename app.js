@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (lowercase.includes('consultoria') || lowercase.includes('planejar') || lowercase.includes('roteiro')) {
       reply = "Nossa Consultoria VIP cuida de todo o seu roteiro e busca as melhores passagens e hotéis sob medida. O plano ideal a partir de R$ 99!";
     } else if (lowercase.includes('preco') || lowercase.includes('valor') || lowercase.includes('desconto')) {
-      reply = "Temos o Destinos Incríveis Club a partir de R$ 19,90/mês e a Consultoria Personalizada por apenas R$ 150 por viagem. Qual plano você gostaria de saber mais?";
+      reply = "Temos o Destinos Incríveis Club a partir de R$ 9,90/mês e a Consultoria Personalizada por apenas R$ 150 por viagem. Qual plano você gostaria de saber mais?";
     } else if (lowercase.includes('oi') || lowercase.includes('ola') || lowercase.includes('bom dia') || lowercase.includes('boa tarde')) {
       reply = "Olá! Eu sou o Guia Virtual dos Destinos Incríveis. Você gostaria de conhecer o Destinos Incríveis Club ou nossa Consultoria de Viagens Personalizada?";
     }

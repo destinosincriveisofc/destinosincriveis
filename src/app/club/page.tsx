@@ -35,7 +35,7 @@ export default function ClubPage() {
   const plans = [
     {
       name: "Membro Fundador",
-      price: "R$ 19,90",
+      price: "R$ 9,90",
       period: "por mês",
       description: "Tenha acesso ilimitado à plataforma, fóruns e IA copilot.",
       link: "/checkout",
