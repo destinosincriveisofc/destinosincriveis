@@ -28,9 +28,14 @@ interface Message {
   recommendations?: RecommendationLog[];
 }
 
-export default function DijaChat() {
+interface DijaChatProps {
+  demoMode?: boolean;
+}
+
+export default function DijaChat({ demoMode = false }: DijaChatProps) {
+  const [isDemo, setIsDemo] = useState<boolean>(demoMode);
   const [token, setToken] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(demoMode);
   
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -44,16 +49,32 @@ export default function DijaChat() {
 
   // 1. Authenticate on mount
   useEffect(() => {
+    if (isDemo) return;
     const savedToken = localStorage.getItem('token');
     if (savedToken) {
       setToken(savedToken);
       setIsAuthenticated(true);
     }
-  }, []);
+  }, [isDemo]);
+
+  // 1.2 Initialize demo mode welcome message
+  useEffect(() => {
+    if (isDemo) {
+      setMessages([
+        {
+          id: 'welcome',
+          role: 'assistant',
+          content: 'Olá! Sou a **DIJA AI**, sua copiloto inteligente de viagens. 🧠✨\n\nEscolha uma das sugestões abaixo ou digite sua ideia de viagem para ver como eu funciono:',
+          rating: 0,
+          created_at: new Date().toISOString()
+        }
+      ]);
+    }
+  }, [isDemo]);
 
   // 1.1 Load preferences on auth
   useEffect(() => {
-    if (!isAuthenticated || !token) return;
+    if (!isAuthenticated || !token || isDemo) return;
     fetchWithTimeout("https://destinosincriveis.vps-kinghost.net/api/auth/me", {
       headers: { Authorization: `Bearer ${token}` }
     })
@@ -138,11 +159,12 @@ export default function DijaChat() {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  // 4. Send message to backend
+  // 4. Send message to backend / Simulate in demo mode
   const handleSendText = async (text: string) => {
-    if (!text.trim() || !sessionId || !token) return;
+    if (!text.trim()) return;
+    if (!isDemo && (!sessionId || !token)) return;
 
-    const userMsgId = Math.random().toString();
+    const userMsgId = Date.now().toString() + '-' + Math.floor(Math.random() * 1000);
     const tempUserMsg: Message = {
       id: userMsgId,
       role: 'user',
@@ -154,6 +176,85 @@ export default function DijaChat() {
     setMessages(prev => [...prev, tempUserMsg]);
     setInputVal('');
     setIsTyping(true);
+
+    if (isDemo) {
+      setTimeout(() => {
+        let content = '';
+        let recommendations: any[] = [];
+
+        const lower = text.toLowerCase();
+        if (lower.includes('noronha') || lower.includes('casal') || lower.includes('praia')) {
+          content = "Fernando de Noronha é um dos destinos mais desejados do Brasil! 🏝️\n\nRecomendo viajar entre **Setembro e Dezembro** (mar mais calmo e pouca chuva).\n\n**Sugestão de Roteiro (3 dias):**\n- **Dia 1:** Tour histórico pela Vila dos Remédios e pôr do sol no Forte do Boldró.\n- **Dia 2:** Snorkel na Baía do Sueste e tarde na Praia do Sancho (eleita a melhor do mundo!).\n- **Dia 3:** Trilha dos Abreus e jantar romântico no restaurante Zé Maria.\n\n**Hospedagem Recomendada:** Pousada Maria Bonita (Premium/Charme).";
+          recommendations = [
+            {
+              id: 'noronha-rec',
+              city_id: 'noronha',
+              reason: 'Melhor destino nacional para casais e amantes de ecoturismo premium.',
+              factors_considered: ['praia', 'romance', 'natureza'],
+              confidence_score: 0.98,
+              city: {
+                name: 'Fernando de Noronha',
+                iata_code: 'FEN',
+                description: 'Praias paradisíacas e preservação ambiental intocada.',
+                image_urls: ['https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=800&auto=format&fit=crop'],
+                metadata_json: { budget_level: 'premium' }
+              }
+            }
+          ];
+        } else if (lower.includes('patagônia') || lower.includes('patagonia') || lower.includes('trekking') || lower.includes('aventura')) {
+          content = "A Patagônia Argentina é espetacular! 🏔️❄️\n\nRecomendo ir de **Novembro a Março** (clima mais ameno para caminhadas).\n\n**Sugestão de Roteiro (4 dias em El Calafate & El Chaltén):**\n- **Dia 1:** Visita ao Glaciar Perito Moreno com minitrekking sobre o gelo.\n- **Dia 2:** Navegação pelos glaciares Upsala e Spegazzini.\n- **Dia 3:** Viagem para El Chaltén (capital nacional do trekking) e trilha curta da Laguna Capri.\n- **Dia 4:** Trekking clássico até a Laguna de los Tres (base do Monte Fitz Roy).";
+          recommendations = [
+            {
+              id: 'patagonia-rec',
+              city_id: 'patagonia',
+              reason: 'Destino número um de aventura na América do Sul, perfeito para sua busca.',
+              factors_considered: ['aventura', 'natureza', 'frio'],
+              confidence_score: 0.95,
+              city: {
+                name: 'Patagônia Argentina',
+                iata_code: 'FTE',
+                description: 'Glaciares gigantescos e trilhas lendárias no fim do mundo.',
+                image_urls: ['https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=800&auto=format&fit=crop'],
+                metadata_json: { budget_level: 'premium' }
+              }
+            }
+          ];
+        } else if (lower.includes('paris') || lower.includes('cultura') || lower.includes('romance') || lower.includes('europa')) {
+          content = "Paris é sempre uma boa ideia! 🥂🗼\n\nPara evitar multidões e aproveitar o clima, prefira **Abril a Junho** (Primavera).\n\n**Sugestão de Roteiro (3 dias):**\n- **Dia 1:** Torre Eiffel, caminhada pela Champs-Élysées e cruzeiro noturno pelo Rio Sena.\n- **Dia 2:** Visita guiada ao Museu do Louvre e tarde artística em Montmartre (Basílica de Sacré-Cœur).\n- **Dia 3:** Palácio de Versalhes ou piquenique nos Jardins de Luxemburgo.";
+          recommendations = [
+            {
+              id: 'paris-rec',
+              city_id: 'paris',
+              reason: 'Combinação ideal de cultura, gastronomia de classe mundial e romance.',
+              factors_considered: ['cultura', 'gastronomia', 'romance'],
+              confidence_score: 0.97,
+              city: {
+                name: 'Paris',
+                iata_code: 'CDG',
+                description: 'A capital da arte, culinária fina e arquitetura histórica.',
+                image_urls: ['https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&auto=format&fit=crop'],
+                metadata_json: { budget_level: 'premium' }
+              }
+            }
+          ];
+        } else {
+          content = "Que ótima escolha! Na versão completa do **CLUB DIJA**, posso analisar voos, hotéis, clima atual e criar um roteiro sob medida para qualquer lugar do mundo, com sincronização direta no seu WhatsApp.\n\nPara experimentar agora, escolha Noronha, Patagônia ou Paris nas sugestões acima! Ou junte-se ao nosso clube para liberar o acesso ilimitado! 🚀";
+        }
+
+        const assistantMsg: Message = {
+          id: 'demo-msg-' + Date.now(),
+          role: 'assistant',
+          content,
+          rating: 0,
+          created_at: new Date().toISOString(),
+          recommendations
+        };
+
+        setMessages(prev => [...prev, assistantMsg]);
+        setIsTyping(false);
+      }, 1500);
+      return;
+    }
 
     try {
       const res = await fetchWithTimeout(`https://destinosincriveis.vps-kinghost.net/api/dija/chat/sessions/${sessionId}/messages`, {
@@ -286,13 +387,25 @@ export default function DijaChat() {
             Conecte-se à sua conta do **CLUB DIJA** para falar com o motor cognitivo e planejar suas férias completas em segundos com aprendizado contextual.
           </p>
         </div>
-        <button
-          onClick={() => window.location.href = "/login"}
-          className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-gold to-yellow-600 text-primary-bg font-extrabold text-sm flex items-center justify-center gap-2 hover:scale-105 active:scale-98 transition-all"
-        >
-          <span>Acessar Painel do Club Dija</span>
-          <ArrowRight size={16} />
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
+          <button
+            onClick={() => window.location.href = "/login"}
+            className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-gold to-yellow-600 text-primary-bg font-extrabold text-sm flex items-center justify-center gap-2 hover:scale-105 active:scale-98 transition-all w-full sm:w-auto"
+          >
+            <span>Acessar Painel do Club Dija</span>
+            <ArrowRight size={16} />
+          </button>
+          <button
+            onClick={() => {
+              setIsDemo(true);
+              setIsAuthenticated(true);
+            }}
+            className="px-8 py-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-blue text-white font-extrabold text-sm flex items-center justify-center gap-2 hover:scale-105 active:scale-98 transition-all w-full sm:w-auto"
+          >
+            <span>Experimentar Versão Demo</span>
+            <Sparkles size={16} className="text-brand-blue" />
+          </button>
+        </div>
       </div>
     );
   }
@@ -467,6 +580,25 @@ export default function DijaChat() {
         <div ref={scrollRef} />
       </div>
 
+      {/* Suggestion Chips in Demo Mode */}
+      {isDemo && messages.length <= 2 && (
+        <div className="px-6 py-2 flex flex-wrap gap-2 justify-center bg-white/[0.01]">
+          {[
+            { label: '🏖️ Noronha (Casal)', prompt: 'Quero um roteiro de casal em Noronha' },
+            { label: '🏔️ Patagônia (Aventura)', prompt: 'Quero aventura na Patagônia' },
+            { label: '🏛️ Paris (Cultura)', prompt: 'Quero um roteiro cultural em Paris' },
+          ].map(chip => (
+            <button
+              key={chip.label}
+              onClick={() => handleSendText(chip.prompt)}
+              className="px-3 py-1.5 rounded-full text-[10px] font-bold bg-white/5 border border-white/10 hover:border-brand-blue text-gray-300 hover:text-white transition-all hover:scale-105 active:scale-95"
+            >
+              {chip.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Input Area */}
       <div className="p-4 border-t border-white/5 flex gap-2 bg-white/[0.01]">
         <input
@@ -474,7 +606,7 @@ export default function DijaChat() {
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendText(inputVal)}
-          placeholder="Peça sugestões de viagem (ex: 'Quero ir para a Europa descansar em outubro')"
+          placeholder={isDemo ? "Escolha uma sugestão acima ou digite..." : "Peça sugestões de viagem (ex: 'Quero ir para a Europa descansar em outubro')"}
           className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brand-blue transition-colors"
         />
         <button

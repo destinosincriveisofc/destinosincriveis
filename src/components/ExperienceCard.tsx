@@ -27,7 +27,7 @@ export default function ExperienceCard({
     <motion.div
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="relative flex-none w-[340px] md:w-[400px] h-[260px] rounded-2xl overflow-hidden cursor-pointer group shadow-lg border border-white/5 bg-surface"
+      className="relative flex-none w-[280px] sm:w-[340px] md:w-[400px] h-[260px] rounded-2xl overflow-hidden cursor-pointer group shadow-lg border border-white/5 bg-surface"
     >
       {/* Background Image */}
       <div className="absolute inset-0">

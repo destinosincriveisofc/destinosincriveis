@@ -66,7 +66,7 @@ export default function AISection() {
 
         {/* Right Chat Column */}
         <div className="lg:col-span-6 flex justify-center w-full">
-          <DijaChatMock />
+          <DijaChatMock demoMode={true} />
         </div>
       </div>
     </section>

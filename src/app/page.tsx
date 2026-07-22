@@ -29,8 +29,25 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Destinos Incríveis",
+    "url": "https://destinosincriveis.com.br",
+    "description": "O copiloto inteligente para descobrir, planejar e viver viagens incríveis. Conheça roteiros curados por tecnologia e nossa inteligência artificial DIJA AI.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://destinosincriveis.com.br/explorar?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Premium Header/Navigation */}
       <Navbar />
 

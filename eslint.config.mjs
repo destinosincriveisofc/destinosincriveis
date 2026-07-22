@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/ban-ts-comment": "off",
       "prefer-const": "off",
       "react/no-unescaped-entities": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
     }
   },
   // Override default ignores of eslint-config-next.

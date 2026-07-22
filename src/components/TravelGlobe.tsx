@@ -50,6 +50,7 @@ function useWindowSize() {
 
 export default function TravelGlobe({ offers = [] }: TravelGlobeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const globeRef = useRef<any>(null);
   const { width, height } = useWindowSize();
 
   const arcsData = [
@@ -88,6 +89,7 @@ export default function TravelGlobe({ offers = [] }: TravelGlobeProps) {
   return (
     <div ref={containerRef} style={{ width, height, position: 'relative', margin: '0 auto' }}>
       <Globe
+        ref={globeRef}
         width={width}
         height={height}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-dark.jpg"
@@ -131,7 +133,17 @@ export default function TravelGlobe({ offers = [] }: TravelGlobeProps) {
         ringPropagationSpeed={3}
         ringRepeatPeriod={1200}
 
-        enablePointerInteraction={false}
+        enablePointerInteraction={true}
+        onGlobeReady={() => {
+          if (globeRef.current) {
+            const controls = globeRef.current.controls();
+            if (controls) {
+              controls.autoRotate = true;
+              controls.autoRotateSpeed = 0.6;
+              controls.enableZoom = false; // Disable zoom to keep layout clean on scroll
+            }
+          }
+        }}
       />
     </div>
   );

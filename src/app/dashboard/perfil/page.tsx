@@ -666,10 +666,10 @@ function PerfilContent() {
                 </div>
 
                 {/* Budget level & Pace */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 700, marginBottom: 12 }}>Perfil de Orçamento</h4>
-                    <div style={{ display: 'flex', gap: 8 }}>
+                    <div className="grid grid-cols-3 gap-2">
                       {[
                         { key: 'low', label: 'Low-cost' },
                         { key: 'medium', label: 'Moderado' },
@@ -680,11 +680,10 @@ function PerfilContent() {
                           type="button"
                           onClick={() => setBudgetLevel(b.key)}
                           style={{
-                            flex: 1,
                             background: budgetLevel === b.key ? 'rgba(255,193,7,0.15)' : 'rgba(0,0,0,0.3)',
                             border: budgetLevel === b.key ? '1px solid #FFC107' : '1px solid rgba(255,255,255,0.1)',
-                            borderRadius: 12, padding: '10px 12px', color: budgetLevel === b.key ? '#FFC107' : '#94a3b8',
-                            fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.2s'
+                            borderRadius: 12, padding: '10px 8px', color: budgetLevel === b.key ? '#FFC107' : '#94a3b8',
+                            fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.2s', width: '100%', textAlign: 'center'
                           }}
                         >
                           {b.label}
@@ -694,7 +693,7 @@ function PerfilContent() {
                   </div>
                   <div>
                     <h4 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 700, marginBottom: 12 }}>Ritmo da Viagem</h4>
-                    <div style={{ display: 'flex', gap: 8 }}>
+                    <div className="grid grid-cols-3 gap-2">
                       {[
                         { key: 'slow', label: 'Relaxado' },
                         { key: 'moderate', label: 'Equilibrado' },
@@ -705,11 +704,10 @@ function PerfilContent() {
                           type="button"
                           onClick={() => setTravelPace(p.key)}
                           style={{
-                            flex: 1,
                             background: travelPace === p.key ? 'rgba(56,189,248,0.15)' : 'rgba(0,0,0,0.3)',
                             border: travelPace === p.key ? '1px solid #38BDF8' : '1px solid rgba(255,255,255,0.1)',
-                            borderRadius: 12, padding: '10px 12px', color: travelPace === p.key ? '#38BDF8' : '#94a3b8',
-                            fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.2s'
+                            borderRadius: 12, padding: '10px 8px', color: travelPace === p.key ? '#38BDF8' : '#94a3b8',
+                            fontWeight: 700, fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.2s', width: '100%', textAlign: 'center'
                           }}
                         >
                           {p.label}

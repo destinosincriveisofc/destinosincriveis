@@ -460,7 +460,7 @@ function DashboardPageContent() {
                 {onboardingStep === 2 && (
                   <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: '0 0 10px 0' }}>Escolha um ou mais estilos que definem suas férias:</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         { key: 'adventure', label: '🧗 Aventura / Ecoturismo' },
                         { key: 'beach', label: '🏖️ Praia / Sol' },
@@ -497,7 +497,7 @@ function DashboardPageContent() {
                   <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
                     <div>
                       <label style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 12 }}>Nível Médio de Orçamento</label>
-                      <div style={{ display: 'flex', gap: 10 }}>
+                      <div className="flex flex-col sm:flex-row gap-3">
                         {[
                           { key: 'low', label: '🎒 Econômico', desc: 'Foco no menor custo' },
                           { key: 'medium', label: '🏨 Moderado', desc: 'Conforto equilibrado' },
@@ -507,11 +507,11 @@ function DashboardPageContent() {
                             key={b.key}
                             onClick={() => setOnbBudget(b.key)}
                             style={{
-                              flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                              flex: '1 1 0%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
                               background: onbBudget === b.key ? 'rgba(255,193,7,0.15)' : 'rgba(0,0,0,0.2)',
                               border: onbBudget === b.key ? '1px solid #FFC107' : '1px solid rgba(255,255,255,0.06)',
                               borderRadius: 14, padding: '16px 12px', color: onbBudget === b.key ? '#FFC107' : '#94a3b8',
-                              cursor: 'pointer', transition: 'all 0.2s'
+                              cursor: 'pointer', transition: 'all 0.2s', width: '100%'
                             }}
                           >
                             <span style={{ fontWeight: 800, fontSize: '0.88rem' }}>{b.label}</span>
@@ -523,7 +523,7 @@ function DashboardPageContent() {
 
                     <div>
                       <label style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: 12 }}>Ritmo Desejado de Viagem</label>
-                      <div style={{ display: 'flex', gap: 10 }}>
+                      <div className="flex flex-col sm:flex-row gap-3">
                         {[
                           { key: 'slow', label: '🧘 Lento', desc: 'Descansar e relaxar' },
                           { key: 'moderate', label: '🧭 Equilibrado', desc: 'Atividades e ócio' },
@@ -533,11 +533,11 @@ function DashboardPageContent() {
                             key={p.key}
                             onClick={() => setOnbPace(p.key)}
                             style={{
-                              flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+                              flex: '1 1 0%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
                               background: onbPace === p.key ? 'rgba(56,189,248,0.15)' : 'rgba(0,0,0,0.2)',
                               border: onbPace === p.key ? '1px solid #38BDF8' : '1px solid rgba(255,255,255,0.06)',
                               borderRadius: 14, padding: '16px 12px', color: onbPace === p.key ? '#38BDF8' : '#94a3b8',
-                              cursor: 'pointer', transition: 'all 0.2s'
+                              cursor: 'pointer', transition: 'all 0.2s', width: '100%'
                             }}
                           >
                             <span style={{ fontSize: '0.88rem', fontWeight: 800 }}>{p.label}</span>
@@ -553,7 +553,7 @@ function DashboardPageContent() {
                 {onboardingStep === 4 && (
                   <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                     <p style={{ color: '#94a3b8', fontSize: '0.88rem', margin: '0 0 10px 0' }}>Selecione as regiões do planeta de sua maior preferência:</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {['América do Sul', 'Europa', 'América do Norte', 'Ásia', 'Oceania', 'África'].map(c => {
                         const selected = onbContinents.includes(c);
                         return (
@@ -650,7 +650,7 @@ function DashboardPageContent() {
           </div>
 
           {/* TWO COLUMN COGNITIVE LAYOUT */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, width: '100%', marginBottom: 32 }} className="cognitive-grid">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full mb-8 cognitive-grid">
             
             {/* LEFT COLUMN: DIJA Evolução & Favoritos */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
@@ -905,7 +905,7 @@ function DashboardPageContent() {
           {/* STATS SECTION */}
           <div className={`${styles.statsGrid} fade-in-up`} ref={statsRef}>
             <div className={`${styles.statCard} hover-lift`}>
-              <div className={styles.statIcon} style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6' }}>
+              <div className={styles.statIcon} style={{ background: 'rgba(56, 189, 248, 0.12)', color: '#38BDF8' }}>
                 <Compass size={24} />
               </div>
               <div className={styles.statInfo}>
@@ -914,7 +914,7 @@ function DashboardPageContent() {
               </div>
             </div>
             <div className={`${styles.statCard} hover-lift`}>
-              <div className={styles.statIcon} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981' }}>
+              <div className={styles.statIcon} style={{ background: 'rgba(255, 193, 7, 0.12)', color: '#FFC107' }}>
                 <TrendingUp size={24} />
               </div>
               <div className={styles.statInfo}>
@@ -923,7 +923,7 @@ function DashboardPageContent() {
               </div>
             </div>
             <div className={`${styles.statCard} hover-lift`}>
-              <div className={styles.statIcon} style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }}>
+              <div className={styles.statIcon} style={{ background: 'rgba(34, 197, 94, 0.12)', color: '#22c55e' }}>
                 <CheckCircle size={24} />
               </div>
               <div className={styles.statInfo}>
